@@ -1,7 +1,8 @@
-# comet
+# Comet - Frontend
 
-This project is generated with [yo angular generator](https://github.com/yeoman/generator-angular)
-version 0.12.1.
+## Installation
+
+Run `bower install` to download all the frontend packages
 
 ## Build & development
 
