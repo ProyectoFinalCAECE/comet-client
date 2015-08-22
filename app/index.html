@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <!-- endbuild -->
+    <link href="styles/vendor/inspinia/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="styles/vendor/animate.css" rel="stylesheet">
+    <link href="styles/vendor/inspinia/style.css" rel="stylesheet">
+  </head>
+  <body class="white-bg" ng-app="cometApp">
+
+    <div>
+      <ui-view></ui-view>
+    </div>
+
+    <!-- build:js(.) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+        <!-- build:js({.tmp,app}) scripts/scripts.js -->
+        <script src="src/app.js"></script>
+        <script src="src/app.routes.js"></script>
+        <script src="src/home/home.controller.js"></script>
+        <script src="src/usuario/usuario.controller.js"></script>
+        <script src="src/services/autenticacion.service.js"></script>
+        <!-- endbuild -->
+</body>
+</html>
