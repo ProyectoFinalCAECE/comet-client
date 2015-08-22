@@ -2,6 +2,7 @@
 
 ## Installation
 
+Run `npm install -g bower` to install bower
 Run `bower install` to download all the frontend packages
 
 ## Build & development
