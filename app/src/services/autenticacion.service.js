@@ -55,13 +55,13 @@
         }
 
         function crear (user) {
-            return $http.post('/usuario/crear', user).success(function(data){
+            return $http.post('/user/', user).success(function(data){
                 saveToken(data.token);
             });
         }
 
         function login (user) {
-            return $http.post('/usuario/login', user).success(function (data) {
+            return $http.post('/user/login', user).success(function (data) {
                 saveToken(data.token);
             });
         }
