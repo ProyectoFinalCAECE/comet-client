@@ -1,5 +1,6 @@
 {
-  "name": "comet",
+  "name": "comet-client",
+  "description":"Universidad CAECE Final Project client app",
   "private": true,
   "devDependencies": {
     "grunt": "^0.4.5",
