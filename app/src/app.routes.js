@@ -15,28 +15,28 @@ angular
                 controller: 'HomeController',
                 controllerAs: 'vm'
             })
-            .state('usuario-login', {
-                url: '/usuario/login',
-                templateUrl: '/src/usuario/usuario-login.html',
-                controller: 'UsuarioController',
+            .state('user-login', {
+                url: '/user/login',
+                templateUrl: '/src/user/user-login.html',
+                controller: 'UserController',
                 controllerAs: 'vm',
-                onEnter: ['$state', 'autenticacionService', function ($state, autenticacionService) {
-                    if (autenticacionService.estaLogueado()) {
-                        $state.go('home');
+                onEnter: ['$state', 'authService', function ($state, authService) {
+                    if (authService.isLoggedIn()) {
+                        $state.go('/');
                     }
                 }]
             })
-            .state('usuario-crear', {
-                url: '/usuario/crear',
-                templateUrl: '/src/usuario/usuario-crear.html',
-                controller: 'UsuarioController',
+            .state('user-create', {
+                url: '/user/create',
+                templateUrl: '/src/user/user-create.html',
+                controller: 'UserController',
                 controllerAs: 'vm',
-                onEnter: ['$state', 'autenticacionService', function ($state, autenticacionService) {
-                    if (autenticacionService.estaLogueado()) {
-                        $state.go('home');
+                onEnter: ['$state', 'authService', function ($state, authService) {
+                    if (authService.isLoggedIn()) {
+                        $state.go('/');
                     }
                 }]
             });
 
-        $urlRouterProvider.otherwise('home');
+        $urlRouterProvider.otherwise('/');
     }

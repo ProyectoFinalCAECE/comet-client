@@ -9,24 +9,24 @@
             </div>
             <h3>Crear cuenta en Comet</h3>
             <p>Crea una cuenta para empezar a comunicarte a toda velocidad sarasa sarasa.</p>
-            <form class="m-t" role="form" ng-submit="vm.crear()" >
+            <form class="m-t" role="form" ng-submit="vm.create()" >
                 <div class="form-group">
-                    <input type="text" ng-model="vm.usuario.firstName" class="form-control" placeholder="Nombre" required="">
+                    <input type="text" ng-model="vm.user.firstName" class="form-control" placeholder="Nombre" required="">
                 </div>
                 <div class="form-group">
-                    <input type="text" ng-model="vm.usuario.lastName" class="form-control" placeholder="Apellido" required="">
+                    <input type="text" ng-model="vm.user.lastName" class="form-control" placeholder="Apellido" required="">
                 </div>
                 <div class="form-group">
-                    <input type="email" ng-model="vm.usuario.email" class="form-control" placeholder="Email" required="">
+                    <input type="email" ng-model="vm.user.email" class="form-control" placeholder="Email" required="">
                 </div>
                 <div class="form-group">
-                    <input type="password" ng-model="vm.usuario.password" class="form-control" placeholder="Contraseña" required="">
+                    <input type="password" ng-model="vm.user.password" class="form-control" placeholder="Contraseña" required="">
                 </div>
 
                 <button type="submit" class="btn btn-primary block full-width m-b">Crear cuenta</button>
 
                 <p class="text-muted text-center"><small>Ya tenés cuenta?</small></p>
-                <a class="btn btn-sm btn-white btn-block" href="/#/usuario/login">Login</a>
+                <a class="btn btn-sm btn-white btn-block" href="/#/user/login">Login</a>
             </form>
             <p class="m-t"> <small>The Comet Company &copy; 2015</small> </p>
         </div>

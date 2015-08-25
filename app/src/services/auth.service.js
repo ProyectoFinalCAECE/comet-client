@@ -4,18 +4,18 @@
 
     angular
         .module('cometApp')
-        .factory('autenticacionService', autenticacionService);
+        .factory('authService', authService);
 
-    autenticacionService.$inject = ['$http', '$window'];
+    authService.$inject = ['$http', '$window'];
 
-    function autenticacionService ($http, $window){
+    function authService ($http, $window){
 
         var storageKey = 'comet-token';
 
         return {
-            estaLogueado: estaLogueado,
-            usuarioActual:usuarioActual,
-            crear:crear,
+            isLoggedIn:isLoggedIn,
+            currentUser:currentUser,
+            create:create,
             login:login,
             logout:logout
         };
@@ -28,7 +28,7 @@
             return $window.localStorage[storageKey];
         }
 
-        function estaLogueado() {
+        function isLoggedIn() {
 
             try {
                 var token = getToken();
@@ -46,15 +46,15 @@
             }
         }
 
-        function usuarioActual () {
-            if (estaLogueado()) {
+        function currentUser () {
+            if (isLoggedIn()) {
                 var token = getToken();
                 var payload = JSON.parse($window.atob(token.split('.')[1]));
                 return payload.alias;
             }
         }
 
-        function crear (user) {
+        function create (user) {
             return $http.post('/user/', user).success(function(data){
                 saveToken(data.token);
             });

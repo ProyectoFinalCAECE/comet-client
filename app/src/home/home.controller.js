@@ -5,16 +5,16 @@
         .module('cometApp')
         .controller('HomeController', HomeController);
 
-    HomeController.$inject = ['autenticacionService'];
+    HomeController.$inject = ['authService'];
 
-    function HomeController (autenticacionService) {
+    function HomeController (authService) {
 
         var vm = this;
 
-        vm.estaLogueado = autenticacionService.estaLogueado;
-        vm.usuarioActual = autenticacionService.usuarioActual;
-        vm.logout = autenticacionService.logout;
+        vm.isLoggedIn = authService.isLoggedIn;
+        vm.currentUser = authService.currentUser;
+        vm.logout = authService.logout;
 
-        console.log(autenticacionService.usuarioActual());
+        console.log(authService.currentUser());
     }
 })();

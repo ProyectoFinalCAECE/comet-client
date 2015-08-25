@@ -2,21 +2,21 @@
     'use strict';
 
     angular.module('cometApp')
-           .controller('UsuarioController', UsuarioController);
+           .controller('UserController', UserController);
 
-        UsuarioController.$inject = ['$state', 'autenticacionService'];
+        UserController.$inject = ['$state', 'authService'];
 
-        function UsuarioController ($state, autenticacionService) {
+        function UserController ($state, authService) {
 
           var vm = this;
 
-          vm.usuario = {};
-          vm.crear = crear;
+          vm.user = {};
+          vm.create = create;
           vm.login = login;
           vm.logout = logout;
 
-          function crear () {
-              autenticacionService.crear(vm.usuario).error(function(data) {
+          function create () {
+              authService.create(vm.user).error(function(data) {
                   console.log(data);
                   vm.error = data;
               }).then(function() {
@@ -25,7 +25,7 @@
           }
 
           function login () {
-              autenticacionService.login(vm.usuario).error(function (data) {
+              authService.login(vm.user).error(function (data) {
                   vm.error = data;
               }).then(function () {
                   $state.go('home');
@@ -33,7 +33,7 @@
           }
 
           function logout () {
-              autenticacionService.logout();
+              authService.logout();
               $state.go('home');
           }
       }
