@@ -1,1 +1,5 @@
 
+/* MQ: estilo para validacion de form que me faltaba */
+.has-error.control-label {
+  color: #ed5565;
+}

@@ -15,13 +15,30 @@
           vm.login = login;
           vm.logout = logout;
 
+          vm.validationErrors = null;
+
           function create () {
-              authService.create(vm.user).error(function(data) {
-                  console.log(data);
-                  vm.error = data;
-              }).then(function() {
-                  $state.go('home');
-              });
+              if (vm.frmCreateUser.$valid) {
+                authService.create(vm.user).error(function(data) {
+                    console.log(data);
+                    loadServerErrors(data);
+                }).then(function() {
+                    $state.go('home');
+                });
+            }
+          }
+
+          // loadServerErrors({
+          //   data: {
+          //     errors: { email: "El email ya existe" }
+          //     }
+          // });
+          function loadServerErrors(data) {
+            vm.validationErrors = {};
+            angular.forEach(data.errors, function(value, key) {
+              vm.validationErrors[key] = value;
+            });
+            console.log(vm.validationErrors);
           }
 
           function login () {

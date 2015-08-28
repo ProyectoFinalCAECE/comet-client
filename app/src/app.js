@@ -12,9 +12,10 @@
      */
     angular
         .module('cometApp', [
-            'ui.router',
             'ngAnimate',
+            'ngMessages',
             'ngSanitize',
-            'ngTouch'
+            'ngTouch',
+            'ui.router'
         ]);
 })();
