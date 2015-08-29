@@ -3,3 +3,8 @@
 .has-error.control-label {
   color: #ed5565;
 }
+
+#user-profile .middle-box {
+	width: 500px;
+
+}
