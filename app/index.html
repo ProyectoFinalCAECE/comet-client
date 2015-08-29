@@ -9,6 +9,7 @@
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/ngtoast/dist/ngToast.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -22,6 +23,7 @@
 
     <div>
       <ui-view></ui-view>
+      <toast></toast>
     </div>
 
     <!-- build:js(.) scripts/vendor.js -->
@@ -35,14 +37,17 @@
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="bower_components/validator-js/validator.js"></script>
     <script src="bower_components/angular-messages/angular-messages.js"></script>
+    <script src="bower_components/ngtoast/dist/ngToast.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="src/app.js"></script>
         <script src="src/app.routes.js"></script>
+        <script src="src/field-match.directive.js"></script>
         <script src="src/home/home.controller.js"></script>
         <script src="src/user/user.controller.js"></script>
+        <script src="src/user/user-profile.controller.js"></script>
         <script src="src/services/auth.service.js"></script>
         <!-- endbuild -->
 </body>

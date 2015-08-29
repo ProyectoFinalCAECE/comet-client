@@ -36,6 +36,27 @@ angular
                         $state.go('/');
                     }
                 }]
+            })
+            .state('user-profile', {
+                url: '/user/profile',
+                templateUrl: '/src/user/user-profile.html',
+                controller: 'UserProfileController',
+                controllerAs: 'vm',
+                onEnter: ['$state', 'authService', function ($state, authService) {
+                    if (!authService.isLoggedIn()) {
+                        $state.go('/');
+                    }
+                }]
+            }).state('user-forgot', {
+                url: '/user/forgot',
+                templateUrl: '/src/user/user-forgot.html',
+                controller: 'UserController',
+                controllerAs: 'vm',
+                onEnter: ['$state', 'authService', function ($state, authService) {
+                    if (authService.isLoggedIn()) {
+                        $state.go('/');
+                    }
+                }]
             });
 
         $urlRouterProvider.otherwise('/');

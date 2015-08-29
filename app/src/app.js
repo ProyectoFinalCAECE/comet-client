@@ -15,6 +15,7 @@
             'ngAnimate',
             'ngMessages',
             'ngSanitize',
+            'ngToast',
             'ngTouch',
             'ui.router'
         ]);

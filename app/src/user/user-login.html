@@ -24,14 +24,29 @@
         </div>
         <div class="col-md-6">
             <div class="ibox-content">
-                <form class="m-t" role="form" ng-submit="vm.login()">
-                    <div class="form-group">
-                        <input type="email" ng-model="vm.user.email" class="form-control" placeholder="Email" required="">
+                <form name="vm.frmLogin" class="m-t" role="form" ng-submit="vm.login()" novalidate="">
+                    <div class="form-group" ng-class="{ 'has-error': vm.frmLogin.email.$invalid && vm.frmLogin.email.$dirty }">
+                       <input type="email" name="email" ng-model="vm.user.email" class="form-control" placeholder="Direccion de email" required="">
+                       <div ng-messages="vm.frmLogin.email.$error" ng-if="vm.frmLogin.email.$dirty" class="control-label" role="alert">
+                          <div ng-message="required" class="text-center">Debe ingresar el email</div>
+                          <div ng-message="email" class="text-center">El email ingresado es inválido</div>
+                       </div>
+                       <div ng-if="vm.validationErrors['email']" class="has-error control-label" role="alert">
+                          <div class="text-center">{{ vm.validationErrors['email'] }}</div>
+                       </div>
                     </div>
-                    <div class="form-group">
-                        <input type="password" ng-model="vm.user.password" class="form-control" placeholder="Contraseña" required="">
+
+                    <div class="form-group" ng-class="{ 'has-error': vm.frmLogin.password.$invalid && vm.frmLogin.password.$dirty }">
+                       <input type="password" name="password" ng-model="vm.user.password" class="form-control" placeholder="Contraseña" required="">
+                       <div ng-messages="vm.frmLogin.password.$error" ng-if="vm.frmLogin.password.$dirty" class="control-label" role="alert">
+                          <div ng-message="required" class="text-center">Debe ingresar una contraseña</div>
+                       </div>
+                       <div ng-if="vm.validationErrors['password']" class="has-error control-label" role="alert">
+                          <div class="text-center">{{ vm.validationErrors['password'] }}</div>
+                       </div>
                     </div>
-                    <button type="submit" class="btn btn-primary block full-width m-b">Login</button>
+
+                    <button type="submit" ng-disabled="vm.frmLogin.$invalid" class="btn btn-primary block full-width m-b">Login</button>
 
                     <a href="/#/user/forgot">
                         <small>Olvidaste tu contraseña ?</small>

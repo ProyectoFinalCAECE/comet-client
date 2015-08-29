@@ -1,3 +1,7 @@
+/**
+ * @name HomeController
+ * @desc HomePage controller
+ */
 (function() {
     'use strict';
 
