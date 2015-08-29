@@ -31,7 +31,7 @@
             authService.create(vm.user).error(function(data) {
                 loadServerErrors(data);
             }).then(function() {
-                $state.go('/');
+                $state.go('home');
             });
           }
 
@@ -53,7 +53,7 @@
            */
           function logout () {
               authService.logout();
-              $state.go('/');
+              $state.go('home');
           }
 
           /**
