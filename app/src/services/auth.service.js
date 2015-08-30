@@ -61,7 +61,7 @@
         }
 
         function login (user) {
-            return $http.post('/user/login', user).success(function (data) {
+            return $http.post('/account/login', user).success(function (data) {
                 saveToken(data.token);
             });
         }
