@@ -17,11 +17,14 @@
 
         // /account/password/token POST
         // /account/password/recover POST
+
         // /account/password/renew
 
         return {
             confirm:confirm,
-            resendConfirmation: resendConfirmation
+            resendConfirmation: resendConfirmation,
+            recoverPassword: recoverPassword,
+            recoverPasswordValidate: recoverPasswordValidate
         };
 
         /**
@@ -29,7 +32,10 @@
          * @desc calls the backend endpoint to confirm a user email address
          */
         function confirm (token) {
-            return $http.post('/account/confirm', {token: token});
+          var data = {
+            token: token
+          };
+          return $http.post('/account/confirm', data);
         }
 
         /**
@@ -37,7 +43,35 @@
          * @desc calls the backend endpoint to resend the confirmation email
          */
         function resendConfirmation(token) {
-          return $http.post('/account/confirm/token', {token: token}, authService.getJwtHeader());
+          var data = {
+            token: token
+          };
+          return $http.post('/account/confirm/token', data, authService.getJwtHeader());
+        }
+
+        /**
+         * @name recoverPassword
+         * @desc calls the backend endpoint to send the user a email
+         *       with a link to recover his/her password
+         */
+        function recoverPassword (email) {
+            var data = {
+              email: email
+            };
+            return $http.post('/account/password/token', data);
+        }
+
+        /**
+         * @name confirm
+         * @desc calls the backend endpoint to validate the token and
+         *       set the new password
+         */
+        function recoverPasswordValidate (token, newpassword) {
+            var data = {
+              token: token,
+              newpassword: newpassword
+            };
+            return $http.post('/account/password/recover', data);
         }
     }
 })();

@@ -22,7 +22,7 @@ angular
                 controllerAs: 'vm',
                 onEnter: ['$state', 'authService', function ($state, authService) {
                     if (authService.isLoggedIn()) {
-                        $state.go('/');
+                        $state.go('home');
                     }
                 }]
             })
@@ -33,7 +33,7 @@ angular
                 controllerAs: 'vm',
                 onEnter: ['$state', 'authService', function ($state, authService) {
                     if (authService.isLoggedIn()) {
-                        $state.go('/');
+                        $state.go('home');
                     }
                 }]
             })
@@ -44,26 +44,37 @@ angular
                 controllerAs: 'vm',
                 onEnter: ['$state', 'authService', function ($state, authService) {
                     if (!authService.isLoggedIn()) {
-                        $state.go('/');
-                    }
-                }]
-            })
-            .state('user-forgot', {
-                url: '/user/forgot',
-                templateUrl: '/src/user/user-forgot.html',
-                controller: 'UserController',
-                controllerAs: 'vm',
-                onEnter: ['$state', 'authService', function ($state, authService) {
-                    if (authService.isLoggedIn()) {
-                        $state.go('/');
+                        $state.go('home');
                     }
                 }]
             })
             .state('account-confirm', {
                 url: '/account/confirm?token',
                 templateUrl: '/src/account/account-confirm.html',
-                controller: 'AccountController',
+                controller: 'AccountConfirmController',
                 controllerAs: 'vm'
+            })
+            .state('account-forgot', {
+                url: '/account/forgot',
+                templateUrl: '/src/account/account-forgot.html',
+                controller: 'AccountRecoverController',
+                controllerAs: 'vm',
+                onEnter: ['$state', 'authService', function ($state, authService) {
+                    if (authService.isLoggedIn()) {
+                        $state.go('home');
+                    }
+                }]
+            })
+            .state('account-recover', {
+                url: '/account/recover?token',
+                templateUrl: '/src/account/account-recover.html',
+                controller: 'AccountRecoverController',
+                controllerAs: 'vm',
+                onEnter: ['$state', 'authService', function ($state, authService) {
+                    if (authService.isLoggedIn()) {
+                        $state.go('home');
+                    }
+                }]
             });
 
         $urlRouterProvider.otherwise('/');

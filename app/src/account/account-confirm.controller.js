@@ -1,16 +1,16 @@
 /**
- * @name AccountController
- * @desc Controller for the accounts module */
+ * @name AccountConfirmController
+ * @desc Controller for the accounts confirm views */
 
 (function() {
     'use strict';
 
     angular.module('cometApp')
-           .controller('AccountController', AccountController);
+           .controller('AccountConfirmController', AccountConfirmController);
 
-        AccountController.$inject = ['$state', '$stateParams', 'accountService'];
+        AccountConfirmController.$inject = ['$state', '$stateParams', 'accountService'];
 
-        function AccountController ($state, $stateParams, accountService) {
+        function AccountConfirmController ($state, $stateParams, accountService) {
 
           var vm = this;
           vm.confirm = confirm;

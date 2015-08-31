@@ -18,5 +18,8 @@
             'ngToast',
             'ngTouch',
             'ui.router'
-        ]);
+        ])
+        .run(function($rootScope, helpersService){
+          $rootScope.helpers = helpersService;
+        });
 })();
