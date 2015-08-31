@@ -1,0 +1,19 @@
+<div>
+  <div ng-show="vm.resend && vm.resendSuccess">
+    <p class="alert alert-success">Hemos reenviado el email de confirmación, revisa tu casilla de correo.</p>
+  </div>
+  <div ng-show="vm.resend  && vm.resendError">
+    <p class="alert alert-danger">No hemos podido reenviar el correo. Intenta nuevamente.</p>
+  </div>
+
+  <div ng-show="vm.confirmedAccount">
+    <p>Gracias por confirmar tu cuenta.</p>
+    <p>Ya podés utilizar todos los servicios que Comet ofrece. !</p>
+    <p><a href="/#/" class="btn btn-primary">Volver</a></p>
+  </div>
+   <div ng-show="vm.confirmationError">
+    <p>Ocurrió un error al confirmar tu cuenta.</p>
+    <p>Quizás el ticket de validación expiró o tuvimos un problema con tu cuenta.</p>
+    <button type="button" class="btn btn-primary" ng-click="vm.resendConfirmation()">Reenviar email de confirmación</button>
+  </div>
+</div>

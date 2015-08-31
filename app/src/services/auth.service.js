@@ -17,7 +17,8 @@
             currentUser:currentUser,
             create:create,
             login:login,
-            logout:logout
+            logout:logout,
+            getJwtHeader: getJwtHeader
         };
 
         function saveToken (token) {
@@ -26,6 +27,14 @@
 
         function getToken() {
             return $window.localStorage[storageKey];
+        }
+
+        function getJwtHeader(){
+          return {
+            headers: {
+              Authorization: 'Bearer '+ getToken()
+            }
+          };
         }
 
         function isLoggedIn() {

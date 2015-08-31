@@ -47,7 +47,8 @@ angular
                         $state.go('/');
                     }
                 }]
-            }).state('user-forgot', {
+            })
+            .state('user-forgot', {
                 url: '/user/forgot',
                 templateUrl: '/src/user/user-forgot.html',
                 controller: 'UserController',
@@ -57,6 +58,12 @@ angular
                         $state.go('/');
                     }
                 }]
+            })
+            .state('account-confirm', {
+                url: '/account/confirm?token',
+                templateUrl: '/src/account/account-confirm.html',
+                controller: 'AccountController',
+                controllerAs: 'vm'
             });
 
         $urlRouterProvider.otherwise('/');
