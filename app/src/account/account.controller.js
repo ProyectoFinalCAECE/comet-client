@@ -13,10 +13,8 @@
         function AccountController ($state, $stateParams, accountService) {
 
           var vm = this;
-
           vm.confirm = confirm;
           vm.resendConfirmation = resendConfirmation;
-
           vm.token = $stateParams.token;
           vm.confirmedAccount = false;
           vm.confirmationError = false;
@@ -24,8 +22,15 @@
           vm.resendSuccess = false;
           vm.resendError = false;
 
-          // controller activation
-          confirm();
+          activate();
+
+          /**
+           * @name activate
+           * @desc controller startup logic
+           */
+          function activate() {
+            confirm();
+          }
 
           /**
            * @name confirm

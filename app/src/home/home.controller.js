@@ -14,30 +14,33 @@
     function HomeController (authService, userService) {
 
         var vm = this;
-
         vm.isLoggedIn = authService.isLoggedIn;
         vm.currentUser = authService.currentUser;
-        vm.logout = authService.logout;
-        vm.accountConfirmed = true;
+        vm.logout = logout;
+        vm.user = null;
 
-        initialize();
+        activate();
 
         /**
-         * @name initialize
-         * @desc loads controller initial state
+         * @name activate
+         * @desc controller startup logic
          */
-        function initialize() {
+        function activate() {
 
-          if (vm.isLoggedIn()) {
+          // current logged in user
+          userService.get().error(function(err) {
+              console.log(err);
+          }).then(function (res) {
+              vm.user = res.data.user;
+          });
+        }
 
-            userService.get().error(function(err) {
-                console.log(err);
-            }).then(function (res) {
-                var user = res.data.user;
-                vm.accountConfirmed = user.confirmed;
-                console.log(user);
-            });
-          }
+        /**
+         * @name logout
+         * @desc logouts the user and cleans the state
+         */
+        function logout() {
+          authService.logout();
         }
     }
 })();

@@ -21,6 +21,5 @@
         function get () {
           return $http.get('/user/', authService.getJwtHeader());
         }
-
     }
 })();
