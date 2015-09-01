@@ -4,6 +4,10 @@
   color: #ed5565;
 }
 
+.logo-name a {
+  color: #e6e6e6;
+}
+
 #formulario.middle-box {
 	position: relative;
 	margin-top: 0;
