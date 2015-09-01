@@ -8,6 +8,11 @@
   color: #e6e6e6;
 }
 
+/* Wrapper del dashboard - le pongo el color de fondo azul */
+#wrapper {
+  background-color: #2f4050
+}
+
 #formulario.middle-box {
 	position: relative;
 	margin-top: 0;
@@ -17,10 +22,10 @@
 	margin-left: -60px;
 }
 
-.modificarCuenta.middle-box {
-	height:500px;
+.modificarCuenta {
+	width:500px;
 }
 
-#modificarCuentaTabs.nav-tabs {
-	width:490px;
-}
+/*#modificarCuentaTabs.nav-tabs {
+	width:500px;
+}*/
