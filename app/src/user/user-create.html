@@ -2,7 +2,7 @@
    <div class="middle-box text-center loginscreen">
       <div>
          <div class="text-center">
-            <h1 class="logo-name">Comet</h1><!--Agregar imagen --><!-- Tocar CSS para centrar titulo -->
+            <h1 class="logo-name">Comet</h1>
          </div>
          <h3>Crear cuenta en Comet</h3>
          <p>Crea una cuenta para empezar a comunicarte!</p>
@@ -10,19 +10,19 @@
             <div class="form-group" ng-class="{ 'has-error': vm.frmCreateUser.firstName.$invalid && vm.frmCreateUser.lastName.$dirty }">
                <input type="text" name="firstName" ng-model="vm.user.firstName" class="form-control" placeholder="Nombre" required="">
                <div ng-messages="vm.frmCreateUser.firstName.$error" ng-if="vm.frmCreateUser.lastName.$dirty" class="control-label" role="alert">
-                  <div ng-message="required">Debe ingresar el nombre</div>
+                  <div ng-message="required">Debes ingresar tu nombre</div>
                </div>
             </div>
             <div class="form-group" ng-class="{ 'has-error': vm.frmCreateUser.lastName.$invalid && vm.frmCreateUser.lastName.$dirty }">
                <input type="text" name="lastName" ng-model="vm.user.lastName" class="form-control" placeholder="Apellido" required="">
                <div ng-messages="vm.frmCreateUser.lastName.$error" ng-if="vm.frmCreateUser.lastName.$dirty" class="control-label" role="alert">
-                  <div ng-message="required">Debe ingresar el apellido</div>
+                  <div ng-message="required">Debes ingresar tu apellido</div>
                </div>
             </div>
             <div class="form-group" ng-class="{ 'has-error': vm.frmCreateUser.email.$invalid && vm.frmCreateUser.email.$dirty }">
                <input type="email" name="email" ng-model="vm.user.email" class="form-control" placeholder="Direccion de email" required="">
                <div ng-messages="vm.frmCreateUser.email.$error" ng-if="vm.frmCreateUser.email.$dirty" class="control-label" role="alert">
-                  <div ng-message="required">Debe ingresar el email</div>
+                  <div ng-message="required">Debes ingresar tu email</div>
                   <div ng-message="email">El email ingresado es inválido</div>
                </div>
                <div ng-if="vm.validationErrors['email']" class="has-error control-label" role="alert">
@@ -39,19 +39,19 @@
                   <div ng-message="minlength">Debe tener una longitud entre 6 y 40 caracteres</div>
                   <div ng-message="maxlength">La longitud máxima aceptada es 40 caracteres</div>
                   <div ng-message="pattern">Debe tener al menos una minúscula, una mayúscula y un símbolo o número</div>
-                  <div ng-message="required">Debe ingresar una contraseña</div>
+                  <div ng-message="required">Debes ingresar una contraseña</div>
                </div>
             </div>
             <div class="form-group" ng-class="{ 'has-error': vm.frmCreateUser.confirmPassword.$invalid && vm.frmCreateUser.confirmPassword.$dirty }">
               <input type="password"  name="confirmPassword" ng-model="vm.user.confirmPassword" class="form-control" placeholder="Repetir la contraseña" required="" field-match="" dsfieldmatch="vm.frmCreateUser.password">
               <div ng-messages="vm.frmCreateUser.confirmPassword.$error" ng-if="vm.frmCreateUser.confirmPassword.$dirty" class="control-label" role="alert">
-                <div ng-message="required">Debe ingresar la confirmación de su contraseña</div>
+                <div ng-message="required">Debes ingresar la confirmación de tu contraseña</div>
                 <div ng-message="fieldMatch">Las contraseñas no coinciden</div>
               </div>
             </div>
             <button type="submit" ng-disabled="vm.frmCreateUser.$invalid" class="btn btn-primary block full-width m-b">Crear cuenta</button>
-            <p class="text-muted text-center"><small>Ya tiene una cuenta?</small></p>
-            <a class="btn btn-sm btn-white btn-block" href="/#/user/login">Login</a>
+            <p class="text-muted text-center"><small>¿Ya tienes una cuenta?</small></p>
+            <a class="btn btn-sm btn-white btn-block" href="/#/account/login">Login</a>
          </form>
          <p class="m-t"> <small>The Comet Company &copy; 2015</small> </p>
       </div>

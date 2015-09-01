@@ -4,14 +4,19 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Comet | Dashboard</title>
-	  <link rel="stylesheet" href="../../../bower_components/bootstrap/dist/css/bootstrap.css" />
-      <link rel="stylesheet" href="../../../bower_components/ngtoast/dist/ngToast.css" />
-	  <link href="../../../bower_components/fontawesome/css/font-awesome.css" rel="stylesheet">
+      <link href="../../../bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+      <link href="../../../bower_components/ngtoast/dist/ngToast.css" rel="stylesheet" />
+      <link href="../../../bower_components/fontawesome/css/font-awesome.css" rel="stylesheet">
       <link href="../../styles/vendor/INSPINIA/plugins/toastr/toastr.min.css" rel="stylesheet">
       <link href="../../styles/vendor/gritter/jquery.gritter.css" rel="stylesheet">
       <link href="../../styles/vendor/animate.css" rel="stylesheet">
       <link href="../../styles/vendor/INSPINIA/style.css" rel="stylesheet">
       <link href="../../styles/main.css" rel="stylesheet">
+	  
+	  <!-- Se agrega este -->
+    <link href="../../styles/vendor/INSPINIA/plugins/iCheck/custom.css" rel="stylesheet">
+
+
    </head>
    <body>
       <div id="wrapper">
@@ -34,7 +39,7 @@
                            <li><a href="user-login.html">Salir</a></li>
                         </ul>
                      </div>
-                  </li>                      
+                  </li>
                   <li>
                      <a href="#"><i class="fa fa-sitemap"></i> <span class="nav-label">Ejemplo Menu</span><span class="fa arrow"></span></a>
                      <ul class="nav nav-second-level">
@@ -61,7 +66,7 @@
                         </li>
                      </ul>
                   </li>
-				   <li>
+                  <li>
                      <a href="#"><i class="fa fa-sitemap"></i> <span class="nav-label">Ejemplo Menu 2</span><span class="fa arrow"></span></a>
                      <ul class="nav nav-second-level">
                         <li>
@@ -91,192 +96,188 @@
             </div>
          </nav>
          <div id="page-wrapper" class="gray-bg dashbard-1">
-			 <div class="row border-bottom">
-				 <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
-						  <div class="navbar-header">
-							 <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
-							 <form role="search" class="navbar-form-custom" method="post" action="search_results.html">
-								<div class="form-group">
-								   <input type="text" placeholder="Buscar..." class="form-control" name="top-search" id="top-search">
-								</div>
-							 </form>
-						  </div>
-						  <ul class="nav navbar-top-links navbar-right">
-							 <li>
-								<span class="m-r-sm text-muted welcome-message">Bienvenido a Comet!</span>
-							 </li>
-							 <li class="dropdown">
-								<a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-								<i class="fa fa-envelope"></i>  <span class="label label-warning">16</span>
-								</a>
-								<ul class="dropdown-menu dropdown-messages">
-								   <li>
-									  <div class="dropdown-messages-box">
-										 <a href="profile.html" class="pull-left">
-										 <img alt="image" class="img-circle" src="../../images/vendor/a7.jpg">
-										 </a>
-										 <div class="media-body">
-											<small class="pull-right">Hace 21hs</small>
-											<strong>Mariano Quevedo abrio un canal</strong><br>
-											<small class="text-muted">Hace 3 dias - 05/08/2015 17:32 pm </small>
-										 </div>
-									  </div>
-								   </li>
-								   <li class="divider"></li>
-								   <li>
-									  <div class="dropdown-messages-box">
-										 <a href="profile.html" class="pull-left">
-										 <img alt="image" class="img-circle" src="../../images/vendor/a4.jpg">
-										 </a>
-										 <div class="media-body ">
-											<small class="pull-right text-navy">Hace 5hs</small>
-											<strong>Juan Saucedo</strong> started following <strong>Alan Rossi</strong>. <br>
-											<small class="text-muted">Ayer - 07/08/2015 13:21 pm </small>
-										 </div>
-									  </div>
-								   </li>
-								   <li class="divider"></li>
-								   <li>
-									  <div class="dropdown-messages-box">
-										 <a href="profile.html" class="pull-left">
-										 <img alt="image" class="img-circle" src="../../images/vendor/profile.jpg">
-										 </a>
-										 <div class="media-body ">
-											<small class="pull-right">Hace 23hs</small>
-											<strong>Matias Villoria compartio un archivo contigo.</strong><br>
-											<small class="text-muted">Hace 2 dias - 06/08/2015 9:30 am - </small>
-										 </div>
-									  </div>
-								   </li>
-								   <li class="divider"></li>
-								   <li>
-									  <div class="text-center link-block">
-										 <a href="mailbox.html">
-										 <i class="fa fa-envelope"></i> <strong>Leer todos los mensajes</strong>
-										 </a>
-									  </div>
-								   </li>
-								</ul>
-							 </li>
-							 <li class="dropdown">
-								<a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-								<i class="fa fa-bell"></i>  <span class="label label-primary">8</span>
-								</a>
-								<ul class="dropdown-menu dropdown-alerts">
-								   <li>
-									  <a href="mailbox.html">
-										 <div>
-											<i class="fa fa-envelope fa-fw"></i> Tienes 23 mensajes sin leer
-											<span class="pull-right text-muted small">Hace 4 minutos</span>
-										 </div>
-									  </a>
-								   </li>
-								   <li class="divider"></li>
-								   <li>
-									  <a href="profile.html">
-										 <div>
-											<i class="fa fa-twitter fa-fw"></i> 3 New Followers
-											<span class="pull-right text-muted small">Hace 12 minutos</span>
-										 </div>
-									  </a>
-								   </li>
-								   <li class="divider"></li>
-								   <li>
-									  <a href="grid_options.html">
-										 <div>
-											<i class="fa fa-upload fa-fw"></i> Server Rebooted
-											<span class="pull-right text-muted small">4 minutes ago</span>
-										 </div>
-									  </a>
-								   </li>
-								   <li class="divider"></li>
-								   <li>
-									  <div class="text-center link-block">
-										 <a href="notifications.html">
-										 <strong>Ver todas las alertas</strong>
-										 <i class="fa fa-angle-right"></i>
-										 </a>
-									  </div>
-								   </li>
-								</ul>
-							 </li>
-							 <li>
-								<a href="user-login.html">
-								<i class="fa fa-sign-out"></i> Salir
-								</a>
-							 </li>
-						  </ul>
-					   </nav>
-			</div>
-			<div class="row  border-bottom white-bg dashboard-header">
-				
-				<!--<div class="middle-box text-center  animated fadeInDown">-->
-				<div class="text-center  animated fadeInDown">
-         <div>
-            <div>
-               <h1 class="logo-name">Titulo</h1>
-            </div>
-            <form class="m-t" role="form" action="index.html">
-               <div class="panel blank-panel">
-                  <div class="panel-heading">
-                     <div class="panel-options">
-                        <ul class="nav nav-tabs">
-                           <li class="active"><a data-toggle="tab" href="#tab-1">Modificar datos</a></li>
-                           <li class=""><a data-toggle="tab" href="#tab-2">Modificar contraseña</a></li>
-                           <li class=""><a data-toggle="tab" href="#tab-3">Cerrar cuenta</a></li>
+            <div class="row border-bottom">
+               <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+                  <div class="navbar-header">
+                     <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+                     <form role="search" class="navbar-form-custom" method="post" action="search_results.html">
+                        <div class="form-group">
+                           <input type="text" placeholder="Buscar..." class="form-control" name="top-search" id="top-search">
+                        </div>
+                     </form>
+                  </div>
+                  <ul class="nav navbar-top-links navbar-right">
+                     <li>
+                        <span class="m-r-sm text-muted welcome-message">Bienvenido a Comet!</span>
+                     </li>
+                     <li class="dropdown">
+                        <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                        <i class="fa fa-envelope"></i>  <span class="label label-warning">16</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-messages">
+                           <li>
+                              <div class="dropdown-messages-box">
+                                 <a href="profile.html" class="pull-left">
+                                 <img alt="image" class="img-circle" src="../../images/vendor/a7.jpg">
+                                 </a>
+                                 <div class="media-body">
+                                    <small class="pull-right">Hace 21hs</small>
+                                    <strong>Mariano Quevedo abrio un canal</strong><br>
+                                    <small class="text-muted">Hace 3 dias - 05/08/2015 17:32 pm </small>
+                                 </div>
+                              </div>
+                           </li>
+                           <li class="divider"></li>
+                           <li>
+                              <div class="dropdown-messages-box">
+                                 <a href="profile.html" class="pull-left">
+                                 <img alt="image" class="img-circle" src="../../images/vendor/a4.jpg">
+                                 </a>
+                                 <div class="media-body ">
+                                    <small class="pull-right text-navy">Hace 5hs</small>
+                                    <strong>Juan Saucedo</strong> started following <strong>Alan Rossi</strong>. <br>
+                                    <small class="text-muted">Ayer - 07/08/2015 13:21 pm </small>
+                                 </div>
+                              </div>
+                           </li>
+                           <li class="divider"></li>
+                           <li>
+                              <div class="dropdown-messages-box">
+                                 <a href="profile.html" class="pull-left">
+                                 <img alt="image" class="img-circle" src="../../images/vendor/profile.jpg">
+                                 </a>
+                                 <div class="media-body ">
+                                    <small class="pull-right">Hace 23hs</small>
+                                    <strong>Matias Villoria compartio un archivo contigo.</strong><br>
+                                    <small class="text-muted">Hace 2 dias - 06/08/2015 9:30 am - </small>
+                                 </div>
+                              </div>
+                           </li>
+                           <li class="divider"></li>
+                           <li>
+                              <div class="text-center link-block">
+                                 <a href="mailbox.html">
+                                 <i class="fa fa-envelope"></i> <strong>Leer todos los mensajes</strong>
+                                 </a>
+                              </div>
+                           </li>
                         </ul>
+                     </li>
+                     <li class="dropdown">
+                        <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                        <i class="fa fa-bell"></i>  <span class="label label-primary">8</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-alerts">
+                           <li>
+                              <a href="mailbox.html">
+                                 <div>
+                                    <i class="fa fa-envelope fa-fw"></i> Tienes 23 mensajes sin leer
+                                    <span class="pull-right text-muted small">Hace 4 minutos</span>
+                                 </div>
+                              </a>
+                           </li>
+                           <li class="divider"></li>
+                           <li>
+                              <a href="profile.html">
+                                 <div>
+                                    <i class="fa fa-twitter fa-fw"></i> 3 New Followers
+                                    <span class="pull-right text-muted small">Hace 12 minutos</span>
+                                 </div>
+                              </a>
+                           </li>
+                           <li class="divider"></li>
+                           <li>
+                              <a href="grid_options.html">
+                                 <div>
+                                    <i class="fa fa-upload fa-fw"></i> Server Rebooted
+                                    <span class="pull-right text-muted small">4 minutes ago</span>
+                                 </div>
+                              </a>
+                           </li>
+                           <li class="divider"></li>
+                           <li>
+                              <div class="text-center link-block">
+                                 <a href="notifications.html">
+                                 <strong>Ver todas las alertas</strong>
+                                 <i class="fa fa-angle-right"></i>
+                                 </a>
+                              </div>
+                           </li>
+                        </ul>
+                     </li>
+                     <li>
+                        <a href="user-login.html">
+                        <i class="fa fa-sign-out"></i> Salir
+                        </a>
+                     </li>
+                  </ul>
+               </nav>
+            </div>
+            <div class="row  border-bottom white-bg dashboard-header">
+               <!--<div class="middle-box text-center  animated fadeInDown">-->
+               <div id="formulario" class="modificarCuenta middle-box  text-center  animated fadeInDown">
+                     <div>
+                        <h1 class="logo-name">Comet</h1>
                      </div>
-                  </div>
-                  <div class="panel-body">
-                     <div class="tab-content">
-                        <div id="tab-1" class="tab-pane active">
-                           <div class="form-group">
-                              <input type="text" class="form-control" placeholder="Nombre" required="">
+                     <form class="m-t" role="form" action="index.html">
+                        <div class="panel blank-panel">
+                           <div class="panel-heading">
+                              <div class="panel-options">
+                                 <ul id="modificarCuentaTabs" class="nav nav-tabs">
+                                    <li class="active"><a data-toggle="tab" href="#tab-1">Modificar datos</a></li>
+                                    <li class=""><a data-toggle="tab" href="#tab-2">Modificar contraseña</a></li>
+                                    <li class=""><a data-toggle="tab" href="#tab-3">Cerrar cuenta</a></li>
+                                 </ul>
+                              </div>
                            </div>
-                           <div class="form-group">
-                              <input type="text" class="form-control" placeholder="Apellido" required="">
+                           <div class="panel-body">
+                              <div class="tab-content">
+                                 <div id="tab-1" class="tab-pane active">
+                                    <div class="form-group">
+                                       <input type="text" class="form-control" placeholder="Nombre" required="">
+                                    </div>
+                                    <div class="form-group">
+                                       <input type="text" class="form-control" placeholder="Apellido" required="">
+                                    </div>
+                                    <div class="form-group">
+                                       <input type="text" class="form-control" placeholder="Alias" required="">
+                                    </div>
+                                    Cambiar Foto (Subir foto)
+                                    <button type="submit" class="btn btn-primary block full-width m-b">Modificar datos</button>
+                                 </div>
+                                 <div id="tab-2" class="tab-pane">
+                                    <div class="form-group">
+                                       <input type="password" class="form-control" placeholder="Contraseña actual" required="">
+                                    </div>
+                                    <div class="form-group">
+                                       <input type="password" class="form-control" placeholder="Nueva contraseña" required="">
+                                    </div>
+                                    <div class="form-group">
+                                       <input type="password" class="form-control" placeholder="Repetir contraseña" required="">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary block full-width m-b">Modificar contraseña</button>
+                                 </div>
+                                 <div id="tab-3" class="tab-pane">
+                                    <div class="form-group">
+					
+                                       <div class="checkbox i-checks"><label> <input type="checkbox"><i></i> Estas seguro de cerrar la cuenta? </label></div>
+                                       <!-- copiar estilo igual que el check de registro -->
+                                    </div>
+                                    <div class="form-group">
+                                       <input type="password" class="form-control" placeholder="Contraseña" required="">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary block full-width m-b">Cerrar cuenta</button>
+                                 </div>
+                              </div>
                            </div>
-                           <div class="form-group">
-                              <input type="text" class="form-control" placeholder="Alias" required="">
-                           </div>
-                           Cambiar Foto (Subir foto)
-                           <button type="submit" class="btn btn-primary block full-width m-b">Modificar datos</button>
                         </div>
-                        <div id="tab-2" class="tab-pane">
-                           <div class="form-group">
-                              <input type="password" class="form-control" placeholder="Contraseña actual" required="">
-                           </div>
-						   <div class="form-group">
-                              <input type="password" class="form-control" placeholder="Nueva contraseña" required="">
-                           </div>
-						   <div class="form-group">
-                              <input type="password" class="form-control" placeholder="Repetir contraseña" required="">
-                           </div>
-						   <button type="submit" class="btn btn-primary block full-width m-b">Modificar contraseña</button>
-                        </div>
-                        <div id="tab-3" class="tab-pane">
-							<div class="form-group">
-								<div class="checkbox i-checks"><label> <input type="checkbox"><i></i> Estas seguro de cerrar la cuenta? </label></div> <!-- copiar estilo igual que el check de registro -->
-							</div>
-							<div class="form-group">
-                              <input type="password" class="form-control" placeholder="Contraseña" required="">
-                           </div>
-						   <button type="submit" class="btn btn-primary block full-width m-b">Cerrar cuenta</button>
-                        </div>
-                     </div>
-                  </div>
+                     </form>
                </div>
-            </form>
-         </div>
-      </div>
-				
-				
-			</div>
-			<div class="row">
+            </div>
+            <div class="row">
                <div class="col-lg-12">
-				  <div class="wrapper wrapper-content">
-				   
-				  </div>
+                  <div class="wrapper wrapper-content">
+                  </div>
                   <div class="footer">
                      <div>
                         <p class="m-t"> <small>The Comet Company &copy; 2015</small> </p>
@@ -286,23 +287,6 @@
             </div>
          </div>
       </div>
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
       <!-- Mainly scripts -->
       <script src="../../scripts/vendor/jquery-2.1.1.js"></script>
       <script src="../../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -329,6 +313,13 @@
       <script src="../../scripts/vendor/plugins/chartJs/Chart.min.js"></script>
       <!-- Toastr -->
       <script src="../../scripts/vendor/plugins/toastr/toastr.min.js"></script>
+	  
+	<!-- Se agrega este -->
+	<!-- iCheck -->
+    <script src="../../scripts/vendor/plugins/iCheck/icheck.min.js"></script>
+	
+	
+	
       <script>
          $(document).ready(function() {
              setTimeout(function() {

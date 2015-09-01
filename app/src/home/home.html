@@ -1,5 +1,4 @@
 <div class="container">
-
     <nav class="navbar">
         <div class="container">
             <div class="navbar-header">
@@ -13,9 +12,9 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
-                <li ng-show="vm.isLoggedIn()"><a href="/#/user/profile">{{vm.currentUser()}}</a></li>
+                <li ng-show="vm.isLoggedIn()"><a href="/#/user/profile">{{vm.user.alias}}</a></li>
                 <li ng-show="vm.isLoggedIn()"><a href="" ng-click="vm.logout()">Cerrar sesion</a></li>
-                <li ng-hide="vm.isLoggedIn()"><a href="/#/user/login">Iniciar sesión</a></li>
+                <li ng-hide="vm.isLoggedIn()"><a href="/#/account/login">Iniciar sesión</a></li>
                 <li ng-hide="vm.isLoggedIn()"><a href="/#/user/create">Crear cuenta</a></li>
               </ul>
             </div><!--/.navbar-collapse -->
