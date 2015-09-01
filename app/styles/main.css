@@ -4,7 +4,19 @@
   color: #ed5565;
 }
 
-#user-profile .middle-box {
-	width: 500px;
+#formulario.middle-box {
+	position: relative;
+	margin-top: 0;
+}
 
+#formulario.middle-box  h1{
+	margin-left: -60px;
+}
+
+.modificarCuenta.middle-box {
+	height:500px;
+}
+
+#modificarCuentaTabs.nav-tabs {
+	width:490px;
 }
