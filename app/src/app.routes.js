@@ -65,7 +65,7 @@ angular
                     }
                 }]
             })
-            .state('dashboard', {
+            .state('dashboard-index', {
                 url: '/dashboard',
                 templateUrl: '/src/dashboard/dashboard-index.html',
                 controller: 'DashboardController',
