@@ -9,23 +9,33 @@
     accountService.$inject = ['$http', 'authService'];
 
     function accountService ($http, authService) {
-        // /account/login POST
-        // /account/logout POST
-
-        // /account/confirm POST
-        // /account/confirm/token POST
-
-        // /account/password/token POST
-        // /account/password/recover POST
-
-        // /account/password/renew
 
         return {
+            login: login,
+            logout: logout,
             confirm:confirm,
             resendConfirmation: resendConfirmation,
             recoverPassword: recoverPassword,
             recoverPasswordValidate: recoverPasswordValidate
         };
+
+        /**
+         * @name login
+         * @desc calls the backend endpoint to login a user
+         */
+        function login (user) {
+            return $http.post('/account/login', user).success(function (data) {
+                authService.saveToken(data.token);
+            });
+        }
+
+        /**
+         * @name logout
+         * @desc closes the user session
+         */
+        function logout() {
+            authService.deleteToken();
+        }
 
         /**
          * @name confirm

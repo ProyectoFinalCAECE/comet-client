@@ -15,17 +15,6 @@ angular
                 controller: 'HomeController',
                 controllerAs: 'vm'
             })
-            .state('user-login', {
-                url: '/user/login',
-                templateUrl: '/src/user/user-login.html',
-                controller: 'UserController',
-                controllerAs: 'vm',
-                onEnter: ['$state', 'authService', function ($state, authService) {
-                    if (authService.isLoggedIn()) {
-                        $state.go('home');
-                    }
-                }]
-            })
             .state('user-create', {
                 url: '/user/create',
                 templateUrl: '/src/user/user-create.html',
@@ -44,6 +33,17 @@ angular
                 controllerAs: 'vm',
                 onEnter: ['$state', 'authService', function ($state, authService) {
                     if (!authService.isLoggedIn()) {
+                        $state.go('home');
+                    }
+                }]
+            })
+            .state('account-login', {
+                url: '/account/login',
+                templateUrl: '/src/account/account-login.html',
+                controller: 'AccountLoginController',
+                controllerAs: 'vm',
+                onEnter: ['$state', 'authService', function ($state, authService) {
+                    if (authService.isLoggedIn()) {
                         $state.go('home');
                     }
                 }]
