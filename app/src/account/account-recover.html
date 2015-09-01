@@ -1,14 +1,15 @@
 <div class="row white-bg">
-  <div id="formulario" class="middle-box text-center animated fadeInDown">
+  <div id="formulario" class="middle-box text-center animated fadeIn">
       <div>
          <h1 class="logo-name"><a href="/#/">Comet</a></h1>
       </div>
       <div class="m-t" ng-show="vm.passwordChanged">
         <p>La contraseña ha sido modificada con exito !</p>
-        <p><a href="/#/user/login" class="btn btn-primary">Ir a Login</a></p>
+        <p><a href="/#/account/login" class="btn btn-primary">Ir a Login</a></p>
       </div>
       <div ng-hide="vm.passwordChanged">
-        <h3>Ingrese la nueva contraseña</h3>
+        <h3>Ingrese la nueva contraseña para</h3>
+        <h3 class="text-muted">{{vm.recoverEmail}}</h3>
         <form name="vm.frmRecover" class="m-t" role="form" ng-submit="vm.recoverPasswordValidate()" novalidate="">
           <div class="form-group" ng-class="{ 'has-error': vm.frmRecover.password.$invalid && vm.frmRecover.password.$dirty }">
              <input type="password" name="password" class="form-control" placeholder="Contraseña"
