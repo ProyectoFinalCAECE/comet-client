@@ -21,7 +21,7 @@
           vm.email = null;
           // account-recover
           vm.token = $stateParams.token;
-          vm.recoverEmail = "prueba@gmail.com";
+          vm.recoverEmail = $stateParams.email;
           vm.password = null;
           vm.confirmPassword = null;
           vm.passwordChanged = false;
