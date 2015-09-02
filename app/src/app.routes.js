@@ -13,12 +13,17 @@ angular
                 url: '/',
                 templateUrl: '/src/home/home.html',
                 controller: 'HomeController',
-                controllerAs: 'vm'
+                controllerAs: 'vm',
+                resolve: {
+                    user: ['userService', function(userService) {
+                      return userService.get();
+                    }]
+                }
             })
             .state('user-create', {
                 url: '/user/create',
                 templateUrl: '/src/user/user-create.html',
-                controller: 'UserController',
+                controller: 'UserCreateController',
                 controllerAs: 'vm',
                 onEnter: ['$state', 'authService', function ($state, authService) {
                     if (authService.isLoggedIn()) {
@@ -70,6 +75,11 @@ angular
                 templateUrl: '/src/dashboard/dashboard-index.html',
                 controller: 'DashboardController',
                 controllerAs: 'vm',
+                resolve: {
+                    user: ['userService', function(userService) {
+                      return userService.get();
+                    }]
+                },
                 onEnter: ['$state', 'authService', function ($state, authService) {
                     if (!authService.isLoggedIn()) {
                         $state.go('home');

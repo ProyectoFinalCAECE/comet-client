@@ -13,25 +13,14 @@
                                        '$stateParams',
                                        'ngToast',
                                        'accountService',
-                                       'userService'];
+                                       'user'];
 
-        function DashboardController ($rootScope, $state, $stateParams, ngToast, accountService, userService) {
+        function DashboardController ($rootScope, $state, $stateParams, ngToast, accountService, user) {
 
           var vm = this;
           vm.logout = logout;
           vm.perfil = perfil;
-          vm.user = null;
-
-          activate();
-
-          function activate() {
-            // current logged in user
-            userService.get().error(function(err) {
-                console.log(err);
-            }).then(function (res) {
-                vm.user = res.data.user;
-            });
-          }
+          vm.user = user;
 
           /**
            * @name logout

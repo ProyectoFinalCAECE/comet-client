@@ -1,66 +1,100 @@
 <div class="row border-bottom dashboard-header">
   <div class="row">
     <div class="col-lg-12">
-      <div class="wrapper wrapper-content animated fadeInUp">
+      <div class="wrapper wrapper-content animated fadeIn">
         <div class="ibox">
           <div class="ibox-title">
             <h5>Editar perfil</h5>
           </div>
           <div class="ibox-content">
             <div class="modificarCuenta">
-              <form class="m-t" role="form" action="index.html">
-                <div class="panel blank-panel">
-                  <div class="panel-heading">
-                    <div class="panel-options">
-                      <ul id="modificarCuentaTabs" class="nav nav-tabs">
-                        <li class="active"><a data-toggle="tab" href="#tab-1">Modificar datos</a></li>
-                        <li class=""><a data-toggle="tab" href="#tab-2">Modificar contraseña</a></li>
-                        <li class=""><a data-toggle="tab" href="#tab-3">Cerrar cuenta</a></li>
-                      </ul>
-                    </div>
+              <div class="panel blank-panel">
+                <div class="panel-heading">
+                  <div class="panel-options">
+                    <ul id="modificarCuentaTabs" class="nav nav-tabs">
+                      <li class="active"><a data-toggle="tab" href="#tab-1">Modificar datos</a></li>
+                      <li class=""><a data-toggle="tab" href="#tab-2">Modificar contraseña</a></li>
+                      <li class=""><a data-toggle="tab" href="#tab-3">Cerrar cuenta</a></li>
+                    </ul>
                   </div>
-                  <div class="panel-body">
-                    <div class="tab-content">
-                      <div id="tab-1" class="tab-pane active">
+                </div>
+                <div class="panel-body">
+                  <div class="tab-content">
+                    <div id="tab-1" class="tab-pane active">
+                      <form name="vm.frmUpdate" ng-submit="vm.update()" class="form-horizontal m-t" role="form" novalidate="">
                         <div class="form-group">
-                          <input type="text" class="form-control" placeholder="Nombre" required="">
+                          <label class="col-sm-2 control-label">Email</label>
+                          <div class="col-sm-10">
+                            <input type="text" name="email" ng-model="vm.user.email" class="form-control" disabled>
+                          </div>
+                        </div>
+                        <div class="form-group" ng-class="{ 'has-error': vm.frmUpdate.firstName.$invalid && vm.frmUpdate.firstName.$dirty }">
+                          <label class="col-sm-2 control-label">Nombre</label>
+                          <div class="col-sm-10">
+                            <input type="text" name="firstName" ng-model="vm.user.firstName" class="form-control" placeholder="Nombre" required="">
+                            <div ng-messages="vm.frmUpdate.firstName.$error" ng-if="vm.frmUpdate.firstName.$dirty" class="control-label" role="alert">
+                              <div ng-message="required">Debes ingresar tu nombre</div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group" ng-class="{ 'has-error': vm.frmUpdate.lastName.$invalid && vm.frmUpdate.lastName.$dirty }">
+                          <label class="col-sm-2 control-label">Apellido</label>
+                          <div class="col-sm-10">
+                            <input type="text" name="lastName" ng-model="vm.user.lastName" class="form-control" placeholder="Apellido" required="">
+                            <div ng-messages="vm.frmUpdate.lastName.$error" ng-if="vm.frmUpdate.lastName.$dirty" class="control-label" role="alert">
+                              <div ng-message="required">Debes ingresar tu apellido</div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group" ng-class="{ 'has-error': vm.frmUpdate.alias.$invalid && vm.frmUpdate.alias.$dirty }">
+                          <label class="col-sm-2 control-label">Alias</label>
+                          <div class="col-sm-10">
+                            <input type="text" name="alias" class="form-control" placeholder="Alias"
+                                               ng-model="vm.user.alias"
+                                               ng-pattern="/^[a-zA-Z0-9]*$/"
+                                               required="">
+                            <div ng-messages="vm.frmUpdate.alias.$error" ng-if="vm.frmUpdate.alias.$dirty" class="control-label" role="alert">
+                              <div ng-message="required">Debes ingresar un alias</div>
+                              <div ng-message="pattern">Solo letras y números</div>
+                            </div>
+                          </div>
                         </div>
                         <div class="form-group">
-                          <input type="text" class="form-control" placeholder="Apellido" required="">
+                          <label class="col-sm-2 m-t m-b control-label">Avatar</label>
+                          <div class="col-sm-10 m-t m-b">
+                              <img alt="image" class="img-circle" ng-src="{{vm.user.profilePicture}}" width="48" height="48" />
+                          </div>
                         </div>
-                        <div class="form-group">
-                          <input type="text" class="form-control" placeholder="Alias" required="">
+                        <div>
+                          <button type="submit" ng-disabled="vm.frmUpdate.$invalid" class="btn btn-primary block full-width m-b">Modificar datos</button>
                         </div>
-                        Cambiar Foto (Subir foto)
-                        <button type="submit" class="btn btn-primary block full-width m-b">Modificar datos</button>
+                      </form>
+                    </div>
+                    <div id="tab-2" class="tab-pane">
+                      <div class="form-group">
+                        <input type="password" class="form-control" placeholder="Contraseña actual" required="">
                       </div>
-                      <div id="tab-2" class="tab-pane">
-                        <div class="form-group">
-                          <input type="password" class="form-control" placeholder="Contraseña actual" required="">
-                        </div>
-                        <div class="form-group">
-                          <input type="password" class="form-control" placeholder="Nueva contraseña" required="">
-                        </div>
-                        <div class="form-group">
-                          <input type="password" class="form-control" placeholder="Repetir contraseña" required="">
-                        </div>
-                        <button type="submit" class="btn btn-primary block full-width m-b">Modificar contraseña</button>
+                      <div class="form-group">
+                        <input type="password" class="form-control" placeholder="Nueva contraseña" required="">
                       </div>
-                      <div id="tab-3" class="tab-pane">
-                        <div class="form-group">
-
-                          <div class="checkbox i-checks"><label> <input type="checkbox"><i></i> Estas seguro de cerrar la cuenta? </label></div>
-                          <!-- copiar estilo igual que el check de registro -->
-                        </div>
-                        <div class="form-group">
-                          <input type="password" class="form-control" placeholder="Contraseña" required="">
-                        </div>
-                        <button type="submit" class="btn btn-primary block full-width m-b">Cerrar cuenta</button>
+                      <div class="form-group">
+                        <input type="password" class="form-control" placeholder="Repetir contraseña" required="">
                       </div>
+                      <button type="submit" class="btn btn-primary block full-width m-b">Modificar contraseña</button>
+                    </div>
+                    <div id="tab-3" class="tab-pane">
+                      <div class="form-group">
+                        <div class="checkbox i-checks"><label> <input type="checkbox"><i></i> Estas seguro de cerrar la cuenta? </label></div>
+                        <!-- copiar estilo igual que el check de registro -->
+                      </div>
+                      <div class="form-group">
+                        <input type="password" class="form-control" placeholder="Contraseña" required="">
+                      </div>
+                      <button type="submit" class="btn btn-primary block full-width m-b">Cerrar cuenta</button>
                     </div>
                   </div>
                 </div>
-              </form>
+              </div>
             </div>
           </div>
         </div>

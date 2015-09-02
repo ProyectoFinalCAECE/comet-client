@@ -12,7 +12,8 @@
 
         return {
             create: create,
-            get:get
+            get:get,
+            update:update
         };
 
         /**
@@ -30,7 +31,19 @@
          * @desc calls the backend endpoint to get the logged user data
          */
         function get () {
-          return $http.get('/user/', authService.getJwtHeader());
+          return $http.get('/user/', authService.getJwtHeader()).then(function (res) {
+            return res.data.user;
+          }, function () {
+            return null;
+          });
+        }
+
+        /**
+         * @name put
+         * @desc calls the backend endpoint to update the logged user data
+         */
+        function update (user) {
+          return $http.put('/user/', user, authService.getJwtHeader());
         }
     }
 })();

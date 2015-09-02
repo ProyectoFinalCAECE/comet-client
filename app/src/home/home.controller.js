@@ -9,30 +9,14 @@
         .module('cometApp')
         .controller('HomeController', HomeController);
 
-    HomeController.$inject = ['authService', 'userService', 'accountService'];
+    HomeController.$inject = ['authService', 'accountService', 'user'];
 
-    function HomeController (authService, userService, accountService) {
+    function HomeController (authService, accountService, user) {
 
         var vm = this;
         vm.isLoggedIn = authService.isLoggedIn;
         vm.logout = logout;
-        vm.user = null;
-
-        activate();
-
-        /**
-         * @name activate
-         * @desc controller startup logic
-         */
-        function activate() {
-
-          // current logged in user
-          userService.get().error(function(err) {
-              console.log(err);
-          }).then(function (res) {
-              vm.user = res.data.user;
-          });
-        }
+        vm.user = user;
 
         /**
          * @name logout
