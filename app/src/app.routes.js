@@ -15,17 +15,6 @@ angular
                 controller: 'HomeController',
                 controllerAs: 'vm'
             })
-            .state('user-login', {
-                url: '/user/login',
-                templateUrl: '/src/user/user-login.html',
-                controller: 'UserController',
-                controllerAs: 'vm',
-                onEnter: ['$state', 'authService', function ($state, authService) {
-                    if (authService.isLoggedIn()) {
-                        $state.go('home');
-                    }
-                }]
-            })
             .state('user-create', {
                 url: '/user/create',
                 templateUrl: '/src/user/user-create.html',
@@ -37,13 +26,13 @@ angular
                     }
                 }]
             })
-            .state('user-profile', {
-                url: '/user/profile',
-                templateUrl: '/src/user/user-profile.html',
-                controller: 'UserProfileController',
+            .state('account-login', {
+                url: '/account/login',
+                templateUrl: '/src/account/account-login.html',
+                controller: 'AccountLoginController',
                 controllerAs: 'vm',
                 onEnter: ['$state', 'authService', function ($state, authService) {
-                    if (!authService.isLoggedIn()) {
+                    if (authService.isLoggedIn()) {
                         $state.go('home');
                     }
                 }]
@@ -66,7 +55,7 @@ angular
                 }]
             })
             .state('account-recover', {
-                url: '/account/recover?token',
+                url: '/account/recover?token&email',
                 templateUrl: '/src/account/account-recover.html',
                 controller: 'AccountRecoverController',
                 controllerAs: 'vm',
@@ -75,6 +64,23 @@ angular
                         $state.go('home');
                     }
                 }]
+            })
+            .state('dashboard-index', {
+                url: '/dashboard',
+                templateUrl: '/src/dashboard/dashboard-index.html',
+                controller: 'DashboardController',
+                controllerAs: 'vm',
+                onEnter: ['$state', 'authService', function ($state, authService) {
+                    if (!authService.isLoggedIn()) {
+                        $state.go('home');
+                    }
+                }]
+            })
+            .state('dashboard.profile', {
+                url: '/profile',
+                templateUrl: '/src/user/user-profile.html',
+                controller: 'UserProfileController',
+                controllerAs: 'vm'
             });
 
         $urlRouterProvider.otherwise('/');
