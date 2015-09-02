@@ -1,0 +1,167 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/bin/node', '/usr/bin/npm', 'install' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.40
+4 verbose node symlink /usr/bin/node
+5 verbose readDependencies using package.json deps
+6 verbose install where, deps [ '/vagrant/node-services/comet-client',
+6 verbose install   [ 'grunt',
+6 verbose install     'grunt-angular-templates',
+6 verbose install     'grunt-autoprefixer',
+6 verbose install     'grunt-concurrent',
+6 verbose install     'grunt-contrib-clean',
+6 verbose install     'grunt-contrib-concat',
+6 verbose install     'grunt-contrib-connect',
+6 verbose install     'grunt-contrib-copy',
+6 verbose install     'grunt-contrib-cssmin',
+6 verbose install     'grunt-contrib-htmlmin',
+6 verbose install     'grunt-contrib-imagemin',
+6 verbose install     'grunt-contrib-jshint',
+6 verbose install     'grunt-contrib-uglify',
+6 verbose install     'grunt-contrib-watch',
+6 verbose install     'grunt-filerev',
+6 verbose install     'grunt-google-cdn',
+6 verbose install     'grunt-karma',
+6 verbose install     'grunt-newer',
+6 verbose install     'grunt-ng-annotate',
+6 verbose install     'grunt-svgmin',
+6 verbose install     'grunt-usemin',
+6 verbose install     'grunt-wiredep',
+6 verbose install     'jit-grunt',
+6 verbose install     'jshint-stylish',
+6 verbose install     'karma-jasmine',
+6 verbose install     'karma-phantomjs-launcher',
+6 verbose install     'time-grunt' ] ]
+7 info preinstall comet-client@
+8 verbose readDependencies using package.json deps
+9 verbose already installed skipping grunt@^0.4.5 /vagrant/node-services/comet-client
+10 verbose already installed skipping grunt-angular-templates@^0.5.7 /vagrant/node-services/comet-client
+11 verbose already installed skipping grunt-autoprefixer@^2.0.0 /vagrant/node-services/comet-client
+12 verbose already installed skipping grunt-concurrent@^1.0.0 /vagrant/node-services/comet-client
+13 verbose already installed skipping grunt-contrib-clean@^0.6.0 /vagrant/node-services/comet-client
+14 verbose already installed skipping grunt-contrib-concat@^0.5.0 /vagrant/node-services/comet-client
+15 verbose already installed skipping grunt-contrib-connect@^0.9.0 /vagrant/node-services/comet-client
+16 verbose already installed skipping grunt-contrib-copy@^0.7.0 /vagrant/node-services/comet-client
+17 verbose already installed skipping grunt-contrib-cssmin@^0.12.0 /vagrant/node-services/comet-client
+18 verbose already installed skipping grunt-contrib-htmlmin@^0.4.0 /vagrant/node-services/comet-client
+19 verbose already installed skipping grunt-contrib-imagemin@^0.9.2 /vagrant/node-services/comet-client
+20 verbose already installed skipping grunt-contrib-jshint@^0.11.0 /vagrant/node-services/comet-client
+21 verbose already installed skipping grunt-contrib-uglify@^0.7.0 /vagrant/node-services/comet-client
+22 verbose already installed skipping grunt-contrib-watch@^0.6.1 /vagrant/node-services/comet-client
+23 verbose already installed skipping grunt-filerev@^2.1.2 /vagrant/node-services/comet-client
+24 verbose already installed skipping grunt-google-cdn@^0.4.3 /vagrant/node-services/comet-client
+25 verbose already installed skipping grunt-karma@* /vagrant/node-services/comet-client
+26 verbose already installed skipping grunt-newer@^1.1.0 /vagrant/node-services/comet-client
+27 verbose already installed skipping grunt-ng-annotate@^0.9.2 /vagrant/node-services/comet-client
+28 verbose already installed skipping grunt-svgmin@^2.0.0 /vagrant/node-services/comet-client
+29 verbose already installed skipping grunt-usemin@^3.0.0 /vagrant/node-services/comet-client
+30 verbose already installed skipping grunt-wiredep@^2.0.0 /vagrant/node-services/comet-client
+31 verbose already installed skipping jit-grunt@^0.9.1 /vagrant/node-services/comet-client
+32 verbose already installed skipping jshint-stylish@^1.0.0 /vagrant/node-services/comet-client
+33 verbose already installed skipping karma-jasmine@* /vagrant/node-services/comet-client
+34 verbose already installed skipping karma-phantomjs-launcher@* /vagrant/node-services/comet-client
+35 verbose already installed skipping time-grunt@^1.0.0 /vagrant/node-services/comet-client
+36 silly resolved []
+37 info build /vagrant/node-services/comet-client
+38 verbose linkStuff [ false, false, false, '/vagrant/node-services' ]
+39 info linkStuff comet-client@
+40 verbose linkBins comet-client@
+41 verbose linkMans comet-client@
+42 verbose rebuildBundles comet-client@
+43 verbose rebuildBundles [ '.bin',
+43 verbose rebuildBundles   'grunt',
+43 verbose rebuildBundles   'grunt-angular-templates',
+43 verbose rebuildBundles   'grunt-autoprefixer',
+43 verbose rebuildBundles   'grunt-concurrent',
+43 verbose rebuildBundles   'grunt-contrib-clean',
+43 verbose rebuildBundles   'grunt-contrib-concat',
+43 verbose rebuildBundles   'grunt-contrib-connect',
+43 verbose rebuildBundles   'grunt-contrib-copy',
+43 verbose rebuildBundles   'grunt-contrib-cssmin',
+43 verbose rebuildBundles   'grunt-contrib-htmlmin',
+43 verbose rebuildBundles   'grunt-contrib-imagemin',
+43 verbose rebuildBundles   'grunt-contrib-jshint',
+43 verbose rebuildBundles   'grunt-contrib-uglify',
+43 verbose rebuildBundles   'grunt-contrib-watch',
+43 verbose rebuildBundles   'grunt-filerev',
+43 verbose rebuildBundles   'grunt-google-cdn',
+43 verbose rebuildBundles   'grunt-karma',
+43 verbose rebuildBundles   'grunt-newer',
+43 verbose rebuildBundles   'grunt-ng-annotate',
+43 verbose rebuildBundles   'grunt-svgmin',
+43 verbose rebuildBundles   'grunt-usemin',
+43 verbose rebuildBundles   'grunt-wiredep',
+43 verbose rebuildBundles   'jasmine-core',
+43 verbose rebuildBundles   'jit-grunt',
+43 verbose rebuildBundles   'jshint-stylish',
+43 verbose rebuildBundles   'karma',
+43 verbose rebuildBundles   'karma-jasmine',
+43 verbose rebuildBundles   'karma-phantomjs-launcher',
+43 verbose rebuildBundles   'phantomjs',
+43 verbose rebuildBundles   'time-grunt' ]
+44 verbose rebuild bundle /vagrant/node-services/comet-client/node_modules/jasmine-core
+45 info build /vagrant/node-services/comet-client/node_modules/jasmine-core
+46 info preinstall jasmine-core@2.3.4
+47 verbose linkStuff [ false,
+47 verbose linkStuff   false,
+47 verbose linkStuff   false,
+47 verbose linkStuff   '/vagrant/node-services/comet-client/node_modules' ]
+48 info linkStuff jasmine-core@2.3.4
+49 verbose linkBins jasmine-core@2.3.4
+50 verbose linkMans jasmine-core@2.3.4
+51 verbose rebuildBundles jasmine-core@2.3.4
+52 info install jasmine-core@2.3.4
+53 info postinstall jasmine-core@2.3.4
+54 verbose rebuild bundle /vagrant/node-services/comet-client/node_modules/karma
+55 info build /vagrant/node-services/comet-client/node_modules/karma
+56 info preinstall karma@0.13.9
+57 verbose linkStuff [ false,
+57 verbose linkStuff   false,
+57 verbose linkStuff   false,
+57 verbose linkStuff   '/vagrant/node-services/comet-client/node_modules' ]
+58 info linkStuff karma@0.13.9
+59 verbose linkBins karma@0.13.9
+60 verbose link bins [ { karma: './bin/karma' },
+60 verbose link bins   '/vagrant/node-services/comet-client/node_modules/.bin',
+60 verbose link bins   false ]
+61 verbose linkMans karma@0.13.9
+62 verbose rebuildBundles karma@0.13.9
+63 verbose rebuildBundles [ '.bin',
+63 verbose rebuildBundles   'bluebird',
+63 verbose rebuildBundles   'body-parser',
+63 verbose rebuildBundles   'chokidar',
+63 verbose rebuildBundles   'colors',
+63 verbose rebuildBundles   'connect',
+63 verbose rebuildBundles   'core-js',
+63 verbose rebuildBundles   'di',
+63 verbose rebuildBundles   'dom-serialize',
+63 verbose rebuildBundles   'expand-braces',
+63 verbose rebuildBundles   'glob',
+63 verbose rebuildBundles   'graceful-fs',
+63 verbose rebuildBundles   'http-proxy',
+63 verbose rebuildBundles   'lodash',
+63 verbose rebuildBundles   'log4js',
+63 verbose rebuildBundles   'memoizee',
+63 verbose rebuildBundles   'mime',
+63 verbose rebuildBundles   'minimatch',
+63 verbose rebuildBundles   'optimist',
+63 verbose rebuildBundles   'rimraf',
+63 verbose rebuildBundles   'socket.io',
+63 verbose rebuildBundles   'source-map',
+63 verbose rebuildBundles   'useragent' ]
+64 error Error: EPERM, unlink '/vagrant/node-services/comet-client/node_modules/.bin/karma'
+64 error  { [Error: EPERM, unlink '/vagrant/node-services/comet-client/node_modules/.bin/karma']
+64 error   errno: 50,
+64 error   code: 'EPERM',
+64 error   path: '/vagrant/node-services/comet-client/node_modules/.bin/karma' }
+65 error Please try running this command again as root/Administrator.
+66 error System Linux 3.13.0-61-generic
+67 error command "/usr/bin/node" "/usr/bin/npm" "install"
+68 error cwd /vagrant/node-services/comet-client
+69 error node -v v0.10.40
+70 error npm -v 1.4.28
+71 error path /vagrant/node-services/comet-client/node_modules/.bin/karma
+72 error code EPERM
+73 error errno 50
+74 error stack Error: EPERM, unlink '/vagrant/node-services/comet-client/node_modules/.bin/karma'
+75 verbose exit [ 50, true ]

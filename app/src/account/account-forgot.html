@@ -1,30 +1,25 @@
-<div class="row white-bg">
-  <div id="formulario" class="middle-box text-center animated fadeIn">
-      <div>
-         <h1 class="logo-name"><a href="/#/">Comet</a></h1>
+<div>
+  <div ng-hide="vm.enviado">
+    <p>Por favor ingresá tu dirección de email y te enviaremos un email con instrucciones para recuperar tu contraseña</p>
+    <form name="vm.frmRecover" class="m-t" role="form" ng-submit="vm.recoverPassword()" novalidate="">
+      <div class="form-group" ng-class="{ 'has-error': vm.frmRecover.email.$invalid && vm.frmRecover.email.$dirty }">
+         <input type="email" name="email" ng-model="vm.email" class="form-control" placeholder="Direccion de email" required="">
+         <div ng-messages="vm.frmRecover.email.$error" ng-if="vm.frmRecover.email.$dirty" class="control-label" role="alert">
+            <div ng-message="required" class="text-center">Debe ingresar el email</div>
+            <div ng-message="email" class="text-center">El email ingresado es inválido</div>
+         </div>
+         <div ng-if="vm.validationErrors['email']" class="has-error control-label" role="alert">
+            <div class="text-center">{{ vm.validationErrors['email'] }}</div>
+         </div>
       </div>
-      <div ng-hide="vm.enviado">
-        <p>Por favor ingresá tu dirección de email y te enviaremos un email con instrucciones para recuperar tu contraseña</p>
-        <form name="vm.frmRecover" class="m-t" role="form" ng-submit="vm.recoverPassword()" novalidate="">
-          <div class="form-group" ng-class="{ 'has-error': vm.frmRecover.email.$invalid && vm.frmRecover.email.$dirty }">
-             <input type="email" name="email" ng-model="vm.email" class="form-control" placeholder="Direccion de email" required="">
-             <div ng-messages="vm.frmRecover.email.$error" ng-if="vm.frmRecover.email.$dirty" class="control-label" role="alert">
-                <div ng-message="required" class="text-center">Debe ingresar el email</div>
-                <div ng-message="email" class="text-center">El email ingresado es inválido</div>
-             </div>
-             <div ng-if="vm.validationErrors['email']" class="has-error control-label" role="alert">
-                <div class="text-center">{{ vm.validationErrors['email'] }}</div>
-             </div>
-          </div>
-          <button type="submit" class="btn btn-primary" ng-disabled="vm.frmRecover.$invalid">Recuperar contraseña</button>
-          <a href="/#/account/login" class="m-l">Volver a login</a>
-        </form>
-      </div>
-      <div ng-show="vm.enviado">
-        <h3>Email enviado</h3>
-        <p>Enviamos un email a {{vm.email}}</p>
-        <p>Por favor abrí el email y abrí el link que te enviamos para recuperar tu contraseña</p>
-        <p><a href="/#/" class="btn btn-primary">Volver</a></p>
-      </div>
-    </div>
+      <button type="submit" class="btn btn-primary" ng-disabled="vm.frmRecover.$invalid">Recuperar contraseña</button>
+      <a href="#/">Volver a login</a>
+    </form>
+  </div>
+  <div ng-show="vm.enviado">
+    <h3>Email enviado</h3>
+    <p>Enviamos un email a {{vm.email}}</p>
+    <p>Por favor abrí el email y abrí el link que te enviamos para recuperar tu contraseña</p>
+    <p><a href="/#/" class="btn btn-primary">Volver</a></p>
+  </div>
 </div>

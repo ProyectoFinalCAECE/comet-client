@@ -14,8 +14,10 @@
 
         return {
             isLoggedIn:isLoggedIn,
-            deleteToken:deleteToken,
-            saveToken: saveToken,
+            currentUser:currentUser,
+            create:create,
+            login:login,
+            logout:logout,
             getJwtHeader: getJwtHeader
         };
 
@@ -53,15 +55,27 @@
             }
         }
 
-        // function currentUser () {
-        //     if (isLoggedIn()) {
-        //         var token = getToken();
-        //         var payload = JSON.parse($window.atob(token.split('.')[1]));
-        //         return payload.alias;
-        //     }
-        // }
+        function currentUser () {
+            if (isLoggedIn()) {
+                var token = getToken();
+                var payload = JSON.parse($window.atob(token.split('.')[1]));
+                return payload.alias;
+            }
+        }
 
-        function deleteToken() {
+        function create (user) {
+            return $http.post('/user/', user).success(function(data){
+                saveToken(data.token);
+            });
+        }
+
+        function login (user) {
+            return $http.post('/account/login', user).success(function (data) {
+                saveToken(data.token);
+            });
+        }
+
+        function logout() {
             $window.localStorage.removeItem(storageKey);
         }
     }

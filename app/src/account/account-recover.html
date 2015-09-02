@@ -1,44 +1,37 @@
-<div class="row white-bg">
-  <div id="formulario" class="middle-box text-center animated fadeIn">
-      <div>
-         <h1 class="logo-name"><a href="/#/">Comet</a></h1>
+<div>
+  <div ng-hide="vm.passwordChanged">
+    <form name="vm.frmRecover" class="m-t" role="form" ng-submit="vm.recoverPasswordValidate()" novalidate="">
+      <div class="form-group" ng-class="{ 'has-error': vm.frmRecover.password.$invalid && vm.frmRecover.password.$dirty }">
+         <input type="password" name="password" class="form-control" placeholder="Contraseña"
+                                ng-model="vm.password"
+                                ng-minlength="6"
+                                ng-maxlength="40"
+                                ng-pattern="/(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z])/" />
+         <div ng-messages="vm.frmRecover.password.$error" ng-if="vm.frmRecover.password.$dirty" class="control-label" role="alert">
+            <div ng-message="minlength">Debe tener una longitud entre 6 y 40 caracteres</div>
+            <div ng-message="maxlength">La longitud máxima aceptada es 40 caracteres</div>
+            <div ng-message="pattern">Debe tener al menos una minúscula, una mayúscula y un símbolo o número</div>
+            <div ng-message="required">Debe ingresar una contraseña</div>
+         </div>
       </div>
-      <div class="m-t" ng-show="vm.passwordChanged">
-        <p>La contraseña ha sido modificada con exito !</p>
-        <p><a href="/#/account/login" class="btn btn-primary">Ir a Login</a></p>
+      <div ng-if="vm.validationErrors['password']" class="has-error control-label" role="alert">
+         <div>{{ vm.validationErrors['password'] }}</div>
       </div>
-      <div ng-hide="vm.passwordChanged">
-        <h3>Ingrese la nueva contraseña para</h3>
-        <h3 class="text-muted">{{vm.recoverEmail}}</h3>
-        <form name="vm.frmRecover" class="m-t" role="form" ng-submit="vm.recoverPasswordValidate()" novalidate="">
-          <div class="form-group" ng-class="{ 'has-error': vm.frmRecover.password.$invalid && vm.frmRecover.password.$dirty }">
-             <input type="password" name="password" class="form-control" placeholder="Contraseña"
-                                    ng-model="vm.password"
-                                    ng-minlength="6"
-                                    ng-maxlength="40"
-                                    ng-pattern="/(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z])/" />
-             <div ng-messages="vm.frmRecover.password.$error" ng-if="vm.frmRecover.password.$dirty" class="control-label" role="alert">
-                <div ng-message="minlength">Debe tener una longitud entre 6 y 40 caracteres</div>
-                <div ng-message="maxlength">La longitud máxima aceptada es 40 caracteres</div>
-                <div ng-message="pattern">Debe tener al menos una minúscula, una mayúscula y un símbolo o número</div>
-                <div ng-message="required">Debe ingresar una contraseña</div>
-             </div>
-          </div>
-          <div ng-if="vm.validationErrors['password']" class="has-error control-label" role="alert">
-             <div>{{ vm.validationErrors['password'] }}</div>
-          </div>
-          <div class="form-group" ng-class="{ 'has-error': vm.frmRecover.confirmPassword.$invalid && vm.frmRecover.confirmPassword.$dirty }">
-            <input type="password"  name="confirmPassword" ng-model="vm.confirmPassword" class="form-control" placeholder="Repetir la contraseña" required="" field-match="" dsfieldmatch="vm.frmRecover.password">
-            <div ng-messages="vm.frmRecover.confirmPassword.$error" ng-if="vm.frmRecover.confirmPassword.$dirty" class="control-label" role="alert">
-              <div ng-message="required">Debe ingresar la confirmación de su contraseña</div>
-              <div ng-message="fieldMatch">Las contraseñas no coinciden</div>
-            </div>
-          </div>
-          <div ng-if="vm.validationErrors['confirmPassword']" class="has-error control-label" role="alert">
-             <div>{{ vm.validationErrors['confirmPassword'] }}</div>
-          </div>
-          <button type="submit" name="button" class="btn btn-primary" ng-disabled="vm.frmRecover.$invalid">Cambiar contraseña</button>
-        </form>
+      <div class="form-group" ng-class="{ 'has-error': vm.frmRecover.confirmPassword.$invalid && vm.frmRecover.confirmPassword.$dirty }">
+        <input type="password"  name="confirmPassword" ng-model="vm.confirmPassword" class="form-control" placeholder="Repetir la contraseña" required="" field-match="" dsfieldmatch="vm.frmRecover.password">
+        <div ng-messages="vm.frmRecover.confirmPassword.$error" ng-if="vm.frmRecover.confirmPassword.$dirty" class="control-label" role="alert">
+          <div ng-message="required">Debe ingresar la confirmación de su contraseña</div>
+          <div ng-message="fieldMatch">Las contraseñas no coinciden</div>
+        </div>
       </div>
-   </div>
+      <div ng-if="vm.validationErrors['confirmPassword']" class="has-error control-label" role="alert">
+         <div>{{ vm.validationErrors['confirmPassword'] }}</div>
+      </div>
+      <button type="submit" name="button" class="btn btn-primary" ng-disabled="vm.frmRecover.$invalid">Cambiar contraseña</button>
+    </form>
+  </div>
+  <div ng-show="vm.passwordChanged">
+    <p>La contraseña ha sido modificada con exito !.</p>
+    <p><a href="/#/user/login" class="btn btn-primary">Login</a></p>
+  </div>
 </div>

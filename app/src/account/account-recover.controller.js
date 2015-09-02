@@ -13,18 +13,25 @@
         function AccountRecoverController ($rootScope, $state, $stateParams, ngToast, accountService) {
 
           var vm = this;
-          vm.validationErrors = null;
-          // account-forgot
           vm.recoverPassword = recoverPassword;
           vm.recoverPasswordValidate = recoverPasswordValidate;
           vm.enviado = false;
           vm.email = null;
-          // account-recover
+          vm.validationErrors = null;
           vm.token = $stateParams.token;
-          vm.recoverEmail = $stateParams.email;
           vm.password = null;
           vm.confirmPassword = null;
           vm.passwordChanged = false;
+
+          activate();
+
+          /**
+           * @name activate
+           * @desc controller startup logic
+           */
+          function activate() {
+              console.log(vm.token);
+          }
 
           /**
            * @name recoverPassword

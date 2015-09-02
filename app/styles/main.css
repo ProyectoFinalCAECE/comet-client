@@ -22,6 +22,10 @@
 	margin-left: -60px;
 }
 
+#userCreate.middle-box  h1{
+	margin-left: -100px;
+}
+
 .modificarCuenta {
 	width:500px;
 }
