@@ -17,6 +17,7 @@
             'ngSanitize',
             'ngToast',
             'ngTouch',
+            'ui.bootstrap',
             'ui.router'
         ])
         .run(function($rootScope, helpersService){

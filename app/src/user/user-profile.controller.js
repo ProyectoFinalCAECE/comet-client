@@ -9,23 +9,46 @@
     angular.module('cometApp')
            .controller('UserProfileController', UserProfileController);
 
-        UserProfileController.$inject = ['$rootScope', '$state', 'ngToast', 'userService', 'user'];
+        UserProfileController.$inject = ['$rootScope',
+                                         '$state',
+                                         'ngToast',
+                                         'accountService',
+                                         'userService',
+                                         'user'];
 
-        function UserProfileController ($rootScope, $state, ngToast, userService, user) {
+        function UserProfileController ($rootScope, $state, ngToast, accountService, userService, user) {
 
           var vm = this;
+          vm.validationErrors = null;
+          // profile update
           vm.user = user;
           vm.update = update;
-          vm.validationErrors = null;
+          // change password
+          vm.password = null;
+          vm.newPassword = null;
+          vm.confirmPassword = null;
+          vm.changePassword = changePassword;
+          // close account
 
-          console.log(user);
 
           /**
            * @name update
            * @desc calls the backend endpoint to update the user profile
            */
-          function update () {
+          function update() {
             userService.update(vm.user).error(function(data) {
+                vm.validationErrors = $rootScope.helpers.loadServerErrors(data);
+            }).then(function () {
+                $state.go('dashboard');
+            });
+          }
+
+          /**
+           * @name update
+           * @desc calls the backend endpoint to update the user profile
+           */
+          function changePassword() {
+            accountService.changePassword(vm.password, vm.newPassword).error(function(data) {
                 vm.validationErrors = $rootScope.helpers.loadServerErrors(data);
             }).then(function () {
                 $state.go('dashboard');
