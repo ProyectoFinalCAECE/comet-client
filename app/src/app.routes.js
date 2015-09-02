@@ -86,6 +86,12 @@ angular
                     }
                 }]
             })
+            .state('dashboard.projects', {
+                url: '/projects',
+                templateUrl: '/src/dashboard/dashboard-projects.html',
+                controller: 'UserProfileController',
+                controllerAs: 'vm',
+            })
             .state('dashboard.profile', {
                 url: '/profile',
                 templateUrl: '/src/user/user-profile.html',
