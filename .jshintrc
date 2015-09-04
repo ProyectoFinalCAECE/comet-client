@@ -12,6 +12,6 @@
   "unused": true,
   "globals": {
     "angular": false,
-    "jQuery": false
+    "jquery": false
   }
 }
