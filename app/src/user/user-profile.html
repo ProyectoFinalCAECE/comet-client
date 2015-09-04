@@ -8,8 +8,6 @@
           </div>
           <div class="ibox-content">
             <div class="modificarCuenta">
-              <div ng-show="vm.updateState > 0 && vm.updateState == 2" class="alert alert-success">El perfil ha sido modificado exitosamente.</div>
-              <div ng-show="vm.updateState > 0 && vm.updateState == 1" class="alert alert-danger">Ha ocurrido un error al editar el perfil. Intenta nuevamente.</div>
               <tabset>
                 <tab>
                   <tab-heading>
@@ -22,32 +20,32 @@
                         <input type="text" name="email" ng-model="vm.user.email" class="form-control" disabled>
                       </div>
                     </div>
-                    <div class="form-group" ng-class="{ 'has-error': vm.frmUpdate.firstName.$invalid && vm.frmUpdate.firstName.$dirty }">
+                    <div class="form-group" show-errors>
                       <label class="col-sm-2 control-label">Nombre</label>
                       <div class="col-sm-10">
                         <input type="text" name="firstName" ng-model="vm.user.firstName" class="form-control" placeholder="Nombre" required="">
-                        <div ng-messages="vm.frmUpdate.firstName.$error" ng-if="vm.frmUpdate.firstName.$dirty" class="control-label" role="alert">
+                        <div ng-messages="helpers.fieldIsValid(vm.frmUpdate, 'firstName')" class="control-label" role="alert">
                           <div ng-message="required">Debes ingresar tu nombre</div>
                         </div>
                       </div>
                     </div>
-                    <div class="form-group" ng-class="{ 'has-error': vm.frmUpdate.lastName.$invalid && vm.frmUpdate.lastName.$dirty }">
+                    <div class="form-group" show-errors>
                       <label class="col-sm-2 control-label">Apellido</label>
                       <div class="col-sm-10">
                         <input type="text" name="lastName" ng-model="vm.user.lastName" class="form-control" placeholder="Apellido" required="">
-                        <div ng-messages="vm.frmUpdate.lastName.$error" ng-if="vm.frmUpdate.lastName.$dirty" class="control-label" role="alert">
+                        <div ng-messages="helpers.fieldIsValid(vm.frmUpdate, 'lastName')" class="control-label" role="alert">
                           <div ng-message="required">Debes ingresar tu apellido</div>
                         </div>
                       </div>
                     </div>
-                    <div class="form-group" ng-class="{ 'has-error': vm.frmUpdate.alias.$invalid && vm.frmUpdate.alias.$dirty }">
+                    <div class="form-group" show-errors>
                       <label class="col-sm-2 control-label">Alias</label>
                       <div class="col-sm-10">
                         <input type="text" name="alias" class="form-control" placeholder="Alias"
                         ng-model="vm.user.alias"
                         ng-pattern="/^[a-zA-Z0-9]*$/"
                         required="">
-                        <div ng-messages="vm.frmUpdate.alias.$error" ng-if="vm.frmUpdate.alias.$dirty" class="control-label" role="alert">
+                        <div ng-messages="helpers.fieldIsValid(vm.frmUpdate, 'alias')" class="control-label" role="alert">
                           <div ng-message="required">Debes ingresar un alias</div>
                           <div ng-message="pattern">Solo letras y números</div>
                         </div>

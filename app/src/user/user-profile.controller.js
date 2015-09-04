@@ -10,13 +10,14 @@
            .controller('UserProfileController', UserProfileController);
 
         UserProfileController.$inject = ['$rootScope',
+                                         '$scope',
                                          '$state',
                                          'ngToast',
                                          'accountService',
                                          'userService',
                                          'user'];
 
-        function UserProfileController ($rootScope, $state, ngToast, accountService, userService, user) {
+        function UserProfileController ($rootScope, $scope, $state, ngToast, accountService, userService, user) {
 
           var vm = this;
           vm.validationErrors = null;
@@ -39,6 +40,8 @@
            * @desc calls the backend endpoint to update the user profile
            */
           function update() {
+
+            $scope.$broadcast('show-errors-check-validity');
             if (vm.frmUpdate.$invalid) {
               return;
             }
@@ -61,5 +64,7 @@
                 $state.go('dashboard');
             });
           }
+
+
       }
 })();

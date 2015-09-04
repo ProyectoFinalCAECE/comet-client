@@ -18,6 +18,7 @@
             'ngToast',
             'ngTouch',
             'ui.bootstrap',
+            'ui.bootstrap.showErrors',
             'ui.router'
         ])
         .run(function($rootScope, helpersService){
