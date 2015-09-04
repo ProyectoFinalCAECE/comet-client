@@ -20,14 +20,17 @@
 
           var vm = this;
           vm.validationErrors = null;
+
           // profile update
           vm.user = user;
           vm.update = update;
+
           // change password
           vm.password = null;
           vm.newPassword = null;
           vm.confirmPassword = null;
           vm.changePassword = changePassword;
+
           // close account
 
 
@@ -36,10 +39,14 @@
            * @desc calls the backend endpoint to update the user profile
            */
           function update() {
+            if (vm.frmUpdate.$invalid) {
+              return;
+            }
+
             userService.update(vm.user).error(function(data) {
                 vm.validationErrors = $rootScope.helpers.loadServerErrors(data);
             }).then(function () {
-                $state.go('dashboard');
+                ngToast.success("Tu perfil ha sido editado exitosamente.");
             });
           }
 

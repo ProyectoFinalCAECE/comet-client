@@ -8,6 +8,8 @@
           </div>
           <div class="ibox-content">
             <div class="modificarCuenta">
+              <div ng-show="vm.updateState > 0 && vm.updateState == 2" class="alert alert-success">El perfil ha sido modificado exitosamente.</div>
+              <div ng-show="vm.updateState > 0 && vm.updateState == 1" class="alert alert-danger">Ha ocurrido un error al editar el perfil. Intenta nuevamente.</div>
               <tabset>
                 <tab>
                   <tab-heading>
@@ -57,8 +59,11 @@
                         <img alt="image" class="img-circle" ng-src="{{vm.user.profilePicture}}" width="48" height="48" />
                       </div>
                     </div>
-                    <div>
-                      <button type="submit" ng-disabled="vm.frmUpdate.$invalid" class="btn btn-primary block full-width m-b">Modificar datos</button>
+                    <div class="form-group">
+                        <div class="col-sm-8 col-sm-offset-2">
+                            <button class="btn btn-w-m btn-primary" type="submit">Guardar</button>
+                            <a class="btn btn-link" href="/#/dashboard">Cancelar</a>
+                        </div>
                     </div>
                   </form>
                 </tab>

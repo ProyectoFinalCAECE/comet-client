@@ -19,7 +19,6 @@
 
           var vm = this;
           vm.logout = logout;
-          vm.perfil = perfil;
           vm.user = user;
 
           /**
@@ -29,11 +28,6 @@
           function logout () {
             accountService.logout();
             $state.go('home');
-          }
-
-          function perfil() {
-            console.log("perfil");
-            $state.transitionTo('dashboard.profile');
           }
       }
 })();
