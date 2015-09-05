@@ -1,19 +1,17 @@
 /**
- * @name UserController
+ * @name UserCreateController
  * @desc Controller for the user-create view
  */
-
- // SEPARAR CONTROLLER
 
 (function() {
     'use strict';
 
     angular.module('cometApp')
-           .controller('UserController', UserController);
+           .controller('UserCreateController', UserCreateController);
 
-        UserController.$inject = ['$rootScope', '$state', 'ngToast', 'userService'];
+        UserCreateController.$inject = ['$rootScope', '$state', 'ngToast', 'userService'];
 
-        function UserController ($rootScope, $state, ngToast, userService) {
+        function UserCreateController ($rootScope, $state, ngToast, userService) {
 
           var vm = this;
 

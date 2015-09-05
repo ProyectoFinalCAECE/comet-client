@@ -1,10 +1,10 @@
 <div class="row white-bg">
   <div id="formulario" class="middle-box text-center animated fadeIn">
       <div>
-         <h1 class="logo-name"><a href="/#/">Comet</a></h1>
+         <h3 class="logo-name"><a href="/#/">Comet</a></h3>
       </div>
       <div ng-show="vm.resend && vm.resendSuccess">
-        <p class="alert alert-success">Hemos reenviado el email de confirmación, revisa tu casilla de correo.</p>
+        <p class="alert alert-success">Hemos reenviado el correo de confirmación, revisa tu casilla de correo.</p>
       </div>
       <div ng-show="vm.resend  && vm.resendError">
         <p class="alert alert-danger">No hemos podido reenviar el correo. Intenta nuevamente.</p>
@@ -12,14 +12,14 @@
 
       <div ng-show="vm.confirmedAccount">
         <h3>Gracias por confirmar tu cuenta.</h3>
-        <p>Ya podés utilizar todos los servicios que Comet ofrece. !</p>
+        <p>Ya puedes utilizar todos los servicios de Comet!</p>
         <p class="m-t"><a href="/#/" class="btn btn-primary">Volver</a></p>
       </div>
 
        <div ng-show="vm.confirmationError">
         <p>Ocurrió un error al confirmar tu cuenta.</p>
         <p>Quizás el ticket de validación expiró o tuvimos un problema con tu cuenta.</p>
-        <button type="button" class="m-t btn btn-primary" ng-click="vm.resendConfirmation()">Reenviar email de confirmación</button>
+        <button type="button" class="m-t btn btn-primary" ng-click="vm.resendConfirmation()">Reenviar correo de confirmación</button>
       </div>
     </div>
   </div>

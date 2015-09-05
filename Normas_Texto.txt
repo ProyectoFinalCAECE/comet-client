@@ -1,0 +1,18 @@
+Lenguaje en el sistema Comet
+
+- Tratar al usuario en español neutral ("tu", no "usted" ni "vos")
+- Todos los términos van en español, mientras sea posible (ej. "Dashboard" no se traduce)
+- Usar tildes
+
+En lugar de:            Usar:
+-----------------------------------------------------
+Login                   Iniciar Sesión
+Logout,Salir            Cerrar Sesión
+Mail,Email,E-Mail       Correo / Correo electrónico / Dirección de correo
+Password, Clave         Contraseña
+Link			Enlace / Vínculo
+
+- Siempre que se haga referencia a alguna página, tener en cuenta que se la llame igual
+desde todos lados
+
+Inicio = Portada = Home --> Voy a usar "Inicio"

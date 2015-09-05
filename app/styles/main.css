@@ -1,5 +1,7 @@
+/* Para Angular Bootstrap */
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
 
-/* MQ: estilo para validacion de form que me faltaba */
+/* Para validacion de forms */
 .has-error.control-label {
   color: #ed5565;
 }
@@ -8,7 +10,11 @@
   color: #e6e6e6;
 }
 
-/* Wrapper del dashboard - le pongo el color de fondo azul */
+.logo-name{
+	font-size:80px;
+}
+
+/* Wrapper del dashboard - color de fondo azul */
 #wrapper {
   background-color: #2f4050
 }
@@ -22,14 +28,11 @@
 	margin-left: -60px;
 }
 
-#userCreate.middle-box  h1{
-	margin-left: -100px;
-}
-
 .modificarCuenta {
-	width:500px;
+	width:600px;
 }
 
 /*#modificarCuentaTabs.nav-tabs {
 	width:500px;
 }*/
+

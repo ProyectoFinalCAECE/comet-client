@@ -4,11 +4,11 @@
          <h1 class="logo-name"><a href="/#/">Comet</a></h1>
       </div>
       <div class="m-t" ng-show="vm.passwordChanged">
-        <p>La contraseña ha sido modificada con exito !</p>
-        <p><a href="/#/account/login" class="btn btn-primary">Ir a Login</a></p>
+        <p>La contraseña ha sido modificada con exito!</p>
+        <p><a href="/#/account/login" class="btn btn-primary">Ir al inicio de sesión</a></p>
       </div>
       <div ng-hide="vm.passwordChanged">
-        <h3>Ingrese la nueva contraseña para</h3>
+        <h3>Ingresa la nueva contraseña para</h3>
         <h3 class="text-muted">{{vm.recoverEmail}}</h3>
         <form name="vm.frmRecover" class="m-t" role="form" ng-submit="vm.recoverPasswordValidate()" novalidate="">
           <div class="form-group" ng-class="{ 'has-error': vm.frmRecover.password.$invalid && vm.frmRecover.password.$dirty }">
@@ -21,7 +21,7 @@
                 <div ng-message="minlength">Debe tener una longitud entre 6 y 40 caracteres</div>
                 <div ng-message="maxlength">La longitud máxima aceptada es 40 caracteres</div>
                 <div ng-message="pattern">Debe tener al menos una minúscula, una mayúscula y un símbolo o número</div>
-                <div ng-message="required">Debe ingresar una contraseña</div>
+                <div ng-message="required">Debes ingresar una contraseña</div>
              </div>
           </div>
           <div ng-if="vm.validationErrors['password']" class="has-error control-label" role="alert">
@@ -30,7 +30,7 @@
           <div class="form-group" ng-class="{ 'has-error': vm.frmRecover.confirmPassword.$invalid && vm.frmRecover.confirmPassword.$dirty }">
             <input type="password"  name="confirmPassword" ng-model="vm.confirmPassword" class="form-control" placeholder="Repetir la contraseña" required="" field-match="" dsfieldmatch="vm.frmRecover.password">
             <div ng-messages="vm.frmRecover.confirmPassword.$error" ng-if="vm.frmRecover.confirmPassword.$dirty" class="control-label" role="alert">
-              <div ng-message="required">Debe ingresar la confirmación de su contraseña</div>
+              <div ng-message="required">Debes ingresar la confirmación de tu contraseña</div>
               <div ng-message="fieldMatch">Las contraseñas no coinciden</div>
             </div>
           </div>

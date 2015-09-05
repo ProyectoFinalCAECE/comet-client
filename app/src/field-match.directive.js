@@ -3,6 +3,8 @@
 * @example <input name="password">
            <input name="confirmpassword" fieldMatch dsfieldmatch="password">
 */
+'use strict';
+
 angular
     .module('cometApp')
     .directive('fieldMatch', fieldMatch);

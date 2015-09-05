@@ -2,14 +2,14 @@
    <div id="formulario" class="middle-box text-center loginscreen">
       <div>
          <div class="text-center">
-            <h1 class="logo-name">Comet</h1>
+            <h3 class="logo-name">Comet</h3>
          </div>
          <h3>Crear cuenta en Comet</h3>
          <p>Crea una cuenta para empezar a comunicarte!</p>
          <form name="vm.frmCreateUser" class="m-t" role="form" ng-submit="vm.create()" novalidate>
-            <div class="form-group" ng-class="{ 'has-error': vm.frmCreateUser.firstName.$invalid && vm.frmCreateUser.lastName.$dirty }">
+            <div class="form-group" ng-class="{ 'has-error': vm.frmCreateUser.firstName.$invalid && vm.frmCreateUser.firstName.$dirty }">
                <input type="text" name="firstName" ng-model="vm.user.firstName" class="form-control" placeholder="Nombre" required="">
-               <div ng-messages="vm.frmCreateUser.firstName.$error" ng-if="vm.frmCreateUser.lastName.$dirty" class="control-label" role="alert">
+               <div ng-messages="vm.frmCreateUser.firstName.$error" ng-if="vm.frmCreateUser.firstName.$dirty" class="control-label" role="alert">
                   <div ng-message="required">Debes ingresar tu nombre</div>
                </div>
             </div>
@@ -20,10 +20,10 @@
                </div>
             </div>
             <div class="form-group" ng-class="{ 'has-error': vm.frmCreateUser.email.$invalid && vm.frmCreateUser.email.$dirty }">
-               <input type="email" name="email" ng-model="vm.user.email" class="form-control" placeholder="Direccion de email" required="">
+               <input type="email" name="email" ng-model="vm.user.email" class="form-control" placeholder="Direccion de correo" required="">
                <div ng-messages="vm.frmCreateUser.email.$error" ng-if="vm.frmCreateUser.email.$dirty" class="control-label" role="alert">
-                  <div ng-message="required">Debes ingresar tu email</div>
-                  <div ng-message="email">El email ingresado es inválido</div>
+                  <div ng-message="required">Debes ingresar tu correo</div>
+                  <div ng-message="email">El correo ingresado es inválido</div>
                </div>
                <div ng-if="vm.validationErrors['email']" class="has-error control-label" role="alert">
                   <div>{{ vm.validationErrors['email'] }}</div>
@@ -51,7 +51,7 @@
             </div>
             <button type="submit" ng-disabled="vm.frmCreateUser.$invalid" class="btn btn-primary block full-width m-b">Crear cuenta</button>
             <p class="text-muted text-center"><small>¿Ya tienes una cuenta?</small></p>
-            <a class="btn btn-sm btn-white btn-block" href="/#/account/login">Login</a>
+            <a class="btn btn-sm btn-white btn-block" href="/#/account/login">Iniciar sesión</a>
          </form>
          <p class="m-t"> <small>The Comet Company &copy; 2015</small> </p>
       </div>

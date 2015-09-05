@@ -9,45 +9,62 @@
     angular.module('cometApp')
            .controller('UserProfileController', UserProfileController);
 
-        UserProfileController.$inject = ['$state', 'authService', 'ngToast'];
+        UserProfileController.$inject = ['$rootScope',
+                                         '$scope',
+                                         '$state',
+                                         'ngToast',
+                                         'accountService',
+                                         'userService',
+                                         'user'];
 
-        function UserProfileController ($state, authService, ngToast) {
+        function UserProfileController ($rootScope, $scope, $state, ngToast, accountService, userService, user) {
 
           var vm = this;
+          vm.validationErrors = null;
 
-          vm.user = {};
-          
-          /**
-           * @name create
-           * @desc calls the backend endpoint to create a user
-           */
-          // function create () {
-          //   authService.create(vm.user).error(function(data) {
-          //       loadServerErrors(data);
-          //   }).then(function() {
-          //       $state.go('/');
-          //   });
-          // }
+          // profile update
+          vm.user = user;
+          vm.update = update;
 
-          /**
-           * @name login
-           * @desc calls the backend endpoint to login a user
-           */
-          // function login () {
-          //     authService.login(vm.user).error(function (data) {
-          //         loadServerErrors(data);
-          //     }).then(function () {
-          //         $state.go('/');
-          //     });
-          // }
+          // change password
+          vm.password = null;
+          vm.newPassword = null;
+          vm.confirmPassword = null;
+          vm.changePassword = changePassword;
+
+          // close account
+
 
           /**
-           * @name logout
-           * @desc logouts a user from the application and redirects to home
+           * @name update
+           * @desc calls the backend endpoint to update the user profile
            */
-          // function logout () {
-          //     authService.logout();
-          //     $state.go('/');
-          // }
+          function update() {
+
+            $scope.$broadcast('show-errors-check-validity');
+            if (vm.frmUpdate.$invalid) {
+              return;
+            }
+
+            userService.update(vm.user).error(function(data) {
+                vm.validationErrors = $rootScope.helpers.loadServerErrors(data);
+            }).then(function () {
+                ngToast.success("Tu perfil ha sido editado exitosamente.");
+            });
+          }
+
+          /**
+           * @name update
+           * @desc calls the backend endpoint to update the user profile
+           */
+          function changePassword() {
+            accountService.changePassword(vm.password, vm.newPassword).error(function(data) {
+                vm.validationErrors = $rootScope.helpers.loadServerErrors(data);
+            }).then(function () {
+                $state.go('dashboard');
+            });
+          }
+
+
       }
 })();

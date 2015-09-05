@@ -9,8 +9,13 @@
     function helpersService (){
 
         return {
-            loadServerErrors:loadServerErrors
+            loadServerErrors:loadServerErrors,
+            fieldIsValid: fieldIsValid
         };
+
+        function fieldIsValid(form, fieldName) {
+          return form.$submitted && form[fieldName].$error;
+        }
 
         /**
          * @name loadServerErrors

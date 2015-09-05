@@ -1,66 +1,134 @@
 <div class="row border-bottom dashboard-header">
   <div class="row">
     <div class="col-lg-12">
-      <div class="wrapper wrapper-content animated fadeInUp">
+      <div class="wrapper wrapper-content animated fadeIn">
         <div class="ibox">
           <div class="ibox-title">
             <h5>Editar perfil</h5>
           </div>
           <div class="ibox-content">
             <div class="modificarCuenta">
-              <form class="m-t" role="form" action="index.html">
-                <div class="panel blank-panel">
-                  <div class="panel-heading">
-                    <div class="panel-options">
-                      <ul id="modificarCuentaTabs" class="nav nav-tabs">
-                        <li class="active"><a data-toggle="tab" href="#tab-1">Modificar datos</a></li>
-                        <li class=""><a data-toggle="tab" href="#tab-2">Modificar contraseña</a></li>
-                        <li class=""><a data-toggle="tab" href="#tab-3">Cerrar cuenta</a></li>
-                      </ul>
+              <tabset>
+                <tab>
+                  <tab-heading>
+                    Modificar datos
+                  </tab-heading>
+                  <form name="vm.frmUpdate" ng-submit="vm.update()" class="form-horizontal m-t" role="form" novalidate="">
+                    <div class="form-group">
+                      <label class="col-sm-2 control-label">Correo</label>
+                      <div class="col-sm-10">
+                        <input type="text" name="email" ng-model="vm.user.email" class="form-control" disabled>
+                      </div>
                     </div>
-                  </div>
-                  <div class="panel-body">
-                    <div class="tab-content">
-                      <div id="tab-1" class="tab-pane active">
-                        <div class="form-group">
-                          <input type="text" class="form-control" placeholder="Nombre" required="">
+                    <div class="form-group" show-errors>
+                      <label class="col-sm-2 control-label">Nombre</label>
+                      <div class="col-sm-10">
+                        <input type="text" name="firstName" ng-model="vm.user.firstName" class="form-control" placeholder="Nombre" required="">
+                        <div ng-messages="helpers.fieldIsValid(vm.frmUpdate, 'firstName')" class="control-label" role="alert">
+                          <div ng-message="required">Debes ingresar tu nombre</div>
                         </div>
-                        <div class="form-group">
-                          <input type="text" class="form-control" placeholder="Apellido" required="">
-                        </div>
-                        <div class="form-group">
-                          <input type="text" class="form-control" placeholder="Alias" required="">
-                        </div>
-                        Cambiar Foto (Subir foto)
-                        <button type="submit" class="btn btn-primary block full-width m-b">Modificar datos</button>
                       </div>
-                      <div id="tab-2" class="tab-pane">
-                        <div class="form-group">
-                          <input type="password" class="form-control" placeholder="Contraseña actual" required="">
+                    </div>
+                    <div class="form-group" show-errors>
+                      <label class="col-sm-2 control-label">Apellido</label>
+                      <div class="col-sm-10">
+                        <input type="text" name="lastName" ng-model="vm.user.lastName" class="form-control" placeholder="Apellido" required="">
+                        <div ng-messages="helpers.fieldIsValid(vm.frmUpdate, 'lastName')" class="control-label" role="alert">
+                          <div ng-message="required">Debes ingresar tu apellido</div>
                         </div>
-                        <div class="form-group">
-                          <input type="password" class="form-control" placeholder="Nueva contraseña" required="">
-                        </div>
-                        <div class="form-group">
-                          <input type="password" class="form-control" placeholder="Repetir contraseña" required="">
-                        </div>
-                        <button type="submit" class="btn btn-primary block full-width m-b">Modificar contraseña</button>
                       </div>
-                      <div id="tab-3" class="tab-pane">
-                        <div class="form-group">
+                    </div>
+                    <div class="form-group" show-errors>
+                      <label class="col-sm-2 control-label">Alias</label>
+                      <div class="col-sm-10">
+                        <input type="text" name="alias" class="form-control" placeholder="Alias"
+                        ng-model="vm.user.alias"
+                        ng-pattern="/^[a-zA-Z0-9]*$/"
+                        required="">
+                        <div ng-messages="helpers.fieldIsValid(vm.frmUpdate, 'alias')" class="control-label" role="alert">
+                          <div ng-message="required">Debes ingresar un alias</div>
+                          <div ng-message="pattern">Solo letras y números</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-sm-2 m-t m-b control-label">Avatar</label>
+                      <div class="col-sm-10 m-t m-b">
+                        <img alt="image" class="img-circle" ng-src="{{vm.user.profilePicture}}" width="48" height="48" />
+                      </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-8 col-sm-offset-2">
+                            <button class="btn btn-w-m btn-primary" type="submit">Guardar</button>
+                            <a class="btn btn-link" href="/#/dashboard">Cancelar</a>
+                        </div>
+                    </div>
+                  </form>
+                </tab>
+                <tab>
+                  <tab-heading>Modificar contraseña</tab-heading>
+                  <form name="vm.frmChangePassword" ng-submit="vm.changePassword()" class="form-horizontal m-t" role="form" novalidate="">
 
-                          <div class="checkbox i-checks"><label> <input type="checkbox"><i></i> Estas seguro de cerrar la cuenta? </label></div>
-                          <!-- copiar estilo igual que el check de registro -->
+                    <div class="form-group" ng-class="{ 'has-error': vm.frmChangePassword.password.$invalid && vm.frmChangePassword.password.$dirty }">
+                      <label class="col-sm-4 control-label">Contraseña actual</label>
+                      <div class="col-sm-8">
+                       <input type="password" name="password" class="form-control" placeholder="Contraseña"
+                                              ng-model="vm.password"
+                                              required="">
+                       <div ng-messages="vm.frmChangePassword.password.$error" ng-if="vm.frmChangePassword.password.$dirty" class="control-label" role="alert">
+                          <div ng-message="required">Debes ingresar la contraseña actual</div>
+                       </div>
+                       <div ng-if="vm.validationErrors['password'] || vm.validationErrors['all']" class="has-error control-label" role="alert">
+                          <div>{{ vm.validationErrors['password'] }}</div>
+                          <div>{{ vm.validationErrors['all'] }}</div>
+                       </div>
+                     </div>
+                    </div>
+
+                    <div class="form-group" ng-class="{ 'has-error': vm.frmChangePassword.newPassword.$invalid && vm.frmChangePassword.newPassword.$dirty }">
+                      <label class="col-sm-4 control-label">Nueva contraseña</label>
+                      <div class="col-sm-8">
+                       <input type="password" name="newPassword" class="form-control" placeholder="Nueva Contraseña"
+                                              ng-model="vm.newPassword"
+                                              ng-minlength="6"
+                                              ng-maxlength="40"
+                                              ng-pattern="/(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z])/" />
+                       <div ng-messages="vm.frmChangePassword.newPassword.$error" ng-if="vm.frmChangePassword.newPassword.$dirty" class="control-label" role="alert">
+                          <div ng-message="minlength">Debe tener una longitud entre 6 y 40 caracteres</div>
+                          <div ng-message="maxlength">La longitud máxima aceptada es 40 caracteres</div>
+                          <div ng-message="pattern">Debe tener al menos una minúscula, una mayúscula y un símbolo o número</div>
+                          <div ng-message="required">Debes ingresar una contraseña</div>
                         </div>
-                        <div class="form-group">
-                          <input type="password" class="form-control" placeholder="Contraseña" required="">
-                        </div>
-                        <button type="submit" class="btn btn-primary block full-width m-b">Cerrar cuenta</button>
+                       </div>
+                    </div>
+
+                    <div class="form-group" ng-class="{ 'has-error': vm.frmChangePassword.confirmPassword.$invalid && vm.frmChangePassword.confirmPassword.$dirty }">
+                      <label class="col-sm-4 control-label">Repetir contraseña</label>
+                      <div class="col-sm-8">
+                      <input type="password" name="confirmPassword" ng-model="vm.confirmPassword" class="form-control" placeholder="Repetir la contraseña" required="" field-match="" dsfieldmatch="vm.frmChangePassword.newPassword">
+                      <div ng-messages="vm.frmChangePassword.confirmPassword.$error" ng-if="vm.frmChangePassword.confirmPassword.$dirty" class="control-label" role="alert">
+                        <div ng-message="required">Debes ingresar la confirmación de tu contraseña</div>
+                        <div ng-message="fieldMatch">Las contraseñas no coinciden</div>
                       </div>
                     </div>
+                    </div>
+                    <div>
+                      <button type="submit" ng-disabled="vm.frmChangePassword.$invalid" class="btn btn-primary block full-width m-b">Modificar contraseña</button>
+                    </div>
+                  </form>
+                </tab>
+                <tab>
+                  <tab-heading>Cerrar cuenta</tab-heading>
+                  <div class="form-group">
+                    <div class="checkbox i-checks"><label> <input type="checkbox"><i></i>¿Estás seguro de cerrar la cuenta?</label></div>
+                    <!-- copiar estilo igual que el check de registro -->
                   </div>
-                </div>
-              </form>
+                  <div class="form-group">
+                    <input type="password" class="form-control" placeholder="Contraseña" required="">
+                  </div>
+                  <button type="submit" class="btn btn-primary block full-width m-b">Cerrar cuenta</button>
+                </tab>
+              </tabset>
             </div>
           </div>
         </div>

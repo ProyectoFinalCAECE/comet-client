@@ -16,7 +16,8 @@
             confirm:confirm,
             resendConfirmation: resendConfirmation,
             recoverPassword: recoverPassword,
-            recoverPasswordValidate: recoverPasswordValidate
+            recoverPasswordValidate: recoverPasswordValidate,
+            changePassword: changePassword
         };
 
         /**
@@ -82,6 +83,18 @@
               newpassword: newpassword
             };
             return $http.post('/account/password/recover', data);
+        }
+
+        /**
+         * @name changePassword
+         * @desc calls the backend endpoint to change the user password
+         */
+        function changePassword(oldPassword, newPassword) {
+          var data = {
+            oldpassword: oldPassword,
+            newpassword: newPassword
+          };
+          return $http.post('/account/password/renew', data, authService.getJwtHeader());
         }
     }
 })();
