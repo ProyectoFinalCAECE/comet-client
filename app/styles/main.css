@@ -10,11 +10,14 @@
   color: #e6e6e6;
 }
 
+.logo-name{
+	font-size:80px;
+}
+
 /* Wrapper del dashboard - color de fondo azul */
 #wrapper {
   background-color: #2f4050
 }
-
 
 #formulario.middle-box {
 	position: relative;
@@ -25,10 +28,6 @@
 	margin-left: -60px;
 }
 
-#userCreate.middle-box  h1{
-	margin-left: -100px;
-}
-
 .modificarCuenta {
 	width:600px;
 }
@@ -36,3 +35,4 @@
 /*#modificarCuentaTabs.nav-tabs {
 	width:500px;
 }*/
+
