@@ -21,6 +21,22 @@
           vm.logout = logout;
           vm.user = user;
 
+          activate();
+
+          /**
+           * @name activate
+           * @desc controller activation logic
+           */
+          function activate() {
+
+            if (!vm.user.confirmed) {
+              ngToast.warning({
+                content: 'Todavía no confirmaste tu dirección de correo.',
+                dismissButton: true
+              });
+            }
+          }
+
           /**
            * @name logout
            * @desc logout the user and redirects to home page
