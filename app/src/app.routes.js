@@ -18,7 +18,12 @@ angular
                     user: ['userService', function(userService) {
                       return userService.get();
                     }]
-                }
+                },
+                onEnter: ['$state', 'authService', function ($state, authService) {
+                    if (authService.isLoggedIn()) {
+                        $state.go('dashboard');
+                    }
+                }]
             })
             .state('user-create', {
                 url: '/user/create',

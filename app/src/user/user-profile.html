@@ -24,7 +24,7 @@
                       <label class="col-sm-2 control-label">Nombre</label>
                       <div class="col-sm-10">
                         <input type="text" name="firstName" ng-model="vm.user.firstName" class="form-control" placeholder="Nombre" required="">
-                        <div ng-messages="helpers.fieldIsValid(vm.frmUpdate, 'firstName')" class="control-label" role="alert">
+                        <div ng-messages="helpers.fieldIsNotValid(vm.frmUpdate, 'firstName')" class="control-label" role="alert">
                           <div ng-message="required">Debes ingresar tu nombre</div>
                         </div>
                       </div>
@@ -33,7 +33,7 @@
                       <label class="col-sm-2 control-label">Apellido</label>
                       <div class="col-sm-10">
                         <input type="text" name="lastName" ng-model="vm.user.lastName" class="form-control" placeholder="Apellido" required="">
-                        <div ng-messages="helpers.fieldIsValid(vm.frmUpdate, 'lastName')" class="control-label" role="alert">
+                        <div ng-messages="helpers.fieldIsNotValid(vm.frmUpdate, 'lastName')" class="control-label" role="alert">
                           <div ng-message="required">Debes ingresar tu apellido</div>
                         </div>
                       </div>
@@ -45,7 +45,7 @@
                         ng-model="vm.user.alias"
                         ng-pattern="/^[a-zA-Z0-9]*$/"
                         required="">
-                        <div ng-messages="helpers.fieldIsValid(vm.frmUpdate, 'alias')" class="control-label" role="alert">
+                        <div ng-messages="helpers.fieldIsNotValid(vm.frmUpdate, 'alias')" class="control-label" role="alert">
                           <div ng-message="required">Debes ingresar un alias</div>
                           <div ng-message="pattern">Solo letras y números</div>
                         </div>
