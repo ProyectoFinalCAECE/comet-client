@@ -10,10 +10,10 @@
 
         return {
             loadServerErrors:loadServerErrors,
-            fieldIsValid: fieldIsValid
+            fieldIsNotValid: fieldIsNotValid
         };
 
-        function fieldIsValid(form, fieldName) {
+        function fieldIsNotValid(form, fieldName) {
           return form.$submitted && form[fieldName].$error;
         }
 
