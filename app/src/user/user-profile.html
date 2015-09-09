@@ -20,34 +20,32 @@
                         <input type="text" name="email" ng-model="vm.user.email" class="form-control" disabled>
                       </div>
                     </div>
-                    <div class="form-group" show-errors>
+                    <div class="form-group" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'firstName') }">
                       <label class="col-sm-2 control-label">Nombre</label>
                       <div class="col-sm-10">
                         <input type="text" name="firstName" ng-model="vm.user.firstName" class="form-control" placeholder="Nombre" required="">
-                        <div ng-messages="helpers.fieldIsNotValid(vm.frmUpdate, 'firstName')" class="control-label" role="alert">
-                          <div ng-message="required">Debes ingresar tu nombre</div>
+                        <div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'firstName')" class="control-label" role="alert">
+                          <div class="text-center">{{ vm.validationErrors['firstName'] }}</div>
                         </div>
                       </div>
                     </div>
-                    <div class="form-group" show-errors>
+                    <div class="form-group"  ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'lastName') }">
                       <label class="col-sm-2 control-label">Apellido</label>
                       <div class="col-sm-10">
                         <input type="text" name="lastName" ng-model="vm.user.lastName" class="form-control" placeholder="Apellido" required="">
-                        <div ng-messages="helpers.fieldIsNotValid(vm.frmUpdate, 'lastName')" class="control-label" role="alert">
-                          <div ng-message="required">Debes ingresar tu apellido</div>
+                        <div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'lastName')" class="control-label" role="alert">
+                          <div class="text-center">{{ vm.validationErrors['lastName'] }}</div>
                         </div>
                       </div>
                     </div>
-                    <div class="form-group" show-errors>
+                    <div class="form-group" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'alias') }">
                       <label class="col-sm-2 control-label">Alias</label>
                       <div class="col-sm-10">
                         <input type="text" name="alias" class="form-control" placeholder="Alias"
-                        ng-model="vm.user.alias"
-                        ng-pattern="/^[a-zA-Z0-9]*$/"
-                        required="">
-                        <div ng-messages="helpers.fieldIsNotValid(vm.frmUpdate, 'alias')" class="control-label" role="alert">
-                          <div ng-message="required">Debes ingresar un alias</div>
-                          <div ng-message="pattern">Solo letras y números</div>
+                        ng-model="vm.user.alias">
+                        <div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'alias')" class="control-label" role="alert">
+                          <div class="text-center">{{ vm.validationErrors['alias'] }}</div>
+                          <div class="text-center">{{ vm.validationErrors['all'] }}</div>
                         </div>
                       </div>
                     </div>
@@ -58,62 +56,52 @@
                       </div>
                     </div>
                     <div class="form-group">
-                        <div class="col-sm-8 col-sm-offset-2">
-                            <button class="btn btn-w-m btn-primary" type="submit">Guardar</button>
-                            <a class="btn btn-link" href="/#/dashboard">Cancelar</a>
-                        </div>
+                      <div class="col-sm-8 col-sm-offset-2">
+                        <button class="btn btn-w-m btn-primary" type="submit">Guardar</button>
+                        <a class="btn btn-link" href="/#/dashboard">Cancelar</a>
+                      </div>
                     </div>
                   </form>
                 </tab>
                 <tab>
                   <tab-heading>Modificar contraseña</tab-heading>
                   <form name="vm.frmChangePassword" ng-submit="vm.changePassword()" class="form-horizontal m-t" role="form" novalidate="">
-
-                    <div class="form-group" ng-class="{ 'has-error': vm.frmChangePassword.password.$invalid && vm.frmChangePassword.password.$dirty }">
+                    <!-- Password -->
+                    <div class="form-group" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'password') }">
                       <label class="col-sm-4 control-label">Contraseña actual</label>
                       <div class="col-sm-8">
-                       <input type="password" name="password" class="form-control" placeholder="Contraseña"
-                                              ng-model="vm.password"
-                                              required="">
-                       <div ng-messages="vm.frmChangePassword.password.$error" ng-if="vm.frmChangePassword.password.$dirty" class="control-label" role="alert">
-                          <div ng-message="required">Debes ingresar la contraseña actual</div>
-                       </div>
-                       <div ng-if="vm.validationErrors['password'] || vm.validationErrors['all']" class="has-error control-label" role="alert">
+                        <input type="password" name="password" class="form-control" placeholder="Contraseña"
+                        ng-model="vm.password">
+                        <div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'password')" class="control-label" role="alert">
                           <div>{{ vm.validationErrors['password'] }}</div>
-                          <div>{{ vm.validationErrors['all'] }}</div>
-                       </div>
-                     </div>
-                    </div>
-
-                    <div class="form-group" ng-class="{ 'has-error': vm.frmChangePassword.newPassword.$invalid && vm.frmChangePassword.newPassword.$dirty }">
-                      <label class="col-sm-4 control-label">Nueva contraseña</label>
-                      <div class="col-sm-8">
-                       <input type="password" name="newPassword" class="form-control" placeholder="Nueva Contraseña"
-                                              ng-model="vm.newPassword"
-                                              ng-minlength="6"
-                                              ng-maxlength="40"
-                                              ng-pattern="/(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z])/" />
-                       <div ng-messages="vm.frmChangePassword.newPassword.$error" ng-if="vm.frmChangePassword.newPassword.$dirty" class="control-label" role="alert">
-                          <div ng-message="minlength">Debe tener una longitud entre 6 y 40 caracteres</div>
-                          <div ng-message="maxlength">La longitud máxima aceptada es 40 caracteres</div>
-                          <div ng-message="pattern">Debe tener al menos una minúscula, una mayúscula y un símbolo o número</div>
-                          <div ng-message="required">Debes ingresar una contraseña</div>
                         </div>
-                       </div>
-                    </div>
-
-                    <div class="form-group" ng-class="{ 'has-error': vm.frmChangePassword.confirmPassword.$invalid && vm.frmChangePassword.confirmPassword.$dirty }">
-                      <label class="col-sm-4 control-label">Repetir contraseña</label>
-                      <div class="col-sm-8">
-                      <input type="password" name="confirmPassword" ng-model="vm.confirmPassword" class="form-control" placeholder="Repetir la contraseña" required="" field-match="" dsfieldmatch="vm.frmChangePassword.newPassword">
-                      <div ng-messages="vm.frmChangePassword.confirmPassword.$error" ng-if="vm.frmChangePassword.confirmPassword.$dirty" class="control-label" role="alert">
-                        <div ng-message="required">Debes ingresar la confirmación de tu contraseña</div>
-                        <div ng-message="fieldMatch">Las contraseñas no coinciden</div>
                       </div>
                     </div>
+                    <!-- New Password -->
+                    <div class="form-group" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'newPassword') }">
+                      <label class="col-sm-4 control-label">Nueva contraseña</label>
+                      <div class="col-sm-8">
+                        <input type="password" name="newPassword" class="form-control" placeholder="Nueva Contraseña"
+                        ng-model="vm.newPassword"/>
+                        <div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'newPassword')" class="control-label" role="alert">
+                          <div>{{ vm.validationErrors['newPassword'] }}</div>
+                        </div>
+                      </div>
                     </div>
+                    <!-- Confirm Password -->
+                    <div class="form-group" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'confirmPassword') }">
+                      <label class="col-sm-4 control-label">Repetir contraseña</label>
+                      <div class="col-sm-8">
+                        <input type="password" name="confirmPassword" ng-model="vm.confirmPassword" class="form-control" placeholder="Repetir la contraseña" required="" field-match="" dsfieldmatch="vm.frmChangePassword.newPassword">
+                        <div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'confirmPassword')" class="control-label" role="alert">
+                          <div>{{ vm.validationErrors['confirmPassword'] }}</div>
+                          <div>{{ vm.validationErrors['all'] }}</div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Submit -->
                     <div>
-                      <button type="submit" ng-disabled="vm.frmChangePassword.$invalid" class="btn btn-primary block full-width m-b">Modificar contraseña</button>
+                      <button type="submit" class="btn btn-primary block full-width m-b">Modificar contraseña</button>
                     </div>
                   </form>
                 </tab>

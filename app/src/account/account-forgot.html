@@ -6,17 +6,15 @@
       <div ng-hide="vm.enviado">
         <p>Por favor ingresa tu dirección de correo y te enviaremos un correo con instrucciones para recuperar tu contraseña</p>
         <form name="vm.frmRecover" class="m-t" role="form" ng-submit="vm.recoverPassword()" novalidate="">
-          <div class="form-group" ng-class="{ 'has-error': vm.frmRecover.email.$invalid && vm.frmRecover.email.$dirty }">
+          <!-- Email -->
+          <div class="form-group" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'email') }">
              <input type="email" name="email" ng-model="vm.email" class="form-control" placeholder="Dirección de correo" required="">
-             <div ng-messages="vm.frmRecover.email.$error" ng-if="vm.frmRecover.email.$dirty" class="control-label" role="alert">
-                <div ng-message="required" class="text-center">Debes ingresar el correo</div>
-                <div ng-message="email" class="text-center">El correo ingresado es inválido</div>
-             </div>
-             <div ng-if="vm.validationErrors['email']" class="has-error control-label" role="alert">
+             <div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'email')" class="control-label" role="alert">
                 <div class="text-center">{{ vm.validationErrors['email'] }}</div>
+                <div>{{ vm.validationErrors['all'] }}</div>
              </div>
           </div>
-          <button type="submit" class="btn btn-primary" ng-disabled="vm.frmRecover.$invalid">Recuperar contraseña</button>
+          <button type="submit" class="btn btn-primary">Recuperar contraseña</button>
           <a href="/#/account/login" class="m-l">Volver al inicio</a>
         </form>
       </div>

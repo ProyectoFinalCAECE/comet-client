@@ -11,33 +11,24 @@
         <h3>Ingresa la nueva contraseña para</h3>
         <h3 class="text-muted">{{vm.recoverEmail}}</h3>
         <form name="vm.frmRecover" class="m-t" role="form" ng-submit="vm.recoverPasswordValidate()" novalidate="">
-          <div class="form-group" ng-class="{ 'has-error': vm.frmRecover.password.$invalid && vm.frmRecover.password.$dirty }">
-             <input type="password" name="password" class="form-control" placeholder="Contraseña"
-                                    ng-model="vm.password"
-                                    ng-minlength="6"
-                                    ng-maxlength="40"
-                                    ng-pattern="/(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z])/" />
-             <div ng-messages="vm.frmRecover.password.$error" ng-if="vm.frmRecover.password.$dirty" class="control-label" role="alert">
-                <div ng-message="minlength">Debe tener una longitud entre 6 y 40 caracteres</div>
-                <div ng-message="maxlength">La longitud máxima aceptada es 40 caracteres</div>
-                <div ng-message="pattern">Debe tener al menos una minúscula, una mayúscula y un símbolo o número</div>
-                <div ng-message="required">Debes ingresar una contraseña</div>
-             </div>
-          </div>
-          <div ng-if="vm.validationErrors['password']" class="has-error control-label" role="alert">
-             <div>{{ vm.validationErrors['password'] }}</div>
-          </div>
-          <div class="form-group" ng-class="{ 'has-error': vm.frmRecover.confirmPassword.$invalid && vm.frmRecover.confirmPassword.$dirty }">
-            <input type="password"  name="confirmPassword" ng-model="vm.confirmPassword" class="form-control" placeholder="Repetir la contraseña" required="" field-match="" dsfieldmatch="vm.frmRecover.password">
-            <div ng-messages="vm.frmRecover.confirmPassword.$error" ng-if="vm.frmRecover.confirmPassword.$dirty" class="control-label" role="alert">
-              <div ng-message="required">Debes ingresar la confirmación de tu contraseña</div>
-              <div ng-message="fieldMatch">Las contraseñas no coinciden</div>
+          <!-- Contraseña -->
+          <div class="form-group" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'password') }">
+            <input type="password" name="password" class="form-control" placeholder="Contraseña"
+                                    ng-model="vm.password" />
+            <div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'password')" class="control-label" role="alert">
+               <div class="text-center">{{ vm.validationErrors['password'] }}</div>
             </div>
           </div>
-          <div ng-if="vm.validationErrors['confirmPassword']" class="has-error control-label" role="alert">
-             <div>{{ vm.validationErrors['confirmPassword'] }}</div>
+          <!-- Repetir Contraseña -->
+          <div class="form-group" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'confirmPassword') }">
+            <input type="password"  name="confirmPassword" ng-model="vm.confirmPassword" class="form-control" placeholder="Repetir la contraseña">
+            <div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'confirmPassword')" class="control-label" role="alert">
+               <div class="text-center">{{ vm.validationErrors['confirmPassword'] }}</div>
+               <div>{{ vm.validationErrors['all'] }}</div>
+            </div>
           </div>
-          <button type="submit" name="button" class="btn btn-primary" ng-disabled="vm.frmRecover.$invalid">Cambiar contraseña</button>
+          <!-- Submit -->
+          <button type="submit" name="button" class="btn btn-primary">Cambiar contraseña</button>
         </form>
       </div>
    </div>

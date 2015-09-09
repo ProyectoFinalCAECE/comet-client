@@ -16,29 +16,22 @@
         <div class="col-md-6">
             <div class="ibox-content">
                 <form name="vm.frmLogin" class="m-t" role="form" ng-submit="vm.login()" novalidate="">
-                    <div class="form-group" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.frmLogin, 'email') }">
+                    <!-- Email -->
+                    <div class="form-group" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'email') }">
                        <input type="email" name="email" ng-model="vm.user.email" class="form-control" placeholder="Dirección de correo" required="">
-                       <div ng-messages="helpers.fieldIsNotValid(vm.frmLogin, 'email')" class="control-label" role="alert">
-                          <div ng-message="required" class="text-center">Debes ingresar el correo</div>
-                          <div ng-message="email" class="text-center">El correo ingresado es inválido</div>
-                       </div>
-                       <div ng-messages="vm.validationErrors['email'] || vm.validationErrors['all']" class="control-label" role="alert">
+                       <div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'email')" class="control-label" role="alert">
                           <div class="text-center">{{ vm.validationErrors['email'] }}</div>
-                          <div>{{ vm.validationErrors['all'] }}</div>
                        </div>
                     </div>
-
-                    <div class="form-group" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.frmLogin, 'email') }">
+                    <!-- Password -->
+                    <div class="form-group" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'password') }">
                        <input type="password" name="password" ng-model="vm.user.password" class="form-control" placeholder="Contraseña" required="">
-                       <div ng-messages="helpers.fieldIsNotValid(vm.frmLogin, 'password')" class="control-label" role="alert">
-                          <div ng-message="required" class="text-center">Debes ingresar una contraseña</div>
-                       </div>
-                       <div ng-messages="vm.validationErrors['password'] || vm.validationErrors['all']" class="control-label" role="alert">
+                       <div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'password')" class="control-label" role="alert">
                           <div class="text-center">{{ vm.validationErrors['password'] }}</div>
                           <div>{{ vm.validationErrors['all'] }}</div>
                        </div>
                     </div>
-
+                    <!-- Submit -->
                     <button type="submit" class="btn btn-primary block full-width m-b">Iniciar sesión</button>
 
                     <a href="/#/account/forgot">
