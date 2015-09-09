@@ -1,0 +1,35 @@
+<div class="row white-bg">
+  <div id="formulario" class="middle-box text-center animated fadeIn">
+      <div>
+         <h1 class="logo-name"><a href="/#/">Comet</a></h1>
+      </div>
+      <div class="m-t" ng-show="vm.accountOpened">
+        <p>La cuenta ha sido reabierta !</p>
+        <p><a href="/#/account/login" class="btn btn-primary">Ir al inicio de sesión</a></p>
+      </div>
+      <div ng-hide="vm.accountOpened">
+        <h3>Ingresa la nueva contraseña para</h3>
+        <h3 class="text-muted">{{vm.reopenEmail}}</h3>
+        <form name="vm.frmReopen" class="m-t" role="form" ng-submit="vm.reopenAccountValidate()" novalidate="">
+          <!-- Contraseña -->
+          <div class="form-group" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'password') }">
+            <input type="password" name="password" class="form-control" placeholder="Contraseña"
+                                    ng-model="vm.password" />
+            <div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'password')" class="control-label" role="alert">
+               <div class="text-center">{{ vm.validationErrors['password'] }}</div>
+            </div>
+          </div>
+          <!-- Repetir Contraseña -->
+          <div class="form-group" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'confirmPassword') }">
+            <input type="password"  name="confirmPassword" ng-model="vm.confirmPassword" class="form-control" placeholder="Repetir la contraseña">
+            <div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'confirmPassword')" class="control-label" role="alert">
+               <div class="text-center">{{ vm.validationErrors['confirmPassword'] }}</div>
+               <div>{{ vm.validationErrors['all'] }}</div>
+            </div>
+          </div>
+          <!-- Submit -->
+          <button type="submit" name="button" class="btn btn-primary">Reabrir cuentra</button>
+        </form>
+      </div>
+   </div>
+</div>

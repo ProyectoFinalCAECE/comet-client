@@ -75,6 +75,28 @@ angular
                     }
                 }]
             })
+            .state('account-reopen', {
+                url: '/account/reopen',
+                templateUrl: '/src/account/account-reopen.html',
+                controller: 'AccountReopenController',
+                controllerAs: 'vm',
+                onEnter: ['$state', 'authService', function ($state, authService) {
+                    if (authService.isLoggedIn()) {
+                        $state.go('home');
+                    }
+                }]
+            })
+            .state('account-reopen-return', {
+                url: '/account/reopen-return?token&email',
+                templateUrl: '/src/account/account-reopen-return.html',
+                controller: 'AccountReopenController',
+                controllerAs: 'vm',
+                onEnter: ['$state', 'authService', function ($state, authService) {
+                    if (authService.isLoggedIn()) {
+                        $state.go('home');
+                    }
+                }]
+            })
             .state('dashboard', {
                 url: '/dashboard',
                 templateUrl: '/src/dashboard/dashboard-index.html',

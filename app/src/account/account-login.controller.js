@@ -14,8 +14,9 @@
 
           var vm = this;
           vm.validationErrors = null;
-          vm.login = login;
+          vm.accountClosed = false;
           vm.user = null;
+          vm.login = login;
 
           /**
            * @name login

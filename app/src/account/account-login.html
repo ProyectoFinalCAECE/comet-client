@@ -31,15 +31,17 @@
                           <div>{{ vm.validationErrors['all'] }}</div>
                        </div>
                     </div>
+                    <div ng-show="vm.validationErrors.closed" class="alert alert-warning text-center" role="alert">
+                      <p>Tu cuenta se encuentra cerrada.</p>
+                      <p><a type="button" href="/#/account/reopen" class="btn btn-xs btn-warning">Reabrir cuenta</a></p>
+                    </div>
                     <!-- Submit -->
                     <button type="submit" class="btn btn-primary block full-width m-b">Iniciar sesión</button>
 
-                    <a href="/#/account/forgot">
-                        <small>¿Olvidaste tu contraseña?</small>
-                    </a>
-
-                    <p class="text-muted text-center">
-                        <small>¿Aún no tienes una cuenta?</small>
+                    <p class="text-center">
+                      <a href="/#/account/forgot">
+                          <small>¿Olvidaste tu contraseña?</small>
+                      </a>
                     </p>
                     <a class="btn btn-sm btn-white btn-block" href="/#/user/create">Crear una cuenta</a>
                 </form>
