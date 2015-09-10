@@ -113,16 +113,22 @@ angular
                     }
                 }]
             })
-            .state('dashboard.projects', {
-                url: '/projects',
-                templateUrl: '/src/dashboard/dashboard-projects.html',
-                controller: 'UserProfileController',
-                controllerAs: 'vm',
-            })
             .state('dashboard.profile', {
                 url: '/profile',
                 templateUrl: '/src/user/user-profile.html',
                 controller: 'UserProfileController',
+                controllerAs: 'vm'
+            })
+            .state('dashboard.project-list', {
+                url: '/projects',
+                templateUrl: '/src/projects/project-list.html',
+                controller: 'ProjectListController',
+                controllerAs: 'vm'
+            })
+            .state('dashboard.project-create', {
+                url: '/projects/create',
+                templateUrl: '/src/projects/project-create.html',
+                controller: 'ProjectCreateController',
                 controllerAs: 'vm'
             });
 
