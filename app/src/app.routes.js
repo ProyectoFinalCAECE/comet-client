@@ -14,11 +14,6 @@ angular
                 templateUrl: '/src/home/home.html',
                 controller: 'HomeController',
                 controllerAs: 'vm',
-                resolve: {
-                    user: ['userService', function(userService) {
-                      return userService.get();
-                    }]
-                },
                 onEnter: ['$state', 'authService', function ($state, authService) {
                     if (authService.isLoggedIn()) {
                         $state.go('dashboard');

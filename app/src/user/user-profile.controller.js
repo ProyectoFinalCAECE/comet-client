@@ -55,7 +55,7 @@
             accountService.changePassword(vm.password, vm.newPassword, vm.confirmPassword).error(function(data) {
                 vm.validationErrors = $rootScope.helpers.loadServerErrors(data);
             }).then(function () {
-                $state.go('dashboard');
+                $state.go('dashboard.project-list');
             });
           }
 

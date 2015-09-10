@@ -9,21 +9,11 @@
         .module('cometApp')
         .controller('HomeController', HomeController);
 
-    HomeController.$inject = ['authService', 'accountService', 'user'];
+    HomeController.$inject = ['authService'];
 
-    function HomeController (authService, accountService, user) {
+    function HomeController (authService) {
 
         var vm = this;
         vm.isLoggedIn = authService.isLoggedIn;
-        vm.logout = logout;
-        vm.user = user;
-
-        /**
-         * @name logout
-         * @desc logouts the user and cleans the state
-         */
-        function logout() {
-          accountService.logout();
-        }
     }
 })();

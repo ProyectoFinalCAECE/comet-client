@@ -31,7 +31,7 @@
                 ngToast.danger('Ocurrió un error al consultar al servidor.');
               }
             }).then(function() {
-                $state.go('home');
+                $state.go('dashboard.project-list');
             });
           }
       }

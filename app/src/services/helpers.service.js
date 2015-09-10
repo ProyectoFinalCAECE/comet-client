@@ -18,7 +18,6 @@
         // }
 
         function fieldIsNotValid(model, fieldName) {
-          console.log('fieldIsNotValid', model);
           if (model === null) {
             return false;
           }
