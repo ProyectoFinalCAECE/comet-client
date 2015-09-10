@@ -17,6 +17,9 @@
 
           vm.user = {};
           vm.create = create;
+
+          vm.passwordPattern = "Debe tener entre 6 y 40 caracteres " +
+                                "y contener al menos una minúscula, una mayúscula y un símbolo o número.";
           vm.validationErrors = null;
 
           /**
