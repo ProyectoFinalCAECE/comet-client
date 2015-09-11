@@ -14,11 +14,6 @@ angular
                 templateUrl: '/src/home/home.html',
                 controller: 'HomeController',
                 controllerAs: 'vm',
-                resolve: {
-                    user: ['userService', function(userService) {
-                      return userService.get();
-                    }]
-                },
                 onEnter: ['$state', 'authService', function ($state, authService) {
                     if (authService.isLoggedIn()) {
                         $state.go('dashboard');
@@ -113,16 +108,22 @@ angular
                     }
                 }]
             })
-            .state('dashboard.projects', {
-                url: '/projects',
-                templateUrl: '/src/dashboard/dashboard-projects.html',
-                controller: 'UserProfileController',
-                controllerAs: 'vm',
-            })
             .state('dashboard.profile', {
                 url: '/profile',
                 templateUrl: '/src/user/user-profile.html',
                 controller: 'UserProfileController',
+                controllerAs: 'vm'
+            })
+            .state('dashboard.project-list', {
+                url: '/projects',
+                templateUrl: '/src/projects/project-list.html',
+                controller: 'ProjectListController',
+                controllerAs: 'vm'
+            })
+            .state('dashboard.project-create', {
+                url: '/projects/create',
+                templateUrl: '/src/projects/project-create.html',
+                controller: 'ProjectCreateController',
                 controllerAs: 'vm'
             });
 

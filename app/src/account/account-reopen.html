@@ -1,21 +1,37 @@
-<div class="row white-bg">
-  <div id="formulario" class="middle-box text-center animated fadeIn">
+<div class="container">
+  <nav class="navbar">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/#/">Comet</a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+      </div>
+      <!--/.navbar-collapse -->
+    </div>
+  </nav>
+  <div class="row white-bg">
+    <div id="formulario" class="middle-box text-center animated fadeIn">
       <div>
-         <h1 class="logo-name"><a href="/#/">Comet</a></h1>
+        <h3 class="logo-name">Comet</h3>
       </div>
       <div ng-hide="vm.enviado">
         <p>Por favor ingresa tu dirección de correo y te enviaremos un correo con instrucciones para reabrir tu cuenta</p>
         <form name="vm.frmReopen" class="m-t" role="form" ng-submit="vm.reopenAccount()" novalidate="">
           <!-- Email -->
           <div class="form-group" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'email') }">
-             <input type="email" name="email" ng-model="vm.email" class="form-control" placeholder="Dirección de correo" required="">
-             <div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'email')" class="control-label" role="alert">
-                <div class="text-center">{{ vm.validationErrors['email'] }}</div>
-                <div>{{ vm.validationErrors['all'] }}</div>
-             </div>
+            <input type="email" name="email" ng-model="vm.email" class="form-control" placeholder="Dirección de correo" required="">
+            <div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'email')" class="control-label" role="alert">
+              <div class="text-center">{{ vm.validationErrors['email'] }}</div>
+              <div>{{ vm.validationErrors['all'] }}</div>
+            </div>
           </div>
           <button type="submit" class="btn btn-primary">Reabrir cuenta</button>
-          <a href="/#/account/login" class="m-l">Volver al inicio</a>
         </form>
       </div>
       <div ng-show="vm.enviado">
@@ -25,4 +41,5 @@
         <p><a href="/#/" class="btn btn-primary">Volver</a></p>
       </div>
     </div>
+  </div>
 </div>

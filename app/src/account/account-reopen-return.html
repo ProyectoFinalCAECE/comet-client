@@ -1,7 +1,24 @@
-<div class="row white-bg">
-  <div id="formulario" class="middle-box text-center animated fadeIn">
+<div class="container">
+  <nav class="navbar">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/#/">Comet</a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+      </div>
+      <!--/.navbar-collapse -->
+    </div>
+  </nav>
+  <div class="row white-bg">
+    <div id="formulario" class="middle-box text-center animated fadeIn">
       <div>
-         <h1 class="logo-name"><a href="/#/">Comet</a></h1>
+        <h3 class="logo-name">Comet</h3>
       </div>
       <div class="m-t" ng-show="vm.accountOpened">
         <p>La cuenta ha sido reabierta !</p>
@@ -14,22 +31,23 @@
           <!-- Contraseña -->
           <div class="form-group" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'password') }">
             <input type="password" name="password" class="form-control" placeholder="Contraseña"
-                                    ng-model="vm.password" />
+              ng-model="vm.password" />
             <div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'password')" class="control-label" role="alert">
-               <div class="text-center">{{ vm.validationErrors['password'] }}</div>
+              <div class="text-center">{{ vm.validationErrors['password'] }}</div>
             </div>
           </div>
           <!-- Repetir Contraseña -->
           <div class="form-group" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'confirmPassword') }">
             <input type="password"  name="confirmPassword" ng-model="vm.confirmPassword" class="form-control" placeholder="Repetir la contraseña">
             <div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'confirmPassword')" class="control-label" role="alert">
-               <div class="text-center">{{ vm.validationErrors['confirmPassword'] }}</div>
-               <div>{{ vm.validationErrors['all'] }}</div>
+              <div class="text-center">{{ vm.validationErrors['confirmPassword'] }}</div>
+              <div>{{ vm.validationErrors['all'] }}</div>
             </div>
           </div>
           <!-- Submit -->
           <button type="submit" name="button" class="btn btn-primary">Reabrir cuentra</button>
         </form>
       </div>
-   </div>
+    </div>
+  </div>
 </div>

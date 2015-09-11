@@ -26,7 +26,7 @@
               accountService.login(vm.user).error(function (data) {
                 vm.validationErrors = $rootScope.helpers.loadServerErrors(data);
               }).then(function () {
-                  $state.go('dashboard.projects');
+                  $state.go('dashboard.project-list');
               });
           }
       }
