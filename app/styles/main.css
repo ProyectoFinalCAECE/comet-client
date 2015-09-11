@@ -11,7 +11,7 @@
 }
 
 .logo-name{
-	font-size:80px;
+	font-size:100px;
 }
 
 /* Wrapper del dashboard - color de fondo azul */
@@ -32,7 +32,44 @@
 	width:600px;
 }
 
+#loginbox {
+  border-style: none solid none;
+}
+
 /*#modificarCuentaTabs.nav-tabs {
 	width:500px;
 }*/
+
+/* Vista de proyectos */
+
+.proyecto-lg-4{
+	width:50%
+}
+
+.proyecto-sm-8{
+		width:100%
+}
+
+.proyecto-sm-8 ul{
+    list-style: none;
+	 margin: 0; padding: 0;
+}
+
+.proyecto-sm-8 li{
+	display: inline;
+}
+
+
+.miembrosProyecto li {
+	display: inline;
+}
+
+
+.miembrosProyecto img {
+	width:9%
+}
+	
+.rolProyecto {
+	float:right 
+}
 
