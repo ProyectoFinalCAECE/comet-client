@@ -6,16 +6,21 @@
             <a href="/#/dashboard/projects/create" class="btn btn-xl btn-primary">Crear proyecto</a>
           </p>
       </div>
-      <div ng-hide="vm.isEmpty" ng-repeat="project in vm.projects" class="col-lg-4">
-          <div class="contact-box">
-            <a href="/#/dashboard/project/">
-              <div class="col-sm-12">
-                  <h3><strong>{{project.name}}</strong></h3>
-                  <p>{{project.description}}</p>
-              </div>
-              <div class="clearfix"></div>
-            </a>
-          </div>
+      <div ng-hide="vm.isEmpty">
+        <p>
+          <a href="/#/dashboard/projects/create" class="btn btn-xl btn-primary">Crear proyecto</a>
+        </p>
+        <div ng-repeat="project in vm.projects" class="col-lg-4">
+            <div class="contact-box">
+              <a href="/#/dashboard/project/">
+                <div class="col-sm-12">
+                    <h3><strong>{{project.name}}</strong></h3>
+                    <p>{{project.description}}</p>
+                </div>
+                <div class="clearfix"></div>
+              </a>
+            </div>
+        </div>
       </div>
   </div>
 </div>
