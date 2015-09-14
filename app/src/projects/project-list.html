@@ -21,13 +21,13 @@
         </p>
     </div>
     <!-- listado de proyectos -->
-    <div ng-hide="vm.isEmpty" ng-repeat="project in vm.projects | filter:filtro" class="col-lg-4 proyecto-lg-4">
+    <div ng-hide="vm.isEmpty" ng-repeat="project in vm.projects | filter:filtro | orderBy:createdAt" class="col-lg-4 proyecto-lg-4">
       <div class="contact-box">
         <a href="profile.html">
           <div class="col-sm-8 proyecto-sm-8">
             <div>
               <span class="rolProyecto" ng-show="project.isOwner">
-                Administrador
+                Dueño
               </span>
             </div>
             <h3><strong>{{project.name}}</strong></h3>
