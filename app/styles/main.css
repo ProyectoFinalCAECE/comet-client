@@ -2,7 +2,7 @@
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
 
 /* Para validacion de forms */
-.has-error.control-label {
+.has-error.control-label, .has-error .input-group {
   color: #ed5565;
 }
 
@@ -39,4 +39,3 @@
 /*#modificarCuentaTabs.nav-tabs {
 	width:500px;
 }*/
-

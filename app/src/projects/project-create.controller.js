@@ -36,18 +36,21 @@
            * @desc adds an invite to the list of invites
           */
           function addInvite() {
-            vm.invites.push({ address: 'ejemplo@gmail.com'});
+            var indice = vm.invites.length + 1;
+            vm.invites.push({
+              address: '',
+              name: 'address_' + indice.toString()
+            });
           }
 
           /**
            * @name removeInvite
            * @desc removes an invite to the list of invites
           */
-          function removeInvite(item) {
-            var index = Array.indexOf(item);
-            if (index > -1) {
-                vm.invites.splice(index, 1);
-            }
+          function removeInvite(invite) {
+            vm.invites = $.grep(vm.invites, function(value) {
+              return value !== invite;
+            });
           }
 
           /**

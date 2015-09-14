@@ -20,14 +20,20 @@
       </div>
       <!-- Invitar -->
       <div>
-        <div ng-repeat="invite in vm.invites" class="form-group">
-          <input type="text" name="name" ng-model="invite.address" class="form-control" placeholder="Dirección de correo">
+        <h3>Personas a invitar</h3>
+        <div ng-repeat="invite in vm.invites" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'address_' + ($index + 1))}">
+            <div class="input-group m-b">
+              <input type="email" name="email" ng-model="invite.address" class="form-control" placeholder="Dirección de correo"/>
+              <span class="input-group-btn">
+                <button ng-click="vm.removeInvite(invite)" type="button" class="btn btn-danger">Borrar</button>
+              </span>
+            </div>
+            <div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'address_' + ($index + 1))" class="control-label" role="alert">
+              <div class="text-center">{{ vm.validationErrors['address_' + ($index + 1)] }}</div>
+            </div>
         </div>
         <p>
-          <button type="button" name="button" ng-click="vm.addInvite()">Agregar otro</button>
-        </p>
-        <p>
-          {{vm.invites | json}}
+          <button type="button" class="btn btn-primary" name="button" ng-click="vm.addInvite()">Agregar invitación</button>
         </p>
       </div>
       <!-- Submit -->
