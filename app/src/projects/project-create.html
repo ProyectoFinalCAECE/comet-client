@@ -9,6 +9,7 @@
         <input type="text" name="name" ng-model="vm.project.name" class="form-control" placeholder="Nombre">
         <div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'name')" class="control-label" role="alert">
           <div class="text-center">{{ vm.validationErrors['name'] }}</div>
+          <div>{{ vm.validationErrors['all'] }}</div>
         </div>
       </div>
       <!-- Descripcion -->
