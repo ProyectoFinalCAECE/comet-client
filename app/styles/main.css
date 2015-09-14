@@ -43,18 +43,20 @@
 .col-lg-9 {
     width: 100%;
 }
+
 .col-lg-9 ol {
     list-style: none;
     margin: 0;
     padding: 0;
 }
+
 .col-lg-9 li {
     display: inline;
     width: 10%;
 }
 
 .breadcrumb2 button{
-    width: 10%;
+    width: 120px;
     float: right;
 }
 
@@ -64,7 +66,8 @@
 }
 
 .proyecto-lg-4 {
-    width: 50%
+    width: 50%;
+    float:left;
 }
 .proyecto-sm-8 {
     width: 100%;
@@ -78,15 +81,19 @@
 .proyecto-sm-8 li {
     display: inline;
 }
+
 .miembrosProyecto li {
     display: inline;
 }
+
 .miembrosProyecto img {
     width: 9%
 }
+
 .rolProyecto {
     float: right
 }
+
 .miembrosProyecto p {
     display: inline;
     /*border-radius: 50%;?8
@@ -101,7 +108,7 @@
 
 @media (max-width: 1100px) {
     .proyecto-sm-8 {
-        height: 90px
+        height: 90px;
     }
 }
 
@@ -125,4 +132,13 @@
         display:none;
     }
 }
+
+@media (max-width: 315px) {
+	.breadcrumb2 .form-control {
+		width: 40%;
+	}
+
+}
+
+
 
