@@ -1,5 +1,48 @@
-<div>
+<div class="container">
   <div class="row">
       Nuevo Proyecto
+  </div>
+  <div class="col-sm-8">
+    <form name="vm.frmCreateProject" class="m-t" role="form" ng-submit="vm.create()" novalidate>
+      <!-- Nombre -->
+      <div class="form-group" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'name') }">
+        <input type="text" name="name" ng-model="vm.project.name" class="form-control" placeholder="Nombre">
+        <div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'name')" class="control-label" role="alert">
+          <div class="text-center">{{ vm.validationErrors['name'] }}</div>
+        </div>
+      </div>
+      <!-- Descripcion -->
+      <div class="form-group" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'description') }">
+        <textarea cols="25" rows="7" ng-model="vm.project.description" class="form-control" placeholder="Breve descripcion del proyecto"></textarea>
+        <div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'description')" class="control-label" role="alert">
+          <div class="text-center">{{ vm.validationErrors['description'] }}</div>
+        </div>
+      </div>
+      <!-- Invitar -->
+      <div>
+        <h3>Personas a invitar</h3>
+        <div ng-repeat="invite in vm.invites" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'address_' + ($index + 1))}">
+            <div class="input-group m-b">
+              <input type="email" name="email" ng-model="invite.address" class="form-control" placeholder="Dirección de correo"/>
+              <span class="input-group-btn">
+                <button ng-click="vm.removeInvite(invite)" type="button" class="btn btn-danger">Borrar</button>
+              </span>
+            </div>
+            <div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'address_' + ($index + 1))" class="control-label" role="alert">
+              <div class="text-center">{{ vm.validationErrors['address_' + ($index + 1)] }}</div>
+            </div>
+        </div>
+        <p>
+          <button type="button" class="btn btn-primary" name="button" ng-click="vm.addInvite()">Agregar invitación</button>
+        </p>
+      </div>
+      <!-- Submit -->
+      <div class="form-group">
+        <div class="col-sm-8 col-sm-offset-2">
+          <button class="btn btn-w-m btn-primary" type="submit">Crear proyecto</button>
+          <a class="btn btn-link" href="/#/dashboard">Cancelar</a>
+        </div>
+      </div>
+    </form>
   </div>
 </div>

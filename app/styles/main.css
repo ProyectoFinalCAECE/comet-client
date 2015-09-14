@@ -8,8 +8,8 @@
 }
 /* Para validacion de forms */
 
-.has-error.control-label {
-    color: #ed5565;
+.has-error.control-label, .has-error .input-group {
+  color: #ed5565;
 }
 .logo-name a {
     color: #e6e6e6;
