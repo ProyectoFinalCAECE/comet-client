@@ -1,8 +1,8 @@
 <div class="container">
-  <div class="row">
+  <div class="row crearProyectoTitle">
       Nuevo Proyecto
   </div>
-  <div class="col-sm-8">
+  <div class="col-sm-8 crearProyecto-sm-8">
     <form name="vm.frmCreateProject" class="m-t" role="form" ng-submit="vm.create()" novalidate>
       <!-- Nombre -->
       <div class="form-group" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'name') }">
@@ -20,7 +20,7 @@
         </div>
       </div>
       <!-- Invitar -->
-      <div>
+      <div class="crearProyectoSubmit">
         <h3>Personas a invitar</h3>
         <div ng-repeat="invite in vm.invites" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'address_' + ($index + 1))}">
             <div class="input-group m-b">
@@ -39,7 +39,7 @@
       </div>
       <!-- Submit -->
       <div class="form-group">
-        <div class="col-sm-8 col-sm-offset-2">
+        <div class="col-sm-8 col-sm-offset-2 crearProyectoSubmit">
           <button class="btn btn-w-m btn-primary" type="submit">Crear proyecto</button>
           <a class="btn btn-link" href="/#/dashboard">Cancelar</a>
         </div>

@@ -116,11 +116,11 @@
     .miembrosProyecto{
         display:none;
     }
-    
+
     .proyecto-lg-4 {
        width: 100%
     }
-   
+
     .proyecto-sm-8 {
         width: 100%;
         height: 40px
@@ -140,5 +140,18 @@
 
 }
 
+/*Crear Proyecto*/
 
+.crearProyectoTitle{
+    font-size:40px;
+}
 
+.crearProyectoSubmit{
+    margin-top:30px;
+    margin-left:0;
+    padding-left:0;
+}
+
+.crearProyectoSubmit button{
+    width:140px;
+}
