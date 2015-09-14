@@ -16,6 +16,8 @@
           var vm = this;
           vm.projects = null;
           vm.isEmpty = true;
+          vm.closedProjects = null;
+          vm.closedProjectsEmpty = true;
 
           activate();
 

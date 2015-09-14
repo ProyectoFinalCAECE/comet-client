@@ -1,26 +1,89 @@
-<div>
+<div class="row wrapper border-bottom white-bg page-heading">
+  <div class="col-lg-9">
+      <h2>Proyectos Activos</h2>
+      <ol class="breadcrumb2">
+        <li>
+          <input type="text" placeholder="Filtrar..." class="form-control" name="top-search" id="top-search">
+        </li>
+        <li>
+          <a href="/#/dashboard/projects/create" class="btn btn-primary">Crear Proyecto</a>
+        </li>
+      </ol>
+  </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
   <div class="row">
-      <div ng-show="vm.isEmpty">
-          <p>No hay ningun proyecto creado</p>
-          <p>
-            <a href="/#/dashboard/projects/create" class="btn btn-xl btn-primary">Crear proyecto</a>
-          </p>
-      </div>
-      <div ng-hide="vm.isEmpty">
+    <!-- No tiene proyectos -->
+    <div ng-show="vm.isEmpty">
+        <p>No hay ningun proyecto creado</p>
         <p>
           <a href="/#/dashboard/projects/create" class="btn btn-xl btn-primary">Crear proyecto</a>
         </p>
-        <div ng-repeat="project in vm.projects" class="col-lg-4">
-            <div class="contact-box">
-              <a href="/#/dashboard/project/">
-                <div class="col-sm-12">
-                    <h3><strong>{{project.name}}</strong></h3>
-                    <p>{{project.description}}</p>
-                </div>
-                <div class="clearfix"></div>
-              </a>
+    </div>
+    <!-- listado de proyectos -->
+    <div ng-hide="vm.isEmpty" ng-repeat="project in vm.projects" class="col-lg-4 proyecto-lg-4">
+      <div class="contact-box">
+        <a href="profile.html">
+          <div class="col-sm-8 proyecto-sm-8">
+            <div>
+              <span class="rolProyecto" ng-show="project.isOwner">
+                Administrador
+              </span>
             </div>
-        </div>
+            <h3><strong>{{project.name}}</strong></h3>
+            <p>{{project.description}}</p>
+            <ul class="miembrosProyecto">
+              <li><img alt="image" class="img-circle" src="../../images/vendor/a2.jpg" /></li>
+              <li><img alt="image" class="img-circle" src="../../images/vendor/a7.jpg" /></li>
+              <li><img alt="image" class="img-circle" src="../../images/vendor/a3.jpg" /></li>
+              <li><img alt="image" class="img-circle" src="../../images/vendor/a8.jpg" /></li>
+              <li><img alt="image" class="img-circle" src="../../images/vendor/a1.jpg" /></li>
+              <li><img alt="image" class="img-circle" src="../../images/vendor/a6.jpg" /></li>
+              <li><p>+6</p></li>
+            </ul>
+          </div>
+          <div class="clearfix"></div>
+        </a>
       </div>
+    </div>
+  </div>
+</div>
+<!-- proyectos cerrados -->
+<div class="row wrapper border-bottom white-bg page-heading">
+  <div class="col-lg-9">
+    <h2>Proyectos Cerrados</h2>
+    <div class="form-group">
+      <input type="text" placeholder="Filtrar..." class="form-control" name="top-search" id="top-search">
+    </div>
+  </div>
+</div>
+<div class="wrapper wrapper-content">
+  <div class="row">
+    <!-- listado de proyectos cerrados -->
+    <div ng-hide="vm.closedProjectsEmpty" ng-repeat="project in vm.closedProjects" class="col-lg-4 proyecto-lg-4">
+      <div class="contact-box">
+        <a href="profile.html">
+          <div class="col-sm-8 proyecto-sm-8">
+            <div>
+              <span class="rolProyecto">
+                Administrador
+              </span>
+            </div>
+            <h3><strong>{{project.name}}</strong></h3>
+            <p>{{project.description}}</p>
+            <ul class="miembrosProyecto">
+              <li><img alt="image" class="img-circle" src="../../images/vendor/a2.jpg" /></li>
+              <li><img alt="image" class="img-circle" src="../../images/vendor/a7.jpg" /></li>
+              <li><img alt="image" class="img-circle" src="../../images/vendor/a3.jpg" /></li>
+              <li><img alt="image" class="img-circle" src="../../images/vendor/a8.jpg" /></li>
+              <li><img alt="image" class="img-circle" src="../../images/vendor/a1.jpg" /></li>
+              <li><img alt="image" class="img-circle" src="../../images/vendor/a6.jpg" /></li>
+              <li><p>+6</p></li>
+            </ul>
+          </div>
+          <div class="clearfix"></div>
+        </a>
+      </div>
+    </div>
   </div>
 </div>
