@@ -3,7 +3,7 @@
       <h2>Proyectos Activos</h2>
       <ol class="breadcrumb2">
         <li>
-          <input type="text" placeholder="Filtrar..." class="form-control" name="top-search" id="top-search">
+          <input ng-model="filtro" type="text" placeholder="Filtrar..." class="form-control" name="top-search" id="top-search">
         </li>
         <li>
           <a href="/#/dashboard/projects/create" class="btn btn-primary">Crear Proyecto</a>
@@ -21,7 +21,7 @@
         </p>
     </div>
     <!-- listado de proyectos -->
-    <div ng-hide="vm.isEmpty" ng-repeat="project in vm.projects" class="col-lg-4 proyecto-lg-4">
+    <div ng-hide="vm.isEmpty" ng-repeat="project in vm.projects | filter:filtro" class="col-lg-4 proyecto-lg-4">
       <div class="contact-box">
         <a href="profile.html">
           <div class="col-sm-8 proyecto-sm-8">
