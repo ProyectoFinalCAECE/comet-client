@@ -9,9 +9,9 @@
     angular.module('cometApp')
            .controller('ProjectListController', ProjectListController);
 
-        ProjectListController.$inject = ['projectService'];
+        ProjectListController.$inject = ['filterFilter', 'projectService'];
 
-        function ProjectListController (projectService) {
+        function ProjectListController (filterFilter, projectService) {
 
           var vm = this;
           vm.projects = null;
@@ -28,8 +28,14 @@
            */
           function activate () {
             projectService.getAll().then(function(response){
-              vm.projects = response.data;
+
+              var projects = response.data;
+
+              vm.projects = filterFilter(projects, {state:'O' });
+              vm.closedProjects = filterFilter(projects, {state:'C' });
+
               vm.isEmpty = vm.projects.length === 0;
+              vm.closedProjectsEmpty = vm.closedProjects.length === 0;
             });
           }
 
