@@ -16,6 +16,8 @@
 }
 .logo-name {
     font-size: 100px;
+    letter-spacing:normal;
+    font-weight: normal;
 }
 /* Wrapper del dashboard - color de fondo azul */
 
