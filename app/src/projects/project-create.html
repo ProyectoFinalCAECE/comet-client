@@ -15,7 +15,7 @@
   <div class="col-sm-8 crearProyecto-sm-8">
     <form name="vm.frmCreateProject" class="m-t" role="form" ng-submit="vm.create()" novalidate>
       <!-- Nombre -->
-      <div class="form-group" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'name') }">
+      <div class="form-group cometInput" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'name') }">
         <input type="text" name="name" ng-model="vm.project.name" class="form-control" placeholder="Nombre">
         <div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'name')" class="control-label" role="alert">
           <div class="text-center">{{ vm.validationErrors['name'] }}</div>

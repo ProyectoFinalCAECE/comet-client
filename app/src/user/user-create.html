@@ -24,28 +24,28 @@
       <p>Crea una cuenta para empezar a comunicarte!</p>
       <form name="vm.frmCreateUser" class="m-t" role="form" ng-submit="vm.create()" novalidate>
         <!-- Nombre -->
-        <div class="form-group" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'firstName') }">
+        <div class="form-group cometInput" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'firstName') }">
           <input type="text" name="firstName" ng-model="vm.user.firstName" class="form-control" placeholder="Nombre">
           <div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'firstName')" class="control-label" role="alert">
             <div class="text-center">{{ vm.validationErrors['firstName'] }}</div>
           </div>
         </div>
         <!-- Apellido -->
-        <div class="form-group" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'lastName') }">
+        <div class="form-group cometInput" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'lastName') }">
           <input type="text" name="lastName" ng-model="vm.user.lastName" class="form-control" placeholder="Apellido">
           <div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'lastName')" class="control-label" role="alert">
             <div class="text-center">{{ vm.validationErrors['lastName'] }}</div>
           </div>
         </div>
         <!-- Email -->
-        <div class="form-group" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'email') }">
+        <div class="form-group cometInput" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'email') }">
           <input type="email" name="email" ng-model="vm.user.email" class="form-control" placeholder="Direccion de correo">
           <div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'email')" class="control-label" role="alert">
             <div class="text-center">{{ vm.validationErrors['email'] }}</div>
           </div>
         </div>
         <!-- Password -->
-        <div class="form-group" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'password') }">
+        <div class="form-group cometInput" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'password') }">
           <input type="password" name="password" class="form-control" placeholder="Contraseña"
                  ng-model="vm.user.password"
                  popover="{{vm.passwordPattern}}"
@@ -56,7 +56,7 @@
           </div>
         </div>
         <!-- Repetir password -->
-        <div class="form-group" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'confirmPassword') }">
+        <div class="form-group cometInput" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'confirmPassword') }">
           <input type="password"  name="confirmPassword" ng-model="vm.user.confirmPassword" class="form-control" placeholder="Repetir la contraseña">
           <div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'confirmPassword')" class="control-label" role="alert">
             <div class="text-center">{{ vm.validationErrors['confirmPassword'] }}</div>

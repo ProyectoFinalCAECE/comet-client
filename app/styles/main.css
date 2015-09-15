@@ -153,3 +153,8 @@
 .crearProyectoSubmit button{
     width:140px;
 }
+
+/* Estilos para formularios dentro de pestañas */
+.cometInput input{
+	width:300px;
+}

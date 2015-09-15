@@ -14,13 +14,13 @@
                     Modificar datos
                   </tab-heading>
                   <form name="vm.frmUpdate" ng-submit="vm.update()" class="form-horizontal m-t" role="form" novalidate="">
-                    <div class="form-group">
+                    <div class="form-group cometInput">
                       <label class="col-sm-2 control-label">Correo</label>
                       <div class="col-sm-10">
                         <input type="text" name="email" ng-model="vm.user.email" class="form-control" disabled>
                       </div>
                     </div>
-                    <div class="form-group" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'firstName') }">
+                    <div class="form-group cometInput" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'firstName') }">
                       <label class="col-sm-2 control-label">Nombre</label>
                       <div class="col-sm-10">
                         <input type="text" name="firstName" ng-model="vm.user.firstName" class="form-control" placeholder="Nombre" required="">
@@ -29,7 +29,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="form-group"  ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'lastName') }">
+                    <div class="form-group cometInput"  ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'lastName') }">
                       <label class="col-sm-2 control-label">Apellido</label>
                       <div class="col-sm-10">
                         <input type="text" name="lastName" ng-model="vm.user.lastName" class="form-control" placeholder="Apellido" required="">
@@ -38,7 +38,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="form-group" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'alias') }">
+                    <div class="form-group cometInput" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'alias') }">
                       <label class="col-sm-2 control-label">Alias</label>
                       <div class="col-sm-10">
                         <input type="text" name="alias" class="form-control" placeholder="Alias"
