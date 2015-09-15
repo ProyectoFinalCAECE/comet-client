@@ -120,6 +120,12 @@ angular
                 controller: 'ProjectListController',
                 controllerAs: 'vm'
             })
+            .state('project-accept', {
+                url: '/projects/invitations/accept?token',
+                templateUrl: '/src/projects/project-accept.html',
+                controller: 'ProjectAcceptController',
+                controllerAs: 'vm'
+            })
             .state('dashboard.project-create', {
                 url: '/projects/create',
                 templateUrl: '/src/projects/project-create.html',

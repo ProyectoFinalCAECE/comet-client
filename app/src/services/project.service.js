@@ -13,7 +13,8 @@
         return {
             create: create,
             getAll: getAll,
-            getById: getById
+            getById: getById,
+            acceptInvitation: acceptInvitation
         };
 
         /**
@@ -38,6 +39,17 @@
          */
         function getById (id) {
             return $http.get('/project/' + id, authService.getJwtHeader());
+        }
+
+        /**
+         * @name acceptInvitation
+         * @desc accepts a project invitation
+         */
+        function acceptInvitation (id, token) {
+            var data = {
+              token: token
+            };
+            return $http.post('/project/' + id + '/invitations/accept', data, authService.getJwtHeader());
         }
     }
 })();
