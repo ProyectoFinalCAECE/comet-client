@@ -16,6 +16,8 @@
 }
 .logo-name {
     font-size: 100px;
+    letter-spacing:normal;
+    font-weight: normal;
 }
 /* Wrapper del dashboard - color de fondo azul */
 
@@ -150,4 +152,9 @@
 
 .crearProyectoSubmit button{
     width:140px;
+}
+
+/* Estilos para formularios dentro de pestañas */
+.cometInput input{
+	width:300px;
 }

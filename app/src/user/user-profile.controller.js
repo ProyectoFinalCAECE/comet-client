@@ -13,11 +13,12 @@
                                          '$scope',
                                          '$state',
                                          'ngToast',
+                                         'formsConfig',
                                          'accountService',
                                          'userService',
                                          'user'];
 
-        function UserProfileController ($rootScope, $scope, $state, ngToast, accountService, userService, user) {
+        function UserProfileController ($rootScope, $scope, $state, ngToast, formsConfig, accountService, userService, user) {
 
           var vm = this;
           vm.validationErrors = null;
@@ -31,6 +32,7 @@
           vm.newPassword = null;
           vm.confirmPassword = null;
           vm.changePassword = changePassword;
+          vm.passwordPattern = formsConfig.passwordLabel;
 
           // close account
 

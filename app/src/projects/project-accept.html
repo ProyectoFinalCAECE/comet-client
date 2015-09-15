@@ -1,0 +1,39 @@
+<div class="container">
+  <nav class="navbar">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/#/">Comet</a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+      </div>
+      <!--/.navbar-collapse -->
+    </div>
+  </nav>
+  <div class="row white-bg">
+    <div id="formulario" class="middle-box text-center animated fadeIn">
+      <div>
+        <h3 class="logo-name">Comet</h3>
+      </div>
+
+      <div ng-show="vm.acceptSuccess">
+        <h3>Invitación aceptada exitosamente!.</h3>
+        <p>En segundos será redirigido a su Dashboard</p>
+      </div>
+
+       <div ng-show="vm.acceptError">
+        <p>Ocurrió un error al aceptar la invitación.</p>
+        <p>{{ vm.errorMessage }}</p>
+        <p class="m-t"><a href="/#/" class="btn btn-primary">Volver</a></p>
+      </div>
+
+      <div ng-hide="vm.isLoggedIn()"><a href="/#/user/create">Crear cuenta</a></div>
+      <div ng-hide="vm.isLoggedIn()"><a href="/#/account/login">Iniciar sesión</a></div>
+    </div>
+  </div>
+</div>

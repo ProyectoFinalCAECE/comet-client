@@ -14,13 +14,13 @@
                     Modificar datos
                   </tab-heading>
                   <form name="vm.frmUpdate" ng-submit="vm.update()" class="form-horizontal m-t" role="form" novalidate="">
-                    <div class="form-group">
+                    <div class="form-group cometInput">
                       <label class="col-sm-2 control-label">Correo</label>
                       <div class="col-sm-10">
                         <input type="text" name="email" ng-model="vm.user.email" class="form-control" disabled>
                       </div>
                     </div>
-                    <div class="form-group" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'firstName') }">
+                    <div class="form-group cometInput" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'firstName') }">
                       <label class="col-sm-2 control-label">Nombre</label>
                       <div class="col-sm-10">
                         <input type="text" name="firstName" ng-model="vm.user.firstName" class="form-control" placeholder="Nombre" required="">
@@ -29,7 +29,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="form-group"  ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'lastName') }">
+                    <div class="form-group cometInput"  ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'lastName') }">
                       <label class="col-sm-2 control-label">Apellido</label>
                       <div class="col-sm-10">
                         <input type="text" name="lastName" ng-model="vm.user.lastName" class="form-control" placeholder="Apellido" required="">
@@ -38,7 +38,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="form-group" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'alias') }">
+                    <div class="form-group cometInput" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'alias') }">
                       <label class="col-sm-2 control-label">Alias</label>
                       <div class="col-sm-10">
                         <input type="text" name="alias" class="form-control" placeholder="Alias"
@@ -82,7 +82,10 @@
                       <label class="col-sm-4 control-label">Nueva contraseña</label>
                       <div class="col-sm-8">
                         <input type="password" name="newPassword" class="form-control" placeholder="Nueva Contraseña"
-                        ng-model="vm.newPassword"/>
+                        ng-model="vm.newPassword"
+                        popover="{{vm.passwordPattern}}"
+                        popover-placement="bottom"
+                        popover-trigger="focus"/>
                         <div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'newPassword')" class="control-label" role="alert">
                           <div>{{ vm.validationErrors['newPassword'] }}</div>
                         </div>
@@ -101,20 +104,25 @@
                     </div>
                     <!-- Submit -->
                     <div>
-                      <button type="submit" class="btn btn-primary block full-width m-b">Modificar contraseña</button>
+                      <button type="submit" class="btn btn-primary">Modificar contraseña</button>
                     </div>
                   </form>
                 </tab>
                 <tab>
                   <tab-heading>Cerrar cuenta</tab-heading>
+                  <form class="form-horizontal m-t" role="form">
+                    <div class="form-group">
+                      <div class="checkbox i-checks"><label> <input type="checkbox"><i></i>¿Estás seguro de cerrar la cuenta?</label></div>
+                      <!-- copiar estilo igual que el check de registro -->
+                    </div>
                   <div class="form-group">
-                    <div class="checkbox i-checks"><label> <input type="checkbox"><i></i>¿Estás seguro de cerrar la cuenta?</label></div>
-                    <!-- copiar estilo igual que el check de registro -->
+                    <label class="col-sm-4 control-label">Contraseña actual</label>
+                    <div class="col-sm-8">
+                      <input type="password" class="form-control" placeholder="Contraseña">
+                    </div>
                   </div>
-                  <div class="form-group">
-                    <input type="password" class="form-control" placeholder="Contraseña" required="">
-                  </div>
-                  <button type="submit" class="btn btn-primary block full-width m-b">Cerrar cuenta</button>
+                  <button type="submit" class="btn btn-primary">Cerrar cuenta</button>
+                </form>
                 </tab>
               </tabset>
             </div>
