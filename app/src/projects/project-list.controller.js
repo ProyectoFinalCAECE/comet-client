@@ -18,6 +18,7 @@
           vm.isEmpty = true;
           vm.closedProjects = null;
           vm.closedProjectsEmpty = true;
+          vm.hiddenMembersCount = hiddenMembersCount;
 
           activate();
 
@@ -32,5 +33,12 @@
             });
           }
 
+          /**
+           * @name hiddenMembersCount
+           * @desc returns the number of members not displayed in the project card
+           */
+          function hiddenMembersCount(members, displayed) {
+            return members.length - displayed.length;
+          }
         }
 })();
