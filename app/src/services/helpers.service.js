@@ -13,8 +13,15 @@
             fieldIsNotValid: fieldIsNotValid
         };
 
-        function fieldIsNotValid(form, fieldName) {
-          return form.$submitted && form[fieldName].$error;
+        // function fieldIsNotValid(form, fieldName) {
+        //   return form.$submitted && form[fieldName].$error;
+        // }
+
+        function fieldIsNotValid(model, fieldName) {
+          if (model === null) {
+            return false;
+          }
+          return model[fieldName] || model.all;
         }
 
         /**

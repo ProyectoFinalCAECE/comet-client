@@ -1,38 +1,157 @@
 /* Para Angular Bootstrap */
-.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
 
+.nav,
+.pagination,
+.carousel,
+.panel-title a {
+    cursor: pointer;
+}
 /* Para validacion de forms */
-.has-error.control-label {
+
+.has-error.control-label, .has-error .input-group {
   color: #ed5565;
 }
-
 .logo-name a {
-  color: #e6e6e6;
+    color: #e6e6e6;
 }
-
-.logo-name{
-	font-size:80px;
+.logo-name {
+    font-size: 100px;
 }
-
 /* Wrapper del dashboard - color de fondo azul */
+
 #wrapper {
-  background-color: #2f4050
+    background-color: #2f4050
 }
-
 #formulario.middle-box {
-	position: relative;
-	margin-top: 0;
+    position: relative;
+    margin-top: 0;
 }
-
-#formulario.middle-box  h1{
-	margin-left: -60px;
+#formulario.middle-box h1 {
+    margin-left: -60px;
 }
-
 .modificarCuenta {
-	width:600px;
+    width: 600px;
 }
-
+#loginbox {
+    border-style: none solid none;
+}
 /*#modificarCuentaTabs.nav-tabs {
 	width:500px;
 }*/
+/* Vista de proyectos */
 
+.col-lg-9 {
+    width: 100%;
+}
+
+.col-lg-9 ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.col-lg-9 li {
+    display: inline;
+    width: 10%;
+}
+
+.breadcrumb2 button{
+    width: 120px;
+    float: right;
+}
+
+.breadcrumb2 .form-control {
+    width: 50%;
+    float: left;
+}
+
+.proyecto-lg-4 {
+    width: 50%;
+    float:left;
+}
+.proyecto-sm-8 {
+    width: 100%;
+    height: 110px
+}
+.proyecto-sm-8 ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.proyecto-sm-8 li {
+    display: inline;
+}
+
+.miembrosProyecto li {
+    display: inline;
+}
+
+.miembrosProyecto img {
+    width: 9%
+}
+
+.rolProyecto {
+    float: right
+}
+
+.miembrosProyecto p {
+    display: inline;
+    /*border-radius: 50%;?8
+    padding: 1%;
+    background: #fff;
+    /*border: 2px solid #666;*/
+    color: #666;
+    text-align: center;
+    vertical-align: middle;
+    font: 3vw Arial, sans-serif;
+}
+
+@media (max-width: 1100px) {
+    .proyecto-sm-8 {
+        height: 90px;
+    }
+}
+
+@media (max-width: 900px) {
+    .miembrosProyecto{
+        display:none;
+    }
+
+    .proyecto-lg-4 {
+       width: 100%
+    }
+
+    .proyecto-sm-8 {
+        width: 100%;
+        height: 40px
+    }
+}
+
+@media (max-width: 500px) {
+    .rolProyecto {
+        display:none;
+    }
+}
+
+@media (max-width: 315px) {
+	.breadcrumb2 .form-control {
+		width: 40%;
+	}
+
+}
+
+/*Crear Proyecto*/
+
+.crearProyectoTitle{
+    font-size:40px;
+}
+
+.crearProyectoSubmit{
+    margin-top:30px;
+    margin-left:0;
+    padding-left:0;
+}
+
+.crearProyectoSubmit button{
+    width:140px;
+}

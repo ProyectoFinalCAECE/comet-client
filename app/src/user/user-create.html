@@ -1,59 +1,74 @@
 <div class="container">
-   <div id="formulario" class="middle-box text-center loginscreen">
-      <div>
-         <div class="text-center">
-            <h3 class="logo-name">Comet</h3>
-         </div>
-         <h3>Crear cuenta en Comet</h3>
-         <p>Crea una cuenta para empezar a comunicarte!</p>
-         <form name="vm.frmCreateUser" class="m-t" role="form" ng-submit="vm.create()" novalidate>
-            <div class="form-group" ng-class="{ 'has-error': vm.frmCreateUser.firstName.$invalid && vm.frmCreateUser.firstName.$dirty }">
-               <input type="text" name="firstName" ng-model="vm.user.firstName" class="form-control" placeholder="Nombre" required="">
-               <div ng-messages="vm.frmCreateUser.firstName.$error" ng-if="vm.frmCreateUser.firstName.$dirty" class="control-label" role="alert">
-                  <div ng-message="required">Debes ingresar tu nombre</div>
-               </div>
-            </div>
-            <div class="form-group" ng-class="{ 'has-error': vm.frmCreateUser.lastName.$invalid && vm.frmCreateUser.lastName.$dirty }">
-               <input type="text" name="lastName" ng-model="vm.user.lastName" class="form-control" placeholder="Apellido" required="">
-               <div ng-messages="vm.frmCreateUser.lastName.$error" ng-if="vm.frmCreateUser.lastName.$dirty" class="control-label" role="alert">
-                  <div ng-message="required">Debes ingresar tu apellido</div>
-               </div>
-            </div>
-            <div class="form-group" ng-class="{ 'has-error': vm.frmCreateUser.email.$invalid && vm.frmCreateUser.email.$dirty }">
-               <input type="email" name="email" ng-model="vm.user.email" class="form-control" placeholder="Direccion de correo" required="">
-               <div ng-messages="vm.frmCreateUser.email.$error" ng-if="vm.frmCreateUser.email.$dirty" class="control-label" role="alert">
-                  <div ng-message="required">Debes ingresar tu correo</div>
-                  <div ng-message="email">El correo ingresado es inválido</div>
-               </div>
-               <div ng-if="vm.validationErrors['email']" class="has-error control-label" role="alert">
-                  <div>{{ vm.validationErrors['email'] }}</div>
-               </div>
-            </div>
-            <div class="form-group" ng-class="{ 'has-error': vm.frmCreateUser.password.$invalid && vm.frmCreateUser.password.$dirty }">
-               <input type="password" name="password" class="form-control" placeholder="Contraseña"
-                                      ng-model="vm.user.password"
-                                      ng-minlength="6"
-                                      ng-maxlength="40"
-                                      ng-pattern="/(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z])/" />
-               <div ng-messages="vm.frmCreateUser.password.$error" ng-if="vm.frmCreateUser.password.$dirty" class="control-label" role="alert">
-                  <div ng-message="minlength">Debe tener una longitud entre 6 y 40 caracteres</div>
-                  <div ng-message="maxlength">La longitud máxima aceptada es 40 caracteres</div>
-                  <div ng-message="pattern">Debe tener al menos una minúscula, una mayúscula y un símbolo o número</div>
-                  <div ng-message="required">Debes ingresar una contraseña</div>
-               </div>
-            </div>
-            <div class="form-group" ng-class="{ 'has-error': vm.frmCreateUser.confirmPassword.$invalid && vm.frmCreateUser.confirmPassword.$dirty }">
-              <input type="password"  name="confirmPassword" ng-model="vm.user.confirmPassword" class="form-control" placeholder="Repetir la contraseña" required="" field-match="" dsfieldmatch="vm.frmCreateUser.password">
-              <div ng-messages="vm.frmCreateUser.confirmPassword.$error" ng-if="vm.frmCreateUser.confirmPassword.$dirty" class="control-label" role="alert">
-                <div ng-message="required">Debes ingresar la confirmación de tu contraseña</div>
-                <div ng-message="fieldMatch">Las contraseñas no coinciden</div>
-              </div>
-            </div>
-            <button type="submit" ng-disabled="vm.frmCreateUser.$invalid" class="btn btn-primary block full-width m-b">Crear cuenta</button>
-            <p class="text-muted text-center"><small>¿Ya tienes una cuenta?</small></p>
-            <a class="btn btn-sm btn-white btn-block" href="/#/account/login">Iniciar sesión</a>
-         </form>
-         <p class="m-t"> <small>The Comet Company &copy; 2015</small> </p>
+  <nav class="navbar">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/#/">Comet</a>
       </div>
-   </div>
+      <div id="navbar" class="navbar-collapse collapse">
+      </div>
+      <!--/.navbar-collapse -->
+    </div>
+  </nav>
+  <div id="formulario" class="middle-box text-center loginscreen">
+    <div>
+      <div class="text-center">
+        <h3 class="logo-name">Comet</h3>
+      </div>
+      <h3>Crear cuenta en Comet</h3>
+      <p>Crea una cuenta para empezar a comunicarte!</p>
+      <form name="vm.frmCreateUser" class="m-t" role="form" ng-submit="vm.create()" novalidate>
+        <!-- Nombre -->
+        <div class="form-group" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'firstName') }">
+          <input type="text" name="firstName" ng-model="vm.user.firstName" class="form-control" placeholder="Nombre">
+          <div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'firstName')" class="control-label" role="alert">
+            <div class="text-center">{{ vm.validationErrors['firstName'] }}</div>
+          </div>
+        </div>
+        <!-- Apellido -->
+        <div class="form-group" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'lastName') }">
+          <input type="text" name="lastName" ng-model="vm.user.lastName" class="form-control" placeholder="Apellido">
+          <div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'lastName')" class="control-label" role="alert">
+            <div class="text-center">{{ vm.validationErrors['lastName'] }}</div>
+          </div>
+        </div>
+        <!-- Email -->
+        <div class="form-group" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'email') }">
+          <input type="email" name="email" ng-model="vm.user.email" class="form-control" placeholder="Direccion de correo">
+          <div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'email')" class="control-label" role="alert">
+            <div class="text-center">{{ vm.validationErrors['email'] }}</div>
+          </div>
+        </div>
+        <!-- Password -->
+        <div class="form-group" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'password') }">
+          <input type="password" name="password" class="form-control" placeholder="Contraseña"
+                 ng-model="vm.user.password"
+                 popover="{{vm.passwordPattern}}"
+                 popover-placement="bottom"
+                 popover-trigger="focus"/>
+          <div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'password')" class="control-label" role="alert">
+            <div class="text-center">{{ vm.validationErrors['password'] }}</div>
+          </div>
+        </div>
+        <!-- Repetir password -->
+        <div class="form-group" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'confirmPassword') }">
+          <input type="password"  name="confirmPassword" ng-model="vm.user.confirmPassword" class="form-control" placeholder="Repetir la contraseña">
+          <div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'confirmPassword')" class="control-label" role="alert">
+            <div class="text-center">{{ vm.validationErrors['confirmPassword'] }}</div>
+            <div>{{ vm.validationErrors['all'] }}</div>
+          </div>
+        </div>
+        <!-- Submit -->
+        <button type="submit" class="btn btn-primary block full-width m-b">Crear cuenta</button>
+        <p class="text-muted text-center"><small>¿Ya tienes una cuenta?</small></p>
+        <a class="btn btn-sm btn-white btn-block" href="/#/account/login">Iniciar sesión</a>
+      </form>
+      <p class="m-t"> <small>&copy; Equipo Comet 2015</small> </p>
+    </div>
+  </div>
 </div>

@@ -21,8 +21,8 @@
         <h3 class="logo-name">Comet</h3>
       </div>
       <div ng-hide="vm.enviado">
-        <p>Por favor ingresa tu dirección de correo y te enviaremos un correo con instrucciones para recuperar tu contraseña</p>
-        <form name="vm.frmRecover" class="m-t" role="form" ng-submit="vm.recoverPassword()" novalidate="">
+        <p>Por favor ingresa tu dirección de correo y te enviaremos un correo con instrucciones para reabrir tu cuenta</p>
+        <form name="vm.frmReopen" class="m-t" role="form" ng-submit="vm.reopenAccount()" novalidate="">
           <!-- Email -->
           <div class="form-group" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'email') }">
             <input type="email" name="email" ng-model="vm.email" class="form-control" placeholder="Dirección de correo" required="">
@@ -31,13 +31,13 @@
               <div>{{ vm.validationErrors['all'] }}</div>
             </div>
           </div>
-          <button type="submit" class="btn btn-primary">Recuperar contraseña</button>
+          <button type="submit" class="btn btn-primary">Reabrir cuenta</button>
         </form>
       </div>
       <div ng-show="vm.enviado">
         <h3>Correo enviado</h3>
         <p>Enviamos un correo a {{vm.email}}</p>
-        <p>Por favor abre el correo y sigue el vínculo que te enviamos para recuperar tu contraseña</p>
+        <p>Por favor abre el correo y sigue el vínculo que te enviamos para reabrir tu cuenta</p>
         <p><a href="/#/" class="btn btn-primary">Volver</a></p>
       </div>
     </div>

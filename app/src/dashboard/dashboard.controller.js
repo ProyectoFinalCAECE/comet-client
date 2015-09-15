@@ -31,7 +31,7 @@
 
             if (!vm.user.confirmed) {
               ngToast.warning({
-                content: 'Todavía no confirmaste tu dirección de correo.',
+                content: 'Recuerda confirmar tu dirección de correo.',
                 dismissButton: true
               });
             }

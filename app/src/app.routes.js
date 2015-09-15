@@ -14,11 +14,6 @@ angular
                 templateUrl: '/src/home/home.html',
                 controller: 'HomeController',
                 controllerAs: 'vm',
-                resolve: {
-                    user: ['userService', function(userService) {
-                      return userService.get();
-                    }]
-                },
                 onEnter: ['$state', 'authService', function ($state, authService) {
                     if (authService.isLoggedIn()) {
                         $state.go('dashboard');
@@ -75,6 +70,28 @@ angular
                     }
                 }]
             })
+            .state('account-reopen', {
+                url: '/account/reopen',
+                templateUrl: '/src/account/account-reopen.html',
+                controller: 'AccountReopenController',
+                controllerAs: 'vm',
+                onEnter: ['$state', 'authService', function ($state, authService) {
+                    if (authService.isLoggedIn()) {
+                        $state.go('home');
+                    }
+                }]
+            })
+            .state('account-reopen-return', {
+                url: '/account/reopen-return?token&email',
+                templateUrl: '/src/account/account-reopen-return.html',
+                controller: 'AccountReopenController',
+                controllerAs: 'vm',
+                onEnter: ['$state', 'authService', function ($state, authService) {
+                    if (authService.isLoggedIn()) {
+                        $state.go('home');
+                    }
+                }]
+            })
             .state('dashboard', {
                 url: '/dashboard',
                 templateUrl: '/src/dashboard/dashboard-index.html',
@@ -91,16 +108,22 @@ angular
                     }
                 }]
             })
-            .state('dashboard.projects', {
-                url: '/projects',
-                templateUrl: '/src/dashboard/dashboard-projects.html',
-                controller: 'UserProfileController',
-                controllerAs: 'vm',
-            })
             .state('dashboard.profile', {
                 url: '/profile',
                 templateUrl: '/src/user/user-profile.html',
                 controller: 'UserProfileController',
+                controllerAs: 'vm'
+            })
+            .state('dashboard.project-list', {
+                url: '/projects',
+                templateUrl: '/src/projects/project-list.html',
+                controller: 'ProjectListController',
+                controllerAs: 'vm'
+            })
+            .state('dashboard.project-create', {
+                url: '/projects/create',
+                templateUrl: '/src/projects/project-create.html',
+                controller: 'ProjectCreateController',
                 controllerAs: 'vm'
             });
 

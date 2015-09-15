@@ -40,12 +40,6 @@
            * @desc calls the backend endpoint to update the user profile
            */
           function update() {
-
-            $scope.$broadcast('show-errors-check-validity');
-            if (vm.frmUpdate.$invalid) {
-              return;
-            }
-
             userService.update(vm.user).error(function(data) {
                 vm.validationErrors = $rootScope.helpers.loadServerErrors(data);
             }).then(function () {
@@ -58,10 +52,10 @@
            * @desc calls the backend endpoint to update the user profile
            */
           function changePassword() {
-            accountService.changePassword(vm.password, vm.newPassword).error(function(data) {
+            accountService.changePassword(vm.password, vm.newPassword, vm.confirmPassword).error(function(data) {
                 vm.validationErrors = $rootScope.helpers.loadServerErrors(data);
             }).then(function () {
-                $state.go('dashboard');
+                $state.go('dashboard.project-list');
             });
           }
 

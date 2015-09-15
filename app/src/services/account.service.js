@@ -17,7 +17,9 @@
             resendConfirmation: resendConfirmation,
             recoverPassword: recoverPassword,
             recoverPasswordValidate: recoverPasswordValidate,
-            changePassword: changePassword
+            changePassword: changePassword,
+            reopenAccount: reopenAccount,
+            reopenAccountValidate: reopenAccountValidate
         };
 
         /**
@@ -73,14 +75,15 @@
         }
 
         /**
-         * @name confirm
+         * @name recoverPasswordValidate
          * @desc calls the backend endpoint to validate the token and
          *       set the new password
          */
-        function recoverPasswordValidate (token, newpassword) {
+        function recoverPasswordValidate (token, newpassword, confirmPassword) {
             var data = {
               token: token,
-              newpassword: newpassword
+              newpassword: newpassword,
+              confirmPassword: confirmPassword
             };
             return $http.post('/account/password/recover', data);
         }
@@ -89,12 +92,39 @@
          * @name changePassword
          * @desc calls the backend endpoint to change the user password
          */
-        function changePassword(oldPassword, newPassword) {
+        function changePassword(oldPassword, newPassword, confirmPassword) {
           var data = {
             oldpassword: oldPassword,
-            newpassword: newPassword
+            newpassword: newPassword,
+            confirmPassword: confirmPassword
           };
           return $http.post('/account/password/renew', data, authService.getJwtHeader());
+        }
+
+        /**
+         * @name reopenAccount
+         * @desc calls the backend endpoint to send the user a email
+         *       with a link to reopen the account
+         */
+        function reopenAccount (email) {
+            var data = {
+              email: email
+            };
+            return $http.post('/account/reopen/token', data);
+        }
+
+        /**
+         * @name reopenAccountValidate
+         * @desc calls the backend endpoint to validate the token, reopen
+         *       the account and set the new password
+         */
+        function reopenAccountValidate (token, newpassword, confirmPassword) {
+            var data = {
+              token: token,
+              newpassword: newpassword,
+              confirmPassword: confirmPassword
+            };
+            return $http.post('/account/reopen', data);
         }
     }
 })();

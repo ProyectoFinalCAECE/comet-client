@@ -44,7 +44,7 @@
            * @desc calls the backend endpoint that sets a new password for the user
            */
           function recoverPasswordValidate () {
-            accountService.recoverPasswordValidate(vm.token, vm.password).error(function(data) {
+            accountService.recoverPasswordValidate(vm.token, vm.password, vm.confirmPassword).error(function(data) {
                 vm.validationErrors = $rootScope.helpers.loadServerErrors(data);
                 if (vm.validationErrors === null)
                 {
