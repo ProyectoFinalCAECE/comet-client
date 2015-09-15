@@ -31,7 +31,10 @@
           <!-- Contraseña -->
           <div class="form-group" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'password') }">
             <input type="password" name="password" class="form-control" placeholder="Contraseña"
-                                    ng-model="vm.password" />
+                                   ng-model="vm.password"
+                                   popover="{{vm.passwordPattern}}"
+                                   popover-placement="bottom"
+                                   popover-trigger="focus"/>
             <div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'password')" class="control-label" role="alert">
                <div class="text-center">{{ vm.validationErrors['password'] }}</div>
             </div>

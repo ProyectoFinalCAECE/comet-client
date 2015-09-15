@@ -8,9 +8,19 @@
     angular.module('cometApp')
            .controller('AccountRecoverController', AccountRecoverController);
 
-        AccountRecoverController.$inject = ['$rootScope', '$state', '$stateParams', 'ngToast', 'accountService'];
+        AccountRecoverController.$inject = ['$rootScope',
+                                            '$state',
+                                            '$stateParams',
+                                            'ngToast',
+                                            'formsConfig',
+                                            'accountService'];
 
-        function AccountRecoverController ($rootScope, $state, $stateParams, ngToast, accountService) {
+        function AccountRecoverController ($rootScope,
+                                           $state,
+                                           $stateParams,
+                                           ngToast,
+                                           formsConfig,
+                                           accountService) {
 
           var vm = this;
           vm.validationErrors = null;
@@ -25,6 +35,7 @@
           vm.password = null;
           vm.confirmPassword = null;
           vm.passwordChanged = false;
+          vm.passwordPattern = formsConfig.passwordLabel;
 
           /**
            * @name recoverPassword

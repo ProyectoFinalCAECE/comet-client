@@ -9,17 +9,20 @@
     angular.module('cometApp')
            .controller('UserCreateController', UserCreateController);
 
-        UserCreateController.$inject = ['$rootScope', '$state', 'ngToast', 'userService'];
+        UserCreateController.$inject = ['$rootScope',
+                                        '$state',
+                                        'ngToast',
+                                        'formsConfig',
+                                        'userService'];
 
-        function UserCreateController ($rootScope, $state, ngToast, userService) {
+        function UserCreateController ($rootScope, $state, ngToast, formsConfig, userService) {
 
           var vm = this;
 
           vm.user = {};
           vm.create = create;
 
-          vm.passwordPattern = "Debe tener entre 6 y 40 caracteres " +
-                                "y contener al menos una minúscula, una mayúscula y un símbolo o número.";
+          vm.passwordPattern = formsConfig.passwordLabel;
           vm.validationErrors = null;
 
           /**
