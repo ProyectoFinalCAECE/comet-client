@@ -17,6 +17,7 @@
             'ngSanitize',
             'ngToast',
             'ngTouch',
+            'ncy-angular-breadcrumb',
             'ui.bootstrap',
             'ui.bootstrap.showErrors',
             'ui.router'
