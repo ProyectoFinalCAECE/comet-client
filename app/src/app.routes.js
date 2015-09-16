@@ -97,6 +97,10 @@ angular
                 templateUrl: '/src/dashboard/dashboard-index.html',
                 controller: 'DashboardController',
                 controllerAs: 'vm',
+                ncyBreadcrumb: {
+                  label: 'Inicio'
+                },
+                redirectTo: 'dashboard.project-list',
                 resolve: {
                     user: ['userService', function(userService) {
                       return userService.get();
@@ -105,6 +109,8 @@ angular
                 onEnter: ['$state', 'authService', function ($state, authService) {
                     if (!authService.isLoggedIn()) {
                         $state.go('home');
+                    }else {
+                        console.log("pasè por dashboard");
                     }
                 }]
             })
@@ -112,24 +118,33 @@ angular
                 url: '/profile',
                 templateUrl: '/src/user/user-profile.html',
                 controller: 'UserProfileController',
-                controllerAs: 'vm'
+                controllerAs: 'vm',
+                ncyBreadcrumb: {
+                  label: 'Editar perfil'
+                }
             })
             .state('dashboard.project-list', {
                 url: '/projects',
                 templateUrl: '/src/projects/project-list.html',
                 controller: 'ProjectListController',
-                controllerAs: 'vm'
-            })
-            .state('project-accept', {
-                url: '/projects/invitations/accept?token',
-                templateUrl: '/src/projects/project-accept.html',
-                controller: 'ProjectAcceptController',
-                controllerAs: 'vm'
+                controllerAs: 'vm',
+                ncyBreadcrumb: {
+                  label: 'Proyectos'
+                }
             })
             .state('dashboard.project-create', {
                 url: '/projects/create',
                 templateUrl: '/src/projects/project-create.html',
                 controller: 'ProjectCreateController',
+                controllerAs: 'vm',
+                ncyBreadcrumb: {
+                  label: 'Crear proyecto'
+                }
+            })
+            .state('project-accept', {
+                url: '/projects/invitations/accept?token',
+                templateUrl: '/src/projects/project-accept.html',
+                controller: 'ProjectAcceptController',
                 controllerAs: 'vm'
             });
 

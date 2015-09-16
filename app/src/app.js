@@ -17,6 +17,7 @@
             'ngSanitize',
             'ngToast',
             'ngTouch',
+            'ncy-angular-breadcrumb',
             'ui.bootstrap',
             'ui.bootstrap.showErrors',
             'ui.router'
@@ -25,7 +26,14 @@
           "passwordLabel": "Debe tener entre 6 y 40 caracteres " +
                            "y contener al menos una minúscula, una mayúscula y un símbolo o número."
         })
-        .run(function($rootScope, helpersService){
+        .run(function($rootScope, $state, helpersService){
           $rootScope.helpers = helpersService;
+          // required for the default child state trick to work
+          $rootScope.$on('$stateChangeStart', function(evt, to, params) {
+            if (to.redirectTo) {
+              evt.preventDefault();
+              $state.go(to.redirectTo, params);
+            }
+          });
         });
 })();
