@@ -13,9 +13,12 @@
                                         '$state',
                                         'ngToast',
                                         'formsConfig',
-                                        'userService'];
+                                        'userService',
+                                        '$controller'];
 
-        function UserCreateController ($rootScope, $state, ngToast, formsConfig, userService) {
+        function UserCreateController ($rootScope, $state, ngToast, formsConfig, userService, $controller) {
+
+          var ProjectAcceptController = $rootScope.$new();
 
           var vm = this;
 
@@ -55,7 +58,8 @@
                 ngToast.danger('Ocurrió un error al consultar al servidor.');
               }
             }).then(function() {
-                $state.go('dashboard.project-list');
+                $controller('ProjectAcceptController',{$rootScope : ProjectAcceptController });
+                ProjectAcceptController.acceptInvitation();
             });
           }
       }

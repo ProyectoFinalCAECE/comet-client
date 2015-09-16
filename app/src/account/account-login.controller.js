@@ -14,8 +14,6 @@
 
           var ProjectAcceptController = $rootScope.$new();
 
-
-
           var vm = this;
           vm.validationErrors = null;
           vm.accountClosed = false;
