@@ -97,6 +97,7 @@ angular
                 templateUrl: '/src/dashboard/dashboard-index.html',
                 controller: 'DashboardController',
                 controllerAs: 'vm',
+                redirectTo: 'dashboard.project-list',
                 resolve: {
                     user: ['userService', function(userService) {
                       return userService.get();
@@ -105,6 +106,8 @@ angular
                 onEnter: ['$state', 'authService', function ($state, authService) {
                     if (!authService.isLoggedIn()) {
                         $state.go('home');
+                    }else {
+                        console.log("pasè por dashboard");
                     }
                 }]
             })
@@ -120,16 +123,16 @@ angular
                 controller: 'ProjectListController',
                 controllerAs: 'vm'
             })
-            .state('project-accept', {
-                url: '/projects/invitations/accept?token',
-                templateUrl: '/src/projects/project-accept.html',
-                controller: 'ProjectAcceptController',
-                controllerAs: 'vm'
-            })
             .state('dashboard.project-create', {
                 url: '/projects/create',
                 templateUrl: '/src/projects/project-create.html',
                 controller: 'ProjectCreateController',
+                controllerAs: 'vm'
+            })
+            .state('project-accept', {
+                url: '/projects/invitations/accept?token',
+                templateUrl: '/src/projects/project-accept.html',
+                controller: 'ProjectAcceptController',
                 controllerAs: 'vm'
             });
 
