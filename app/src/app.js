@@ -27,7 +27,7 @@
         })
         .run(function($rootScope, $state, helpersService){
           $rootScope.helpers = helpersService;
-
+          // required for the default child state trick to work
           $rootScope.$on('$stateChangeStart', function(evt, to, params) {
             if (to.redirectTo) {
               evt.preventDefault();
