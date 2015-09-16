@@ -1,0 +1,40 @@
+<div class="loginColumns" ng-hide="vm.showCreate">
+  <div class="row">
+    <div class="col-md-6">
+      <div id="loginbox" class="ibox-content">
+        <h3>Inicia sesión en Comet</h3>
+        <p>Inicia sesión para empezar a comunicarte!</p>
+
+        <form name="vml.frmLogin" class="m-t" role="form" ng-submit="vml.loginAndAccept()" novalidate="">
+          <!-- Email -->
+          <div class="form-group" ng-class="{ 'has-error': helpers.fieldIsNotValid(vml.validationErrors, 'email') }">
+            <input type="email" name="email" ng-model="vml.user.email" class="form-control" placeholder="Dirección de correo" required="">
+            <div ng-messages="helpers.fieldIsNotValid(vml.validationErrors, 'email')" class="control-label" role="alert">
+              <div class="text-center">{{ vml.validationErrors['email'] }}</div>
+            </div>
+          </div>
+          <!-- Password -->
+          <div class="form-group" ng-class="{ 'has-error': helpers.fieldIsNotValid(vml.validationErrors, 'password') }">
+            <input type="password" name="password" ng-model="vml.user.password" class="form-control" placeholder="Contraseña" required="">
+            <div ng-messages="helpers.fieldIsNotValid(vml.validationErrors, 'password')" class="control-label" role="alert">
+              <div class="text-center">{{ vml.validationErrors['password'] }}</div>
+              <div>{{ vml.validationErrors['all'] }}</div>
+            </div>
+          </div>
+          <div ng-show="vml.validationErrors.closed" class="alert alert-warning text-center" role="alert">
+            <p>Tu cuenta se encuentra cerrada.</p>
+            <p><a type="button" href="/#/account/reopen" class="btn btn-xs btn-warning">Reabrir cuenta</a></p>
+          </div>
+          <!-- Submit -->
+          <button type="submit" class="btn btn-primary block full-width m-b">Iniciar sesión</button>
+          <p class="text-center">
+            <a href="/#/account/forgot">
+            <small>¿Olvidaste tu contraseña?</small>
+            </a>
+          </p>
+          <a class="btn btn-sm btn-white btn-block" ng-click="toggleForms()">Crear una cuenta</a>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -132,6 +132,26 @@ angular
                   label: 'Proyectos'
                 }
             })
+            .state('project-accept', {
+                url: '/projects/invitations/accept?token',
+                views:{
+                        '':{templateUrl: '/src/projects/project-accept.html',
+                            controller: 'ProjectAcceptController',
+                            controllerAs: 'vm'
+                            },
+
+                        'columnOne@project-accept': {
+                            templateUrl: '/src/projects/project-accept-create-account.html',
+                            controller: 'UserCreateController',
+                            controllerAs: 'vmc'
+                        },
+                        'columnTwo@project-accept': {
+                            templateUrl: '/src/projects/project-accept-login.html',
+                            controller: 'AccountLoginController',
+                            controllerAs: 'vml'
+                        }
+                      }
+            })
             .state('dashboard.project-create', {
                 url: '/projects/create',
                 templateUrl: '/src/projects/project-create.html',
@@ -140,12 +160,6 @@ angular
                 ncyBreadcrumb: {
                   label: 'Crear proyecto'
                 }
-            })
-            .state('project-accept', {
-                url: '/projects/invitations/accept?token',
-                templateUrl: '/src/projects/project-accept.html',
-                controller: 'ProjectAcceptController',
-                controllerAs: 'vm'
             });
 
         $urlRouterProvider.otherwise('/');
