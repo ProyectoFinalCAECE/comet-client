@@ -41,7 +41,7 @@
               <input type="password" name="password" ng-model="vm.user.password" class="form-control" placeholder="Contraseña" required="">
               <div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'password')" class="control-label" role="alert">
                 <div class="text-center">{{ vm.validationErrors['password'] }}</div>
-                <div>{{ vm.validationErrors['all'] }}</div>
+                <div class="text-center">{{ vm.validationErrors['all'] }}</div>
               </div>
             </div>
             <div ng-show="vm.validationErrors.closed" class="alert alert-warning text-center" role="alert">

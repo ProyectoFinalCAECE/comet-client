@@ -18,7 +18,7 @@
       <div class="form-group cometInput" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'name') }">
         <input type="text" name="name" ng-model="vm.project.name" class="form-control" placeholder="Nombre">
         <div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'name')" class="control-label" role="alert">
-          <div class="text-center">{{ vm.validationErrors['name'] }}</div>
+          <div>{{ vm.validationErrors['name'] }}</div>
           <div>{{ vm.validationErrors['all'] }}</div>
         </div>
       </div>
@@ -26,7 +26,7 @@
       <div class="form-group" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'description') }">
         <textarea cols="25" rows="7" ng-model="vm.project.description" class="form-control" placeholder="Breve descripcion del proyecto"></textarea>
         <div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'description')" class="control-label" role="alert">
-          <div class="text-center">{{ vm.validationErrors['description'] }}</div>
+          <div>{{ vm.validationErrors['description'] }}</div>
         </div>
       </div>
       <!-- Invitar -->
