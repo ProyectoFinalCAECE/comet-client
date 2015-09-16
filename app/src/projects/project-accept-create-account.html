@@ -1,0 +1,53 @@
+<div id="formulario" ng-show="vm.showCreate" class="middle-box text-center loginscreen">
+  <div>
+    <h3>Crear cuenta en Comet</h3>
+    <p>Crea una cuenta para empezar a comunicarte!</p>
+    <form name="vmc.frmCreateUser" class="m-t" role="form" ng-submit="vmc.createAndAccept()" novalidate>
+      <!-- Nombre -->
+      <div class="form-group cometInput" ng-class="{ 'has-error': helpers.fieldIsNotValid(vmc.validationErrors, 'firstName') }">
+        <input type="text" name="firstName" ng-model="vmc.user.firstName" class="form-control" placeholder="Nombre">
+        <div ng-messages="helpers.fieldIsNotValid(vmc.validationErrors, 'firstName')" class="control-label" role="alert">
+          <div class="text-center">{{ vmc.validationErrors['firstName'] }}</div>
+        </div>
+      </div>
+      <!-- Apellido -->
+      <div class="form-group cometInput" ng-class="{ 'has-error': helpers.fieldIsNotValid(vmc.validationErrors, 'lastName') }">
+        <input type="text" name="lastName" ng-model="vmc.user.lastName" class="form-control" placeholder="Apellido">
+        <div ng-messages="helpers.fieldIsNotValid(vmc.validationErrors, 'lastName')" class="control-label" role="alert">
+          <div class="text-center">{{ vmc.validationErrors['lastName'] }}</div>
+        </div>
+      </div>
+      <!-- Email -->
+      <div class="form-group cometInput" ng-class="{ 'has-error': helpers.fieldIsNotValid(vmc.validationErrors, 'email') }">
+        <input type="email" name="email" ng-model="vmc.user.email" class="form-control" placeholder="Direccion de correo">
+        <div ng-messages="helpers.fieldIsNotValid(vmc.validationErrors, 'email')" class="control-label" role="alert">
+          <div class="text-center">{{ vmc.validationErrors['email'] }}</div>
+        </div>
+      </div>
+      <!-- Password -->
+      <div class="form-group cometInput" ng-class="{ 'has-error': helpers.fieldIsNotValid(vmc.validationErrors, 'password') }">
+        <input type="password" name="password" class="form-control" placeholder="Contraseña"
+               ng-model="vmc.user.password"
+               popover="{{vmc.passwordPattern}}"
+               popover-placement="bottom"
+               popover-trigger="focus"/>
+        <div ng-messages="helpers.fieldIsNotValid(vmc.validationErrors, 'password')" class="control-label" role="alert">
+          <div class="text-center">{{ vmc.validationErrors['password'] }}</div>
+        </div>
+      </div>
+      <!-- Repetir password -->
+      <div class="form-group cometInput" ng-class="{ 'has-error': helpers.fieldIsNotValid(vmc.validationErrors, 'confirmPassword') }">
+        <input type="password"  name="confirmPassword" ng-model="vmc.user.confirmPassword" class="form-control" placeholder="Repetir la contraseña">
+        <div ng-messages="helpers.fieldIsNotValid(vmc.validationErrors, 'confirmPassword')" class="control-label" role="alert">
+          <div class="text-center">{{ vmc.validationErrors['confirmPassword'] }}</div>
+          <div>{{ vmc.validationErrors['all'] }}</div>
+        </div>
+      </div>
+      <!-- Submit -->
+      <button type="submit" class="btn btn-primary">Crear cuenta</button>
+      <p class="text-muted text-center"><small>¿Ya tienes una cuenta?</small></p>
+      <a class="btn btn-sm btn-white btn-block" ng-click="toggleForms()">Iniciar sesión</a>
+
+    </form>
+  </div>
+</div>
