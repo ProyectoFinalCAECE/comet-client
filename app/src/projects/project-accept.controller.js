@@ -22,6 +22,8 @@
           vm.acceptError = false;
           vm.errorMessage = '';
 
+          vm.showCreate = true;
+
           activate();
 
           /**
@@ -51,5 +53,9 @@
               });
             }
           }
+
+          $rootScope.toggleForms = function() {
+            vm.showCreate = vm.showCreate === false ? true : false;
+          };
         }
 })();

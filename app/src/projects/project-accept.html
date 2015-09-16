@@ -31,9 +31,12 @@
         <p>{{ vm.errorMessage }}</p>
         <p class="m-t"><a href="/#/" class="btn btn-primary">Volver</a></p>
       </div>
-
-      <div ng-hide="vm.isLoggedIn()"><a href="/#/user/create">Crear cuenta</a></div>
-      <div ng-hide="vm.isLoggedIn()"><a href="/#/account/login">Iniciar sesión</a></div>
+      <div ng-hide="vm.isLoggedIn()">
+        <div ui-view="columnOne">
+        </div>
+        <div ui-view="columnTwo">
+        </div>
+      </div>
     </div>
   </div>
 </div>
