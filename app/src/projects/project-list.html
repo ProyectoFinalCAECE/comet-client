@@ -6,7 +6,7 @@
           <input ng-model="vm.filterQuery" type="text" placeholder="Filtrar..." class="form-control" name="top-search" id="top-search">
         </li>
         <li>
-          <a href="/#/dashboard/projects/create" class="btn btn-primary" style="float:right">Crear Proyecto</a>
+          <button ng-click="vm.gotoCreateProject()" type="button" name="btnCrearProyecto" class="btn btn-primary" style="float:right">Crear Proyecto</button>
         </li>
       </ol>
   </div>
@@ -17,7 +17,7 @@
     <div ng-show="vm.isEmpty" class="jumbotron text-center">
         <p>No encontramos proyectos en los que participes :(</p>
         <p>
-          <a href="/#/dashboard/projects/create" class="btn btn-xl btn-primary">Crear proyecto</a>
+          <a ng-click="vm.gotoCreateProject()" class="btn btn-xl btn-primary">Crear proyecto</a>
         </p>
     </div>
     <!-- listado de proyectos -->

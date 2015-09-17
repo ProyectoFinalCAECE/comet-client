@@ -26,6 +26,10 @@
           "passwordLabel": "Debe tener entre 6 y 40 caracteres " +
                            "y contener al menos una minúscula, una mayúscula y un símbolo o número."
         })
+        .constant("dialogType", {
+          ALERT: 1,
+          CONFIRM: 2
+        })
         .run(function($rootScope, $state, helpersService){
           $rootScope.helpers = helpersService;
           // required for the default child state trick to work

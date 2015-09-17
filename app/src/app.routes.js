@@ -109,8 +109,6 @@ angular
                 onEnter: ['$state', 'authService', function ($state, authService) {
                     if (!authService.isLoggedIn()) {
                         $state.go('home');
-                    }else {
-                        console.log("pasè por dashboard");
                     }
                 }]
             })

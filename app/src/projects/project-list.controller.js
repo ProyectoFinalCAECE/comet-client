@@ -9,15 +9,28 @@
     angular.module('cometApp')
            .controller('ProjectListController', ProjectListController);
 
-        ProjectListController.$inject = ['filterFilter', 'projectService'];
+        ProjectListController.$inject = ['$rootScope',
+                                         '$state',
+                                         'filterFilter',
+                                         'ngToast',
+                                         'dialogService',
+                                         'projectService',
+                                         'userService'];
 
-        function ProjectListController (filterFilter, projectService) {
+        function ProjectListController ($rootScope,
+                                        $state,
+                                        filterFilter,
+                                        ngToast,
+                                        dialogService,
+                                        projectService,
+                                        userService) {
 
           var vm = this;
           vm.projects = null;
           vm.isEmpty = true;
           vm.closedProjects = null;
           vm.closedProjectsEmpty = true;
+          vm.gotoCreateProject = gotoCreateProject;
           vm.hiddenMembersCount = hiddenMembersCount;
 
           activate();
@@ -28,14 +41,30 @@
            */
           function activate () {
             projectService.getAll().then(function(response){
-
               var projects = response.data;
+              vm.projects = filterFilter(projects, { state:'O' });
+              vm.isEmpty = (vm.projects.length === 0);
+              vm.closedProjects = filterFilter(projects, { state:'C' });
+              vm.closedProjectsEmpty = (vm.closedProjects.length === 0);
+            });
+          }
 
-              vm.projects = filterFilter(projects, {state:'O' });
-              vm.closedProjects = filterFilter(projects, {state:'C' });
+          /**
+           * @name gotoCreateProject
+           * @desc validates the user account and redirects to the
+           *       create project page
+           */
+          function gotoCreateProject() {
+            userService.getCurrentUser().then(function (user) {
+              if (user && user.confirmed) {
+                $state.go('dashboard.project-create');
+              }
+              else {
+                var message = 'No puedes crear un proyecto sin antes ' +
+                              'confirmar tu dirección de correo.';
 
-              vm.isEmpty = vm.projects.length === 0;
-              vm.closedProjectsEmpty = vm.closedProjects.length === 0;
+                dialogService.showModalAlert('Confirmar cuenta', message);
+              }
             });
           }
 
