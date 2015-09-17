@@ -6,9 +6,9 @@
         .module('cometApp')
         .factory('userService', userService);
 
-    userService.$inject = ['$log', '$http', 'authService'];
+    userService.$inject = ['$log', '$http', '$q', 'authService'];
 
-    function userService ($log, $http, authService){
+    function userService ($log, $http, $q, authService){
 
         var currentUser = null;
 
@@ -46,17 +46,19 @@
          * @desc returns the current logged in user
          */
         function getCurrentUser () {
+          var deferred = $q.defer();
+
           if (currentUser === null) {
             return get().then(function (user) {
               currentUser = user;
-              $log.log('getCurrentUser ajax:', user);
               return currentUser;
             });
           }
           else {
-            $log.log('currentUser != null', currentUser);
-            return currentUser;
+            deferred.resolve(currentUser);
           }
+
+          return deferred.promise;
         }
 
         /**
