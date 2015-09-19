@@ -118,26 +118,33 @@
               </tab>
               <tab>
                 <tab-heading>Cerrar cuenta</tab-heading>
-                <form class="form-horizontal m-t" role="form">
+                <form name="vm.frmCloseAccount" ng-submit="vm.close()" class="form-horizontal m-t" role="form" novalidate="">
+                  <!-- Checkbox -->
                   <div class="form-group">
                     <label class="col-sm-6 control-label">¿Está seguro de cerrar la cuenta?</label>
                     <div class="col-sm-6 checkbox i-checks">
-                      <input type="checkbox" style="margin-left:10px;"><i></i>
+                      <input type="checkbox" ng-model="vm.imSure" style="margin-left:10px;"><i></i>
                     </div>
                   </div>
-                <div class="form-group">
-                  <label class="col-sm-4 control-label">Contraseña actual</label>
-                  <div class="col-sm-8">
-                    <input type="password" class="form-control" placeholder="Contraseña">
+                  <!-- Password -->
+                  <div class="form-group">
+                    <label class="col-sm-4 control-label">Contraseña actual</label>
+                    <div class="col-sm-8" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'password') }">
+                      <input type="password" name="password" class="form-control" placeholder="Contraseña" ng-model="vm.password"/>
+                      <div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'password')" class="control-label" role="alert">
+                        <div class="text-center">{{ vm.validationErrors['password'] }}</div>
+                        <div class="text-center">{{ vm.validationErrors['all'] }}</div>
+                      </div>
+                    </div>
                   </div>
-                </div>
-                <div class="form-group m-t">
-                  <div class="col-sm-8 col-sm-offset-4">
-                    <button type="submit" class="btn btn-primary">Cerrar cuenta</button>
-                    <a class="btn btn-link" href="/#/dashboard">Cancelar</a>
+                  <!-- Submit -->
+                  <div class="form-group">
+                    <div class="col-sm-8 col-sm-offset-4">
+                      <button type="submit" class="btn btn-primary" ng-disabled="(vm.imSure == false)">Cerrar cuenta</button>
+                      <a class="btn btn-link" href="/#/dashboard">Cancelar</a>
+                    </div>
                   </div>
-                </div>
-              </form>
+                </form>
               </tab>
             </tabset>
           </div>
