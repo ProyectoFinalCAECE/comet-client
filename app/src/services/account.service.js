@@ -19,7 +19,8 @@
             recoverPasswordValidate: recoverPasswordValidate,
             changePassword: changePassword,
             reopenAccount: reopenAccount,
-            reopenAccountValidate: reopenAccountValidate
+            reopenAccountValidate: reopenAccountValidate,
+            closeAccount: closeAccount
         };
 
         /**
@@ -125,6 +126,27 @@
               confirmPassword: confirmPassword
             };
             return $http.post('/account/reopen', data);
+        }
+
+        /**
+         * @name closeAccount
+         * @desc calls the backend endpoint to close an User account.
+         *
+         */
+        function closeAccount (password) {
+            var data = {
+              password: password
+            };
+
+            var req = {
+              method: "DELETE",
+              url: '/user/',
+              data: data,
+              headers: {"Content-Type":"application/json;charset=utf-8",
+                        "Authorization":"Bearer "+ authService.getToken()}
+            };
+
+            return $http(req);
         }
     }
 })();
