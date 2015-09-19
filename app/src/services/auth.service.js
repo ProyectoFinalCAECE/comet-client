@@ -16,7 +16,8 @@
             isLoggedIn:isLoggedIn,
             deleteToken:deleteToken,
             saveToken: saveToken,
-            getJwtHeader: getJwtHeader
+            getJwtHeader: getJwtHeader,
+            getToken: getToken
         };
 
         function saveToken (token) {

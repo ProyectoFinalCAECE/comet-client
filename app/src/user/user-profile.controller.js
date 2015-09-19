@@ -35,7 +35,8 @@
           vm.passwordPattern = formsConfig.passwordLabel;
 
           // close account
-
+          vm.imSure = false;
+          vm.close = close;
 
           /**
            * @name update
@@ -61,6 +62,21 @@
             });
           }
 
-
+          /**
+           * @name close
+           * @desc calls the backend endpoint to close an account
+           */
+          function close() {
+            //closing account on server.
+            accountService.closeAccount(vm.password).error(function(data) {
+                vm.validationErrors = $rootScope.helpers.loadServerErrors(data);
+            }).then(function () {
+              //closing client session.
+              console.log('pre logout angular');
+              accountService.logout();
+              console.log('pre logout angular');
+              $state.go('home');
+            });
+          }
       }
 })();
