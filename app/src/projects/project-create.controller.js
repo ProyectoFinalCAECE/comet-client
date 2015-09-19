@@ -13,6 +13,7 @@
                                            '$state',
                                            '$timeout',
                                            'ngToast',
+                                           'dialogService',
                                            'projectService',
                                            'userService'];
 
@@ -20,6 +21,7 @@
                                           $state,
                                           $timeout,
                                           ngToast,
+                                          dialogService,
                                           projectService,
                                           userService) {
 
@@ -80,10 +82,12 @@
                 ngToast.danger('Ocurrió un error al consultar al servidor.');
               }
             }).then(function() {
-                ngToast.success("El proyecto ha sido creado exitosamente.");
-                $timeout( function () {
+                var msg = 'El proyecto "' + vm.project.name +
+                          '" ha sido creado exitosamente.';
+                var dlg = dialogService.showModalAlert('Crear proyecto', msg);
+                dlg.result.then(function () {
                   $state.go('dashboard.project-list');
-                }, 1000);
+                });
             });
           }
         }

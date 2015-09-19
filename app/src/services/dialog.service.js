@@ -37,11 +37,7 @@
              }
            });
 
-           modalInstance.result.then(function (result) {
-             console.log(result);
-           }, function () {
-             console.info('Modal dismissed at: ' + new Date());
-           });
+           return modalInstance;
          }
     }
 })();
