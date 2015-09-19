@@ -9,9 +9,19 @@
     angular.module('cometApp')
            .controller('ProjectCreateController', ProjectCreateController);
 
-        ProjectCreateController.$inject = ['$rootScope', '$state', '$timeout', 'ngToast', 'projectService'];
+        ProjectCreateController.$inject = ['$rootScope',
+                                           '$state',
+                                           '$timeout',
+                                           'ngToast',
+                                           'projectService',
+                                           'userService'];
 
-        function ProjectCreateController ($rootScope, $state, $timeout, ngToast, projectService) {
+        function ProjectCreateController ($rootScope,
+                                          $state,
+                                          $timeout,
+                                          ngToast,
+                                          projectService,
+                                          userService) {
 
           var vm = this;
           vm.project = {};
@@ -28,7 +38,11 @@
            * @desc controller activation logic
           */
           function activate () {
-
+            userService.getCurrentUser().then(function (user) {
+              if (!user.confirmed) {
+                $state.go('dashboard.project-list');
+              }
+            });
           }
 
           /**
