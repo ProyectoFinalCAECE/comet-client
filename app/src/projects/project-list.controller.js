@@ -13,6 +13,7 @@
                                          '$state',
                                          'filterFilter',
                                          'ngToast',
+                                         'constraints',
                                          'dialogService',
                                          'projectService',
                                          'userService'];
@@ -21,6 +22,7 @@
                                         $state,
                                         filterFilter,
                                         ngToast,
+                                        constraints,
                                         dialogService,
                                         projectService,
                                         userService) {
@@ -55,17 +57,41 @@
            *       create project page
            */
           function gotoCreateProject() {
+            var canCreate = false,
+                message = "";
+
             userService.getCurrentUser().then(function (user) {
               if (user && user.confirmed) {
+                if (checkProjectLimit()) {
+                  canCreate = true;
+                }
+                else {
+                  message = 'No puedes crear un proyecto, has llegado al límite de ' +
+                            constraints.projectPerUser + '.<BR/>' +
+                            'Cierra algún proyecto para continuar.';
+                }
+              }
+              else {
+                message = 'No puedes crear mas de ' + constraints.projectPerUser +
+                          ' proyectos. Cierra algún proyecto para continuar';
+              }
+
+              if (canCreate) {
                 $state.go('dashboard.project-create');
               }
               else {
-                var message = 'No puedes crear un proyecto sin antes ' +
-                              'confirmar tu dirección de correo.';
-
-                dialogService.showModalAlert('Confirmar cuenta', message);
+                dialogService.showModalAlert('Crear proyecto', message);
               }
             });
+          }
+
+          /**
+           * @name checkProjectLimit
+           * @desc returns if the user has reached the maximum project count
+           */
+          function checkProjectLimit() {
+            var total = vm.projects;
+            return (total < constraints.projectPerUser);
           }
 
           /**

@@ -9,9 +9,21 @@
     angular.module('cometApp')
            .controller('ProjectCreateController', ProjectCreateController);
 
-        ProjectCreateController.$inject = ['$rootScope', '$state', '$timeout', 'ngToast', 'projectService'];
+        ProjectCreateController.$inject = ['$rootScope',
+                                           '$state',
+                                           '$timeout',
+                                           'ngToast',
+                                           'dialogService',
+                                           'projectService',
+                                           'userService'];
 
-        function ProjectCreateController ($rootScope, $state, $timeout, ngToast, projectService) {
+        function ProjectCreateController ($rootScope,
+                                          $state,
+                                          $timeout,
+                                          ngToast,
+                                          dialogService,
+                                          projectService,
+                                          userService) {
 
           var vm = this;
           vm.project = {};
@@ -28,7 +40,11 @@
            * @desc controller activation logic
           */
           function activate () {
-
+            userService.getCurrentUser().then(function (user) {
+              if (!user.confirmed) {
+                $state.go('dashboard.project-list');
+              }
+            });
           }
 
           /**
@@ -66,10 +82,12 @@
                 ngToast.danger('Ocurrió un error al consultar al servidor.');
               }
             }).then(function() {
-                ngToast.success("El proyecto ha sido creado exitosamente.");
-                $timeout( function () {
+                var msg = 'El proyecto "' + vm.project.name +
+                          '" ha sido creado exitosamente.';
+                var dlg = dialogService.showModalAlert('Crear proyecto', msg);
+                dlg.result.then(function () {
                   $state.go('dashboard.project-list');
-                }, 1000);
+                });
             });
           }
         }
