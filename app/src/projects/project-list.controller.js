@@ -62,7 +62,7 @@
 
             userService.getCurrentUser().then(function (user) {
               if (user && user.confirmed) {
-                if (checkProjectLimit()) {
+                if (checkProjectCount()) {
                   canCreate = true;
                 }
                 else {
@@ -86,11 +86,12 @@
           }
 
           /**
-           * @name checkProjectLimit
+           * @name checkProjectCount
            * @desc returns if the user has reached the maximum project count
            */
-          function checkProjectLimit() {
-            var total = vm.projects;
+          function checkProjectCount() {
+            var total = vm.projects.length;
+            console.log(total, constraints.projectPerUser);
             return (total < constraints.projectPerUser);
           }
 
