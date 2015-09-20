@@ -210,10 +210,11 @@
             </div>
 			
 			
-            <!-- Inicio ModificarProyecto -->					
-		   <div id="formulario" class="ModificarProyecto animated fadeInDown">
-				 <div class="row wrapper border-bottom white-bg page-heading">
-					  <div class="col-lg-9">
+			
+            <!-- Inicio ModificarProyecto -->
+			<div id="formulario" class="ModificarProyecto animated fadeInDown">
+				<div class="row wrapper border-bottom white-bg page-heading">
+					<div class="col-lg-9">
 						<h2>Modificar Proyecto: @NombreProyecto</h2>
 						<ol class="breadcrumb">
 							<li>
@@ -223,69 +224,83 @@
 								<a href="projects.html">Proyectos</a>
 							</li>
 						</ol>
-					  </div>
-				  </div>
-				 <form class="m-t" role="form" action="index.html">
-					<div class="panel blank-panel">
-					   <div class="panel-heading">
-						  <div class="panel-options">
-							 <ul id="modificarCuentaTabs" class="nav nav-tabs">
-								<li class="active"><a data-toggle="tab" href="#tab-1">Administrar Proyecto (?)</a></li>
-								<li class=""><a data-toggle="tab" href="#tab-2">Agregar/Quitar Participantes</a></li>
-								<li class=""><a data-toggle="tab" href="#tab-3">Integraciones (?)</a></li>
-								<li class=""><a data-toggle="tab" href="#tab-4">Cerrar Proyecto</a></li>
-							 </ul>
-						  </div>
-					   </div>
-					   <div class="panel-body">
-						  <div class="tab-content">
-							 <div id="tab-1" class="tab-pane active">
-								<div>
-									<h3>Administrar Proyecto</h3>
-								</div>
-							 </div>
-							 <div id="tab-2" class="tab-pane">
-								<div class="crearProyectoSubmit">
-									<h3>Personas a invitar</h3>
-									<div ng-repeat="invite in vm.invites" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'address_' + ($index + 1))}">
-										<div class="input-group m-b">
-										  <input type="email" name="email" ng-model="invite.address" class="form-control" placeholder="Dirección de correo"/>
-										  <span class="input-group-btn">
-											<button ng-click="vm.removeInvite(invite)" type="button" class="btn btn-danger">Borrar</button>
-										  </span>
-										</div>
-										<!--
-											<div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'address_' + ($index + 1))" class="control-label" role="alert">
-											  <div class="text-center">{{ vm.validationErrors['address_' + ($index + 1)] }}</div>
-											</div>
-										-->
-									</div>
-									<p>
-									  <button type="button" class="btn btn-primary" name="button" ng-click="vm.addInvite()">Agregar invitación</button>
-									</p>
-							  </div>
-							 </div>
-							 <div id="tab-3" class="tab-pane">
-								<div>
-									<h3>Integraciones</h3>
-								</div>
-							 </div>
-							 <div id="tab-4" class="tab-pane">
-								<div class="form-group">
-								   <h3>Cerrar Proyecto</h3>
-								   <div class="checkbox i-checks"><label> <input type="checkbox"/><i></i> Estas seguro de cerrar el proyecto? </label></div>
-								</div>
-								<div class="form-group cometInput">
-								   <input type="password" class="form-control" placeholder="Contraseña" required=""/>
-								</div>
-								<button type="submit" class="btn btn-primary">Cerrar Proyecto</button>
-							 </div>
-						  </div>
-					   </div>
 					</div>
-				 </form>
-		   </div>
-           <!-- FIN ModificarProyecto -->
+				</div>
+				<form class="m-t" role="form" action="index.html">
+					<div class="panel blank-panel">
+						<div class="panel-heading">
+							<div class="panel-options">
+								<ul id="modificarCuentaTabs" class="nav nav-tabs">
+									<li class="active">
+										<a data-toggle="tab" href="#tab-1">Administrar Proyecto</a>
+									</li>
+									<li class="">
+										<a data-toggle="tab" href="#tab-2">Agregar/Quitar Participantes</a>
+									</li>
+									<li class="">
+										<a data-toggle="tab" href="#tab-3">Integraciones</a>
+									</li>
+									<li class="">
+										<a data-toggle="tab" href="#tab-4">Cerrar Proyecto</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="panel-body">
+							<div class="tab-content">
+								<div id="tab-1" class="tab-pane active">
+									<div>
+										<h3>Administrar Proyecto</h3>
+									</div>
+								</div>
+								<div id="tab-2" class="tab-pane">
+									<div class="crearProyectoSubmit">
+										<h3>Personas a invitar</h3>
+										<div ng-repeat="invite in vm.invites" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'address_' + ($index + 1))}">
+											<div class="input-group m-b">
+												<input type="email" name="email" ng-model="invite.address" class="form-control" placeholder="Dirección de correo" />
+												<span class="input-group-btn">
+													<button ng-click="vm.removeInvite(invite)" type="button" class="btn btn-danger">Borrar</button>
+												</span>
+											</div>
+											<!--
+												<div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'address_' + ($index + 1))" class="control-label" role="alert">
+												  <div class="text-center">{{ vm.validationErrors['address_' + ($index + 1)] }}</div>
+												</div>
+											-->
+										</div>
+										<p>
+											<button type="button" class="btn btn-primary" name="button" ng-click="vm.addInvite()">Agregar invitación</button>
+										</p>
+									</div>
+								</div>
+								<div id="tab-3" class="tab-pane">
+									<div>
+										<h3>Integraciones</h3>
+									</div>
+								</div>
+								<div id="tab-4" class="tab-pane">
+									<div class="form-group">
+										<h3>Cerrar Proyecto</h3>
+										<div class="checkbox i-checks">
+											<label>
+												<input type="checkbox" />
+												<i />
+												Estas seguro de cerrar el proyecto?
+											</label>
+										</div>
+									</div>
+									<div class="form-group cometInput">
+										<input type="password" class="form-control" placeholder="Contraseña" required="" />
+									</div>
+									<button type="submit" class="btn btn-primary">Cerrar Proyecto</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<!-- FIN ModificarProyecto -->
 
 		   
             <div class="row">
