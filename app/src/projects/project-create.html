@@ -12,7 +12,6 @@
         <input type="text" name="name" ng-model="vm.project.name" class="form-control" placeholder="Nombre">
         <div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'name')" class="control-label" role="alert">
           <div>{{ vm.validationErrors['name'] }}</div>
-          <div>{{ vm.validationErrors['all'] }}</div>
         </div>
       </div>
       <!-- Descripcion -->
@@ -20,6 +19,7 @@
         <textarea cols="25" rows="7" ng-model="vm.project.description" class="form-control" placeholder="Breve descripcion del proyecto"></textarea>
         <div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'description')" class="control-label" role="alert">
           <div>{{ vm.validationErrors['description'] }}</div>
+          <div>{{ vm.validationErrors['all'] }}</div>
         </div>
       </div>
       <!-- Invitar -->
@@ -27,13 +27,13 @@
         <h3>Personas a invitar</h3>
         <div ng-repeat="invite in vm.invites" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'address_' + ($index + 1))}">
             <div class="input-group m-b">
-              <input type="email" name="email" ng-model="invite.address" class="form-control" placeholder="Dirección de correo"/>
+              <input type="text" name="email" ng-model="invite.address" class="form-control" placeholder="Dirección de correo"/>
               <span class="input-group-btn">
                 <button ng-click="vm.removeInvite(invite)" type="button" class="btn btn-danger">Borrar</button>
               </span>
             </div>
             <div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'address_' + ($index + 1))" class="control-label" role="alert">
-              <div class="text-center">{{ vm.validationErrors['address_' + ($index + 1)] }}</div>
+              <div>{{ vm.validationErrors['address_' + ($index + 1)] }}</div>
             </div>
         </div>
         <p>
