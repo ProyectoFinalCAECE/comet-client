@@ -24,6 +24,7 @@
              controller: 'DialogModalController',
              controllerAs: 'vm',
              size: 'sm',
+             backdrop: 'static',
              resolve: {
                type: function () {
                  return dialogType.ALERT;
