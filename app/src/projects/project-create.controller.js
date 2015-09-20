@@ -87,6 +87,8 @@
                 var dlg = dialogService.showModalAlert('Crear proyecto', msg);
                 dlg.result.then(function () {
                   $state.go('dashboard.project-list');
+                }, function () {
+                  $state.go('dashboard.project-list');
                 });
             });
           }
