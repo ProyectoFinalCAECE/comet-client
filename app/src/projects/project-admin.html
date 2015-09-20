@@ -1,0 +1,107 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+  <div class="col-lg-9">
+      <h2>Administrar proyecto <strong>{{ vm.project.name }}</strong></h2>
+      <div ncy-breadcrumb></div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="wrapper wrapper-content modificarProyecto animated fadeIn">
+      <div class="ibox">
+        <div class="ibox-title">
+          <h5>Administrar proyecto</h5>
+        </div>
+        <div class="ibox-content">
+          <tabset>
+            <tab>
+              <tab-heading>
+                Modificar datos
+              </tab-heading>
+              <form name="vm.frmUpdate" ng-submit="vm.update()" class="form-horizontal m-t" role="form" novalidate="">
+                <div class="form-group cometInput" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'name') }">
+                  <label class="col-sm-2 control-label">Nombre</label>
+                  <div class="col-sm-10">
+                    <input type="text" name="firstName" ng-model="vm.project.name" class="form-control" placeholder="Nombre" required="">
+                    <div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'name')" class="control-label" role="alert">
+                      <div class="text-center">{{ vm.validationErrors['name'] }}</div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Descripcion -->
+                <div class="form-group cometInput" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'description') }">
+                  <label class="col-sm-2 control-label">Descripción</label>
+                  <div class="col-sm-10">
+                    <textarea cols="25" rows="7" ng-model="vm.project.description" class="form-control" placeholder="Breve descripcion del proyecto"></textarea>
+                    <div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'description')" class="control-label" role="alert">
+                      <div>{{ vm.validationErrors['description'] }}</div>
+                      <div class="text-center">{{ vm.validationErrors['all'] }}</div>
+                    </div>
+                  </div>
+                </div>
+                <!-- submit -->
+                <div class="form-group">
+                  <div class="col-sm-8 col-sm-offset-2">
+                    <button class="btn btn-w-m btn-primary" type="submit">Guardar</button>
+                    <a class="btn btn-link" href="/#/dashboard">Cancelar</a>
+                  </div>
+                </div>
+              </form>
+            </tab>
+            <tab>
+              <tab-heading>
+                Participantes
+              </tab-heading>
+              <div>
+								<h3>Personas a invitar</h3>
+								<div ng-repeat="invite in vm.invites" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'address_' + ($index + 1))}">
+									<div class="input-group m-b">
+									  <input type="email" name="email" ng-model="invite.address" class="form-control" placeholder="Dirección de correo"/>
+									  <span class="input-group-btn">
+										<button ng-click="vm.removeInvite(invite)" type="button" class="btn btn-danger">Borrar</button>
+									  </span>
+									</div>
+									<div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'address_' + ($index + 1))" class="control-label" role="alert">
+									  <div class="text-center">{{ vm.validationErrors['address_' + ($index + 1)] }}</div>
+									</div>
+								</div>
+								<p>
+								  <button type="button" class="btn btn-primary" name="button" ng-click="vm.addInvite()">Agregar invitación</button>
+								</p>
+						  </div>
+            </tab>
+            <tab>
+              <tab-heading>
+                Integraciones
+              </tab-heading>
+            </tab>
+            <tab>
+              <tab-heading>
+                Cerrar proyecto
+              </tab-heading>
+              <form class="form-horizontal m-t" role="form">
+                <div class="form-group">
+                  <label class="col-sm-6 control-label">¿Estás seguro de cerrar el proyecto?</label>
+                  <div class="col-sm-6 checkbox i-checks">
+                    <input type="checkbox" style="margin-left:10px;"><i></i>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-4 control-label">Contraseña</label>
+                  <div class="col-sm-8">
+                    <input type="password" class="form-control" placeholder="Contraseña">
+                  </div>
+                </div>
+                <div class="form-group m-t">
+                  <div class="col-sm-8 col-sm-offset-4">
+                    <button type="submit" class="btn btn-primary">Cerrar proyecto</button>
+                    <a class="btn btn-link" href="/#/dashboard">Cancelar</a>
+                  </div>
+                </div>
+              </form>
+            </tab>
+          </tabset>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

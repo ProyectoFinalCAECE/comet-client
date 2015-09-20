@@ -6,12 +6,13 @@
         .module('cometApp')
         .factory('projectService', projectService);
 
-    projectService.$inject = ['$http', 'authService'];
+    projectService.$inject = ['$log', '$http', 'authService'];
 
-    function projectService ($http, authService) {
+    function projectService ($log, $http, authService) {
 
         return {
             create: create,
+            update:update,
             getAll: getAll,
             getById: getById,
             acceptInvitation: acceptInvitation
@@ -24,6 +25,15 @@
         function create (project) {
           return $http.post('/project', project, authService.getJwtHeader());
         }
+
+        /**
+         * @name update
+         * @desc edits project info
+         */
+         function update (project) {
+           $log.log('update', project);
+           return $http.put('/project/' + project.id, project, authService.getJwtHeader());
+         }
 
         /**
          * @name getAll

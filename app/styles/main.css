@@ -31,9 +31,14 @@
 #formulario.middle-box h1 {
     margin-left: -60px;
 }
-.modificarCuenta {
+.modificarCuenta .tab-content {
     width: 600px;
 }
+
+.modificarProyecto .tab-content {
+  width: 600px;
+}
+
 #loginbox {
     border-style: none solid none;
 }

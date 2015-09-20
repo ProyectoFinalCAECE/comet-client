@@ -158,6 +158,21 @@ angular
                 ncyBreadcrumb: {
                   label: 'Crear proyecto'
                 }
+            })
+            .state('dashboard.project-admin', {
+                url: '/projects/admin/:id',
+                templateUrl: '/src/projects/project-admin.html',
+                controller: 'ProjectAdminController',
+                controllerAs: 'vm',
+                ncyBreadcrumb: {
+                  label: 'Administrar proyecto'
+                },
+                resolve: {
+                   project: ['projectService','$stateParams', function(projectService, $stateParams) {
+                       return projectService.getById($stateParams.id)
+                              .then(function(data) { return data.data; });
+                   }]
+               }
             });
 
         $urlRouterProvider.otherwise('/');
