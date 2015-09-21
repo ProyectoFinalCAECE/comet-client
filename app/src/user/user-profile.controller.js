@@ -12,13 +12,13 @@
         UserProfileController.$inject = ['$rootScope',
                                          '$scope',
                                          '$state',
-                                         'ngToast',
+                                         'dialogService',
                                          'formsConfig',
                                          'accountService',
                                          'userService',
                                          'user'];
 
-        function UserProfileController ($rootScope, $scope, $state, ngToast, formsConfig, accountService, userService, user) {
+        function UserProfileController ($rootScope, $scope, $state, dialogService, formsConfig, accountService, userService, user) {
 
           var vm = this;
           vm.validationErrors = null;
@@ -45,22 +45,32 @@
           function update() {
             userService.update(vm.user).error(function(data) {
                 vm.validationErrors = $rootScope.helpers.loadServerErrors(data);
-            }).then(function () {
-                ngToast.success("Tu perfil ha sido editado exitosamente.");
-            }).then(function () {
-                $state.go('dashboard.project-list');
+            }).then(function() {
+                var msg = 'Tus datos se actualizaron exitosamente.';
+                var dlg = dialogService.showModalAlert('Editar Perfil', msg);
+                dlg.result.then(function () {
+                  $state.go('dashboard.project-list');
+                }, function () {
+                  $state.go('dashboard.project-list');
+                });
             });
           }
 
           /**
-           * @name update
+           * @name changePassword
            * @desc calls the backend endpoint to update the user profile
            */
           function changePassword() {
             accountService.changePassword(vm.password, vm.newPassword, vm.confirmPassword).error(function(data) {
                 vm.validationErrors = $rootScope.helpers.loadServerErrors(data);
-            }).then(function () {
-                $state.go('dashboard.project-list');
+            }).then(function() {
+                var msg = 'Tus datos se actualizaron exitosamente.';
+                var dlg = dialogService.showModalAlert('Editar Perfil', msg);
+                dlg.result.then(function () {
+                  $state.go('dashboard.project-list');
+                }, function () {
+                  $state.go('dashboard.project-list');
+                });
             });
           }
 
