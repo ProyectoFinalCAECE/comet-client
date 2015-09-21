@@ -47,6 +47,8 @@
                 vm.validationErrors = $rootScope.helpers.loadServerErrors(data);
             }).then(function () {
                 ngToast.success("Tu perfil ha sido editado exitosamente.");
+            }).then(function () {
+                $state.go('dashboard.project-list');
             });
           }
 

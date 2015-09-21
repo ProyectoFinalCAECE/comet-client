@@ -30,7 +30,7 @@
                     <div class="col-sm-10">
                       <input type="text" name="firstName" ng-model="vm.user.firstName" class="form-control" placeholder="Nombre" required="">
                       <div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'firstName')" class="control-label" role="alert">
-                        <div class="text-center">{{ vm.validationErrors['firstName'] }}</div>
+                        <div class="text-left">{{ vm.validationErrors['firstName'] }}</div>
                       </div>
                     </div>
                   </div>
@@ -39,7 +39,7 @@
                     <div class="col-sm-10">
                       <input type="text" name="lastName" ng-model="vm.user.lastName" class="form-control" placeholder="Apellido" required="">
                       <div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'lastName')" class="control-label" role="alert">
-                        <div class="text-center">{{ vm.validationErrors['lastName'] }}</div>
+                        <div class="text-left">{{ vm.validationErrors['lastName'] }}</div>
                       </div>
                     </div>
                   </div>
@@ -49,8 +49,8 @@
                       <input type="text" name="alias" class="form-control" placeholder="Alias"
                       ng-model="vm.user.alias">
                       <div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'alias')" class="control-label" role="alert">
-                        <div class="text-center">{{ vm.validationErrors['alias'] }}</div>
-                        <div class="text-center">{{ vm.validationErrors['all'] }}</div>
+                        <div class="text-left">{{ vm.validationErrors['alias'] }}</div>
+                        <div class="text-left">{{ vm.validationErrors['all'] }}</div>
                       </div>
                     </div>
                   </div>
@@ -78,7 +78,7 @@
                       <input type="password" name="password" class="form-control" placeholder="Contraseña"
                       ng-model="vm.password">
                       <div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'password')" class="control-label" role="alert">
-                        <div>{{ vm.validationErrors['password'] }}</div>
+                        <div class="text-left">{{ vm.validationErrors['password'] }}</div>
                       </div>
                     </div>
                   </div>
@@ -92,7 +92,7 @@
                       popover-placement="bottom"
                       popover-trigger="focus"/>
                       <div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'newPassword')" class="control-label" role="alert">
-                        <div>{{ vm.validationErrors['newPassword'] }}</div>
+                        <div class="text-left">{{ vm.validationErrors['newPassword'] }}</div>
                       </div>
                     </div>
                   </div>
@@ -102,8 +102,8 @@
                     <div class="col-sm-8">
                       <input type="password" name="confirmPassword" ng-model="vm.confirmPassword" class="form-control" placeholder="Repetir la contraseña" required="" field-match="" dsfieldmatch="vm.frmChangePassword.newPassword">
                       <div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'confirmPassword')" class="control-label" role="alert">
-                        <div>{{ vm.validationErrors['confirmPassword'] }}</div>
-                        <div>{{ vm.validationErrors['all'] }}</div>
+                        <div class="text-left">{{ vm.validationErrors['confirmPassword'] }}</div>
+                        <div class="text-left">{{ vm.validationErrors['all'] }}</div>
                       </div>
                     </div>
                   </div>
