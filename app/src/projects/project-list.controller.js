@@ -16,7 +16,8 @@
                                          'constraints',
                                          'dialogService',
                                          'projectService',
-                                         'userService'];
+                                         'userService',
+                                         'projects'];
 
         function ProjectListController ($rootScope,
                                         $state,
@@ -25,7 +26,8 @@
                                         constraints,
                                         dialogService,
                                         projectService,
-                                        userService) {
+                                        userService,
+                                        projects) {
 
           var vm = this;
           vm.projects = null;
@@ -42,13 +44,10 @@
            * @desc controller activation logic
            */
           function activate () {
-            projectService.getAll().then(function(response){
-              var projects = response.data;
               vm.projects = filterFilter(projects, { state:'O' });
               vm.isEmpty = (vm.projects.length === 0);
               vm.closedProjects = filterFilter(projects, { state:'C' });
               vm.closedProjectsEmpty = (vm.closedProjects.length === 0);
-            });
           }
 
           /**

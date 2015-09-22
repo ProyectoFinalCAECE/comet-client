@@ -128,6 +128,13 @@ angular
                 controllerAs: 'vm',
                 ncyBreadcrumb: {
                   label: 'Proyectos'
+                },
+                resolve: {
+                  projects: ['projectService', function (projectService) {
+                    return projectService.getAll().then(function (response) {
+                      return response.data;
+                    });
+                  }]
                 }
             })
             .state('project-accept', {
