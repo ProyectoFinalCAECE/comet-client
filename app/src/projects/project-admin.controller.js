@@ -9,24 +9,31 @@
     angular.module('cometApp')
            .controller('ProjectAdminController', ProjectAdminController);
 
-        ProjectAdminController.$inject = ['$rootScope',
-                                           '$state',
-                                           'ngToast',
-                                           'dialogService',
-                                           'projectService',
-                                           'project'];
+        ProjectAdminController.$inject = ['$log',
+                                          '$rootScope',
+                                          '$state',
+                                          'ngToast',
+                                          'dialogService',
+                                          'projectService',
+                                          'user',
+                                          'project'];
 
-        function ProjectAdminController ($rootScope,
+        function ProjectAdminController ( $log,
+                                          $rootScope,
                                           $state,
                                           ngToast,
                                           dialogService,
                                           projectService,
+                                          user,
                                           project) {
 
           var vm = this;
-          vm.project = project;
           vm.update = update;
+          vm.isCurrentUser = isCurrentUser;
+          vm.project = project;
           vm.validationErrors = null;
+
+          $log.log(project);
 
           activate();
 
@@ -57,6 +64,11 @@
                   $state.go('dashboard.project-list');
                 });
             });
+          }
+
+          function isCurrentUser(member) {
+            $log.log(member, user);
+            return member.email === user.email;
           }
         }
 })();

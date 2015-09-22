@@ -34,8 +34,13 @@
     width: 600px;
 }
 
-.modificarProyecto .tab-content {
+.modificarProyecto .datos,
+.modificarProyecto .cerrar {
   width: 600px;
+}
+
+.modificarProyecto .filter {
+  width: 300px;
 }
 
 #loginbox {
@@ -133,11 +138,11 @@
         width: 100%;
         height: 40px
     }
-	
+
 	.columnaMiembros{
         display:none;
     }
-	
+
 	.columnaIntegraciones{
         display:none;
     }
@@ -147,7 +152,7 @@
     .rolProyecto {
         display:none;
     }
-	
+
 	.columnaFecha{
         display:none;
 	}
