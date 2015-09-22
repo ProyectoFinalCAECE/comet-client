@@ -137,6 +137,28 @@ angular
                   }]
                 }
             })
+            .state('dashboard.project-explore', {
+                url: '/projects/:id',
+                templateUrl: '/src/projects/project-explore.html',
+                controller: 'ProjectExploreController',
+                controllerAs: 'vm',
+                ncyBreadcrumb: {
+                  label: 'Proyecto'
+                },
+                resolve: {
+                  project: ['projectService', '$stateParams', 'authService', '$state', function (projectService, $stateParams, authService, $state) {
+
+                    return projectService.getById($stateParams.id).error(function(data) {
+                      console.log('data.errors.all: ' + data.errors.all);
+                      if (authService.isLoggedIn()) {
+                          $state.go('dashboard');
+                      }
+                    }).then(function (response) {
+                      return response.data;
+                    });
+                  }]
+                }
+            })
             .state('project-accept', {
                 url: '/projects/invitations/accept?token',
                 views:{
