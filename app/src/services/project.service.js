@@ -13,6 +13,7 @@
         return {
             create: create,
             update:update,
+            deleteMember:deleteMember,
             getAll: getAll,
             getById: getById,
             acceptInvitation: acceptInvitation
@@ -30,9 +31,17 @@
          * @name update
          * @desc edits project info
          */
-         function update (project) {
-           $log.log('update', project);
-           return $http.put('/project/' + project.id, project, authService.getJwtHeader());
+        function update (project) {
+          $log.log('update', project);
+          return $http.put('/project/' + project.id, project, authService.getJwtHeader());
+        }
+
+        /**
+         * @name deleteMember
+         * @desc delete a member from project
+         */
+         function deleteMember (project, member) {
+           return $http.delete('/project/' + project.id + '/members/' + member.id, authService.getJwtHeader());
          }
 
         /**

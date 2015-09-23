@@ -55,33 +55,43 @@
               </tab-heading>
               <div class="m-t">
                 <div>
-                    <input ng-model="vm.filterQuery" type="text" placeholder="Filtrar..." class="filter form-control">
+                  <input ng-model="vm.filterQuery" type="text" placeholder="Filtrar..." class="filter form-control">
                 </div>
                 <div class="m-t table-responsive">
                   <table class="table table-striped">
                       <thead>
-                      <tr>
-                          <th></th>
-                          <th>Nombre</th>
-                          <th>Alias</th>
-                          <th>Correo</th>
-                          <th>Fecha de Alta</th>
-                      </tr>
+                        <tr>
+                            <th></th>
+                            <th>Nombre</th>
+                            <th>Alias</th>
+                            <th>Correo</th>
+                            <th>Fecha de Alta</th>
+                            <th class="text-center">Acciones</th>
+                        </tr>
                       </thead>
                       <tbody>
                         <tr ng-repeat="member in vm.project.members | filter:vm.filterQuery">
-                            <td><input type="checkbox" ng-if="!vm.isCurrentUser(member)" ng-model="member.selected"></td>
+                            <td>
+                              <img alt="image" class="img-circle" title="{{member.alias}}" ng-src="{{member.profilePicture}}" height="30" width="30" />
+                            </td>
                             <td>{{member.firstName + ' ' + member.lastName}}</td>
                             <td>{{member.alias}}</td>
                             <td>{{member.email}}</td>
                             <td>{{member.createdAt | date}}</td>
+                            <td class="text-center">
+                                <i  ng-if="!vm.isCurrentUser(member)"
+                                    ng-click="vm.deleteMember(member)"
+                                    class="fa fa-trash-o text-navy"
+                                    style="font-size: 20px;cursor:pointer">
+                                </i>
+                            </td>
                         </tr>
-                    </tbody>
+                      </tbody>
                   </table>
                 </div>
-						  </div>
-              <div>
-                <h3>Invitar participantes</h3>
+                <div>
+                  <h3>Invitar participantes</h3>
+                </div>
               </div>
             </tab>
             <tab>
