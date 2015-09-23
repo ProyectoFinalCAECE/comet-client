@@ -16,7 +16,8 @@
             create: create,
             get:get,
             update:update,
-            getCurrentUser:getCurrentUser
+            getCurrentUser:getCurrentUser,
+            uploadProfilePicture:uploadProfilePicture
         };
 
         /**
@@ -67,6 +68,16 @@
          */
         function update (user) {
           return $http.put('/user/', user, authService.getJwtHeader());
+        }
+
+        function uploadProfilePicture(picture){
+          var fd = new FormData();
+          fd.append('file', picture);
+          $http.post('/user/image', fd, {
+              transformRequest: angular.identity,
+              headers: {'Content-Type': undefined,
+                        'Authorization':'Bearer '+ authService.getToken()}
+          });
         }
     }
 })();

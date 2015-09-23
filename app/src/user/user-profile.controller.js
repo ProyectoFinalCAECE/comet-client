@@ -26,6 +26,8 @@
           // profile update
           vm.user = user;
           vm.update = update;
+          vm.uploadFile = uploadFile;
+          vm.profilePicture = null;
 
           // change password
           vm.password = null;
@@ -89,6 +91,16 @@
               console.log('pre logout angular');
               $state.go('home');
             });
+          }
+
+          /**
+           * @name uploadFile
+           * @desc calls the backend endpoint to upload an User's profile picture
+           */
+          function uploadFile() {
+              console.log('file is ' + vm.profilePicture);
+              console.dir('vm.profilePicture: ' + vm.profilePicture);
+              userService.uploadProfilePicture(vm.profilePicture);
           }
       }
 })();
