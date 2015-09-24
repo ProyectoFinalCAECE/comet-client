@@ -201,7 +201,12 @@ angular
                        return projectService.getById($stateParams.id)
                               .then(function(data) { return data.data; });
                    }]
-               }
+               },
+               onEnter: ['$state', 'project', function ($state, project) {
+                   if (!project.isOwner) {
+                     $state.go('dashboard.project-list');
+                   }
+               }]
             });
 
         $urlRouterProvider.otherwise('/');

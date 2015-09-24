@@ -29,6 +29,7 @@
 
           var vm = this;
           vm.update = update;
+          vm.deleteMember = deleteMember;
           vm.isCurrentUser = isCurrentUser;
           vm.project = project;
           vm.validationErrors = null;
@@ -52,8 +53,7 @@
           function update () {
             projectService.update(vm.project).error(function(data) {
               vm.validationErrors = $rootScope.helpers.loadServerErrors(data);
-              if (vm.validationErrors === null)
-              {
+              if (vm.validationErrors === null) {
                 ngToast.danger('Ocurrió un error al consultar al servidor.');
               }
             }).then(function() {
@@ -66,8 +66,32 @@
             });
           }
 
+          /**
+           * @name deleteMember
+           * @desc deletes selected members from project
+          */
+          function deleteMember (member) {
+            projectService.deleteMember(vm.project, member).error(function(data) {
+              vm.validationErrors = $rootScope.helpers.loadServerErrors(data);
+              if (vm.validationErrors === null) {
+                ngToast.danger('Ocurrió un error al consultar al servidor.');
+              }
+            }).then(function() {
+              var msg = '¿Esta seguro que desea eliminar el participante?';
+              var dlg = dialogService.showModalConfirm('Administrar proyecto', msg);
+              dlg.result.then(function () {
+                var index = vm.project.members.indexOf(member);
+                vm.project.members.splice(index, 1);
+                ngToast.success('El participante ha sido eliminado.');
+              });
+            });
+          }
+
+          /**
+           * @name isCurrentUser
+           * @desc returns if the member is the current logged in user
+          */
           function isCurrentUser(member) {
-            $log.log(member, user);
             return member.email === user.email;
           }
         }
