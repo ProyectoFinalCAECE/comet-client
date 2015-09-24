@@ -23,12 +23,12 @@
           </div>
           <div ng-show="vml.validationErrors.closed" class="alert alert-warning text-center" role="alert">
             <p>Tu cuenta se encuentra cerrada.</p>
-            <p><a type="button" href="/#/account/reopen" class="btn btn-xs btn-warning">Reabrir cuenta</a></p>
+            <p><a type="button" ui-sref="account-reopen" class="btn btn-xs btn-warning">Reabrir cuenta</a></p>
           </div>
           <!-- Submit -->
           <button type="submit" class="btn btn-primary block full-width m-b">Iniciar sesión</button>
           <p class="text-center">
-            <a href="/#/account/forgot">
+            <a ui-sref="account-forgot">
             <small>¿Olvidaste tu contraseña?</small>
             </a>
           </p>
