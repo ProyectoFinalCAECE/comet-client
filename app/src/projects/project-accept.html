@@ -29,7 +29,7 @@
        <div ng-show="vm.acceptError">
         <p>Ocurrió un error al aceptar la invitación.</p>
         <p>{{ vm.errorMessage }}</p>
-        <p class="m-t"><a href="/#/" class="btn btn-primary">Volver</a></p>
+        <p class="m-t"><a ui-sref="home" class="btn btn-primary">Volver</a></p>
       </div>
       <div ng-hide="vm.isLoggedIn()">
         <div ui-view="columnOne">
