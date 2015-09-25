@@ -138,7 +138,7 @@ angular
                 }
             })
             .state('dashboard.project-explore', {
-                url: '/projects/:id',
+                url: '/project/:id',
                 templateUrl: '/src/projects/project-explore.html',
                 controller: 'ProjectExploreController',
                 controllerAs: 'vm',
