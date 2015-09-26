@@ -12,11 +12,13 @@
 
         return {
             create: create,
-            update:update,
+            update: update,
+            close: close,
             deleteMember:deleteMember,
             getAll: getAll,
             getById: getById,
-            acceptInvitation: acceptInvitation
+            acceptInvitation: acceptInvitation,
+            addInvitations: addInvitations
         };
 
         /**
@@ -29,7 +31,7 @@
 
         /**
          * @name update
-         * @desc edits project info
+         * @desc calls the backend endpoint  to edit project info
          */
         function update (project) {
           $log.log('update', project);
@@ -37,11 +39,30 @@
         }
 
         /**
+         * @name close
+         * @desc calls the backend endpoint to close a project
+         */
+        function close(id) {
+          return $http.delete('/project/' + id + '/close', authService.getJwtHeader());
+        }
+
+        /**
+         * @name addInvitations
+         * @desc calls backend to send invitations for new members
+         */
+        function addInvitations(id, invites) {
+          var data = {
+            "addresses": invites
+          };
+          return $http.post('/project/' + id + '/invitations', data, authService.getJwtHeader());
+        }
+
+        /**
          * @name deleteMember
          * @desc delete a member from project
          */
-         function deleteMember (project, member) {
-           return $http.delete('/project/' + project.id + '/members/' + member.id, authService.getJwtHeader());
+         function deleteMember (id, member) {
+           return $http.delete('/project/' + id + '/members/' + member.id, authService.getJwtHeader());
          }
 
         /**
