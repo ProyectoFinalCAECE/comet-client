@@ -11,6 +11,7 @@
     function userService ($log, $http, $q, authService){
 
         var currentUser = null;
+        var resourceUrl = '/users/';
 
         return {
             create: create,
@@ -24,7 +25,7 @@
          * @desc calls the backend endpoint to create a new user account
          */
         function create (user) {
-            return $http.post('/user/', user).success(function(data){
+            return $http.post(resourceUrl, user).success(function(data){
                 authService.saveToken(data.token);
             });
         }
@@ -34,7 +35,7 @@
          * @desc calls the backend endpoint to get the logged user data
          */
         function get () {
-          return $http.get('/user/', authService.getJwtHeader()).then(function (res) {
+          return $http.get(resourceUrl, authService.getJwtHeader()).then(function (res) {
             return res.data.user;
           }, function () {
             return null;
@@ -66,7 +67,7 @@
          * @desc calls the backend endpoint to update the logged user data
          */
         function update (user) {
-          return $http.put('/user/', user, authService.getJwtHeader());
+          return $http.put(resourceUrl, user, authService.getJwtHeader());
         }
     }
 })();
