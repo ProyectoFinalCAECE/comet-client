@@ -71,8 +71,7 @@
                 }
               }
               else {
-                message = 'No puedes crear mas de ' + constraints.projectPerUser +
-                          ' proyectos. Cierra algún proyecto para continuar';
+                message = 'Debes confirmar tu cuenta para poder crear un proyecto';
               }
 
               if (canCreate) {
