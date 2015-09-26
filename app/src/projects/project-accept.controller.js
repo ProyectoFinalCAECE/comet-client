@@ -12,6 +12,7 @@
         ProjectAcceptController.$inject = ['$rootScope', '$state', '$timeout', 'projectService', 'authService', '$stateParams'];
 
         function ProjectAcceptController ($rootScope, $state, $timeout, projectService, authService, $stateParams) {
+
           var vm = this;
           vm.acceptInvitation = acceptInvitation;
           vm.validationErrors = null;
@@ -41,15 +42,24 @@
           function acceptInvitation () {
             if (vm.isLoggedIn()) {
               projectService.acceptInvitation(1, vm.token).error(function(data) {
-                console.log(data);
                 vm.acceptError = true;
-                vm.errorMessage = data.errors.all;
-                console.log('vm.errorMessage is ' + vm.errorMessage);
+                if (data.errors && data.errors.all) {
+                  vm.errorMessage = data.errors.all;
+                }
+                else
+                {
+                  if (data.error) {
+                    vm.errorMessage = data.error.message;
+                  }
+                  else {
+                    vm.errorMessage = 'Ocurrió un error al consultar al servidor.';
+                  }
+                }
               }).then(function() {
                   vm.acceptSuccess = true;
                   $timeout( function () {
                     $state.go('dashboard.project-list');
-                  }, 2000);
+                  }, 500);
               });
             }
           }

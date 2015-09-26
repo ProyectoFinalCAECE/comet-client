@@ -10,15 +10,13 @@
            .controller('UserCreateController', UserCreateController);
 
         UserCreateController.$inject = ['$rootScope',
+                                        '$scope',
                                         '$state',
                                         'ngToast',
                                         'formsConfig',
-                                        'userService',
-                                        '$controller'];
+                                        'userService'];
 
-        function UserCreateController ($rootScope, $state, ngToast, formsConfig, userService, $controller) {
-
-          var ProjectAcceptController = $rootScope.$new();
+        function UserCreateController ($rootScope, $scope, $state, ngToast, formsConfig, userService) {
 
           var vm = this;
 
@@ -50,7 +48,6 @@
            * @desc creates a user and accepts project invitation
            */
           function createAndAccept () {
-            console.log('into createAndAccept!');
             userService.create(vm.user).error(function(data) {
               vm.validationErrors = $rootScope.helpers.loadServerErrors(data);
               if (vm.validationErrors === null)
@@ -58,8 +55,7 @@
                 ngToast.danger('Ocurrió un error al consultar al servidor.');
               }
             }).then(function() {
-                $controller('ProjectAcceptController',{$rootScope : ProjectAcceptController });
-                ProjectAcceptController.acceptInvitation();
+                $scope.$parent.vm.acceptInvitation();
             });
           }
       }
