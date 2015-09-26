@@ -6,9 +6,11 @@
         .module('cometApp')
         .factory('accountService', accountService);
 
-    accountService.$inject = ['$http', 'authService'];
+    accountService.$inject = ['$log', '$http', 'authService'];
 
-    function accountService ($http, authService) {
+    function accountService ($log, $http, authService) {
+
+        var resourceUrl = '/accounts/';
 
         return {
             login: login,
@@ -28,7 +30,7 @@
          * @desc calls the backend endpoint to login a user
          */
         function login (user) {
-            return $http.post('/account/login', user).success(function (data) {
+            return $http.post(resourceUrl + 'login', user).success(function (data) {
                 authService.saveToken(data.token);
             });
         }
@@ -49,7 +51,7 @@
           var data = {
             token: token
           };
-          return $http.post('/account/confirm', data);
+          return $http.post(resourceUrl + 'confirm', data);
         }
 
         /**
@@ -60,7 +62,7 @@
           var data = {
             token: token
           };
-          return $http.post('/account/confirm/token', data, authService.getJwtHeader());
+          return $http.post(resourceUrl + 'confirm/token', data, authService.getJwtHeader());
         }
 
         /**
@@ -72,7 +74,7 @@
             var data = {
               email: email
             };
-            return $http.post('/account/password/token', data);
+            return $http.post(resourceUrl + 'password/token', data);
         }
 
         /**
@@ -86,7 +88,7 @@
               newpassword: newpassword,
               confirmPassword: confirmPassword
             };
-            return $http.post('/account/password/recover', data);
+            return $http.post(resourceUrl + 'password/recover', data);
         }
 
         /**
@@ -99,7 +101,7 @@
             newpassword: newPassword,
             confirmPassword: confirmPassword
           };
-          return $http.post('/account/password/renew', data, authService.getJwtHeader());
+          return $http.post(resourceUrl + 'password/renew', data, authService.getJwtHeader());
         }
 
         /**
@@ -111,7 +113,7 @@
             var data = {
               email: email
             };
-            return $http.post('/account/reopen/token', data);
+            return $http.post(resourceUrl + 'reopen/token', data);
         }
 
         /**
@@ -125,7 +127,7 @@
               newpassword: newpassword,
               confirmPassword: confirmPassword
             };
-            return $http.post('/account/reopen', data);
+            return $http.post(resourceUrl + 'reopen', data);
         }
 
         /**

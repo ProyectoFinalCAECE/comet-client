@@ -25,19 +25,23 @@
       <!-- Invitar -->
       <div class="crearProyectoSubmit">
         <h3>Personas a invitar</h3>
-        <div ng-repeat="invite in vm.invites" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'address_' + ($index + 1))}">
-            <div class="input-group m-b">
-              <input type="text" name="email" ng-model="invite.address" class="form-control" placeholder="Dirección de correo"/>
-              <span class="input-group-btn">
-                <button ng-click="vm.removeInvite(invite)" type="button" class="btn btn-danger">Borrar</button>
-              </span>
+        <div ng-repeat="invite in vm.invites" class="m-b" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'address_' + ($index + 1))}">
+            <div class="input-group">
+                <input type="text" name="email" ng-model="invite.address" class="form-control" placeholder="Dirección de correo"/>
+                <span class="input-group-btn">
+                  <button ng-click="vm.removeInvite(invite)" type="button" class="btn btn-danger">Borrar</button>
+                </span>
             </div>
             <div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'address_' + ($index + 1))" class="control-label" role="alert">
               <div>{{ vm.validationErrors['address_' + ($index + 1)] }}</div>
             </div>
         </div>
         <p>
-          <button type="button" class="btn btn-success btn-xs" name="button" ng-click="vm.addInvite()">Agregar invitación</button>
+          <button type="button" class="btn btn-success btn-xs m-t" name="button" ng-disabled="vm.invitesLimitReached" ng-click="vm.addInvite()">Agregar invitación</button>
+        </p>
+        <p class="text-muted" ng-show="vm.invitesLimitReached">
+          Puedes ingresar un máximo de {{vm.membersPerProjectPerStep}} personas en esta instancia. <br>
+          Si deseas invitar mas personas puedes hacerlo desde la vista "Administrar proyecto"
         </p>
       </div>
       <!-- Submit -->

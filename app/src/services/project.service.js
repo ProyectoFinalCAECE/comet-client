@@ -10,13 +10,17 @@
 
     function projectService ($log, $http, authService) {
 
+        var resourceUrl = '/projects/';
+
         return {
             create: create,
-            update:update,
+            update: update,
+            close: close,
             deleteMember:deleteMember,
             getAll: getAll,
             getById: getById,
-            acceptInvitation: acceptInvitation
+            acceptInvitation: acceptInvitation,
+            addInvitations: addInvitations
         };
 
         /**
@@ -24,24 +28,43 @@
          * @desc creates a new project
          */
         function create (project) {
-          return $http.post('/project', project, authService.getJwtHeader());
+          return $http.post(resourceUrl, project, authService.getJwtHeader());
         }
 
         /**
          * @name update
-         * @desc edits project info
+         * @desc calls the backend endpoint  to edit project info
          */
         function update (project) {
           $log.log('update', project);
-          return $http.put('/project/' + project.id, project, authService.getJwtHeader());
+          return $http.put(resourceUrl + project.id, project, authService.getJwtHeader());
+        }
+
+        /**
+         * @name close
+         * @desc calls the backend endpoint to close a project
+         */
+        function close(id) {
+          return $http.delete(resourceUrl + id + '/close', authService.getJwtHeader());
+        }
+
+        /**
+         * @name addInvitations
+         * @desc calls backend to send invitations for new members
+         */
+        function addInvitations(id, invites) {
+          var data = {
+            "addresses": invites
+          };
+          return $http.post(resourceUrl + id + '/invitations', data, authService.getJwtHeader());
         }
 
         /**
          * @name deleteMember
          * @desc delete a member from project
          */
-         function deleteMember (project, member) {
-           return $http.delete('/project/' + project.id + '/members/' + member.id, authService.getJwtHeader());
+         function deleteMember (id, member) {
+           return $http.delete(resourceUrl + id + '/members/' + member.id, authService.getJwtHeader());
          }
 
         /**
@@ -49,7 +72,7 @@
          * @desc returns all the users projects
          */
         function getAll () {
-            return $http.get('/project', authService.getJwtHeader());
+            return $http.get(resourceUrl, authService.getJwtHeader());
         }
 
         /**
@@ -57,7 +80,7 @@
          * @desc returns a project by id
          */
         function getById (id) {
-            return $http.get('/project/' + id, authService.getJwtHeader());
+            return $http.get(resourceUrl + id, authService.getJwtHeader());
         }
 
         /**
@@ -68,7 +91,7 @@
             var data = {
               token: token
             };
-            return $http.post('/project/' + id + '/invitations/accept', data, authService.getJwtHeader());
+            return $http.post(resourceUrl + id + '/invitations/accept', data, authService.getJwtHeader());
         }
     }
 })();

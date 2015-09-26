@@ -143,7 +143,8 @@ angular
                 controller: 'ProjectExploreController',
                 controllerAs: 'vm',
                 ncyBreadcrumb: {
-                  label: 'Proyecto'
+                  label: '{{vm.project.name}}',
+                  parent: 'dashboard.project-list'
                 },
                 resolve: {
                   project: ['projectService', '$stateParams', 'authService', '$state', function (projectService, $stateParams, authService, $state) {
