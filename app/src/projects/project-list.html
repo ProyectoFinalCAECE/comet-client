@@ -31,7 +31,7 @@
               </span>
             </div>
             <h3><strong>{{project.name}}</strong></h3>
-            <p class="ProjDesc">{{project.description}}</p>
+            <p class="ProjDescCard">{{project.description}}</p>
             <ul class="miembrosProyecto">
               <li ng-repeat="member in filtered = (project.members | limitTo:6)">
                 <img alt="image" class="img-circle" title="{{member.alias}}" ng-src="{{member.profilePicture}}" />
