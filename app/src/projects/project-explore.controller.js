@@ -10,22 +10,24 @@
            .controller('ProjectExploreController', ProjectExploreController);
 
         ProjectExploreController.$inject = ['$rootScope',
-                                         '$state',
-                                         'projectService',
-                                         'project',
-                                         'dialogService'];
+                                            '$state',
+                                            'dialogService',
+                                            'dashboardServiceModel',
+                                            'projectService',
+                                            'project'];
 
         function ProjectExploreController ($rootScope,
-                                        $state,
-                                        projectService,
-                                        project,
-                                        dialogService) {
+                                           $state,
+                                           dialogService,
+                                           dashboardServiceModel,
+                                           projectService,
+                                           project) {
 
           var vm = this;
           vm.project = null;
+          vm.gotoEditProject = gotoEditProject;
 
           activate();
-          vm.gotoEditProject = gotoEditProject;
 
           /**
            * @name activate
@@ -33,7 +35,7 @@
            */
           function activate () {
               vm.project = project;
-              console.log('project is: ' + vm.project);
+              dashboardServiceModel.setCurrentProject(project);
           }
 
           /**

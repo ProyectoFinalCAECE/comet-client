@@ -13,6 +13,7 @@
                                            '$state',
                                            '$timeout',
                                            'ngToast',
+                                           'constraints',
                                            'dialogService',
                                            'projectService',
                                            'userService'];
@@ -21,6 +22,7 @@
                                           $state,
                                           $timeout,
                                           ngToast,
+                                          constraints,
                                           dialogService,
                                           projectService,
                                           userService) {
@@ -28,10 +30,12 @@
           var vm = this;
           vm.project = {};
           vm.invites = [];
+          vm.validationErrors = null;
+          vm.invitesLimitReached = false;
+          vm.membersPerProjectPerStep = constraints.membersPerProjectPerStep;
           vm.create = create;
           vm.addInvite = addInvite;
           vm.removeInvite = removeInvite;
-          vm.validationErrors = null;
 
           activate();
 
@@ -53,10 +57,14 @@
           */
           function addInvite() {
             var indice = vm.invites.length + 1;
-            vm.invites.push({
-              address: '',
-              name: 'address_' + indice.toString()
-            });
+            if (indice <= constraints.membersPerProjectPerStep) {
+              vm.invites.push({
+                address: '',
+                name: 'address_' + indice.toString()
+              });
+            } else {
+               vm.invitesLimitReached = true;
+            }
           }
 
           /**
@@ -64,9 +72,12 @@
            * @desc removes an invite to the list of invites
           */
           function removeInvite(invite) {
+            console.log('before', vm.invites.length);
+            vm.invitesLimitReached = false;
             vm.invites = $.grep(vm.invites, function(value) {
               return value !== invite;
             });
+            console.log('after', vm.invites.length);
           }
 
           /**

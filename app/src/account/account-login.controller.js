@@ -8,11 +8,9 @@
     angular.module('cometApp')
            .controller('AccountLoginController', AccountLoginController);
 
-        AccountLoginController.$inject = ['$rootScope', '$state', 'accountService', '$controller'];
+        AccountLoginController.$inject = ['$rootScope', '$scope', '$state', 'accountService'];
 
-        function AccountLoginController ($rootScope, $state, accountService, $controller) {
-
-          var ProjectAcceptController = $rootScope.$new();
+        function AccountLoginController ($rootScope, $scope, $state, accountService) {
 
           var vm = this;
           vm.validationErrors = null;
@@ -38,12 +36,10 @@
            * @desc calls the backend endpoint to login a user and accepts project invitation
            */
           function loginAndAccept () {
-              console.log('into login and accept!!');
               accountService.login(vm.user).error(function (data) {
                 vm.validationErrors = $rootScope.helpers.loadServerErrors(data);
               }).then(function () {
-                  $controller('ProjectAcceptController',{$rootScope : ProjectAcceptController });
-                  ProjectAcceptController.acceptInvitation();
+                  $scope.$parent.vm.acceptInvitation();
               });
           }
       }
