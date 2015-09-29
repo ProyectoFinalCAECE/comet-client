@@ -58,6 +58,7 @@
                     <label class="col-sm-2 m-t m-b control-label">Avatar</label>
                     <div class="col-sm-10 m-t m-b">
                       <img alt="image" class="img-circle" ng-src="{{vm.user.profilePicture}}" width="48" height="48" />
+                      <input type="file" file-model="vm.user.profilePicture" accept="image/*"/>
                     </div>
 
                   </div>
@@ -68,19 +69,6 @@
                     </div>
                   </div>
                 </form>
-
-                <form name="vm.frmUpdatePicture" ng-submit="vm.uploadFile()">
-                  <input type="file" file-model="vm.profilePicture"/>
-                  <button class="btn btn-w-m btn-primary" type="submit">Guardar FOTO</button>
-                </form>
-                <!--<form id        =  "uploadForm"
-                     enctype   =  "multipart/form-data"
-                     action    =  "/user/image"
-                     method    =  "post"
-                >
-                <input type="file" name="profilePicture" />
-                <input type="submit" name="submit">
-              </form>-->
               </tab>
               <tab>
                 <tab-heading>Modificar contraseña</tab-heading>

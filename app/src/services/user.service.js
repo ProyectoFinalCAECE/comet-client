@@ -70,14 +70,19 @@
           return $http.put('/user/', user, authService.getJwtHeader());
         }
 
+        /**
+         * @name uploadProfilePicture
+         * @desc calls the backend endpoint to update the logged user's profile picture
+         */
+
         function uploadProfilePicture(picture){
           var fd = new FormData();
-          fd.append('file', picture);
-          $http.post('/user/image', fd, {
-              transformRequest: angular.identity,
-              headers: {'Content-Type': undefined,
-                        'Authorization':'Bearer '+ authService.getToken()}
-          });
+          fd.append('profilePicture', picture);
+          return $http.post('/user/image', fd, {
+                                                transformRequest: angular.identity,
+                                                headers: {'Content-Type': undefined,
+                                                          'Authorization':'Bearer '+ authService.getToken()}
+                });
         }
     }
 })();
