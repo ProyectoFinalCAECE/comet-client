@@ -10,22 +10,21 @@
 
     function dashboardServiceModel ($log, $rootScope) {
 
-        var self = this;
-        self.project = null;
+        var project = null;
 
         return {
             setCurrentProject: setCurrentProject,
             getCurrentProject: getCurrentProject
         };
 
-        function setCurrentProject (project) {
-          self.project = project;
+        function setCurrentProject (newProject) {
+          project = newProject;
           $rootScope.$broadcast("currentProjectUpdated");
           console.log('project is: ', project);
         }
 
         function getCurrentProject () {
-          return self.project;
+          return project;
         }
     }
 })();

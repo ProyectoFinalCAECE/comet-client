@@ -137,7 +137,7 @@
            * @name inviteMembers
            * @desc calls the endpoint to invite people to the project
           */
-          function inviteMembers () {
+          function inviteMembers() {
             $log.log(vm.invites);
             projectService.addInvitations(vm.project.id, vm.invites).error(function(data) {
               vm.validationErrors = $rootScope.helpers.loadServerErrors(data);
@@ -160,7 +160,7 @@
            * @name close
            * @desc calls the endpoint to close the project
           */
-          function close () {
+          function close() {
             $log.log('close', vm.project.id);
             projectService.close(vm.project.id).error(function(data) {
               vm.validationErrors = $rootScope.helpers.loadServerErrors(data);
