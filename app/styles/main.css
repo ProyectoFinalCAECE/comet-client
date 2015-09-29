@@ -27,9 +27,9 @@
     background: #213A53 none repeat scroll 0% 0%;
 }
 
-.skin-2 .nav > li > a,
+.skin-2 #side-menu > li,
 .skin-2 .welcome-message {
-  color: #edf6ff;
+  /*color: #edf6ff;*/
   background: #213A53;
 
 }
@@ -37,7 +37,7 @@
 .skin-2 .navbar-default .nav > li > a:hover,
 .skin-2 .navbar-default .nav > li > a:focus {
   background: #213A53;
-  color: ##EDF6FF;
+  color: #EDF6FF;
 }
 
 .nav-second-level li:last-child {
@@ -197,6 +197,10 @@
     width: 900px;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.skin-2 .nav-tabs > li > a{
+    color: #676A6C;
 }
 
 /*Crear Proyecto*/
