@@ -19,10 +19,32 @@
     font-weight: normal;
 }
 /* Wrapper del dashboard - color de fondo azul */
-
 #wrapper {
-    background-color: #2f4050
+    background-color: #213A53!important;
 }
+
+.skin-2 .navbar-static-side {
+    background: #213A53 none repeat scroll 0% 0%;
+}
+
+.skin-2 #side-menu > li,
+.skin-2 .welcome-message {
+  /*color: #edf6ff;*/
+  background: #213A53;
+
+}
+
+.skin-2 .navbar-default .nav > li > a:hover,
+.skin-2 .navbar-default .nav > li > a:focus {
+  background: #213A53;
+  color: #EDF6FF;
+}
+
+.nav-second-level li:last-child {
+    margin-bottom: 0;
+}
+
+
 #formulario.middle-box {
     position: relative;
     margin-top: 0;
@@ -165,6 +187,22 @@
 
 }
 
+.ProjDescCard{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.ProjDesc{
+    width: 900px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.skin-2 .nav-tabs > li > a{
+    color: #676A6C;
+}
+
 /*Crear Proyecto*/
 
 .crearProyectoSubmit{
@@ -177,7 +215,7 @@
     width:140px;
 }
 
-/* Estilos para formularios dentro de pestañas */
+/* Estilos para formularios dentro de pestaÃ±as */
 .cometInput input{
 	width:300px;
 }
@@ -222,5 +260,9 @@
 }
 
 .columnaFecha{
-  width:100px;
+  	width:130px;
+}
+
+.columnaEstado {
+	width:75px;
 }

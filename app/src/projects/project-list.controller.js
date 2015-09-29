@@ -15,6 +15,7 @@
                                          'ngToast',
                                          'constraints',
                                          'dialogService',
+                                         'dashboardServiceModel',
                                          'projectService',
                                          'userService',
                                          'projects'];
@@ -25,6 +26,7 @@
                                         ngToast,
                                         constraints,
                                         dialogService,
+                                        dashboardServiceModel,
                                         projectService,
                                         userService,
                                         projects) {
@@ -44,6 +46,7 @@
            * @desc controller activation logic
            */
           function activate () {
+              dashboardServiceModel.setCurrentProject(null);
               vm.projects = filterFilter(projects, { state:'O' });
               vm.isEmpty = (vm.projects.length === 0);
               vm.closedProjects = filterFilter(projects, { state:'C' });
@@ -71,8 +74,7 @@
                 }
               }
               else {
-                message = 'No puedes crear mas de ' + constraints.projectPerUser +
-                          ' proyectos. Cierra algún proyecto para continuar';
+                message = 'Debes confirmar tu cuenta para poder crear un proyecto';
               }
 
               if (canCreate) {

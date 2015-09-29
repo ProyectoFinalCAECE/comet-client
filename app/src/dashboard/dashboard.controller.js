@@ -1,6 +1,6 @@
 /**
  * @name DashboardController
- * @desc Controller for the dashboard views */
+ * @desc Parent controller for the dashboard views */
 
 (function() {
     'use strict';
@@ -8,18 +8,28 @@
     angular.module('cometApp')
            .controller('DashboardController', DashboardController);
 
-        DashboardController.$inject = ['$rootScope',
+        DashboardController.$inject = ['$scope',
                                        '$state',
                                        '$stateParams',
                                        'ngToast',
+                                       'dashboardServiceModel',
                                        'accountService',
                                        'user'];
 
-        function DashboardController ($rootScope, $state, $stateParams, ngToast, accountService, user) {
+        function DashboardController ($scope,
+                                      $state,
+                                      $stateParams,
+                                      ngToast,
+                                      dashboardServiceModel,
+                                      accountService,
+                                      user) {
 
           var vm = this;
-          vm.logout = logout;
           vm.user = user;
+          vm.logout = logout;
+          vm.project = dashboardServiceModel.project;
+          vm.publicChannels = null;
+          vm.privateChannels = null;
 
           activate();
 
@@ -35,6 +45,28 @@
                 dismissButton: true
               });
             }
+
+            // listen to project updates
+            $scope.$on('currentProjectUpdated', function() {
+              console.log('dashboard notify currentProjectUpdated', dashboardServiceModel.getCurrentProject());
+              vm.project = dashboardServiceModel.getCurrentProject();
+              loadChannels(vm.project);
+            });
+          }
+
+          function loadChannels (project) {
+            // load project channels
+            vm.privateChannels = [
+              {
+                name: 'my private channel - ' + project.id
+              }
+            ];
+
+            vm.publicChannels = [
+              {
+                name: 'my public channel - ' + project.id
+              }
+            ];
           }
 
           /**

@@ -12,50 +12,42 @@
             </span>
             <span class="text-muted text-xs block">Online <b class="caret"></b></span> </span> </a>
             <ul class="dropdown-menu m-t-xs">
-              <li><a href="/#/dashboard/profile">Perfil</a></li>
-              <li><a href="/#/dashboard/projects">Proyectos</a></li>
+              <li><a ui-sref="dashboard.profile">Perfil</a></li>
+              <li><a ui-sref="dashboard.project-list">Proyectos</a></li>
               <li class="divider"></li>
               <li><a ng-click="vm.logout()">Salir</a></li>
             </ul>
         </div>
         </li>
-        <li>
+        <li ng-show="vm.project != null">
           <a href="#">
             <span class="nav-label">Canales públicos</span><span class="fa arrow"></span>
           </a>
           <ul class="nav nav-second-level">
-            <li><a href="#">general</a></li>
-            <li>
-              <a href="#">deploy</a>
-            </li>
-            <li>
-              <a href="#">github</a>
+            <li ng-repeat="channel in vm.publicChannels">
+              <a href="#">{{channel.name}}</a>
             </li>
           </ul>
         </li>
-        <li class="active">
+        <li class="active" ng-show="vm.project != null">
           <a href="#">
-            <span class="nav-label">Conectados</span>
+            <span class="nav-label">Participantes</span>
           </a>
           <ul class="nav">
-              <li><a href="#"> <i class="fa fa-circle text-navy"></i> Alan </a></li>
-              <li><a href="#"> <i class="fa fa-circle text-danger"></i> Diego</a></li>
-              <li><a href="#"> <i class="fa fa-circle text-navy"></i> Juan</a></li>
-              <li><a href="#"> <i class="fa fa-circle text-navy"></i> Julio</a></li>
-              <li><a href="#"> <i class="fa fa-circle text-warning"></i> Mariano</a></li>
-              <li><a href="#"> <i class="fa fa-circle text-warning"></i> Matias</a></li>
+              <li ng-repeat="member in vm.project.members">
+                <a href="#"> <i class="fa fa-circle text-navy"></i> {{member.alias}} </a>
+              </li>
             </li>
           </ul>
         </li>
-        <li>
+        <li ng-show="vm.project != null">
           <a href="#">
             <span class="nav-label">Canales privados</span>
             <span class="fa arrow"></span>
           </a>
           <ul class="nav nav-second-level">
-            <li><a href="#">Oficina 54</a></li>
-            <li>
-              <a href="#">grupoTesting</a>
+            <li ng-repeat="channel in vm.privateChannels">
+              <a href="#">{{channel.name}}</a>
             </li>
           </ul>
         </li>

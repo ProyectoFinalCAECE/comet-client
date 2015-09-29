@@ -138,21 +138,18 @@ angular
                 }
             })
             .state('dashboard.project-explore', {
-                url: '/projects/:id',
+                url: '/project/:id',
                 templateUrl: '/src/projects/project-explore.html',
                 controller: 'ProjectExploreController',
                 controllerAs: 'vm',
                 ncyBreadcrumb: {
-                  label: 'Proyecto'
+                  label: '{{vm.project.name}}',
+                  parent: 'dashboard.project-list'
                 },
                 resolve: {
                   project: ['projectService', '$stateParams', 'authService', '$state', function (projectService, $stateParams, authService, $state) {
-
-                    return projectService.getById($stateParams.id).error(function(data) {
-                      console.log('data.errors.all: ' + data.errors.all);
-                      if (authService.isLoggedIn()) {
-                          $state.go('dashboard');
-                      }
+                    return projectService.getById($stateParams.id).error(function() {
+                      $state.go('dashboard');
                     }).then(function (response) {
                       return response.data;
                     });
@@ -200,6 +197,40 @@ angular
                    project: ['projectService','$stateParams', function(projectService, $stateParams) {
                        return projectService.getById($stateParams.id)
                               .then(function(data) { return data.data; });
+                   }]
+               },
+               onEnter: ['$state', 'project', function ($state, project) {
+                   if (!project.isOwner) {
+                     $state.go('dashboard.project-list');
+                   }
+               }]
+            })
+            .state('dashboard.channel-create', {
+                url: '/channels/create',
+                templateUrl: '/src/channels/channel-create.html',
+                controller: 'ChannelCreateController',
+                controllerAs: 'vm',
+                ncyBreadcrumb: {
+                  label: 'Crear canal',
+                  parent: 'dashboard.project-explore({id:vm.project.id})'
+                }
+            })
+            .state('dashboard.channel-explore', {
+                url: '/channel/:id',
+                templateUrl: '/src/channels/channel-explore.html',
+                controller: 'ChannelExploreController',
+                controllerAs: 'vm',
+                ncyBreadcrumb: {
+                  label: '{{vm.channel.name}}',
+                  parent: 'dashboard.project-explore({id:vm.project.id})'
+                },
+                resolve: {
+                  channel: ['dashboardServiceModel','channelService','$stateParams', function(dashboardServiceModel, channelService, $stateParams) {
+                    var currentProject = dashboardServiceModel.getCurrentProject();
+                    return channelService.getById(currentProject.id,$stateParams.id)
+                          .then(function(data) {
+                            return data.data;
+                          });
                    }]
                }
             });

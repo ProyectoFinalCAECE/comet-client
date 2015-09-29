@@ -3,7 +3,7 @@
       <h2>Proyectos</h2>
       <ol class="breadcrumb2">
         <li>
-          <input ng-model="vm.filterQuery" type="text" placeholder="Filtrar..." class="form-control" name="top-search" id="top-search">
+          <input ng-model="vm.filterQuery" type="text" placeholder="Filtrar..." class="form-control" name="top-search">
         </li>
         <li>
           <button ng-click="vm.gotoCreateProject()" type="button" name="btnCrearProyecto" class="btn btn-primary" style="float:right">Crear Proyecto</button>
@@ -23,7 +23,7 @@
     <!-- listado de proyectos -->
     <div ng-hide="vm.isEmpty" ng-repeat="project in vm.projects | filter:vm.filterQuery | orderBy:createdAt" class="col-lg-4 proyecto-lg-4">
       <div class="contact-box">
-        <a href="/#/dashboard/projects/{{project.id}}">
+        <a ui-sref="dashboard.project-explore({id:project.id})">
           <div class="col-sm-8 proyecto-sm-8">
             <div>
               <span class="rolProyecto" ng-show="project.isOwner">
@@ -31,7 +31,7 @@
               </span>
             </div>
             <h3><strong>{{project.name}}</strong></h3>
-            <p>{{project.description}}</p>
+            <p class="ProjDescCard">{{project.description}}</p>
             <ul class="miembrosProyecto">
               <li ng-repeat="member in filtered = (project.members | limitTo:6)">
                 <img alt="image" class="img-circle" title="{{member.alias}}" ng-src="{{member.profilePicture}}" />
@@ -61,21 +61,23 @@
     <!-- listado de proyectos cerrados -->
     <div ng-hide="vm.closedProjectsEmpty" ng-repeat="project in vm.closedProjects | filter:vm.closedFilterQuery | orderBy:createdAt" class="col-lg-4 proyecto-lg-4">
       <div class="contact-box text-muted">
-        <div class="col-sm-8 proyecto-sm-8">
-          <div>
-            <span class="rolProyecto" ng-show="project.isOwner">
-              Dueño
-            </span>
+        <a ui-sref="dashboard.project-explore({id:project.id})">
+          <div class="col-sm-8 proyecto-sm-8">
+            <div>
+              <span class="rolProyecto" ng-show="project.isOwner">
+                Dueño
+              </span>
+            </div>
+            <h3><strong>{{project.name}}</strong></h3>
+            <p>{{project.description}}</p>
+            <ul class="miembrosProyecto">
+              <li ng-repeat="member in filtered = (project.members | limitTo:6)">
+                <img alt="image" class="img-circle" title="{{member.alias}}" ng-src="{{member.profilePicture}}" />
+              </li>
+              <li ng-show="vm.hiddenMembersCount(project.members, filtered) > 0"><p>+{{vm.hiddenMembersCount(project.members, filtered)}}</p></li>
+            </ul>
           </div>
-          <h3><strong>{{project.name}}</strong></h3>
-          <p>{{project.description}}</p>
-          <ul class="miembrosProyecto">
-            <li ng-repeat="member in filtered = (project.members | limitTo:6)">
-              <img alt="image" class="img-circle" title="{{member.alias}}" ng-src="{{member.profilePicture}}" />
-            </li>
-            <li ng-show="vm.hiddenMembersCount(project.members, filtered) > 0"><p>+{{vm.hiddenMembersCount(project.members, filtered)}}</p></li>
-          </ul>
-        </div>
+        </a>
         <div class="clearfix"></div>
       </div>
     </div>

@@ -3,10 +3,10 @@
 </div>
 <div class="modal-body text-center">
   <p ng-bind-html="vm.message | unsafe">
-    
+
   </p>
 </div>
 <div class="modal-footer">
-    <button class="btn btn-primary" type="button" ng-click="vm.ok()">Aceptar</button>
     <button ng-show="vm.showCancel" class="btn btn-warning" type="button" ng-click="vm.cancel()">Cancelar</button>
+    <button class="btn btn-primary" type="button" ng-click="vm.ok()">Aceptar</button>
 </div>

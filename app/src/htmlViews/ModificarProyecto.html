@@ -251,10 +251,42 @@
 								<div id="tab-1" class="tab-pane active">
 									<div>
 										<h3>Administrar Proyecto</h3>
+										 <!-- Nombre -->
+										  <div class="form-group cometInput" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'name') }">
+											<input type="text" name="name" ng-model="vm.project.name" class="form-control" placeholder="@NombreActual">
+											<!--
+											<div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'name')" class="control-label" role="alert">
+											  <div>{{ vm.validationErrors['name'] }}</div>
+											</div>
+											-->
+										  </div>
+										  <!-- Descripcion -->
+										  <div class="form-group" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'description') }">
+											<textarea cols="25" rows="7" ng-model="vm.project.description" class="form-control" placeholder="@DescripcionActual"></textarea>
+											<!--
+											<div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'description')" class="control-label" role="alert">
+											  <div>{{ vm.validationErrors['description'] }}</div>
+											  <div>{{ vm.validationErrors['all'] }}</div>
+											</div>
+											-->
+										  </div>
+										 <!-- Ownwer -->
+										 <!-- Agrego esto por lo que comento Taboada, si no corresponde quitar -->
+										  <div class="form-group cometInput" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'owner') }">
+											<input type="text" name="owner" ng-model="vm.project.owner" class="form-control" placeholder="@Dueño">
+											<!--
+											<div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'owner')" class="control-label" role="alert">
+											  <div>{{ vm.validationErrors['owner'] }}</div>
+											</div>
+											-->
+										  </div>
+									</div>
+									<div>
+										<button type="submit" class="btn btn-primary">Aceptar</button>
 									</div>
 								</div>
 								<div id="tab-2" class="tab-pane">
-									<div class="crearProyectoSubmit">
+									<div>
 										<h3>Personas a invitar</h3>
 										<div ng-repeat="invite in vm.invites" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'address_' + ($index + 1))}">
 											<div class="input-group m-b">
@@ -293,7 +325,9 @@
 									<div class="form-group cometInput">
 										<input type="password" class="form-control" placeholder="Contraseña" required="" />
 									</div>
-									<button type="submit" class="btn btn-primary">Cerrar Proyecto</button>
+									<div>
+										<button type="submit" class="btn btn-primary">Cerrar Proyecto</button>
+									</div>
 								</div>
 							</div>
 						</div>

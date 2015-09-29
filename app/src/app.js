@@ -31,7 +31,9 @@
           CONFIRM: 2
         })
         .constant('constraints', {
-          projectPerUser: 30
+          projectPerUser: 30,
+          membersPerProject: 50,
+          membersPerProjectPerStep: 10 
         })
         .run(function($rootScope, $state, helpersService){
           $rootScope.helpers = helpersService;

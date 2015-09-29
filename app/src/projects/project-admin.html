@@ -43,7 +43,7 @@
                   <div class="form-group">
                     <div class="col-sm-8 col-sm-offset-2">
                       <button class="btn btn-w-m btn-primary" type="submit">Guardar</button>
-                      <a class="btn btn-link" href="/#/dashboard">Cancelar</a>
+                      <a class="btn btn-link" ui-sref="dashboard.project-list">Cancelar</a>
                     </div>
                   </div>
                 </form>
@@ -55,33 +55,67 @@
               </tab-heading>
               <div class="m-t">
                 <div>
-                    <input ng-model="vm.filterQuery" type="text" placeholder="Filtrar..." class="filter form-control">
+                  <input ng-model="vm.filterQuery" type="text" placeholder="Filtrar..." class="filter form-control">
                 </div>
                 <div class="m-t table-responsive">
                   <table class="table table-striped">
                       <thead>
-                      <tr>
-                          <th></th>
-                          <th>Nombre</th>
-                          <th>Alias</th>
-                          <th>Correo</th>
-                          <th>Fecha de Alta</th>
-                      </tr>
+                        <tr>
+                            <th></th>
+                            <th>Nombre</th>
+                            <th>Alias</th>
+                            <th>Correo</th>
+                            <th>Fecha de Alta</th>
+                            <th class="text-center">Acciones</th>
+                        </tr>
                       </thead>
                       <tbody>
                         <tr ng-repeat="member in vm.project.members | filter:vm.filterQuery">
-                            <td><input type="checkbox" ng-if="!vm.isCurrentUser(member)" ng-model="member.selected"></td>
+                            <td>
+                              <img alt="image" class="img-circle" title="{{member.alias}}" ng-src="{{member.profilePicture}}" height="30" width="30" />
+                            </td>
                             <td>{{member.firstName + ' ' + member.lastName}}</td>
                             <td>{{member.alias}}</td>
                             <td>{{member.email}}</td>
                             <td>{{member.createdAt | date}}</td>
+                            <td class="text-center">
+                                <i  ng-if="!vm.isCurrentUser(member)"
+                                    ng-click="vm.deleteMember(member)"
+                                    class="fa fa-trash-o text-navy"
+                                    style="font-size: 20px;cursor:pointer">
+                                </i>
+                            </td>
                         </tr>
-                    </tbody>
+                      </tbody>
                   </table>
                 </div>
-						  </div>
-              <div>
-                <h3>Invitar participantes</h3>
+                <!-- Invitar -->
+                <div class="crearProyectoSubmit">
+                  <h3>Invitar participantes</h3>
+                  <div ng-repeat="invite in vm.invites" class="m-b" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'address_' + ($index + 1))}">
+                      <div class="input-group">
+                          <input type="text" name="email" ng-model="invite.address" class="form-control" placeholder="Dirección de correo"/>
+                          <span class="input-group-btn">
+                            <button ng-click="vm.removeInvite(invite)" type="button" class="btn btn-danger">Borrar</button>
+                          </span>
+                      </div>
+                      <div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'address_' + ($index + 1))" class="control-label" role="alert">
+                        <div>{{ vm.validationErrors['address_' + ($index + 1)] }}</div>
+                      </div>
+                  </div>
+                  <p>
+                    <button type="button" class="btn btn-success btn-xs m-t" name="button" ng-disabled="vm.invitesLimitReached" ng-click="vm.addInvite()">Agregar invitación</button>
+                  </p>
+                  <p class="text-muted" ng-show="vm.invitesLimitReached">
+                    Puedes ingresar un máximo de {{vm.membersPerProjectPerStep}} personas en esta instancia. <br>
+                    Si deseas invitar mas personas puedes hacerlo desde la vista "Administrar proyecto"
+                  </p>
+                  <!-- Submit -->
+                  <div class="form-group">
+                    <button class="btn btn-w-m btn-primary" type="button" ng-click="vm.inviteMembers()">Invitar participantes</button>
+                    <a class="btn btn-link" ui-sref="dashboard.project-list">Cancelar</a>
+                  </div>
+                </div>
               </div>
             </tab>
             <tab>
@@ -94,23 +128,17 @@
                 Cerrar proyecto
               </tab-heading>
               <div class="cerrar">
-                <form class="form-horizontal m-t" role="form">
+                <form class="form-horizontal m-t" role="form" ng-submit="vm.close()">
                   <div class="form-group">
                     <label class="col-sm-6 control-label">¿Estás seguro de cerrar el proyecto?</label>
                     <div class="col-sm-6 checkbox i-checks">
-                      <input type="checkbox" style="margin-left:10px;"><i></i>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="col-sm-4 control-label">Contraseña</label>
-                    <div class="col-sm-8">
-                      <input type="password" class="form-control" placeholder="Contraseña">
+                      <input type="checkbox" ng-model="vm.imSure" style="margin-left:10px;"><i></i>
                     </div>
                   </div>
                   <div class="form-group m-t">
                     <div class="col-sm-8 col-sm-offset-4">
-                      <button type="submit" class="btn btn-primary">Cerrar proyecto</button>
-                      <a class="btn btn-link" href="/#/dashboard">Cancelar</a>
+                      <button type="submit" ng-disabled="vm.imSure == false" class="btn btn-primary">Cerrar proyecto</button>
+                      <a class="btn btn-link" ui-sref="dashboard.project-list">Cancelar</a>
                     </div>
                   </div>
                 </form>
