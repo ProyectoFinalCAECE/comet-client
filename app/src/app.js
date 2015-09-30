@@ -20,20 +20,26 @@
             'ncy-angular-breadcrumb',
             'ui.bootstrap',
             'ui.bootstrap.showErrors',
-            'ui.router'
+            'ui.router',
+            'ui.select'
         ])
+        // lodash support
+        .constant('lodash', window._)
+        // global forms configuration
         .constant('formsConfig', {
           'passwordLabel': 'Debe tener entre 6 y 40 caracteres ' +
                            'y contener al menos una minúscula, una mayúscula y un símbolo o número.'
         })
+        // global dialog types
         .constant("dialogType", {
           ALERT: 1,
           CONFIRM: 2
         })
+        // global constraints
         .constant('constraints', {
           projectPerUser: 30,
           membersPerProject: 50,
-          membersPerProjectPerStep: 10 
+          membersPerProjectPerStep: 10
         })
         .run(function($rootScope, $state, helpersService){
           $rootScope.helpers = helpersService;
