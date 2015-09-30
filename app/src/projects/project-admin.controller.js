@@ -45,7 +45,7 @@
           vm.inviteMembers = inviteMembers;
           //close project
           vm.imSure = false;
-          vm.close = close;
+          vm.close = closeProject;
 
           activate();
 
@@ -157,10 +157,10 @@
           }
 
           /**
-           * @name close
+           * @name closeProject
            * @desc calls the endpoint to close the project
           */
-          function close() {
+          function closeProject() {
             $log.log('close', vm.project.id);
             projectService.close(vm.project.id).error(function(data) {
               vm.validationErrors = $rootScope.helpers.loadServerErrors(data);
