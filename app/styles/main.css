@@ -5,19 +5,27 @@
 .panel-title a {
     cursor: pointer;
 }
-/* Para validacion de forms */
 
+/* Para validacion de forms */
 .has-error.control-label, .has-error .input-group {
   color: #ed5565;
 }
+
 .logo-name a {
     color: #e6e6e6;
 }
+
 .logo-name {
     font-size: 100px;
     letter-spacing:normal;
     font-weight: normal;
 }
+
+/* Top Navigation   */
+.dropdown-messages.cometNotifications{
+	width:390px;
+}
+
 /* Wrapper del dashboard - color de fondo azul */
 #wrapper {
     background-color: #213A53!important;
@@ -40,11 +48,16 @@
   color: #EDF6FF;
 }
 
+.skin-2 #side-menu > li > a, .skin-2 .nav.nav-second-level > li > a {
+    color: #EDF6FF;
+}
+
 .nav-second-level li:last-child {
     margin-bottom: 0;
 }
 
 
+/* Formularios */
 #formulario.middle-box {
     position: relative;
     margin-top: 0;
@@ -68,14 +81,9 @@
 #loginbox {
     border-style: none solid none;
 }
-/*#modificarCuentaTabs.nav-tabs {
-	width:500px;
-}*/
-
 
 
 /* Estilos para la vista de proyectos y canales*/
-
 .col-lg-9 {
     width: 100%;
 }
@@ -131,16 +139,13 @@
 
 .miembrosProyecto p {
     display: inline;
-    /*border-radius: 50%;?8
-    padding: 1%;
-    background: #fff;
-    /*border: 2px solid #666;*/
     color: #666;
     text-align: center;
     vertical-align: middle;
     font: 3vw Arial, sans-serif;
 }
 
+/* Responsive Design */
 @media (max-width: 1100px) {
     .proyecto-sm-8 {
         height: 90px;
@@ -215,7 +220,7 @@
     width:140px;
 }
 
-/* Estilos para formularios dentro de pestaÃ±as */
+/* Estilos para formularios dentro de pestanas */
 .cometInput input{
 	width:300px;
 }
