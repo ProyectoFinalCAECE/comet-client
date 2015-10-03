@@ -24,7 +24,7 @@
                     <div class="col-sm-10">
                       <input type="text" name="firstName" ng-model="vm.project.name" class="form-control" placeholder="Nombre" required="">
                       <div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'name')" class="control-label" role="alert">
-                        <div class="text-center">{{ vm.validationErrors['name'] }}</div>
+                        <div class="text-left">{{ vm.validationErrors['name'] }}</div>
                       </div>
                     </div>
                   </div>
@@ -34,8 +34,8 @@
                     <div class="col-sm-10">
                       <textarea cols="25" rows="7" ng-model="vm.project.description" class="form-control" placeholder="Breve descripcion del proyecto"></textarea>
                       <div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'description')" class="control-label" role="alert">
-                        <div>{{ vm.validationErrors['description'] }}</div>
-                        <div class="text-center">{{ vm.validationErrors['all'] }}</div>
+                        <div class="text-left">{{ vm.validationErrors['description'] }}</div>
+                        <div class="text-left">{{ vm.validationErrors['all'] }}</div>
                       </div>
                     </div>
                   </div>
