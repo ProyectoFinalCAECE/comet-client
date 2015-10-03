@@ -157,11 +157,7 @@
         height: 90px;
     }
 
-    .cometInput input{
-    	width:450px;
-    }
-
-    .cometInput textarea{
+    .cometInput input, .cometInput textarea{
     	width:450px;
     }
 
@@ -192,11 +188,7 @@
         display:none;
     }
 
-    .cometInput input{
-      width:400px;
-    }
-
-    .cometInput textarea{
+    .cometInput input, .cometInput textarea{
       width:400px;
     }
 
@@ -218,11 +210,7 @@
         display:none;
 	}
 
-  .cometInput input{
-  	width:350px;
-  }
-
-  .cometInput textarea{
+  .cometInput input, .cometInput textarea{
   	width:350px;
   }
 
@@ -332,4 +320,8 @@
 
 .columnaEstado {
 	width:75px;
+}
+
+.cometProjects:hover{
+	border: 1px solid grey;
 }

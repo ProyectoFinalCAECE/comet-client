@@ -36,6 +36,7 @@
           vm.members = [];
           vm.project = dashboardServiceModel.getCurrentProject();
           vm.validationErrors = null;
+          vm.isPrivate = false;
           vm.create = create;
 
           /**
@@ -43,7 +44,11 @@
            * @desc channel creation logic
           */
           function create () {
-            vm.channel.type = (vm.isPrivate === true ? 'P' : 'S');
+
+            // channel type
+            vm.channel.type = (vm.isPrivate ? 'P' : 'S');
+
+            // members
             vm.channel.members = lodash.map(vm.members, function(m) { return m.id; });
 
             channelService.create(vm.project.id, vm.channel)
@@ -59,6 +64,8 @@
             var createdChannel = response.data;
             var msg = 'El canal "' + createdChannel.name +
                       '" ha sido creado exitosamente.';
+
+            $rootScope.$broadcast("channelsUpdated");
 
             var dlg = dialogService.showModalAlert('Crear canal', msg);
             dlg.result.then(function () {

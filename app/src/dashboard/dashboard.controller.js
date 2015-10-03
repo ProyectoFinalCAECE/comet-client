@@ -13,8 +13,10 @@
                                        '$state',
                                        '$stateParams',
                                        'ngToast',
+                                       'lodash',
                                        'dashboardServiceModel',
                                        'accountService',
+                                       'channelService',
                                        'user'];
 
         function DashboardController ($log,
@@ -22,8 +24,10 @@
                                       $state,
                                       $stateParams,
                                       ngToast,
+                                      lodash,
                                       dashboardServiceModel,
                                       accountService,
+                                      channelService,
                                       user) {
 
           var vm = this;
@@ -61,6 +65,11 @@
             $scope.$on('currentUserUpdated', function() {
               vm.user = dashboardServiceModel.getCurrentUser();
             });
+
+            // listen to user updates
+            $scope.$on('channelsUpdated', function() {
+              loadChannels(vm.project);
+            });
           }
 
           function loadChannels (project) {
@@ -69,18 +78,17 @@
               return;
             }
 
-            // load project channels
-            vm.privateChannels = [
-              {
-                name: 'my private channel - ' + project.id
-              }
-            ];
+            channelService.getAll(project.id).then(function (response) {
+              var channels = response.data;
+              $log.log(channels);
+              vm.privateChannels = lodash.filter(channels, function(p) {
+                return p.type === 'P';
+              });
 
-            vm.publicChannels = [
-              {
-                name: 'my public channel - ' + project.id
-              }
-            ];
+              vm.publicChannels = lodash.filter(channels, function(p) {
+                return p.type === 'S';
+              });
+            });
           }
 
           /**
