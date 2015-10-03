@@ -65,6 +65,8 @@
             var msg = 'El canal "' + createdChannel.name +
                       '" ha sido creado exitosamente.';
 
+            $rootScope.$broadcast("channelsUpdated");
+
             var dlg = dialogService.showModalAlert('Crear canal', msg);
             dlg.result.then(function () {
               $state.go('dashboard.channel-explore', { id: createdChannel.id  });
