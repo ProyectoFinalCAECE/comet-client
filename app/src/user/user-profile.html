@@ -14,7 +14,7 @@
         <div class="ibox-content">
           <div class="modificarCuenta">
             <tabset>
-              <tab>
+              <tab select="vm.onTabSelected(1)">
                 <tab-heading>
                   Modificar datos
                 </tab-heading>
@@ -68,7 +68,7 @@
                   </div>
                 </form>
               </tab>
-              <tab>
+              <tab select="vm.onTabSelected(2)">
                 <tab-heading>Modificar contraseña</tab-heading>
                 <form name="vm.frmChangePassword" ng-submit="vm.changePassword()" class="form-horizontal m-t" role="form" novalidate="">
                   <!-- Password -->
@@ -116,9 +116,9 @@
                   </div>
                 </form>
               </tab>
-              <tab>
+              <tab select="vm.onTabSelected(3)">
                 <tab-heading>Cerrar cuenta</tab-heading>
-                <form name="vm.frmCloseAccount" ng-submit="vm.close()" class="form-horizontal m-t" role="form" novalidate="">
+                <form name="vm.frmCloseAccount" ng-submit="vm.closeAccount()" class="form-horizontal m-t" role="form" novalidate="">
                   <!-- Checkbox -->
                   <div class="form-group">
                     <label class="col-sm-6 control-label">¿Está seguro de cerrar la cuenta?</label>
