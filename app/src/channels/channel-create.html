@@ -38,8 +38,8 @@
       <!-- Invitar -->
       <div class="form-group">
         <label class="col-sm-2 control-label">Participantes</label>
-        <div class="col-sm-10">
-          <ui-select multiple ng-model="vm.members" theme="bootstrap" style="width: 500px;">
+        <div class="col-sm-10 cometInput">
+          <ui-select multiple ng-model="vm.members" theme="bootstrap">
             <ui-select-match placeholder="Buscar usuarios...">{{$item.alias}}</ui-select-match>
             <ui-select-choices repeat="member in vm.project.members | props: {firstName: $select.search, lastName: $select.search}">
               <div ng-bind-html="member.alias | highlight: $select.search"></div>
