@@ -9,7 +9,8 @@
     angular.module('cometApp')
            .controller('UserProfileController', UserProfileController);
 
-        UserProfileController.$inject = ['$rootScope',
+        UserProfileController.$inject = ['$log',
+                                         '$rootScope',
                                          '$scope',
                                          '$state',
                                          'dialogService',
@@ -18,10 +19,11 @@
                                          'userService',
                                          'user'];
 
-        function UserProfileController ($rootScope, $scope, $state, dialogService, formsConfig, accountService, userService, user) {
+        function UserProfileController ($log, $rootScope, $scope, $state, dialogService, formsConfig, accountService, userService, user) {
 
           var vm = this;
           vm.validationErrors = null;
+          vm.onTabSelected = onTabSelected;
 
           // profile update
           vm.user = user;
@@ -36,7 +38,7 @@
 
           // close account
           vm.imSure = false;
-          vm.close = close;
+          vm.closeAccount = closeAccount;
 
           /**
            * @name update
@@ -78,7 +80,7 @@
            * @name close
            * @desc calls the backend endpoint to close an account
            */
-          function close() {
+          function closeAccount() {
             //closing account on server.
             accountService.closeAccount(vm.password).error(function(data) {
                 vm.validationErrors = $rootScope.helpers.loadServerErrors(data);
@@ -89,6 +91,15 @@
               console.log('pre logout angular');
               $state.go('home');
             });
+          }
+
+          /**
+           * @name onTabSelected
+           * @desc event fired when a tab is selected
+           */
+          function onTabSelected() {
+            // reset validation state
+            vm.validationErrors = null;
           }
       }
 })();

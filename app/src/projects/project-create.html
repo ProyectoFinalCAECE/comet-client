@@ -8,15 +8,17 @@
   <div class="col-sm-8 crearProyecto-sm-8">
     <form name="vm.frmCreateProject" class="m-t" role="form" ng-submit="vm.create()" novalidate>
       <!-- Nombre -->
+      <label class="col-sm-2 control-label">Nombre</label>
       <div class="form-group cometInput" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'name') }">
-        <input type="text" name="name" ng-model="vm.project.name" class="form-control" placeholder="Nombre">
+        <input type="text" name="name" ng-model="vm.project.name" class="form-control" placeholder="Nombre del proyecto">
         <div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'name')" class="control-label" role="alert">
           <div>{{ vm.validationErrors['name'] }}</div>
         </div>
       </div>
       <!-- Descripcion -->
-      <div class="form-group" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'description') }">
-        <textarea cols="25" rows="7" ng-model="vm.project.description" class="form-control" placeholder="Breve descripcion del proyecto"></textarea>
+      <label class="col-sm-2 control-label">Descripción</label>
+      <div class="form-group cometInput" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'description') }">
+        <textarea cols="25" rows="7" ng-model="vm.project.description" class="form-control" placeholder="Breve descripción del proyecto"></textarea>
         <div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'description')" class="control-label" role="alert">
           <div>{{ vm.validationErrors['description'] }}</div>
           <div>{{ vm.validationErrors['all'] }}</div>
@@ -26,7 +28,8 @@
       <div class="crearProyectoSubmit">
         <h3>Personas a invitar</h3>
         <div ng-repeat="invite in vm.invites" class="m-b" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'address_' + ($index + 1))}">
-            <div class="input-group">
+          <label class="col-sm-2 control-label"></label>
+            <div class="input-group invitarEmails">
                 <input type="text" name="email" ng-model="invite.address" class="form-control" placeholder="Dirección de correo"/>
                 <span class="input-group-btn">
                   <button ng-click="vm.removeInvite(invite)" type="button" class="btn btn-danger">Borrar</button>

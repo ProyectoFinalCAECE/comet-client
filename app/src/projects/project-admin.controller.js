@@ -35,17 +35,21 @@
           vm.invites = [];
           vm.invitesLimitReached = false;
           vm.membersPerProjectPerStep = constraints.membersPerProjectPerStep;
+          vm.onTabSelected = onTabSelected;
+
           // update info
           vm.update = update;
+
           // invite / delete members
           vm.deleteMember = deleteMember;
           vm.isCurrentUser = isCurrentUser;
           vm.addInvite = addInvite;
           vm.removeInvite = removeInvite;
           vm.inviteMembers = inviteMembers;
+
           //close project
           vm.imSure = false;
-          vm.close = closeProject;
+          vm.closeProject = closeProject;
 
           activate();
 
@@ -177,6 +181,20 @@
                   $state.go('dashboard.project-list');
                 });
             });
+          }
+
+          /**
+           * @name onTabSelected
+           * @desc event fired when a tab is selected
+           */
+          function onTabSelected (tab) {
+            vm.validationErrors = null;
+            if (tab === 2) {
+              // members tab
+              if (vm.invites.length === 0) {
+                vm.addInvite();
+              }
+            }
           }
         }
 })();

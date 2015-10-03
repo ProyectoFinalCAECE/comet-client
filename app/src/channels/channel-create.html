@@ -18,7 +18,7 @@
         </div>
       </div>
       <!-- Descripcion -->
-      <div class="form-group" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'description') }">
+      <div class="form-group cometInput" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'description') }">
         <label class="col-sm-2 control-label">Descripción</label>
         <div class="col-sm-10">
           <textarea cols="25" rows="2" ng-model="vm.channel.description" class="form-control" placeholder="Breve descripcion del propósito del canal"></textarea>
@@ -32,14 +32,7 @@
       <div class="form-group">
         <label class="col-sm-2 control-label">Es privado</label>
         <div class="col-sm-10">
-          <input type="checkbox" ng-model="vm.channel.isPrivate" class="form-control">
-        </div>
-      </div>
-      <!-- Etiquetas -->
-      <div class="form-group">
-        <label class="col-sm-2 control-label">Etiquetas</label>
-        <div class="col-sm-10">
-
+          <input type="checkbox" ng-model="vm.channel.isPrivate" class="">
         </div>
       </div>
       <!-- Invitar -->
