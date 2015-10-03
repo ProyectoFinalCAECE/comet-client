@@ -39,16 +39,10 @@
 .skin-2 .welcome-message {
   /*color: #edf6ff;*/
   background: #213A53;
-
 }
 
-.skin-2 .navbar-default .nav > li > a:hover,
-.skin-2 .navbar-default .nav > li > a:focus {
-  background: #213A53;
-  color: #EDF6FF;
-}
-
-.skin-2 #side-menu > li > a, .skin-2 .nav.nav-second-level > li > a {
+.skin-2 #side-menu > li > a,
+.skin-2 .nav.nav-second-level > li > a {
     color: #EDF6FF;
 }
 
@@ -56,6 +50,18 @@
     margin-bottom: 0;
 }
 
+/* Cambios del skin-2 */
+
+.skin-2 .ibox-content{
+  background: #ffffff;
+}
+
+
+.skin-2 .navbar-default .nav > li > a:hover,
+.skin-2 .navbar-default .nav > li > a:focus {
+  background: #213A53;
+  color: #EDF6FF;
+}
 
 /* Formularios */
 #formulario.middle-box {
