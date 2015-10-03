@@ -25,7 +25,7 @@
           </a>
           <ul class="nav nav-second-level">
             <li ng-repeat="channel in vm.publicChannels">
-              <a href="#">{{channel.name}}</a>
+              <a ui-sref="dashboard.channel-explore({id:channel.id})">{{channel.name}}</a>
             </li>
           </ul>
         </li>
@@ -47,7 +47,7 @@
           </a>
           <ul class="nav nav-second-level">
             <li ng-repeat="channel in vm.privateChannels">
-              <a href="#">{{channel.name}}</a>
+              <a ui-sref="dashboard.channel-explore({id:channel.id})">{{channel.name}}</a>
             </li>
           </ul>
         </li>

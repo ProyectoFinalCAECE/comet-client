@@ -15,18 +15,28 @@
                                          '$state',
                                          'dialogService',
                                          'formsConfig',
+                                         'dashboardServiceModel',
                                          'accountService',
                                          'userService',
                                          'user'];
 
-        function UserProfileController ($log, $rootScope, $scope, $state, dialogService, formsConfig, accountService, userService, user) {
+        function UserProfileController ($log,
+                                        $rootScope,
+                                        $scope,
+                                        $state,
+                                        dialogService,
+                                        formsConfig,
+                                        dashboardServiceModel,
+                                        accountService,
+                                        userService,
+                                        user) {
 
           var vm = this;
           vm.validationErrors = null;
           vm.onTabSelected = onTabSelected;
 
           // profile update
-          vm.user = user;
+          vm.user = angular.copy(user);
           vm.update = update;
 
           // change password
@@ -47,14 +57,22 @@
           function update() {
             userService.update(vm.user).error(function(data) {
                 vm.validationErrors = $rootScope.helpers.loadServerErrors(data);
-            }).then(function() {
-                var msg = 'Tus datos se actualizaron exitosamente.';
-                var dlg = dialogService.showModalAlert('Editar Perfil', msg);
-                dlg.result.then(function () {
-                  $state.go('dashboard.project-list');
-                }, function () {
-                  $state.go('dashboard.project-list');
-                });
+            }).then(userUpdateSuccess);
+          }
+
+          function userUpdateSuccess() {
+            // get the updated user from backend
+            userService.get().then(function (updatedUser) {
+              dashboardServiceModel.setCurrentUser(updatedUser);
+
+              var msg = 'Tus datos se actualizaron exitosamente.';
+              var dlg = dialogService.showModalAlert('Editar Perfil', msg);
+
+              dlg.result.then(function () {
+                $state.go('dashboard.project-list');
+              }, function () {
+                $state.go('dashboard.project-list');
+              });
             });
           }
 
