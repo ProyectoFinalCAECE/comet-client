@@ -13,7 +13,7 @@
         </div>
         <div class="ibox-content">
           <tabset>
-            <tab>
+            <tab select="vm.onTabSelected(1)">
               <tab-heading>
                 Modificar datos
               </tab-heading>
@@ -49,7 +49,7 @@
                 </form>
               </div>
             </tab>
-            <tab>
+            <tab select="vm.onTabSelected(2)">
               <tab-heading>
                 Participantes
               </tab-heading>
@@ -118,17 +118,17 @@
                 </div>
               </div>
             </tab>
-            <tab>
+            <tab select="vm.onTabSelected(3)">
               <tab-heading>
                 Integraciones
               </tab-heading>
             </tab>
-            <tab>
+            <tab select="vm.onTabSelected(4)">
               <tab-heading>
                 Cerrar proyecto
               </tab-heading>
               <div class="cerrar">
-                <form class="form-horizontal m-t" role="form" ng-submit="vm.close()">
+                <form class="form-horizontal m-t" role="form" ng-submit="vm.closeProject()">
                   <div class="form-group">
                     <label class="col-sm-6 control-label">¿Estás seguro de cerrar el proyecto?</label>
                     <div class="col-sm-6 checkbox i-checks">
