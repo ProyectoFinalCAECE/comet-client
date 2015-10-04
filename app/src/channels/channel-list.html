@@ -1,0 +1,81 @@
+<div class="wrapper wrapper-content animated fadeInRight">
+  <div class="row">
+    <!-- No tiene canales -->
+    <div ng-show="vmc.isEmpty" class="jumbotron text-center">
+        <p>No encontramos canales en los que participes :(</p>
+        <p>
+          <a ng-click="vmc.gotoCreateChannel()" class="btn btn-xl btn-primary">Crear Canal</a>
+        </p>
+    </div>
+    <!-- listado de canales -->
+    <div ng-hide="vmc.isEmpty">
+      <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+          <div class="ibox-title">
+            <h5>Canales</h5>
+          </div>
+          <div class="ibox-content">
+            <div class="row wrapper border-bottom white-bg page-heading">
+              <div class="col-lg-9">
+                <ol class="breadcrumb2">
+                  <li>
+                    <input ng-model="vmc.filterQuery" type="text" placeholder="Filtrar..." class="form-control" name="top-search"/>
+                  </li>
+                  <li class="buttonRight">
+                    <button ui-sref="dashboard.channel-create" type="button" name="btnCrearProyecto buttonRight" class="btn btn-primary" style="float:right">Crear Canal</button>
+                  </li>
+                </ol>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th class="columnaCanal">Canal</th>
+                    <th class="columnaMiembros">Miembros</th>
+                    <th class="columnaIntegraciones">Integraciones</th>
+                    <th class="columnaFecha">Fecha</th>
+                    <th class="columnaEstado">Estado</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr style="cursor: pointer;" ng-repeat="channel in vmc.channels | filter:vmc.filterQuery | orderBy:['-state', '-createdAt']" ui-sref="dashboard.channel-explore({id:channel.id})">
+                      <td class="columnaCanal">{{channel.name}}</td>
+                      <td class="columnaMiembros">
+                        <ul>
+                          <li ng-repeat="member in channel.members | limitTo: 6">
+                            <img alt="image" class="img-circle" title="{{member.alias}}" ng-src="{{member.profilePicture}}" />
+                          </li>
+                          <li ng-show="channel.members.length > 6">
+                            <p>+{{channel.members.length - 6 }}</p>
+                          </li>
+                        </ul>
+                      </td>
+                      <td class="columnaIntegraciones">
+                        <ul>
+                          <li>
+                            <img alt="image" class="img-circle" src="../../images/integraciones/googledrive.jpg" />
+                          </li>
+                          <li>
+                            <img alt="image" class="img-circle" src="../../images/integraciones/dropbox.png" />
+                          </li>
+                          <li>
+                            <img alt="image" class="img-circle" src="../../images/integraciones/github.png" />
+                          </li>
+                        </ul>
+                      </td>
+                      <td class="columnaFecha">{{channel.createdAt | date}}</td>
+                      <td class="columnaEstado">
+                        <i ng-show="channel.state == 'O'" class="fa fa-check text-navy" />
+                        <i ng-show="channel.state == 'C'" class="fa fa-times text-navy" />
+                      </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

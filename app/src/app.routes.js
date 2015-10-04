@@ -139,22 +139,40 @@ angular
             })
             .state('dashboard.project-explore', {
                 url: '/project/:id',
-                templateUrl: '/src/projects/project-explore.html',
-                controller: 'ProjectExploreController',
-                controllerAs: 'vm',
                 ncyBreadcrumb: {
                   label: '{{vm.project.name}}',
                   parent: 'dashboard.project-list'
                 },
-                resolve: {
-                  project: ['projectService', '$stateParams', 'authService', '$state', function (projectService, $stateParams, authService, $state) {
-                    return projectService.getById($stateParams.id).error(function() {
-                      $state.go('dashboard');
-                    }).then(function (response) {
-                      return response.data;
-                    });
-                  }]
-                }
+                views:{
+                        '':{
+                            templateUrl: '/src/projects/project-explore.html',
+                            controller: 'ProjectExploreController',
+                            controllerAs: 'vm',
+                            resolve: {
+                                      project: ['projectService', '$stateParams', 'authService', '$state', function (projectService, $stateParams, authService, $state) {
+                                        return projectService.getById($stateParams.id).error(function() {
+                                          $state.go('dashboard');
+                                        }).then(function (response) {
+                                          return response.data;
+                                        });
+                                      }]
+                                    }
+                            },
+                        'channels@dashboard.project-explore': {
+                            templateUrl: '/src/channels/channel-list.html',
+                            controller: 'ChannelListController',
+                            controllerAs: 'vmc',
+                            resolve: {
+                                      channels: ['channelService', '$stateParams', 'authService', '$state', function (channelService, $stateParams, authService, $state) {
+                                        return channelService.getAll($stateParams.id).error(function() {
+                                          $state.go('dashboard');
+                                        }).then(function (response) {
+                                          return response.data;
+                                        });
+                                      }]
+                                    }
+                        }
+                      }
             })
             .state('project-accept', {
                 url: '/projects/invitations/accept?token',

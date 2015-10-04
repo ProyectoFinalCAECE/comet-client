@@ -18,7 +18,8 @@
                                          'dashboardServiceModel',
                                          'accountService',
                                          'userService',
-                                         'user'];
+                                         'user',
+                                         'fileReader'];
 
         function UserProfileController ($log,
                                         $rootScope,
@@ -29,7 +30,8 @@
                                         dashboardServiceModel,
                                         accountService,
                                         userService,
-                                        user) {
+                                        user,
+                                        fileReader) {
 
           var vm = this;
           vm.validationErrors = null;
@@ -55,8 +57,34 @@
            * @desc calls the backend endpoint to update the user profile
            */
           function update() {
+            console.log('vm.user.profilePicture.mediaType is: ' + vm.user.profilePicture.type);
             userService.update(vm.user).error(function(data) {
                 vm.validationErrors = $rootScope.helpers.loadServerErrors(data);
+            }).then(function() {
+                if(vm.user.profilePicture.type.indexOf('image/') > -1){
+                    //updating profile picture if required
+                    userService.uploadProfilePicture(vm.user.profilePicture).error(function(data) {
+                        vm.validationErrors = $rootScope.helpers.loadServerErrors(data);
+                    }).then(function(response) {
+                      console.log('response is: '+ JSON.stringify(response));
+                      vm.user.profilePicture = response.data.profilePicture;
+                      var msg = 'Tus datos se actualizaron exitosamente.';
+                      var dlg = dialogService.showModalAlert('Editar Perfil', msg);
+                      dlg.result.then(function () {
+                        $state.go('dashboard.project-list');
+                      }, function () {
+                        $state.go('dashboard.project-list');
+                      });
+                    });
+                } else {
+                  var msg = 'Tus datos se actualizaron exitosamente.';
+                  var dlg = dialogService.showModalAlert('Editar Perfil', msg);
+                  dlg.result.then(function () {
+                    $state.go('dashboard.project-list');
+                  }, function () {
+                    $state.go('dashboard.project-list');
+                  });
+                }
             }).then(userUpdateSuccess);
           }
 
@@ -110,6 +138,14 @@
               $state.go('home');
             });
           }
+
+          $scope.getFile = function () {
+            $scope.progress = 0;
+              fileReader.readAsDataUrl($scope.file, $scope)
+                            .then(function(result) {
+                                $scope.imageSrc = result;
+                            });
+          };
 
           /**
            * @name onTabSelected
