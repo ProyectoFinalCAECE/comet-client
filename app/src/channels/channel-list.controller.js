@@ -26,8 +26,6 @@
           var vmc = this;
           vmc.channels = null;
           vmc.isEmpty = true;
-          vmc.closedProjects = null;
-          vmc.closedProjectsisEmpty = true;
           vmc.gotoCreateChannel = gotoCreateChannel;
 
           activate();
@@ -37,12 +35,8 @@
            * @desc controller activation logic
            */
           function activate () {
-              console.log('into activate!!');
-              console.log('channels are: ' + channels);
-              vmc.channels = filterFilter(channels, { state:'O' });
+              vmc.channels = channels;
               vmc.isEmpty = (vmc.channels.length === 0);
-              vmc.closedChannels = filterFilter(channels, { state:'C' });
-              vmc.closedProjectsisEmpty = (vmc.closedChannels.length === 0);
           }
 
           /**

@@ -12,7 +12,7 @@
       <div class="col-lg-12">
         <div class="ibox float-e-margins">
           <div class="ibox-title">
-            <h5>Canales (Publicos)</h5>
+            <h5>Canales</h5>
           </div>
           <div class="ibox-content">
             <div class="row wrapper border-bottom white-bg page-heading">
@@ -39,303 +39,40 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr ng-repeat="channel in vmc.channels | filter:vmc.filterQuery | orderBy:createdAt">
-                    <td class="columnaCanal">{{channel.name}}</td>
-                    <td class="columnaMiembros">
-                      <ul>
-                        <li>
-                          <img alt="image" class="img-circle" src="../../images/vendor/a8.jpg" />
-                        </li>
-                        <li>
-                          <img alt="image" class="img-circle" src="../../images/vendor/a7.jpg" />
-                        </li>
-                      </ul>
-                    </td>
-                    <td class="columnaIntegraciones">
-                      <ul>
-                        <li>
-                          <img alt="image" class="img-circle" src="../../images/integraciones/googledrive.jpg" />
-                        </li>
-                        <li>
-                          <img alt="image" class="img-circle" src="../../images/integraciones/dropbox.png" />
-                        </li>
-                        <li>
-                          <img alt="image" class="img-circle" src="../../images/integraciones/github.png" />
-                        </li>
-                      </ul>
-                    </td>
-                    <td class="columnaFecha">{{channel.createdAt}}</td>
-                    <td class="columnaEstado">
-                      {{channel.state}}
-                    </td>
+                  <tr style="cursor: pointer;" ng-repeat="channel in vmc.channels | filter:vmc.filterQuery | orderBy:['-state', '-createdAt']" ui-sref="dashboard.channel-explore({id:channel.id})">
+                      <td class="columnaCanal">{{channel.name}}</td>
+                      <td class="columnaMiembros">
+                        <ul>
+                          <li ng-repeat="member in channel.members | limitTo: 6">
+                            <img alt="image" class="img-circle" src="{{member.profilePicture}}" />
+                          </li>
+                          <li ng-show="channel.members.length > 6">
+                            <p>+{{channel.members.length - 6 }}</p>
+                          </li>
+                        </ul>
+                      </td>
+                      <td class="columnaIntegraciones">
+                        <ul>
+                          <li>
+                            <img alt="image" class="img-circle" src="../../images/integraciones/googledrive.jpg" />
+                          </li>
+                          <li>
+                            <img alt="image" class="img-circle" src="../../images/integraciones/dropbox.png" />
+                          </li>
+                          <li>
+                            <img alt="image" class="img-circle" src="../../images/integraciones/github.png" />
+                          </li>
+                        </ul>
+                      </td>
+                      <td class="columnaFecha">{{channel.createdAt | date}}</td>
+                      <td class="columnaEstado">
+                        <i ng-show="channel.state == 'O'" class="fa fa-check text-navy" />
+                        <i ng-show="channel.state == 'C'" class="fa fa-times text-navy" />
+                      </td>
                   </tr>
                 </tbody>
               </table>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div ng-hide="vmc.isEmpty" ng-repeat="project in vm.projects | filter:vm.filterQuery | orderBy:createdAt" class="col-lg-4 proyecto-lg-4">
-      <div class="contact-box">
-        <a ui-sref="dashboard.project-explore({id:project.id})">
-          <div class="col-sm-8 proyecto-sm-8">
-            <div>
-              <span class="rolProyecto" ng-show="project.isOwner">
-                Dueño
-              </span>
-            </div>
-            <h3><strong>{{project.name}}</strong></h3>
-            <p class="ProjDescCard">{{project.description}}</p>
-            <ul class="miembrosProyecto">
-              <li ng-repeat="member in filtered = (project.members | limitTo:6)">
-                <img alt="image" class="img-circle" title="{{member.alias}}" ng-src="{{member.profilePicture}}" />
-              </li>
-              <li ng-show="vm.hiddenMembersCount(project.members, filtered) > 0"><p>+{{vm.hiddenMembersCount(project.members, filtered)}}</p></li>
-            </ul>
-          </div>
-          <div class="clearfix"></div>
-        </a>
-      </div>
-    </div>
-  </div>
-</div>
-
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="ibox float-e-margins">
-        <div class="ibox-title">
-          <h5>Canales (Publicos)</h5>
-        </div>
-        <div class="ibox-content">
-          <div class="row wrapper border-bottom white-bg page-heading">
-            <div class="col-lg-9">
-              <ol class="breadcrumb2">
-                <li>
-                  <input ng-model="vmc.filterQuery" type="text" placeholder="Filtrar..." class="form-control" name="top-search"/>
-                </li>
-                <li class="buttonRight">
-                  <button ui-sref="dashboard.channel-create" type="button" name="btnCrearProyecto buttonRight" class="btn btn-primary" style="float:right">Crear Canal</button>
-                </li>
-              </ol>
-            </div>
-          </div>
-          <div class="table-responsive">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th class="columnaCanal">Canal</th>
-                  <th class="columnaMiembros">Miembros</th>
-                  <th class="columnaIntegraciones">Integraciones</th>
-                  <th class="columnaFecha">Fecha</th>
-                  <th class="columnaEstado">Estado</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td class="columnaCanal">Nombre canal</td>
-                  <td class="columnaMiembros">
-                    <ul>
-                      <li>
-                        <img alt="image" class="img-circle" src="../../images/vendor/a8.jpg" />
-                      </li>
-                      <li>
-                        <img alt="image" class="img-circle" src="../../images/vendor/a7.jpg" />
-                      </li>
-                    </ul>
-                  </td>
-                  <td class="columnaIntegraciones">
-                    <ul>
-                      <li>
-                        <img alt="image" class="img-circle" src="../../images/integraciones/googledrive.jpg" />
-                      </li>
-                      <li>
-                        <img alt="image" class="img-circle" src="../../images/integraciones/dropbox.png" />
-                      </li>
-                      <li>
-                        <img alt="image" class="img-circle" src="../../images/integraciones/github.png" />
-                      </li>
-                    </ul>
-                  </td>
-                  <td class="columnaFecha">Jul 14, 2013</td>
-                  <td class="columnaEstado">
-                    <a href="#">
-                      <i class="fa fa-check text-navy" />
-                    </a>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="columnaCanal">Nombre canal</td>
-                  <td class="columnaMiembros">
-                    <ul>
-                      <li>
-                        <img alt="image" class="img-circle" src="../../images/vendor/a2.jpg" />
-                      </li>
-                      <li>
-                        <img alt="image" class="img-circle" src="../../images/vendor/a7.jpg" />
-                      </li>
-                      <li>
-                        <img alt="image" class="img-circle" src="../../images/vendor/a3.jpg" />
-                      </li>
-                      <li>
-                        <img alt="image" class="img-circle" src="../../images/vendor/a8.jpg" />
-                      </li>
-                      <li>
-                        <img alt="image" class="img-circle" src="../../images/vendor/a1.jpg" />
-                      </li>
-                      <li>
-                        <img alt="image" class="img-circle" src="../../images/vendor/a6.jpg" />
-                      </li>
-                      <li>
-                        <p>+6</p>
-                      </li>
-                    </ul>
-                  </td>
-                  <td class="columnaIntegraciones">
-                    <ul>
-                      <li>
-                        <img alt="image" class="img-circle" src="../../images/integraciones/googledrive.jpg" />
-                      </li>
-                      <li>
-                        <img alt="image" class="img-circle" src="../../images/integraciones/dropbox.png" />
-                      </li>
-                      <li>
-                        <img alt="image" class="img-circle" src="../../images/integraciones/github.png" />
-                      </li>
-                    </ul>
-                  </td>
-                  <td class="columnaFecha">Jul 14, 2013</td>
-                  <td class="columnaEstado">
-                    <a href="#">
-                      <i class="fa fa-check text-navy" />
-                    </a>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="columnaCanal">Nombre canal</td>
-                  <td class="columnaMiembros">
-                    <ul>
-                      <li>
-                        <img alt="image" class="img-circle" src="../../images/vendor/a4.jpg" />
-                      </li>
-                      <li>
-                        <img alt="image" class="img-circle" src="../../images/vendor/a7.jpg" />
-                      </li>
-                      <li>
-                        <img alt="image" class="img-circle" src="../../images/vendor/a3.jpg" />
-                      </li>
-                    </ul>
-                  </td>
-                  <td class="columnaIntegraciones">
-                    <ul>
-                      <li>
-                        <img alt="image" class="img-circle" src="../../images/integraciones/googledrive.jpg" />
-                      </li>
-                      <li>
-                        <img alt="image" class="img-circle" src="../../images/integraciones/dropbox.png" />
-                      </li>
-                      <li>
-                        <img alt="image" class="img-circle" src="../../images/integraciones/github.png" />
-                      </li>
-                    </ul>
-                  </td>
-                  <td class="columnaFecha">Jul 14, 2013</td>
-                  <td class="columnaEstado">
-                    <a href="#">
-                      <i class="fa fa-check text-navy" />
-                    </a>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="columnaCanal">Nombre canal</td>
-                  <td class="columnaMiembros">
-                    <ul>
-                      <li>
-                        <img alt="image" class="img-circle" src="../../images/vendor/a1.jpg" />
-                      </li>
-                      <li>
-                        <img alt="image" class="img-circle" src="../../images/vendor/a7.jpg" />
-                      </li>
-                      <li>
-                        <img alt="image" class="img-circle" src="../../images/vendor/a3.jpg" />
-                      </li>
-                      <li>
-                        <img alt="image" class="img-circle" src="../../images/vendor/a6.jpg" />
-                      </li>
-                      <li>
-                        <img alt="image" class="img-circle" src="../../images/vendor/a2.jpg" />
-                      </li>
-                      <li>
-                        <img alt="image" class="img-circle" src="../../images/vendor/a8.jpg" />
-                      </li>
-                      <li>
-                        <p>+10</p>
-                      </li>
-                    </ul>
-                  </td>
-                  <td class="columnaIntegraciones">
-                    <ul>
-                      <li>
-                        <img alt="image" class="img-circle" src="../../images/integraciones/googledrive.jpg" />
-                      </li>
-                      <li>
-                        <img alt="image" class="img-circle" src="../../images/integraciones/dropbox.png" />
-                      </li>
-                      <li>
-                        <img alt="image" class="img-circle" src="../../images/integraciones/github.png" />
-                      </li>
-                    </ul>
-                  </td>
-                  <td class="columnaFecha">Jul 14, 2013</td>
-                  <td class="columnaEstado">
-                    <a href="#">
-                      <i class="fa fa-check text-navy" />
-                    </a>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="columnaCanal">Nombre canal</td>
-                  <td class="columnaMiembros">
-                    <ul>
-                      <li>
-                        <img alt="image" class="img-circle" src="../../images/vendor/a3.jpg" />
-                      </li>
-                      <li>
-                        <img alt="image" class="img-circle" src="../../images/vendor/a6.jpg" />
-                      </li>
-                      <li>
-                        <img alt="image" class="img-circle" src="../../images/vendor/a2.jpg" />
-                      </li>
-                      <li>
-                        <img alt="image" class="img-circle" src="../../images/vendor/a1.jpg" />
-                      </li>
-                      <li>
-                        <img alt="image" class="img-circle" src="../../images/vendor/a7.jpg" />
-                      </li>
-                    </ul>
-                  </td>
-                  <td class="columnaIntegraciones">
-                    <ul>
-                      <li>
-                        <img alt="image" class="img-circle" src="../../images/integraciones/googledrive.jpg" />
-                      </li>
-                      <li>
-                        <img alt="image" class="img-circle" src="../../images/integraciones/dropbox.png" />
-                      </li>
-                      <li>
-                        <img alt="image" class="img-circle" src="../../images/integraciones/github.png" />
-                      </li>
-                    </ul>
-                  </td>
-                  <td class="columnaFecha">Jul 14, 2013</td>
-                  <td class="columnaEstado">
-                    <a href="#">
-                      <i class="fa fa-check text-navy" />
-                    </a>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
           </div>
         </div>
       </div>
