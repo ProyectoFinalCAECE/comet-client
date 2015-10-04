@@ -23,6 +23,7 @@ module.exports = function(config) {
     files: [
       // bower:js
       'bower_components/jquery/dist/jquery.js',
+      'bower_components/lodash/lodash.js',
       'bower_components/angular/angular.js',
       'bower_components/angular-animate/angular-animate.js',
       'bower_components/angular-sanitize/angular-sanitize.js',
@@ -36,6 +37,7 @@ module.exports = function(config) {
       'bower_components/metisMenu/dist/metisMenu.js',
       'bower_components/angular-bootstrap-show-errors/src/showErrors.js',
       'bower_components/angular-breadcrumb/release/angular-breadcrumb.js',
+      'bower_components/angular-ui-select/dist/select.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       "app/scripts/**/*.js",
