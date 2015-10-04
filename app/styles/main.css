@@ -35,20 +35,14 @@
     background: #213A53 none repeat scroll 0% 0%;
 }
 
-.skin-2 #side-menu > li,
+.skin-2 #side-menu > li.active,
 .skin-2 .welcome-message {
   /*color: #edf6ff;*/
   background: #213A53;
-
 }
 
-.skin-2 .navbar-default .nav > li > a:hover,
-.skin-2 .navbar-default .nav > li > a:focus {
-  background: #213A53;
-  color: #EDF6FF;
-}
-
-.skin-2 #side-menu > li > a, .skin-2 .nav.nav-second-level > li > a {
+.skin-2 #side-menu > li > a,
+.skin-2 .nav.nav-second-level > li > a {
     color: #EDF6FF;
 }
 
@@ -56,6 +50,18 @@
     margin-bottom: 0;
 }
 
+/* Cambios del skin-2 */
+
+.skin-2 .ibox-content{
+  background: #ffffff;
+}
+
+
+.skin-2 .navbar-default .nav > li > a:hover,
+.skin-2 .navbar-default .nav > li > a:focus {
+  background: #213A53;
+  color: #EDF6FF;
+}
 
 /* Formularios */
 #formulario.middle-box {
@@ -146,11 +152,19 @@
 }
 
 /* Responsive Design */
-@media (max-width: 1100px) {
+/*@media (max-width: 100%) {*/
     .proyecto-sm-8 {
         height: 90px;
     }
-}
+
+    .cometInput input, .cometInput textarea{
+    	width:450px;
+    }
+
+    .invitarEmails{
+      width:590px;
+    }
+/*}*/
 
 @media (max-width: 900px) {
     .miembrosProyecto{
@@ -173,6 +187,18 @@
 	.columnaIntegraciones{
         display:none;
     }
+
+    .cometInput input, .cometInput textarea{
+      width:400px;
+    }
+
+    .invitarEmails{
+      width:350px;
+    }
+
+    .invitarEmails button{
+      width:100px;
+    }
 }
 
 @media (max-width: 500px) {
@@ -183,12 +209,40 @@
 	.columnaFecha{
         display:none;
 	}
+
+  .cometInput input, .cometInput textarea{
+  	width:350px;
+  }
+
+  .invitarEmails{
+    width:300px;
+  }
+
+  .invitarEmails button{
+    width:100px;
+  }
 }
 
 @media (max-width: 315px) {
 	.breadcrumb2 .form-control {
 		width: 40%;
 	}
+
+  .cometInput input{
+  	width:160px;
+  }
+
+  .cometInput textarea{
+  	width:160px;
+  }
+
+  .invitarEmails{
+    width:160px;
+  }
+
+  .invitarEmails button{
+    width:20px;
+  }
 
 }
 
@@ -221,10 +275,6 @@
 }
 
 /* Estilos para formularios dentro de pestanas */
-.cometInput input{
-	width:300px;
-}
-
 .columnaMiembros li {
     display: inline;
 }
@@ -270,4 +320,8 @@
 
 .columnaEstado {
 	width:75px;
+}
+
+.cometProjects:hover{
+	border: 1px solid grey;
 }

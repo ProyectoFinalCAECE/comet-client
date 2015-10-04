@@ -44,7 +44,7 @@
                       <td class="columnaMiembros">
                         <ul>
                           <li ng-repeat="member in channel.members | limitTo: 6">
-                            <img alt="image" class="img-circle" src="{{member.profilePicture}}" />
+                            <img alt="image" class="img-circle" title="{{member.alias}}" ng-src="{{member.profilePicture}}" />
                           </li>
                           <li ng-show="channel.members.length > 6">
                             <p>+{{channel.members.length - 6 }}</p>

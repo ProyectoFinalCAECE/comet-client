@@ -8,28 +8,37 @@
     angular.module('cometApp')
            .controller('DashboardController', DashboardController);
 
-        DashboardController.$inject = ['$scope',
+        DashboardController.$inject = ['$log',
+                                       '$scope',
                                        '$state',
                                        '$stateParams',
                                        'ngToast',
+                                       'lodash',
                                        'dashboardServiceModel',
                                        'accountService',
+                                       'channelService',
                                        'user'];
 
-        function DashboardController ($scope,
+        function DashboardController ($log,
+                                      $scope,
                                       $state,
                                       $stateParams,
                                       ngToast,
+                                      lodash,
                                       dashboardServiceModel,
                                       accountService,
+                                      channelService,
                                       user) {
 
           var vm = this;
-          vm.user = user;
-          vm.logout = logout;
-          vm.project = dashboardServiceModel.project;
+
+          dashboardServiceModel.setCurrentUser(user);
+          vm.user = dashboardServiceModel.getCurrentUser();
+          vm.project = dashboardServiceModel.getCurrentProject();
+
           vm.publicChannels = null;
           vm.privateChannels = null;
+          vm.logout = logout;
 
           activate();
 
@@ -48,25 +57,38 @@
 
             // listen to project updates
             $scope.$on('currentProjectUpdated', function() {
-              console.log('dashboard notify currentProjectUpdated', dashboardServiceModel.getCurrentProject());
               vm.project = dashboardServiceModel.getCurrentProject();
+              loadChannels(vm.project);
+            });
+
+            // listen to user updates
+            $scope.$on('currentUserUpdated', function() {
+              vm.user = dashboardServiceModel.getCurrentUser();
+            });
+
+            // listen to user updates
+            $scope.$on('channelsUpdated', function() {
               loadChannels(vm.project);
             });
           }
 
           function loadChannels (project) {
-            // load project channels
-            vm.privateChannels = [
-              {
-                name: 'my private channel - ' + project.id
-              }
-            ];
 
-            vm.publicChannels = [
-              {
-                name: 'my public channel - ' + project.id
-              }
-            ];
+            if (project === null ) {
+              return;
+            }
+
+            channelService.getAll(project.id).then(function (response) {
+              var channels = response.data;
+              $log.log(channels);
+              vm.privateChannels = lodash.filter(channels, function(p) {
+                return p.type === 'P';
+              });
+
+              vm.publicChannels = lodash.filter(channels, function(p) {
+                return p.type === 'S';
+              });
+            });
           }
 
           /**

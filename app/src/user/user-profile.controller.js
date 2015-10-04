@@ -9,23 +9,36 @@
     angular.module('cometApp')
            .controller('UserProfileController', UserProfileController);
 
-        UserProfileController.$inject = ['$rootScope',
+        UserProfileController.$inject = ['$log',
+                                         '$rootScope',
                                          '$scope',
                                          '$state',
                                          'dialogService',
                                          'formsConfig',
+                                         'dashboardServiceModel',
                                          'accountService',
                                          'userService',
                                          'user',
                                          'fileReader'];
 
-        function UserProfileController ($rootScope, $scope, $state, dialogService, formsConfig, accountService, userService, user, fileReader) {
+        function UserProfileController ($log,
+                                        $rootScope,
+                                        $scope,
+                                        $state,
+                                        dialogService,
+                                        formsConfig,
+                                        dashboardServiceModel,
+                                        accountService,
+                                        userService,
+                                        user,
+                                        fileReader) {
 
           var vm = this;
           vm.validationErrors = null;
+          vm.onTabSelected = onTabSelected;
 
           // profile update
-          vm.user = user;
+          vm.user = angular.copy(user);
           vm.update = update;
 
           // change password
@@ -37,7 +50,7 @@
 
           // close account
           vm.imSure = false;
-          vm.close = close;
+          vm.closeAccount = closeAccount;
 
           /**
            * @name update
@@ -72,6 +85,22 @@
                     $state.go('dashboard.project-list');
                   });
                 }
+            }).then(userUpdateSuccess);
+          }
+
+          function userUpdateSuccess() {
+            // get the updated user from backend
+            userService.get().then(function (updatedUser) {
+              dashboardServiceModel.setCurrentUser(updatedUser);
+
+              var msg = 'Tus datos se actualizaron exitosamente.';
+              var dlg = dialogService.showModalAlert('Editar Perfil', msg);
+
+              dlg.result.then(function () {
+                $state.go('dashboard.project-list');
+              }, function () {
+                $state.go('dashboard.project-list');
+              });
             });
           }
 
@@ -97,7 +126,7 @@
            * @name close
            * @desc calls the backend endpoint to close an account
            */
-          function close() {
+          function closeAccount() {
             //closing account on server.
             accountService.closeAccount(vm.password).error(function(data) {
                 vm.validationErrors = $rootScope.helpers.loadServerErrors(data);
@@ -117,5 +146,14 @@
                                 $scope.imageSrc = result;
                             });
           };
+
+          /**
+           * @name onTabSelected
+           * @desc event fired when a tab is selected
+           */
+          function onTabSelected() {
+            // reset validation state
+            vm.validationErrors = null;
+          }
       }
 })();
