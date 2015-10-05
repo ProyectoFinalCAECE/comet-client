@@ -231,6 +231,16 @@ angular
                 ncyBreadcrumb: {
                   label: 'Crear canal',
                   parent: 'dashboard.project-explore({id:vm.project.id})'
+                },
+                resolve: {
+                  user: ['dashboardServiceModel',
+                         function(dashboardServiceModel) {
+                           return dashboardServiceModel.getCurrentUser();
+                         }],
+                  project: ['dashboardServiceModel',
+                            function(dashboardServiceModel) {
+                              return dashboardServiceModel.getCurrentProject();
+                            }]
                 }
             })
             .state('dashboard.channel-explore', {
