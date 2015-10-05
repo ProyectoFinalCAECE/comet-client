@@ -15,6 +15,7 @@
 
         return {
             create: create,
+            invite: invite,
             getAll: getAll,
             getById: getById
         };
@@ -33,8 +34,8 @@
          * @desc returns all the channels in the project
          */
         function getAll (projectId) {
-            var url = parentUrl + projectId + resourceUrl;
-            return $http.get(url, authService.getJwtHeader());
+          var url = parentUrl + projectId + resourceUrl;
+          return $http.get(url, authService.getJwtHeader());
         }
 
         /**
@@ -42,8 +43,17 @@
          * @desc returns a channel by id
          */
         function getById (projectId, channelId) {
-            var url = parentUrl + projectId + resourceUrl + channelId;
-            return $http.get(url, authService.getJwtHeader());
+          var url = parentUrl + projectId + resourceUrl + channelId;
+          return $http.get(url, authService.getJwtHeader());
+        }
+
+        /**
+         * @name invite
+         * @desc adds new member to the channel
+         */
+        function invite (projectId, channelId, invites) {
+          var url = parentUrl + projectId + resourceUrl + channelId + '/members';
+          return $http.put(url, invites, authService.getJwtHeader());
         }
     }
 })();

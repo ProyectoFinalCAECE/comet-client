@@ -1,56 +1,60 @@
-(function (module) {
+(function () {
 
-    var fileReader = function ($q, $log) {
+  'use strict';
 
-        var onLoad = function(reader, deferred, scope) {
-            return function () {
-                scope.$apply(function () {
-                    deferred.resolve(reader.result);
-                });
-            };
-        };
+  angular
+      .module('cometApp')
+      .factory('fileReader', fileReader);
 
-        var onError = function (reader, deferred, scope) {
-            return function () {
-                scope.$apply(function () {
-                    deferred.reject(reader.result);
-                });
-            };
-        };
+      fileReader.$inject = ['$q'];
 
-        var onProgress = function(reader, scope) {
-            return function (event) {
-                scope.$broadcast("fileProgress",
-                    {
-                        total: event.total,
-                        loaded: event.loaded
-                    });
-            };
-        };
+      function fileReader ($q) {
 
-        var getReader = function(deferred, scope) {
-            var reader = new FileReader();
-            reader.onload = onLoad(reader, deferred, scope);
-            reader.onerror = onError(reader, deferred, scope);
-            reader.onprogress = onProgress(reader, scope);
-            return reader;
-        };
+          var onLoad = function(reader, deferred, scope) {
+              return function () {
+                  scope.$apply(function () {
+                      deferred.resolve(reader.result);
+                  });
+              };
+          };
 
-        var readAsDataURL = function (file, scope) {
-            var deferred = $q.defer();
+          var onError = function (reader, deferred, scope) {
+              return function () {
+                  scope.$apply(function () {
+                      deferred.reject(reader.result);
+                  });
+              };
+          };
 
-            var reader = getReader(deferred, scope);
-            reader.readAsDataURL(file);
+          var onProgress = function(reader, scope) {
+              return function (event) {
+                  scope.$broadcast("fileProgress",
+                      {
+                          total: event.total,
+                          loaded: event.loaded
+                      });
+              };
+          };
 
-            return deferred.promise;
-        };
+          var getReader = function(deferred, scope) {
+              var reader = new FileReader();
+              reader.onload = onLoad(reader, deferred, scope);
+              reader.onerror = onError(reader, deferred, scope);
+              reader.onprogress = onProgress(reader, scope);
+              return reader;
+          };
 
-        return {
-            readAsDataUrl: readAsDataURL
-        };
-    };
+          var readAsDataURL = function (file, scope) {
+              var deferred = $q.defer();
 
-    module.factory("fileReader",
-                   ["$q", "$log", fileReader]);
+              var reader = getReader(deferred, scope);
+              reader.readAsDataURL(file);
 
-}(angular.module("cometApp")));
+              return deferred.promise;
+          };
+
+          return {
+              readAsDataUrl: readAsDataURL
+          };
+      }
+})();
