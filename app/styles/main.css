@@ -152,19 +152,29 @@
 }
 
 /* Responsive Design */
-/*@media (max-width: 100%) {*/
+
+.cometInput input, .cometInput textarea, .cometInput div{
+    width:450px;
+}
+
+.crearProyecto-sm-8 label{
+  margin-right:10px;
+  padding-left: 0px;
+}
+
+@media (max-width: 1100px) {
     .proyecto-sm-8 {
         height: 90px;
-    }
-
-    .cometInput input, .cometInput textarea{
-    	width:450px;
     }
 
     .invitarEmails{
       width:590px;
     }
-/*}*/
+
+    .crearProyecto-sm-8 label{
+        float:none;
+    }
+}
 
 @media (max-width: 900px) {
     .miembrosProyecto{
@@ -188,7 +198,7 @@
         display:none;
     }
 
-    .cometInput input, .cometInput textarea{
+    .cometInput input, .cometInput textarea, .cometInput div{
       width:400px;
     }
 
@@ -198,6 +208,10 @@
 
     .invitarEmails button{
       width:100px;
+    }
+
+    .crearProyecto-sm-8 label{
+        float:none;
     }
 }
 
@@ -210,7 +224,7 @@
         display:none;
 	}
 
-  .cometInput input, .cometInput textarea{
+  .cometInput input, .cometInput textarea, .cometInput div{
   	width:350px;
   }
 
@@ -228,11 +242,7 @@
 		width: 40%;
 	}
 
-  .cometInput input{
-  	width:160px;
-  }
-
-  .cometInput textarea{
+  .cometInput input, .cometInput textarea, .cometInput div{
   	width:160px;
   }
 
