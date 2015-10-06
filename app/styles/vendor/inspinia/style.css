@@ -4249,7 +4249,7 @@ dd.project-people {
 .chat-discussion {
   background: #eee;
   padding: 15px;
-  height: 400px;
+  height: 100%;
   overflow-y: auto;
 }
 .chat-users {
