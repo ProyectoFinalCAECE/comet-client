@@ -17,7 +17,7 @@
           <h2></h2>
           <h4 class="ProjDesc"></h4>
           <ul>
-            <li>
+            <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                   <i class="fa fa-wrench"></i>
               </a>
@@ -33,8 +33,7 @@
                   </li>
               </ul>
             </li>
-            <li>
-              <li>
+              <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                     <i class="fa fa-group"></i>
                 </a>
@@ -45,7 +44,6 @@
                   </li>
                 </ul>
               </li>
-            </li>
             <li>
               <button ng-click="vm.invite()" ng-disabled="!vm.canInvite()" type="button" class="btn btn-primary" style="float:right; width:20px">+</button>
             </li>
