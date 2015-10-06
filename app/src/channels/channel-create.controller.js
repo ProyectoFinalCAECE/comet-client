@@ -17,8 +17,9 @@
                                            'ngToast',
                                            'constraints',
                                            'dialogService',
-                                           'dashboardServiceModel',
-                                           'channelService'];
+                                           'channelService',
+                                           'user',
+                                           'project'];
 
         function ChannelCreateController ($log,
                                           $rootScope,
@@ -28,23 +29,55 @@
                                           ngToast,
                                           constraints,
                                           dialogService,
-                                          dashboardServiceModel,
-                                          channelService) {
+                                          channelService,
+                                          user,
+                                          project) {
 
           var vm = this;
           vm.channel = {};
-          vm.members = [];
-          vm.project = dashboardServiceModel.getCurrentProject();
+          vm.invites = [];
+          vm.project = project;
           vm.validationErrors = null;
+          vm.isPrivate = false;
           vm.create = create;
+
+          activate();
+
+          function activate () {
+            vm.availableMembers = getAvailableMembers();
+          }
+
+          /**
+           * @name getAvailableMembers
+           * @desc returns the available members to add to the channel
+          */
+          function getAvailableMembers () {
+            var projectMembers = angular.copy(vm.project.members);
+
+            lodash.remove(projectMembers, function (m) {
+              // remove the current logged in user from the list
+              if (m.id === user.id) {
+                return true;
+              }
+              return false;
+            });
+
+            return projectMembers;
+          }
 
           /**
            * @name create
            * @desc channel creation logic
           */
           function create () {
-            vm.channel.type = (vm.isPrivate === true ? 'P' : 'S');
-            vm.channel.members = lodash.map(vm.members, function(m) { return m.id; });
+
+            // channel type
+            vm.channel.type = (vm.isPrivate ? 'P' : 'S');
+
+            // members
+            vm.channel.members = lodash.map(vm.invites, function(m) {
+              return { id:m.id };
+            });
 
             channelService.create(vm.project.id, vm.channel)
               .error(channelCreateError)
@@ -59,6 +92,8 @@
             var createdChannel = response.data;
             var msg = 'El canal "' + createdChannel.name +
                       '" ha sido creado exitosamente.';
+
+            $rootScope.$broadcast("channelsUpdated");
 
             var dlg = dialogService.showModalAlert('Crear canal', msg);
             dlg.result.then(function () {

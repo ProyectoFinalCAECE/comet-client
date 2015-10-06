@@ -79,7 +79,7 @@
         function uploadProfilePicture(picture){
           var fd = new FormData();
           fd.append('profilePicture', picture);
-          return $http.post('/user/image', fd, {
+          return $http.post('/users/image', fd, {
                                                 transformRequest: angular.identity,
                                                 headers: {'Content-Type': undefined,
                                                           'Authorization':'Bearer '+ authService.getToken()}

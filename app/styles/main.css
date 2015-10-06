@@ -5,19 +5,27 @@
 .panel-title a {
     cursor: pointer;
 }
-/* Para validacion de forms */
 
+/* Validacion de forms */
 .has-error.control-label, .has-error .input-group {
   color: #ed5565;
 }
+
 .logo-name a {
     color: #e6e6e6;
 }
+
 .logo-name {
     font-size: 100px;
     letter-spacing:normal;
     font-weight: normal;
 }
+
+/* Top Navigation   */
+.dropdown-messages.cometNotifications{
+	width:390px;
+}
+
 /* Wrapper del dashboard - color de fondo azul */
 #wrapper {
     background-color: #213A53!important;
@@ -27,12 +35,27 @@
     background: #213A53 none repeat scroll 0% 0%;
 }
 
-.skin-2 #side-menu > li,
+.skin-2 #side-menu > li.active,
 .skin-2 .welcome-message {
   /*color: #edf6ff;*/
   background: #213A53;
-
 }
+
+.skin-2 #side-menu > li > a,
+.skin-2 .nav.nav-second-level > li > a {
+    color: #EDF6FF;
+}
+
+.nav-second-level li:last-child {
+    margin-bottom: 0;
+}
+
+/* Cambios del skin-2 */
+
+.skin-2 .ibox-content{
+  background: #ffffff;
+}
+
 
 .skin-2 .navbar-default .nav > li > a:hover,
 .skin-2 .navbar-default .nav > li > a:focus {
@@ -40,11 +63,7 @@
   color: #EDF6FF;
 }
 
-.nav-second-level li:last-child {
-    margin-bottom: 0;
-}
-
-
+/* Formularios */
 #formulario.middle-box {
     position: relative;
     margin-top: 0;
@@ -68,14 +87,9 @@
 #loginbox {
     border-style: none solid none;
 }
-/*#modificarCuentaTabs.nav-tabs {
-	width:500px;
-}*/
-
 
 
 /* Estilos para la vista de proyectos y canales*/
-
 .col-lg-9 {
     width: 100%;
 }
@@ -131,19 +145,34 @@
 
 .miembrosProyecto p {
     display: inline;
-    /*border-radius: 50%;?8
-    padding: 1%;
-    background: #fff;
-    /*border: 2px solid #666;*/
     color: #666;
     text-align: center;
     vertical-align: middle;
     font: 3vw Arial, sans-serif;
 }
 
+/* Responsive Design */
+
+.cometInput input, .cometInput textarea, .cometInput div{
+    width:450px;
+}
+
+.crearProyecto-sm-8 label{
+  margin-right:10px;
+  padding-left: 0px;
+}
+
 @media (max-width: 1100px) {
     .proyecto-sm-8 {
         height: 90px;
+    }
+
+    .invitarEmails{
+      width:590px;
+    }
+
+    .crearProyecto-sm-8 label{
+        float:none;
     }
 }
 
@@ -168,6 +197,22 @@
 	.columnaIntegraciones{
         display:none;
     }
+
+    .cometInput input, .cometInput textarea, .cometInput div{
+      width:400px;
+    }
+
+    .invitarEmails{
+      width:350px;
+    }
+
+    .invitarEmails button{
+      width:100px;
+    }
+
+    .crearProyecto-sm-8 label{
+        float:none;
+    }
 }
 
 @media (max-width: 500px) {
@@ -178,12 +223,36 @@
 	.columnaFecha{
         display:none;
 	}
+
+  .cometInput input, .cometInput textarea, .cometInput div{
+  	width:350px;
+  }
+
+  .invitarEmails{
+    width:300px;
+  }
+
+  .invitarEmails button{
+    width:100px;
+  }
 }
 
 @media (max-width: 315px) {
 	.breadcrumb2 .form-control {
 		width: 40%;
 	}
+
+  .cometInput input, .cometInput textarea, .cometInput div{
+  	width:160px;
+  }
+
+  .invitarEmails{
+    width:160px;
+  }
+
+  .invitarEmails button{
+    width:20px;
+  }
 
 }
 
@@ -215,11 +284,7 @@
     width:140px;
 }
 
-/* Estilos para formularios dentro de pestaÃ±as */
-.cometInput input{
-	width:300px;
-}
-
+/* Estilos para formularios dentro de pestanas */
 .columnaMiembros li {
     display: inline;
 }
@@ -266,3 +331,53 @@
 .columnaEstado {
 	width:75px;
 }
+
+.cometProjects:hover{
+	border: 1px solid grey;
+}
+
+
+/* Explorar Canal */
+.ExplorarCanal{
+  background-color: #FFF;
+
+}
+
+.ExplorarCanalLeftSidebar{
+  float: left;
+  width:70%;
+
+}
+
+.ExplorarCanalRightSidebar{
+  float: left;
+  width:30%;
+  padding-top: 50px; /* REMPLANTEAR!!!! */
+}
+
+.ExplorarCanalRightSidebar li{
+  padding-left:20px;
+}
+
+/*
+  Dialogo Invitar Participantes
+*/
+
+/* estilos para los inputs con "tags"/"tokens" */
+.ui-select-container.form-control[disabled] {
+  background-color: #FFF;
+  text-align: left;
+}
+
+.ui-select-container.form-control[disabled] .ui-select-match-item {
+  color: #FFF;
+  border-color: #23c6c8;
+  background-color: #23c6c8;
+}
+
+.msj-sin-participantes {
+  border: 1px solid rgb(229, 230, 231);
+  padding: 3px;
+  text-align: center;
+}
+

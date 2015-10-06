@@ -18,7 +18,7 @@
         </div>
       </div>
       <!-- Descripcion -->
-      <div class="form-group" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'description') }">
+      <div class="form-group cometInput" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'description') }">
         <label class="col-sm-2 control-label">Descripción</label>
         <div class="col-sm-10">
           <textarea cols="25" rows="2" ng-model="vm.channel.description" class="form-control" placeholder="Breve descripcion del propósito del canal"></textarea>
@@ -32,23 +32,16 @@
       <div class="form-group">
         <label class="col-sm-2 control-label">Es privado</label>
         <div class="col-sm-10">
-          <input type="checkbox" ng-model="vm.channel.isPrivate" class="form-control">
-        </div>
-      </div>
-      <!-- Etiquetas -->
-      <div class="form-group">
-        <label class="col-sm-2 control-label">Etiquetas</label>
-        <div class="col-sm-10">
-
+          <input type="checkbox" ng-model="vm.isPrivate" class="">
         </div>
       </div>
       <!-- Invitar -->
       <div class="form-group">
         <label class="col-sm-2 control-label">Participantes</label>
-        <div class="col-sm-10">
-          <ui-select multiple ng-model="vm.members" theme="bootstrap" style="width: 500px;">
+        <div class="col-sm-10 cometInput">
+          <ui-select multiple ng-model="vm.invites" theme="bootstrap">
             <ui-select-match placeholder="Buscar usuarios...">{{$item.alias}}</ui-select-match>
-            <ui-select-choices repeat="member in vm.project.members | props: {firstName: $select.search, lastName: $select.search}">
+            <ui-select-choices repeat="member in vm.availableMembers | props: {firstName: $select.search, lastName: $select.search}">
               <div ng-bind-html="member.alias | highlight: $select.search"></div>
               <small>
                 <span ng-bind-html="'' + member.firstName + ' ' + member.lastName | highlight: $select.search"></span>

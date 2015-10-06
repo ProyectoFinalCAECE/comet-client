@@ -10,9 +10,12 @@
 
     function dashboardServiceModel ($log, $rootScope) {
 
-        var project = null;
+        var project = null,
+            user = null;
 
         return {
+            setCurrentUser: setCurrentUser,
+            getCurrentUser: getCurrentUser,
             setCurrentProject: setCurrentProject,
             getCurrentProject: getCurrentProject
         };
@@ -20,11 +23,19 @@
         function setCurrentProject (newProject) {
           project = newProject;
           $rootScope.$broadcast("currentProjectUpdated");
-          console.log('project is: ', project);
         }
 
         function getCurrentProject () {
           return project;
+        }
+
+        function setCurrentUser (newUser) {
+          user = newUser;
+          $rootScope.$broadcast("currentUserUpdated");
+        }
+
+        function getCurrentUser () {
+          return user;
         }
     }
 })();

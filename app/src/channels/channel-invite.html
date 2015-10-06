@@ -1,0 +1,63 @@
+<div class="modal-header">
+    <h3 class="modal-title">Invitar participantes a canal</h3>
+</div>
+<div class="modal-body text-center">
+  <!-- filtrar -->
+  <div class="row">
+    <div class="col">
+      <input type="text" name="name" ng-model="vm.filterQuery" class="form-control" placeholder="Filtrar participantes">
+    </div>
+  </div>
+  <!-- Lista usuarios -->
+  <div class="row">
+    <form name="vm.frmInvite" class="form-horizontal m-t" role="form" novalidate="">
+      <div class="">
+        <table class="table table-striped text-left">
+          <thead>
+            <th></th>
+            <th colspan="2">Participante</th>
+            <th>Alias</th>
+          </thead>
+          <tbody>
+            <tr ng-repeat="member in vm.availableMembers | filter: vm.filterQuery">
+              <td>
+                <input type="checkbox" ng-model="member.selected" ng-click="vm.onMemberListClick(member)">
+              </td>
+              <td>
+                <img alt="image" class="img-circle" ng-src="{{member.profilePicture}}" width="20" height="20" />
+              </td>
+              <td>
+                {{member.firstName + ' ' + member.lastName}}
+              </td>
+              <td>
+                {{member.alias}}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </form>
+  </div>
+  <!-- Usuarios seleccionados -->
+  <div class="row">
+    <div class="col">
+      <div class="text-left">
+          <label>Seleccionados</label>
+      </div>
+      <div>
+        <p class="msj-sin-participantes" ng-show="vm.invites.length == 0">
+          No hay participantes seleccionados
+        </p>
+        <ui-select multiple tagging tagging-label="true" ng-show="vm.invites.length > 0" ng-model="vm.invites" theme="bootstrap" search-enabled="searchEnabled" ng-disabled="true" style="min-width: 300px;" title="Choose a person">
+          <ui-select-match placeholder="Participantes seleccionados">{{$item.alias}}</ui-select-match>
+          <ui-select-choices repeat="member in vm.invites">
+          </ui-select-choices>
+        </ui-select>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-warning" type="button" ng-click="vm.cancel()">Cancelar</button>
+    <button class="btn btn-primary" type="button" ng-click="vm.invite()">Aceptar</button>
+</div>
