@@ -1,7 +1,61 @@
 <div class="row wrapper border-bottom white-bg page-heading">
-  <div class="col-lg-9">
-    <h2><strong>{{vm.channel.name}}</strong></h2>
-    <button ng-click="vm.invite()" ng-disabled="!vm.canInvite()" type="button" class="btn btn-primary" style="float:right">Invitar participantes</button>
+  <div class="col-lg-9 ExplorarCanal">
+    <ul>
+      <li>
+        <div class="ExplorarCanalLeftSidebar">
+          <h2><strong>{{vm.channel.name}}</strong></h2>
+          <h4 class="ProjDesc">{{vm.channel.description}}</h4>
+          <ol class="breadcrumb2">
+            <li>
+              <div ncy-breadcrumb></div>
+            </li>
+          </ol>
+        </div>
+      </li>
+      <li>
+        <div class="ExplorarCanalRightSidebar">
+          <h2></h2>
+          <h4 class="ProjDesc"></h4>
+          <ul>
+            <li>
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                  <i class="fa fa-wrench"></i>
+              </a>
+              <ul class="dropdown-menu dropdown-user">
+                  <li>
+                    <a href="#">Cerrar Canal</a>
+                  </li>
+                  <li>
+                    <a href="#">Editar Canal</a>
+                  </li>
+                  <li>
+                    <a href="#">...</a>
+                  </li>
+              </ul>
+            </li>
+            <li>
+              <li>
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fa fa-group"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                  <h4>Miembros</h4>
+                  <li ng-repeat="member in vm.project.members">
+                    <a href="#"> <i class="fa fa-circle text-navy"></i> {{member.alias}} </a>
+                  </li>
+                </ul>
+              </li>
+            </li>
+            <li>
+              <button ng-click="vm.invite()" ng-disabled="!vm.canInvite()" type="button" class="btn btn-primary" style="float:right; width:20px">+</button>
+            </li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+
+
+    <!--
     <ul>
       <li ng-repeat="member in vm.channel.members | limitTo: 6">
         <img alt="image" class="img-circle" title="{{member.alias}}" ng-src="{{member.profilePicture}}" width="40" height="40" />
@@ -10,11 +64,6 @@
         <p>+{{vm.channel.members.length - 6 }}</p>
       </li>
     </ul>
-    <h4 class="ProjDesc">{{vm.channel.description}}</h4>
-    <ol class="breadcrumb2">
-      <li>
-        <div ncy-breadcrumb></div>
-      </li>
-    </ol>
+    -->
   </div>
 </div>

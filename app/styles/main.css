@@ -335,3 +335,25 @@
 .cometProjects:hover{
 	border: 1px solid grey;
 }
+
+
+/* Explorar Canal */
+.ExplorarCanal{
+
+}
+
+.ExplorarCanalLeftSidebar{
+  float: left;
+  width:70%;
+
+}
+
+.ExplorarCanalRightSidebar{
+  float: left;
+  width:30%;
+  padding-top: 50px; /* REMPLANTEAR!!!! */
+}
+
+.ExplorarCanalRightSidebar li{
+  padding-left:20px;
+}
