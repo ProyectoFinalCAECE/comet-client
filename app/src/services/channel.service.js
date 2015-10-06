@@ -20,6 +20,7 @@
             getById: getById,
             close: close,
             deleteChannel: deleteChannel,
+            deleteMember: deleteMember
         };
 
         /**
@@ -75,5 +76,14 @@
           var url = parentUrl + projectId + resourceUrl;
           return $http.delete(url + id, authService.getJwtHeader());
         }
+
+        /**
+         * @name deleteMember
+         * @desc delete a member from project
+         */
+         function deleteMember (projectId, id, member_id) {
+           var url = parentUrl + projectId + resourceUrl;
+           return $http.delete(url + id + '/members/' + member_id, authService.getJwtHeader());
+         }
     }
 })();

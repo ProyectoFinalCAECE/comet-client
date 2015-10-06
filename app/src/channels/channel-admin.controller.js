@@ -81,7 +81,7 @@
            * @desc deletes selected members from channel
           */
           function deleteMember (member) {
-            /*projectService.deleteMember(vm.project.id, member).error(function(data) {
+            channelService.deleteMember(vm.project.id, vm.channel.id, member.id).error(function(data) {
               vm.validationErrors = $rootScope.helpers.loadServerErrors(data);
               if (vm.validationErrors === null) {
                 ngToast.danger('Ocurrió un error al consultar al servidor.');
@@ -90,11 +90,11 @@
               var msg = '¿Esta seguro que desea eliminar el participante?';
               var dlg = dialogService.showModalConfirm('Administrar proyecto', msg);
               dlg.result.then(function () {
-                var index = vm.project.members.indexOf(member);
-                vm.project.members.splice(index, 1);
+              //  var index = vm.project.members.indexOf(member);
+              //  vm.project.members.splice(index, 1);
                 ngToast.success('El participante ha sido eliminado.');
               });
-            });*/
+            });
           }
 
           /**
