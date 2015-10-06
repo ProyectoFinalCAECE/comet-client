@@ -12,12 +12,11 @@
   <div class="row">
     <form name="vm.frmInvite" class="form-horizontal m-t" role="form" novalidate="">
       <div class="">
-        <table class="table table-bordered">
+        <table class="table table-striped text-left">
           <thead>
             <th></th>
-            <th>Nombre</th>
+            <th colspan="2">Participante</th>
             <th>Alias</th>
-            <th><!-- Avatar --></th>
           </thead>
           <tbody>
             <tr ng-repeat="member in vm.availableMembers | filter: vm.filterQuery">
@@ -25,13 +24,13 @@
                 <input type="checkbox" ng-model="member.selected" ng-click="vm.onMemberListClick(member)">
               </td>
               <td>
+                <img alt="image" class="img-circle" ng-src="{{member.profilePicture}}" width="20" height="20" />
+              </td>
+              <td>
                 {{member.firstName + ' ' + member.lastName}}
               </td>
               <td>
                 {{member.alias}}
-              </td>
-              <td>
-                <img alt="image" class="img-circle" ng-src="{{member.profilePicture}}" width="20" height="20" />
               </td>
             </tr>
           </tbody>
@@ -46,7 +45,7 @@
           <label>Seleccionados</label>
       </div>
       <div>
-        <p class="text-center" ng-show="vm.invites.length == 0">
+        <p class="msj-sin-participantes" ng-show="vm.invites.length == 0">
           No hay participantes seleccionados
         </p>
         <ui-select multiple tagging tagging-label="true" ng-show="vm.invites.length > 0" ng-model="vm.invites" theme="bootstrap" search-enabled="searchEnabled" ng-disabled="true" style="min-width: 300px;" title="Choose a person">

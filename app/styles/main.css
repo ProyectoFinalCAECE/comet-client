@@ -6,7 +6,7 @@
     cursor: pointer;
 }
 
-/* Para validacion de forms */
+/* Validacion de forms */
 .has-error.control-label, .has-error .input-group {
   color: #ed5565;
 }
@@ -339,6 +339,7 @@
 
 /* Explorar Canal */
 .ExplorarCanal{
+  background-color: #FFF;
 
 }
 
@@ -357,3 +358,26 @@
 .ExplorarCanalRightSidebar li{
   padding-left:20px;
 }
+
+/*
+  Dialogo Invitar Participantes
+*/
+
+/* estilos para los inputs con "tags"/"tokens" */
+.ui-select-container.form-control[disabled] {
+  background-color: #FFF;
+  text-align: left;
+}
+
+.ui-select-container.form-control[disabled] .ui-select-match-item {
+  color: #FFF;
+  border-color: #23c6c8;
+  background-color: #23c6c8;
+}
+
+.msj-sin-participantes {
+  border: 1px solid rgb(229, 230, 231);
+  padding: 3px;
+  text-align: center;
+}
+
