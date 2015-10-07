@@ -14,11 +14,14 @@
                                            '$state',
                                            '$timeout',
                                            '$modal',
+                                           'lodash',
                                            'ngToast',
                                            'constraints',
                                            'dialogService',
                                            'dashboardServiceModel',
                                            'channelService',
+                                           'user',
+                                           'project',
                                            'channel'];
 
         function ChannelExploreController ($log,
@@ -26,27 +29,44 @@
                                           $state,
                                           $timeout,
                                           $modal,
+                                          lodash,
                                           ngToast,
                                           constraints,
                                           dialogService,
                                           dashboardServiceModel,
                                           channelService,
+                                          user,
+                                          project,
                                           channel) {
 
           var vm = this;
           vm.channel = channel;
-          vm.project = dashboardServiceModel.getCurrentProject();
+          vm.project = project;
           vm.validationErrors = null;
           vm.invite = invite;
+          vm.isMember = false;
           vm.canInvite = canInvite;
+
+          activate();
+
+          /**
+           * @name activate
+           * @desc controller activation logic
+          */
+          function activate () {
+
+            if (lodash.find(vm.channel.members, 'id', user.id) !== undefined) {
+              vm.isMember = true;
+            }
+
+            $log.log('isMember', vm.isMember);
+          }
 
           /**
            * @name canInvite
            * @desc returns if the user can add members to the channel
           */
           function canInvite () {
-            $log.log('canInvite', vm.channel.members);
-            $log.log('canInvite - project members', vm.project.members);
             return (vm.channel.members.length < vm.project.members.length);
           }
 
@@ -55,6 +75,60 @@
            * @desc opens the 'add channel member' dialog
           */
           function invite () {
+
+            if (!vm.isMember) {
+              showAddCurrentMemberDialog();
+            }
+            else {
+              if (vm.canInvite) {
+                showAddMembersDialog();
+              }
+            }
+          }
+
+          /**
+           * @name showAddCurrentMemberDialog
+           * @desc shows the dialog to add the current logged in user to the
+           *       the channel
+          */
+          function showAddCurrentMemberDialog () {
+            var msg = '¿Desea agregarse como participante en este canal?';
+            var dlg = dialogService.showModalConfirm('Agregar canal', msg);
+            dlg.result.then(function () {
+              var invites = {
+                members: [
+                    {
+                      id: user.id
+                    }
+                  ]
+              };
+
+              channelService.invite(vm.project.id, vm.channel.id, invites)
+                .error(channelInviteError)
+                .then(function (response) {
+                  vm.channel = response.data;
+                  $rootScope.$broadcast('channelUpdated', response.data);
+                });
+            });
+          }
+
+          /**
+           * @name channelInviteError
+           * @desc shows the error message to the user
+          */
+          function channelInviteError (data) {
+              vm.validationErrors = $rootScope.helpers.loadServerErrors(data);
+              if (vm.validationErrors === null)
+              {
+                ngToast.danger('Ocurrió un error al consultar al servidor.');
+              }
+          }
+
+          /**
+           * @name showAddMembersDialog
+           * @desc shows the dialog to add members to the channel
+          */
+          function showAddMembersDialog () {
             var modalInstance = $modal.open({
               templateUrl: '/src/channels/channel-invite.html',
               controller: 'ChannelInviteController',

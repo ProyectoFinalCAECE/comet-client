@@ -340,7 +340,6 @@
 /* Explorar Canal */
 .ExplorarCanal{
   background-color: #FFF;
-
 }
 
 .ExplorarCanal ul{
@@ -363,7 +362,11 @@
 .ExplorarCanalRightSidebar li{
   padding-left:20px;
   position: relative;
+}
 
+.ExplorarCanalRightSidebar li a.disabled {
+  color: #CCC;
+  cursor:default;
 }
 
 /*

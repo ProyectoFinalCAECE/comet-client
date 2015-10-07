@@ -46,9 +46,7 @@
           activate();
 
           function activate () {
-            $log.log('activate', vm.channel, vm.project);
             vm.availableMembers = getAvailableMembers();
-            $log.log('availableMembers', vm.availableMembers);
           }
 
           /**

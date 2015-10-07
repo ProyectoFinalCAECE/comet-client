@@ -1,5 +1,5 @@
 <li class="dropdown">
-  <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+  <a ng-class="$vm.isMember ? 'dropdown-toggle' : 'disabled'" data-toggle="{{vm.isMember ? 'dropdown' : ''}}">
     <i class="fa fa-group"></i>
   </a>
   <ul class="dropdown-menu dropdown-user">
@@ -10,20 +10,20 @@
   </ul>
 </li>
 <li class="dropdown">
-  <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+  <a ng-class="$vm.isMember ? 'dropdown-toggle' : 'disabled'" data-toggle="{{vm.isMember ? 'dropdown' : ''}}">
     <i class="fa fa-cog"></i>
   </a>
   <ul class="dropdown-menu dropdown-user">
     <li>
-      <a href="#" ng-click="vmc.closeChannel()" >Cerrar Canal</a>
+      <a ng-click="vmc.closeChannel()">Cerrar Canal</a>
     </li>
     <li>
-      <a href="#" ng-click="vmc.deleteChannel()" >Eliminar Canal</a>
+      <a ng-click="vmc.deleteChannel()">Eliminar Canal</a>
     </li>
   </ul>
 </li>
 <li>
-  <a class="dropdown-toggle" data-toggle="dropdown" ng-click="vm.invite()" ng-disabled="!vm.canInvite()"  href="#">
+  <a ng-click="vm.invite()" ng-class="{ disabled: !vm.canInvite }">
       <i class="fa fa-plus"></i>
   </a>
 </li>

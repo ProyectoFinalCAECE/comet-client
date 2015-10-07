@@ -270,8 +270,11 @@ angular
                             return data.data;
                           });
                    }],
-                   project: ['dashboardServiceModel', function (dashboardServiceModel) {
+                   project: ['dashboardServiceModel', function(dashboardServiceModel) {
                      return dashboardServiceModel.getCurrentProject();
+                   }],
+                   user: ['dashboardServiceModel', function(dashboardServiceModel) {
+                     return dashboardServiceModel.getCurrentUser();
                    }]
                }
 
