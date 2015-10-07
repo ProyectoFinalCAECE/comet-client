@@ -41,10 +41,17 @@
   background: #213A53;
 }
 
-.skin-2 #side-menu > li > a,
+/*.skin-2 #side-menu > li > a,
 .skin-2 .nav.nav-second-level > li > a {
     color: #EDF6FF;
+}*/
+
+.skin-2 #side-menu > li > a,
+.skin-2 #side-menu .nav > li > a {
+    color: #EDF6FF;
+    font-weight: normal;
 }
+
 
 .nav-second-level li:last-child {
     margin-bottom: 0;
