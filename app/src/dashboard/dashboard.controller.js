@@ -80,13 +80,14 @@
 
             channelService.getAll(project.id).then(function (response) {
               var channels = response.data;
-              $log.log(channels);
+
               vm.privateChannels = lodash.filter(channels, function(c) {
                 return c.type === 'P';
               });
 
               vm.publicChannels = lodash.filter(channels, function(c) {
-                return c.type === 'S';
+                var isMember = (lodash.find(c.members, 'id', vm.user.id) !== undefined);
+                return c.type === 'S' && isMember;
               });
             });
           }

@@ -21,7 +21,8 @@
         </li>
         <li ng-show="vm.project != null">
           <a href="#">
-            <span class="nav-label">Canales públicos</span><span class="fa arrow"></span>
+            <span class="nav-label">Canales públicos</span>
+            <span class="fa arrow"></span>
           </a>
           <ul class="nav nav-second-level">
             <li ng-repeat="channel in vm.publicChannels">
@@ -32,6 +33,7 @@
         <li class="active" ng-show="vm.project != null">
           <a href="#">
             <span class="nav-label">Participantes</span>
+            <span class="fa arrow"></span>
           </a>
           <ul class="nav">
               <li ng-repeat="member in vm.project.members">
