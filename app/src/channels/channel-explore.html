@@ -15,38 +15,8 @@
       <li>
         <div class="ExplorarCanalRightSidebar">
           <ul>
-            <li>
-              <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                  <i class="fa fa-cog"></i>
-              </a>
-              <ul class="dropdown-menu dropdown-user">
-                  <li>
-                    <a href="#">Cerrar Canal</a>
-                  </li>
-                  <li>
-                    <a href="#">Editar Canal</a>
-                  </li>
-                  <li>
-                    <a href="#">...</a>
-                  </li>
-              </ul>
-            </li>
-            <li>
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="fa fa-group"></i>
-                </a>
-                <ul class="dropdown-menu dropdown-user">
-                  <h4>Miembros</h4>
-                  <li ng-repeat="member in vm.project.members">
-                    <a href="#"> <i class="fa fa-circle text-navy"></i> {{member.alias}} </a>
-                  </li>
-                </ul>
-            </li>
-            <li>
-              <a class="dropdown-toggle" data-toggle="dropdown" ng-click="vm.invite()" ng-disabled="!vm.canInvite()"  href="#">
-                  <i class="fa fa-plus"></i>
-              </a>
-            </li>
+            <div ui-view="channel-admin">
+            </div>
           </ul>
         </div>
       </li>
@@ -146,18 +116,5 @@
       </div>
 
   </div>
-
-
-
-    <!--
-    <ul>
-      <li ng-repeat="member in vm.channel.members | limitTo: 6">
-        <img alt="image" class="img-circle" title="{{member.alias}}" ng-src="{{member.profilePicture}}" width="40" height="40" />
-      </li>
-      <li ng-show="vm.channel.members.length > 6">
-        <p>+{{vm.channel.members.length - 6 }}</p>
-      </li>
-    </ul>
-    -->
   </div>
 </div>

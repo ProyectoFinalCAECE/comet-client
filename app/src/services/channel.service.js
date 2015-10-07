@@ -17,7 +17,10 @@
             create: create,
             invite: invite,
             getAll: getAll,
-            getById: getById
+            getById: getById,
+            close: close,
+            deleteChannel: deleteChannel,
+            deleteMember: deleteMember
         };
 
         /**
@@ -55,5 +58,32 @@
           var url = parentUrl + projectId + resourceUrl + channelId + '/members';
           return $http.put(url, invites, authService.getJwtHeader());
         }
+
+        /**
+         * @name close
+         * @desc calls the backend endpoint to close a channel
+         */
+        function close(projectId, id) {
+          var url = parentUrl + projectId + resourceUrl;
+          return $http.delete(url + id + '/close', authService.getJwtHeader());
+        }
+
+        /**
+         * @name delete
+         * @desc calls the backend endpoint to delete a channel
+         */
+        function deleteChannel(projectId, id) {
+          var url = parentUrl + projectId + resourceUrl;
+          return $http.delete(url + id, authService.getJwtHeader());
+        }
+
+        /**
+         * @name deleteMember
+         * @desc delete a member from project
+         */
+         function deleteMember (projectId, id, member_id) {
+           var url = parentUrl + projectId + resourceUrl;
+           return $http.delete(url + id + '/members/' + member_id, authService.getJwtHeader());
+         }
     }
 })();
