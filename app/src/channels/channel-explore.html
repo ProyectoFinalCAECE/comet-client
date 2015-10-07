@@ -3,7 +3,9 @@
     <ul>
       <li>
         <div class="ExplorarCanalLeftSidebar">
-          <h2><strong>{{vm.channel.name}}</strong></h2>
+          <h2><strong>{{vm.channel.name}}</strong><span class="badge badge-success" ng-show="{{ vm.channel.type === 'P' }}">
+            Privado
+          </span></h2>
           <h4 class="ProjDesc">{{vm.channel.description}}</h4>
           <ol class="breadcrumb2">
             <li>

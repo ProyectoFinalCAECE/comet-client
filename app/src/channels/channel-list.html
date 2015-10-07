@@ -40,7 +40,9 @@
                 </thead>
                 <tbody>
                   <tr style="cursor: pointer;" ng-repeat="channel in vmc.channels | filter:vmc.filterQuery | orderBy:['-state', '-createdAt']" ui-sref="dashboard.channel-explore({id:channel.id})">
-                      <td class="columnaCanal">{{channel.name}}</td>
+                      <td class="columnaCanal">{{channel.name}} <span class="badge badge-success" ng-show="{{ channel.type === 'P' }}">
+                        P
+                      </span></td>
                       <td class="columnaMiembros">
                         <ul>
                           <li ng-repeat="member in channel.members | limitTo: 6">
