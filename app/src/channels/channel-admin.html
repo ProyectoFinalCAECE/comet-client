@@ -1,6 +1,17 @@
 <li class="dropdown">
   <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-    <i class="fa fa-wrench"></i>
+    <i class="fa fa-group"></i>
+  </a>
+  <ul class="dropdown-menu dropdown-user">
+    <h4>Miembros</h4>
+    <li ng-repeat="member in vm.project.members">
+      <div><i class="fa fa-circle text-navy" style="float:left; padding:0px 10px;"></i> {{member.alias}} <a href="#" ng-click="vmc.deleteMember({{member}})" > <i class="fa fa-times" style="float:right; padding:0px 20px;"></i> </a></div>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+    <i class="fa fa-cog"></i>
   </a>
   <ul class="dropdown-menu dropdown-user">
     <li>
@@ -11,14 +22,8 @@
     </li>
   </ul>
 </li>
-<li class="dropdown">
-  <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-    <i class="fa fa-group"></i>
+<li>
+  <a class="dropdown-toggle" data-toggle="dropdown" ng-click="vm.invite()" ng-disabled="!vm.canInvite()"  href="#">
+      <i class="fa fa-plus"></i>
   </a>
-  <ul class="dropdown-menu dropdown-user">
-    <h4>Miembros</h4>
-    <li ng-repeat="member in vm.project.members">
-      <div><i class="fa fa-circle text-navy" style="float:left; padding:0px 10px;"></i> {{member.alias}} <a href="#" ng-click="vmc.deleteMember({{member}})" > <i class="fa fa-times" style="float:right; padding:0px 20px;"></i> </a></div>
-    </li>
-  </ul>
 </li>

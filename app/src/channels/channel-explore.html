@@ -14,19 +14,13 @@
       </li>
       <li>
         <div class="ExplorarCanalRightSidebar">
-          <h2></h2>
-          <h4 class="ProjDesc"></h4>
           <ul>
             <div ui-view="channel-admin">
             </div>
-            <li>
-              <button ng-click="vm.invite()" ng-disabled="!vm.canInvite()" type="button" class="btn btn-primary" style="float:right; width:20px">+</button>
-            </li>
           </ul>
         </div>
       </li>
     </ul>
-
     <div class="row" style="heigth: 100%;">
       <div class="col-lg-12">
 
@@ -122,18 +116,5 @@
       </div>
 
   </div>
-
-
-
-    <!--
-    <ul>
-      <li ng-repeat="member in vm.channel.members | limitTo: 6">
-        <img alt="image" class="img-circle" title="{{member.alias}}" ng-src="{{member.profilePicture}}" width="40" height="40" />
-      </li>
-      <li ng-show="vm.channel.members.length > 6">
-        <p>+{{vm.channel.members.length - 6 }}</p>
-      </li>
-    </ul>
-    -->
   </div>
 </div>
