@@ -295,7 +295,7 @@
 }
 
 .columnaMiembros img {
-    width: 9%
+    width: 13%
 }
 
 .columnaMiembros p {
@@ -343,20 +343,27 @@
 
 }
 
+.ExplorarCanal ul{
+  padding-left:0px;
+
+}
+
 .ExplorarCanalLeftSidebar{
   float: left;
-  width:70%;
+  width:88%;
 
 }
 
 .ExplorarCanalRightSidebar{
   float: left;
-  width:30%;
-  padding-top: 50px; /* REMPLANTEAR!!!! */
+  width:  12%;
+  padding-top: 80px;  /*REMPLANTEAR!!!! */
 }
 
 .ExplorarCanalRightSidebar li{
   padding-left:20px;
+  position: relative;
+
 }
 
 /*
@@ -380,4 +387,3 @@
   padding: 3px;
   text-align: center;
 }
-
