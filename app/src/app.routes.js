@@ -266,7 +266,6 @@ angular
                     var currentProject = dashboardServiceModel.getCurrentProject();
                     return channelService.getById(currentProject.id, $stateParams.id)
                           .then(function(data) {
-                            console.log('resolve channel', $stateParams.id, data);
                             return data.data;
                           });
                    }],

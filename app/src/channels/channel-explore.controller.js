@@ -54,12 +54,9 @@
            * @desc controller activation logic
           */
           function activate () {
-
             if (lodash.find(vm.channel.members, 'id', user.id) !== undefined) {
               vm.isMember = true;
             }
-
-            $log.log('isMember', vm.isMember);
           }
 
           /**
@@ -107,7 +104,10 @@
                 .error(channelInviteError)
                 .then(function (response) {
                   vm.channel = response.data;
+                  activate();
                   $rootScope.$broadcast('channelUpdated', response.data);
+                  $rootScope.$broadcast('channelsUpdated');
+                  ngToast.success('Canal agregado.');
                 });
             });
           }
