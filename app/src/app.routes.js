@@ -245,12 +245,21 @@ angular
             })
             .state('dashboard.channel-explore', {
                 url: '/channel/:id',
-                templateUrl: '/src/channels/channel-explore.html',
-                controller: 'ChannelExploreController',
-                controllerAs: 'vm',
                 ncyBreadcrumb: {
                   label: '{{vm.channel.name}}',
                   parent: 'dashboard.project-explore({id:vm.project.id})'
+                },
+                views:{
+                        '':{
+                          templateUrl: '/src/channels/channel-explore.html',
+                          controller: 'ChannelExploreController',
+                          controllerAs: 'vm'
+                        },
+                        'channel-admin@dashboard.channel-explore':{
+                          templateUrl: '/src/channels/channel-admin.html',
+                          controller: 'ChannelAdminController',
+                          controllerAs: 'vmc',
+                        }
                 },
                 resolve: {
                   channel: ['dashboardServiceModel','channelService','$stateParams', function(dashboardServiceModel, channelService, $stateParams) {
@@ -260,8 +269,12 @@ angular
                             console.log('resolve channel', $stateParams.id, data);
                             return data.data;
                           });
+                   }],
+                   project: ['dashboardServiceModel', function (dashboardServiceModel) {
+                     return dashboardServiceModel.getCurrentProject();
                    }]
                }
+
             });
 
         $urlRouterProvider.otherwise('/');

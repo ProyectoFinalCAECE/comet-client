@@ -17,33 +17,8 @@
           <h2></h2>
           <h4 class="ProjDesc"></h4>
           <ul>
-            <li class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                  <i class="fa fa-wrench"></i>
-              </a>
-              <ul class="dropdown-menu dropdown-user">
-                  <li>
-                    <a href="#">Cerrar Canal</a>
-                  </li>
-                  <li>
-                    <a href="#">Editar Canal</a>
-                  </li>
-                  <li>
-                    <a href="#">...</a>
-                  </li>
-              </ul>
-            </li>
-              <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="fa fa-group"></i>
-                </a>
-                <ul class="dropdown-menu dropdown-user">
-                  <h4>Miembros</h4>
-                  <li ng-repeat="member in vm.project.members">
-                    <a href="#"> <i class="fa fa-circle text-navy"></i> {{member.alias}} </a>
-                  </li>
-                </ul>
-              </li>
+            <div ui-view="channel-admin">
+            </div>
             <li>
               <button ng-click="vm.invite()" ng-disabled="!vm.canInvite()" type="button" class="btn btn-primary" style="float:right; width:20px">+</button>
             </li>
