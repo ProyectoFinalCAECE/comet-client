@@ -104,20 +104,24 @@
           */
           function closeChannel() {
             $log.log('close', vm.channel.id);
-            channelService.close(vm.project.id, vm.channel.id).error(function(data) {
-              vm.validationErrors = $rootScope.helpers.loadServerErrors(data);
-              if (vm.validationErrors === null)
-              {
-                ngToast.danger('Ocurrió un error al consultar al servidor.');
-              }
-            }).then(function() {
-                var msg = 'El canal se cerró exitosamente.';
-                var dlg = dialogService.showModalAlert('Administrar canal', msg);
-                dlg.result.then(function () {
-                  $state.go('dashboard.project-explore');
-                }, function () {
-                  $state.go('dashboard.project-explore');
-                });
+            var msg = '¿Esta seguro que desea cerrar el canal?';
+            var dlg = dialogService.showModalConfirm('Administrar proyecto', msg);
+            dlg.result.then(function () {
+              channelService.close(vm.project.id, vm.channel.id).error(function(data) {
+                vm.validationErrors = $rootScope.helpers.loadServerErrors(data);
+                if (vm.validationErrors === null)
+                {
+                  ngToast.danger('Ocurrió un error al consultar al servidor.');
+                }
+              }).then(function() {
+                  var msg = 'El canal se cerró exitosamente.';
+                  var dlg = dialogService.showModalAlert('Administrar canal', msg);
+                  dlg.result.then(function () {
+                    $state.go('dashboard.project-explore');
+                  }, function () {
+                    $state.go('dashboard.project-explore');
+                  });
+              });
             });
           }
 
@@ -126,21 +130,25 @@
            * @desc calls the endpoint to delete the channel
           */
           function deleteChannel() {
-            $log.log('deleteChannel', vm.channel.id);
-            channelService.deleteChannel(vm.project.id, vm.channel.id).error(function(data) {
-              vm.validationErrors = $rootScope.helpers.loadServerErrors(data);
-              if (vm.validationErrors === null)
-              {
-                ngToast.danger('Ocurrió un error al consultar al servidor.');
-              }
-            }).then(function() {
-                var msg = 'El canal se eliminó exitosamente.';
-                var dlg = dialogService.showModalAlert('Administrar canal', msg);
-                dlg.result.then(function () {
-                  $state.go('dashboard.project-explore');
-                }, function () {
-                  $state.go('dashboard.project-explore');
-                });
+            var msg = '¿Esta seguro que desea eliminar el canal? Esta operación no puede revertirse.';
+            var dlg = dialogService.showModalConfirm('Administrar proyecto', msg);
+            dlg.result.then(function () {
+              $log.log('deleteChannel', vm.channel.id);
+              channelService.deleteChannel(vm.project.id, vm.channel.id).error(function(data) {
+                vm.validationErrors = $rootScope.helpers.loadServerErrors(data);
+                if (vm.validationErrors === null)
+                {
+                  ngToast.danger('Ocurrió un error al consultar al servidor.');
+                }
+              }).then(function() {
+                  var msg = 'El canal se eliminó exitosamente.';
+                  var dlg = dialogService.showModalAlert('Administrar canal', msg);
+                  dlg.result.then(function () {
+                    $state.go('dashboard.project-explore');
+                  }, function () {
+                    $state.go('dashboard.project-explore');
+                  });
+              });
             });
           }
         }
