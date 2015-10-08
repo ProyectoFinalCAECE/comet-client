@@ -114,12 +114,21 @@ angular
             })
             .state('dashboard.profile', {
                 url: '/profile',
-                templateUrl: '/src/user/user-profile.html',
-                controller: 'UserProfileController',
-                controllerAs: 'vm',
                 ncyBreadcrumb: {
                   label: 'Editar perfil'
-                }
+                },
+                views:{
+                        '':{
+                            templateUrl: '/src/user/user-profile.html',
+                            controller: 'UserProfileController',
+                            controllerAs: 'vm'
+                            },
+                        'resend-confirmation@dashboard.profile': {
+                            templateUrl: '/src/account/account-resend-confirm.html',
+                            controller: 'AccountConfirmController',
+                            controllerAs: 'vmc'
+                        }
+                      }
             })
             .state('dashboard.project-list', {
                 url: '/projects',
