@@ -53,7 +53,7 @@
           function resendConfirmation () {
             vm.resend = false;
 
-            accountService.resendConfirmation(vm.token).error(function(data) {
+            accountService.resendConfirmation('asd').error(function(data) {
               vm.resend = true;
               vm.resendError = true;
               console.log("error:" + data);

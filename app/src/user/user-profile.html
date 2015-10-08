@@ -119,6 +119,11 @@
                 </form>
               </tab>
               <tab select="vm.onTabSelected(3)">
+                <tab-heading>Reenviar Confirmación</tab-heading>
+                <div ui-view="resend-confirmation">
+                </div>
+              </tab>
+              <tab select="vm.onTabSelected(4)">
                 <tab-heading>Cerrar cuenta</tab-heading>
                 <form name="vm.frmCloseAccount" ng-submit="vm.closeAccount()" class="form-horizontal m-t" role="form" novalidate="">
                   <!-- Checkbox -->
