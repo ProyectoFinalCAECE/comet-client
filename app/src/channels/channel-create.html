@@ -31,14 +31,14 @@
       <!-- Es Privado -->
       <div class="form-group">
         <label class="col-sm-2 control-label">Es privado</label>
-        <div class="col-sm-10">
+        <div class="col-sm-5">
           <input type="checkbox" ng-model="vm.isPrivate" class="">
         </div>
       </div>
       <!-- Invitar -->
-      <div class="form-group">
+      <div class="form-group cometInput">
         <label class="col-sm-2 control-label">Participantes</label>
-        <div class="col-sm-10 cometInput">
+        <div class="col-sm-10">
           <ui-select multiple ng-model="vm.invites" theme="bootstrap">
             <ui-select-match placeholder="Buscar usuarios...">{{$item.alias}}</ui-select-match>
             <ui-select-choices repeat="member in vm.availableMembers | props: {firstName: $select.search, lastName: $select.search}">
