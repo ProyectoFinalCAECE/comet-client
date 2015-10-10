@@ -2,7 +2,7 @@
   <div class="row">
     <!-- No tiene canales -->
     <div ng-show="vmc.isEmpty" class="jumbotron text-center">
-        <p>No encontramos canales en este proyecto :(</p>
+        <p>No encontramos canales en este proyecto <i class="fa fa-frown-o"></i></p>
         <p>
           <a ng-click="vmc.gotoCreateChannel()" class="btn btn-xl btn-primary">Crear Canal</a>
         </p>
@@ -32,17 +32,21 @@
                 <thead>
                   <tr>
                     <th class="columnaCanal">Canal</th>
+                    <th class="columnaDescripcion">Descripcion</th>
                     <th class="columnaMiembros">Miembros</th>
                     <th class="columnaIntegraciones">Integraciones</th>
-                    <th class="columnaFecha">Fecha</th>
-                    <th class="columnaEstado">Estado</th>
+                    <th class="columnaFecha">Fecha Creacion</th>
+                    <th class="columnaFecha">Ultimo Mensaje</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr style="cursor: pointer;" ng-repeat="channel in vmc.channels | filter:vmc.filterQuery | orderBy:['-state', '-createdAt']" ui-sref="dashboard.channel-explore({id:channel.id})">
-                      <td class="columnaCanal">{{channel.name}} <span class="badge badge-success" ng-show="{{ channel.type === 'P' }}">
-                        P
-                      </span></td>
+                      <td class="columnaCanal">
+                        <b>{{channel.name}}</b>
+                      </td>
+                      <td class="columnaDescripcion">
+                        {{channel.description}}
+                      </td>
                       <td class="columnaMiembros">
                         <ul>
                           <li ng-repeat="member in channel.members | limitTo: 6">
@@ -55,22 +59,21 @@
                       </td>
                       <td class="columnaIntegraciones">
                         <ul>
+                        <!--
                           <li>
                             <img alt="image" class="img-circle" src="../../images/integraciones/googledrive.jpg" />
                           </li>
                           <li>
                             <img alt="image" class="img-circle" src="../../images/integraciones/dropbox.png" />
                           </li>
+                        -->
                           <li>
                             <img alt="image" class="img-circle" src="../../images/integraciones/github.png" />
                           </li>
                         </ul>
                       </td>
                       <td class="columnaFecha">{{channel.createdAt | date}}</td>
-                      <td class="columnaEstado">
-                        <i ng-show="channel.state == 'O'" class="fa fa-check text-navy" />
-                        <i ng-show="channel.state == 'C'" class="fa fa-times text-navy" />
-                      </td>
+                      <td class="columnaUltimoMensaje">{{channel.createdAt | date}}</td>
                   </tr>
                 </tbody>
               </table>

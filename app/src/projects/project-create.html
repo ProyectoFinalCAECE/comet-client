@@ -26,7 +26,7 @@
       </div>
       <!-- Invitar -->
       <div class="crearProyectoSubmit">
-        <h3>Personas a invitar</h3>
+        <label class="control-label">Personas a invitar</label>
         <div ng-repeat="invite in vm.invites" class="m-b" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'address_' + ($index + 1))}">
           <label class="col-sm-2 control-label"></label>
             <div class="input-group invitarEmails">

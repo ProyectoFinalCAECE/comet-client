@@ -15,7 +15,7 @@
   <div class="row">
     <!-- No tiene proyectos -->
     <div ng-show="vm.isEmpty" class="jumbotron text-center">
-        <p>No encontramos proyectos en los que participes :(</p>
+        <p>No encontramos proyectos en los que participes <i class="fa fa-frown-o"></i></p>
         <p>
           <a ng-click="vm.gotoCreateProject()" class="btn btn-xl btn-primary">Crear proyecto</a>
         </p>
@@ -68,7 +68,7 @@
                 Dueño
               </span>
             </div>
-            <h3><strong>{{project.name}}</strong></h3>
+            <h3><i class="fa fa-lock" style="padding-right:10px;padding-left:0px;"></i><strong>{{project.name}}</strong></h3>
             <p class="ProjDescCard">{{project.description}}</p>
             <ul class="miembrosProyecto">
               <li ng-repeat="member in filtered = (project.members | limitTo:6)">
