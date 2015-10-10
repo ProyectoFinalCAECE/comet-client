@@ -66,7 +66,7 @@
                           </li>
                         </ul>
                       </td>
-                      <td class="columnaFecha">{{channel.createdAt | date}}</td>
+                      <td class="columnaFecha">{{channel.createdAt | date:"dd MMM yyyy"}}</td>
                       <td class="columnaEstado">
                         <i ng-show="channel.state == 'O'" class="fa fa-check text-navy" />
                         <i ng-show="channel.state == 'C'" class="fa fa-times text-navy" />
