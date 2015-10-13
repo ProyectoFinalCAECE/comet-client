@@ -11,6 +11,7 @@
 
         ChannelListController.$inject = ['$rootScope',
                                          '$state',
+                                         'lodash',
                                          'filterFilter',
                                          'userService',
                                          'dialogService',
@@ -18,6 +19,7 @@
 
         function ChannelListController ($rootScope,
                                         $state,
+                                        lodash,
                                         filterFilter,
                                         userService,
                                         dialogService,
@@ -35,7 +37,18 @@
            * @desc controller activation logic
            */
           function activate () {
+
               vmc.channels = channels;
+
+              // only public and opened channels
+              lodash.remove(vmc.channels, function (c) {
+                // remove the closed projects
+                if (c.state !== 'O' || c.type === 'P') {
+                  return true;
+                }
+                return false;
+              });
+
               vmc.isEmpty = (vmc.channels.length === 0);
           }
 
