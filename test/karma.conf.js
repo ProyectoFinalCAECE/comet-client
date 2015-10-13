@@ -40,6 +40,7 @@ module.exports = function(config) {
       'bower_components/validator-js/validator.js',
       'bower_components/angular-utils-pagination/dirPagination.js',
       'bower_components/angular-mocks/angular-mocks.js',
+      'bower_components/ui-router-extras/release/ct-ui-router-extras.js',
       // endbower
       "app/scripts/**/*.js",
       "test/mock/**/*.js",

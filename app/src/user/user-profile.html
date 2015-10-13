@@ -1,7 +1,6 @@
 <div class="row wrapper border-bottom white-bg page-heading">
   <div class="col-lg-9">
       <h2>Perfil de <strong>{{ vm.user.firstName + ' ' + vm.user.lastName }}</strong></h2>
-      <div ncy-breadcrumb></div>
   </div>
 </div>
 <div class="row">
@@ -66,7 +65,7 @@
                   <div class="form-group">
                     <div class="col-sm-8 col-sm-offset-2">
                       <button class="btn btn-w-m btn-primary" type="submit">Guardar</button>
-                      <a class="btn btn-link" ui-sref="dashboard.project-list">Cancelar</a>
+                      <a class="btn btn-link" ng-click="vm.cancel()">Cancelar</a>
                     </div>
                   </div>
                 </form>
@@ -114,7 +113,7 @@
                   <div class="form-group m-t">
                     <div class="col-sm-8 col-sm-offset-4">
                       <button type="submit" class="btn btn-primary">Modificar contraseña</button>
-                      <a class="btn btn-link" ui-sref="dashboard.project-list">Cancelar</a>
+                      <a class="btn btn-link" ng-click="vm.cancel()">Cancelar</a>
                     </div>
                   </div>
                 </form>
@@ -149,7 +148,7 @@
                   <div class="form-group">
                     <div class="col-sm-8 col-sm-offset-4">
                       <button type="submit" class="btn btn-primary" ng-disabled="(vm.imSure == false)">Cerrar cuenta</button>
-                      <a class="btn btn-link" ui-sref="dashboard.project-list">Cancelar</a>
+                      <a class="btn btn-link" ng-click="vm.cancel()">Cancelar</a>
                     </div>
                   </div>
                 </form>

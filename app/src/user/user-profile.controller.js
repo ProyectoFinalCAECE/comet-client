@@ -13,6 +13,7 @@
                                          '$rootScope',
                                          '$scope',
                                          '$state',
+                                         '$previousState',
                                          'dialogService',
                                          'formsConfig',
                                          'dashboardServiceModel',
@@ -25,6 +26,7 @@
                                         $rootScope,
                                         $scope,
                                         $state,
+                                        $previousState,
                                         dialogService,
                                         formsConfig,
                                         dashboardServiceModel,
@@ -36,6 +38,7 @@
           var vm = this;
           vm.validationErrors = null;
           vm.onTabSelected = onTabSelected;
+          vm.cancel = cancel;
 
           // profile update
           vm.user = angular.copy(user);
@@ -61,26 +64,26 @@
             userService.update(vm.user).error(function(data) {
                 vm.validationErrors = $rootScope.helpers.loadServerErrors(data);
             }).then(function() {
-                if(vm.user.profilePicture.type.indexOf('image/') > -1){
-                    //updating profile picture if required
-                    userService.uploadProfilePicture(vm.user.profilePicture).error(function(data) {
-                        vm.validationErrors = $rootScope.helpers.loadServerErrors(data);
-                    }).then(function(response) {
-                      console.log('response is: '+ JSON.stringify(response));
-                      vm.user.profilePicture = response.data.profilePicture;
-                      var msg = 'Tus datos se actualizaron exitosamente.';
-                      var dlg = dialogService.showModalAlert('Editar Perfil', msg);
-                      dlg.result.finally(function () {
-                        $state.go('dashboard.project-list');
-                      });
-                    });
-                } else {
-                  var msg = 'Tus datos se actualizaron exitosamente.';
-                  var dlg = dialogService.showModalAlert('Editar Perfil', msg);
-                  dlg.result.finally(function () {
-                    $state.go('dashboard.project-list');
-                  });
-                }
+                // if(vm.user.profilePicture.type.indexOf('image/') > -1){
+                //     //updating profile picture if required
+                //     userService.uploadProfilePicture(vm.user.profilePicture).error(function(data) {
+                //         vm.validationErrors = $rootScope.helpers.loadServerErrors(data);
+                //     }).then(function(response) {
+                //       console.log('response is: '+ JSON.stringify(response));
+                //       vm.user.profilePicture = response.data.profilePicture;
+                //       var msg = 'Tus datos se actualizaron exitosamente.';
+                //       var dlg = dialogService.showModalAlert('Editar Perfil', msg);
+                //       dlg.result.finally(function () {
+                //         $state.go('dashboard.project-list');
+                //       });
+                //     });
+                // } else {
+                //   var msg = 'Tus datos se actualizaron exitosamente.';
+                //   var dlg = dialogService.showModalAlert('Editar Perfil', msg);
+                //   dlg.result.finally(function () {
+                //     $state.go('dashboard.project-list');
+                //   });
+                // }
             }).then(userUpdateSuccess);
           }
 
@@ -93,7 +96,7 @@
               var dlg = dialogService.showModalAlert('Editar Perfil', msg);
 
               dlg.result.finally(function () {
-                $state.go('dashboard.project-list');
+                $previousState.go();
               });
             });
           }
@@ -109,7 +112,7 @@
                 var msg = 'Tus datos se actualizaron exitosamente.';
                 var dlg = dialogService.showModalAlert('Editar Perfil', msg);
                 dlg.result.finally(function () {
-                  $state.go('dashboard.project-list');
+                  $previousState.go();
                 });
             });
           }
@@ -138,6 +141,14 @@
                                 $scope.imageSrc = result;
                             });
           };
+
+          /**
+           * @name cancel
+           * @desc send the user to the previos view
+           */
+          function cancel () {
+            $previousState.go();
+          }
 
           /**
            * @name onTabSelected

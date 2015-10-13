@@ -17,6 +17,7 @@
             'ngTouch',
             'angularUtils.directives.dirPagination',
             'ncy-angular-breadcrumb',
+            'ct.ui.router.extras.previous',
             'ui.bootstrap',
             'ui.bootstrap.showErrors',
             'ui.router',

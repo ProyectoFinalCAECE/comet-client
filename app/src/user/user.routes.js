@@ -23,9 +23,6 @@
       })
       .state('dashboard.profile', {
         url: '/profile',
-        ncyBreadcrumb: {
-          label: 'Editar perfil'
-        },
         views:{
           '':{
             templateUrl: '/src/user/user-profile.html',
