@@ -38,6 +38,7 @@ module.exports = function(config) {
       'bower_components/metisMenu/dist/metisMenu.js',
       'bower_components/ngtoast/dist/ngToast.js',
       'bower_components/validator-js/validator.js',
+      'bower_components/angular-utils-pagination/dirPagination.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       "app/scripts/**/*.js",

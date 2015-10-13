@@ -15,6 +15,7 @@
             'ngSanitize',
             'ngToast',
             'ngTouch',
+            'angularUtils.directives.dirPagination',
             'ncy-angular-breadcrumb',
             'ui.bootstrap',
             'ui.bootstrap.showErrors',

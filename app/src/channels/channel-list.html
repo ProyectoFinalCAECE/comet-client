@@ -41,7 +41,7 @@
                 </thead>
                 <tbody>
                   <tr style="cursor: pointer;"
-                      ng-repeat="channel in vmc.channels | filter:vmc.filterQuery | orderBy:['-state', '-createdAt']"
+                      dir-paginate="channel in vmc.channels | itemsPerPage: 5 | filter: vmc.filterQuery | orderBy:['-state', '-createdAt']"
                       ui-sref="dashboard.project.channel-explore({projectId: vm.project.id, channelId:channel.id})">
                       <td class="columnaCanal">
                         <b>{{channel.name}}</b>
@@ -79,6 +79,7 @@
                   </tr>
                 </tbody>
               </table>
+              <dir-pagination-controls/>
             </div>
           </div>
         </div>
