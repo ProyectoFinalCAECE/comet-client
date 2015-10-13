@@ -96,9 +96,7 @@
                 var msg = 'El proyecto "' + vm.project.name +
                           '" ha sido creado exitosamente.';
                 var dlg = dialogService.showModalAlert('Crear proyecto', msg);
-                dlg.result.then(function () {
-                  $state.go('dashboard.project-list');
-                }, function () {
+                dlg.result.finally(function () {
                   $state.go('dashboard.project-list');
                 });
             });

@@ -61,7 +61,7 @@
     <!-- listado de proyectos cerrados -->
     <div ng-hide="vm.closedProjectsEmpty" ng-repeat="project in vm.closedProjects | filter:vm.closedFilterQuery | orderBy:createdAt" class="col-lg-4 proyecto-lg-4">
       <div class="contact-box cometProjects text-muted">
-        <a ui-sref="dashboard.project-explore({id:project.id})">
+        <a ui-sref="dashboard.project.project-explore({id:project.id})">
           <div class="col-sm-8 proyecto-sm-8">
             <div>
               <span class="rolProyecto badge badge-warning" ng-show="project.isOwner">

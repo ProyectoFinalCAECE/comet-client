@@ -91,7 +91,6 @@
                 }
               });
             }).then(function() {
-
                 var index = vm.project.members.indexOf(member);
                 vm.project.members.splice(index, 1);
                 ngToast.success('El participante ha sido eliminado.');
@@ -116,10 +115,8 @@
               }).then(function() {
                   var msg = 'El canal se cerró exitosamente.';
                   var dlg = dialogService.showModalAlert('Administrar canal', msg);
-                  dlg.result.then(function () {
-                    $state.go('dashboard.project-explore');
-                  }, function () {
-                    $state.go('dashboard.project-explore');
+                  dlg.result.finally(function () {
+                    $state.go('dashboard.project.project-explore', { id: vm.project.id });
                   });
               });
             });
@@ -143,10 +140,8 @@
               }).then(function() {
                   var msg = 'El canal se eliminó exitosamente.';
                   var dlg = dialogService.showModalAlert('Administrar canal', msg);
-                  dlg.result.then(function () {
-                    $state.go('dashboard.project-explore');
-                  }, function () {
-                    $state.go('dashboard.project-explore');
+                  dlg.result.finally(function () {
+                    $state.go('dashboard.project.project-explore', { id: vm.project.id });
                   });
               });
             });

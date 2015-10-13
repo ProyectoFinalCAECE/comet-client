@@ -152,10 +152,8 @@
             }).then(function() {
                 var msg = 'Las invitaciones se enviaron exitosamente.';
                 var dlg = dialogService.showModalAlert('Administrar proyecto', msg);
-                dlg.result.then(function () {
-                  $state.go('dashboard.project-explore', { id: vm.project.id });
-                }, function () {
-                  $state.go('dashboard.project-explore', { id: vm.project.id });
+                dlg.result.finally(function () {
+                  $state.go('dashboard.project.project-explore', { id: vm.project.id });
                 });
             });
           }
@@ -175,9 +173,7 @@
             }).then(function() {
                 var msg = 'El proyecto se cerró exitosamente.';
                 var dlg = dialogService.showModalAlert('Administrar proyecto', msg);
-                dlg.result.then(function () {
-                  $state.go('dashboard.project-list');
-                }, function () {
+                dlg.result.finally(function () {
                   $state.go('dashboard.project-list');
                 });
             });

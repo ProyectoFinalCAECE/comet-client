@@ -70,18 +70,14 @@
                       vm.user.profilePicture = response.data.profilePicture;
                       var msg = 'Tus datos se actualizaron exitosamente.';
                       var dlg = dialogService.showModalAlert('Editar Perfil', msg);
-                      dlg.result.then(function () {
-                        $state.go('dashboard.project-list');
-                      }, function () {
+                      dlg.result.finally(function () {
                         $state.go('dashboard.project-list');
                       });
                     });
                 } else {
                   var msg = 'Tus datos se actualizaron exitosamente.';
                   var dlg = dialogService.showModalAlert('Editar Perfil', msg);
-                  dlg.result.then(function () {
-                    $state.go('dashboard.project-list');
-                  }, function () {
+                  dlg.result.finally(function () {
                     $state.go('dashboard.project-list');
                   });
                 }
@@ -96,9 +92,7 @@
               var msg = 'Tus datos se actualizaron exitosamente.';
               var dlg = dialogService.showModalAlert('Editar Perfil', msg);
 
-              dlg.result.then(function () {
-                $state.go('dashboard.project-list');
-              }, function () {
+              dlg.result.finally(function () {
                 $state.go('dashboard.project-list');
               });
             });
@@ -114,9 +108,7 @@
             }).then(function() {
                 var msg = 'Tus datos se actualizaron exitosamente.';
                 var dlg = dialogService.showModalAlert('Editar Perfil', msg);
-                dlg.result.then(function () {
-                  $state.go('dashboard.project-list');
-                }, function () {
+                dlg.result.finally(function () {
                   $state.go('dashboard.project-list');
                 });
             });
