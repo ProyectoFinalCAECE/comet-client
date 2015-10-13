@@ -38,6 +38,9 @@
               </li>
               <li ng-show="vm.hiddenMembersCount(project.members, filtered) > 0"><p>+{{vm.hiddenMembersCount(project.members, filtered)}}</p></li>
             </ul>
+            <p class="text-muted text-right">
+              Creado el {{project.createdAt | date}}
+            </p>
           </div>
           <div class="clearfix"></div>
         </a>
@@ -76,6 +79,9 @@
               </li>
               <li ng-show="vm.hiddenMembersCount(project.members, filtered) > 0"><p>+{{vm.hiddenMembersCount(project.members, filtered)}}</p></li>
             </ul>
+            <p class="text-muted text-right">
+              Cerrado el {{project.closedAt | date }}
+            </p>
           </div>
         </a>
         <div class="clearfix"></div>
