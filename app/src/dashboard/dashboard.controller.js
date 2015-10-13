@@ -32,8 +32,7 @@
 
           var vm = this;
 
-          dashboardServiceModel.setCurrentUser(user);
-          vm.user = dashboardServiceModel.getCurrentUser();
+          vm.user = user;
           vm.project = dashboardServiceModel.getCurrentProject();
 
           vm.publicChannels = null;

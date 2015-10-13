@@ -16,12 +16,15 @@
       controller: 'DashboardController',
       controllerAs: 'vm',
       ncyBreadcrumb: {
-        label: 'Inicio'
+        label: 'Proyectos'
       },
       redirectTo: 'dashboard.project-list',
       resolve: {
-        user: ['userService', function(userService) {
-          return userService.get();
+        user: ['userService', 'dashboardServiceModel', function(userService, dashboardServiceModel) {
+            return userService.get().then(function (user) {
+              dashboardServiceModel.setCurrentUser(user);
+              return user;
+            });
         }]
       },
       onEnter: ['$state', 'authService', function ($state, authService) {

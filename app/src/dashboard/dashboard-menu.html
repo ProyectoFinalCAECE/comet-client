@@ -25,7 +25,9 @@
           </a>
           <ul class="nav nav-second-level">
             <li ng-repeat="channel in vm.publicChannels">
-              <a ui-sref="dashboard.channel-explore({id:channel.id})">{{channel.name}}</a>
+              <a ui-sref="dashboard.project.channel-explore({projectId: vm.project.id, channelId:channel.id})">
+                {{channel.name}}
+              </a>
             </li>
           </ul>
         </li>
@@ -48,7 +50,9 @@
           </a>
           <ul class="nav nav-second-level">
             <li ng-repeat="channel in vm.privateChannels">
-              <a ui-sref="dashboard.channel-explore({id:channel.id})">{{channel.name}}</a>
+              <a ui-sref="dashboard.project.channel-explore({projectId: vm.project.id, channelId:channel.id})">
+                {{channel.name}}
+              </a>
             </li>
           </ul>
         </li>

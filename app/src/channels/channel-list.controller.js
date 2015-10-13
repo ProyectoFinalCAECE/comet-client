@@ -47,7 +47,7 @@
           function gotoCreateChannel(){
             userService.getCurrentUser().then(function (user) {
               if (user && user.confirmed) {
-                $state.go('dashboard.channel-create');
+                $state.go('dashboard.project.channel-create');
               }
               else {
                 dialogService.showModalAlert('Crear Canal', 'Debes confirmar tu cuenta para poder crear un proyecto');

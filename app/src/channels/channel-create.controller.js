@@ -41,6 +41,10 @@
           vm.isPrivate = false;
           vm.create = create;
 
+          console.log('channel create controller');
+          //$log.log('ChannelCreateController - project', project);
+          //$log.log('ChannelCreateController - user', user);
+
           activate();
 
           function activate () {
@@ -89,17 +93,18 @@
            * @desc shows a dialog indicating a successful operation
           */
           function channelCreated (response) {
+            // notify changes
+            $rootScope.$broadcast("channelsUpdated");
+
+            // show dialog to the user
             var createdChannel = response.data;
             var msg = 'El canal "' + createdChannel.name +
                       '" ha sido creado exitosamente.';
-
-            $rootScope.$broadcast("channelsUpdated");
-
             var dlg = dialogService.showModalAlert('Crear canal', msg);
-            dlg.result.then(function () {
-              $state.go('dashboard.channel-explore', { id: createdChannel.id  });
-            }, function () {
-              $state.go('dashboard.channel-explore', { id: createdChannel.id  });
+            dlg.result.finally(function () {
+              $state.go('dashboard.project.channel-explore', {
+                projectId: vm.project.id,  channelId: createdChannel.id
+              });
             });
           }
 

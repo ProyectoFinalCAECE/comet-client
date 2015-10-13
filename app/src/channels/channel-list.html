@@ -22,7 +22,7 @@
                     <input ng-model="vmc.filterQuery" type="text" placeholder="Filtrar..." class="form-control" name="top-search"/>
                   </li>
                   <li class="buttonRight">
-                    <button ui-sref="dashboard.channel-create" type="button" name="btnCrearProyecto buttonRight" class="btn btn-primary" style="float:right">Crear Canal</button>
+                    <button ui-sref="dashboard.project.channel-create" type="button" name="btnCrearProyecto buttonRight" class="btn btn-primary" style="float:right">Crear Canal</button>
                   </li>
                 </ol>
               </div>
@@ -40,7 +40,9 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr style="cursor: pointer;" ng-repeat="channel in vmc.channels | filter:vmc.filterQuery | orderBy:['-state', '-createdAt']" ui-sref="dashboard.channel-explore({id:channel.id})">
+                  <tr style="cursor: pointer;"
+                      ng-repeat="channel in vmc.channels | filter:vmc.filterQuery | orderBy:['-state', '-createdAt']"
+                      ui-sref="dashboard.project.channel-explore({projectId: vm.project.id, channelId:channel.id})">
                       <td class="columnaCanal">
                         <b>{{channel.name}}</b>
                       </td>

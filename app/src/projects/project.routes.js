@@ -25,28 +25,34 @@
           }]
         }
       })
-      .state('dashboard.project-explore', {
-        url: '/project/:id',
+      .state('dashboard.project', {
+        abstract: true,
+        url: '/projects/:id',
+        resolve: {
+          project: ['$stateParams', '$state', 'projectService', 'dashboardServiceModel',
+          function ($stateParams, $state, projectService, dashboardServiceModel) {
+            console.log('dashboard.project resolve', $stateParams.id);
+            return projectService.getById($stateParams.id).error(function() {
+              $state.go('dashboard');
+            }).then(function (response) {
+              dashboardServiceModel.setCurrentProject(response.data);
+              return response.data;
+            });
+          }]
+        }
+      })
+      .state('dashboard.project.project-explore', {
+        url: '',
         ncyBreadcrumb: {
-          label: '{{vm.project.name}}',
-          parent: 'dashboard.project-list'
+          label: '{{vm.project.name}}'
         },
         views:{
-          '':{
+          '@dashboard': {
             templateUrl: '/src/projects/project-explore.html',
             controller: 'ProjectExploreController',
-            controllerAs: 'vm',
-            resolve: {
-              project: ['projectService', '$stateParams', 'authService', '$state', function (projectService, $stateParams, authService, $state) {
-                return projectService.getById($stateParams.id).error(function() {
-                  $state.go('dashboard');
-                }).then(function (response) {
-                  return response.data;
-                });
-              }]
-            }
+            controllerAs: 'vm'
           },
-          'channels@dashboard.project-explore': {
+          'channels@dashboard.project.project-explore': {
             templateUrl: '/src/channels/channel-list.html',
             controller: 'ChannelListController',
             controllerAs: 'vmc',

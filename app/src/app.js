@@ -3,11 +3,9 @@
     'use strict';
 
     /**
-     * @ngdoc overview
      * @name cometApp
      * @description
      * # cometApp
-     *
      * Main module of the application.
      */
     angular

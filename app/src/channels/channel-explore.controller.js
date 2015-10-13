@@ -140,7 +140,7 @@
                   return vm.project;
                 },
                 user: function () {
-                  return dashboardServiceModel.getCurrentUser();
+                  return user;
                 },
                 channel: function () {
                   return vm.channel;
