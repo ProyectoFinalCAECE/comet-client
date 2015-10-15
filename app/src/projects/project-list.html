@@ -7,6 +7,7 @@
         </li>
         <li>
           <button ng-click="vm.gotoCreateProject()" type="button" name="btnCrearProyecto" class="btn btn-primary" style="float:right">Crear Proyecto</button>
+          <a style="float: right; margin-top: 15px; margin-right: 20px;" ui-sref="dashboard.project-closed-list">Ver proyectos cerrados</a>
         </li>
       </ol>
   </div>
@@ -44,47 +45,6 @@
           </div>
           <div class="clearfix"></div>
         </a>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- proyectos cerrados -->
-<div ng-hide="vm.closedProjectsEmpty" class="row wrapper border-bottom white-bg page-heading">
-  <div class="col-lg-9">
-    <h2>Proyectos Cerrados</h2>
-	<ol class="breadcrumb2">
-		<li>
-			<input ng-model="vm.closedFilterQuery" type="text" placeholder="Filtrar..." class="form-control">
-		</li>
-	</ol>
-  </div>
-</div>
-<div class="wrapper wrapper-content">
-  <div class="row">
-    <!-- listado de proyectos cerrados -->
-    <div ng-hide="vm.closedProjectsEmpty" ng-repeat="project in vm.closedProjects | filter:vm.closedFilterQuery | orderBy:createdAt" class="col-lg-4 proyecto-lg-4">
-      <div class="contact-box cometProjects text-muted">
-        <a ui-sref="dashboard.project.project-explore({id:project.id})">
-          <div class="col-sm-8 proyecto-sm-8">
-            <div>
-              <span class="rolProyecto badge badge-warning" ng-show="project.isOwner">
-                Dueño
-              </span>
-            </div>
-            <h3><i class="fa fa-lock" style="padding-right:10px;padding-left:0px;"></i><strong>{{project.name}}</strong></h3>
-            <p class="ProjDescCard">{{project.description}}</p>
-            <ul class="miembrosProyecto">
-              <li ng-repeat="member in filtered = (project.members | limitTo:6)">
-                <img alt="image" class="img-circle" title="{{member.alias}}" ng-src="{{member.profilePicture}}" />
-              </li>
-              <li ng-show="vm.hiddenMembersCount(project.members, filtered) > 0"><p>+{{vm.hiddenMembersCount(project.members, filtered)}}</p></li>
-            </ul>
-            <p class="text-muted text-right">
-              Cerrado el {{project.closedAt | date }}
-            </p>
-          </div>
-        </a>
-        <div class="clearfix"></div>
       </div>
     </div>
   </div>

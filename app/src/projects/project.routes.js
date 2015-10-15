@@ -25,6 +25,22 @@
           }]
         }
       })
+      .state('dashboard.project-closed-list', {
+        url: '/projects/closed',
+        templateUrl: '/src/projects/project-closed-list.html',
+        controller: 'ProjectClosedListController',
+        controllerAs: 'vm',
+        ncyBreadcrumb: {
+          label: 'Cerrados'
+        },
+        resolve: {
+          projects: ['projectService', function (projectService) {
+            return projectService.getAll().then(function (response) {
+              return response.data;
+            });
+          }]
+        }
+      })
       .state('dashboard.project', {
         abstract: true,
         url: '/projects/:id',

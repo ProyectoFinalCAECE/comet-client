@@ -1,0 +1,81 @@
+<div class="row wrapper border-bottom white-bg page-heading" data-view="project-closed-list">
+  <div class="col-lg-9">
+    <h2><strong>Proyectos</strong></h2>
+    <button ui-sref="dashboard.project-list" type="button" name="btnCrearProyecto buttonRight" class="btn btn-primary" style="float:right">Volver</button>
+    <h4>Proyectos cerrados de los cuales has formado parte</h4>
+    <ol class="breadcrumb2">
+      <li>
+        <div ncy-breadcrumb></div>
+      </li>
+    </ol>
+  </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+  <div class="row">
+    <!-- No tiene proyectos -->
+    <div ng-show="vm.isEmpty" class="jumbotron text-center">
+        <p>No hay proyectos cerrados</p>
+    </div>
+  </div>
+  <div ng-hide="vm.closedProjectsEmpty">
+    <div class="col-lg-12">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
+          <h5>Proyectos cerrados</h5>
+        </div>
+        <div class="ibox-content">
+          <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-lg-9">
+              <ol class="breadcrumb2">
+                <li>
+                  <input ng-model="vm.filterQuery" type="text" placeholder="Filtrar..." class="form-control" name="top-search"/>
+                </li>
+              </ol>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th class="columnaCanal">Nombre</th>
+                  <th class="columnaDescripcion">Descripcion</th>
+                  <th class="columnaMiembros">Miembros</th>
+                  <th class="columnaIntegraciones">Integraciones</th>
+                  <th class="columnaFecha">Fecha Creacion</th>
+                  <th class="columnaFecha">Fecha Cierre</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="cursor: pointer;"
+                    dir-paginate="project in vm.closedProjects | filter: vm.filterQuery | itemsPerPage: 5 | orderBy:['-closedAt']"
+                    ui-sref="dashboard.project.project-explore({id: project.id})">
+                    <td class="columnaCanal">
+                      <b>{{project.name}}</b>
+                    </td>
+                    <td class="columnaDescripcion">
+                      {{project.description}}
+                    </td>
+                    <td class="columnaMiembros">
+                      <ul>
+                        <li ng-repeat="member in project.members | limitTo: 6">
+                          <img alt="image" class="img-circle" title="{{member.alias}}" ng-src="{{member.profilePicture}}" />
+                        </li>
+                        <li ng-show="project.members.length > 6">
+                          <p>+{{project.members.length - 6 }}</p>
+                        </li>
+                      </ul>
+                    </td>
+                    <td class="columnaIntegraciones">
+                    </td>
+                    <td class="columnaFecha">{{project.createdAt | date}}</td>
+                    <td class="columnaUltimoMensaje">{{project.closedAt | date}}</td>
+                </tr>
+              </tbody>
+            </table>
+            <dir-pagination-controls/>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
