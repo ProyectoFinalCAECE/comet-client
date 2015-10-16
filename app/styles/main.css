@@ -356,14 +356,14 @@
 
 .ExplorarCanalLeftSidebar{
   float: left;
-  width:88%;
+  width:  220px;
 
 }
 
 .ExplorarCanalRightSidebar{
-  float: left;
-  width:  12%;
-  padding-top: 80px;  /*REMPLANTEAR!!!! */
+  float: right;
+  width:  220px;
+  padding-top: 82px;  /*REMPLANTEAR!!!! */
 }
 
 .ExplorarCanalRightSidebar li{

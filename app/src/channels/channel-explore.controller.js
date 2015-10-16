@@ -46,6 +46,7 @@
           vm.invite = invite;
           vm.isMember = false;
           vm.canInvite = canInvite;
+          vm.exit = exit;
 
           activate();
 
@@ -82,6 +83,16 @@
               }
             }
           }
+
+          /*Alan: Test para probar el html. Reubicar donde corresponda!.*/
+          /**
+           * @name exit
+           * @desc opens the 'exit channel' dialog
+          */
+          function exit () {
+                showExitDialog();
+          }
+
 
           /**
            * @name showAddCurrentMemberDialog
@@ -152,5 +163,32 @@
              $rootScope.$broadcast('channelUpdated', updatedChannel);
            });
           }
+
+            /*Alan: Test para probar el html. Reubicar donde corresponda!.*/
+            function showExitDialog () {
+              var modalInstance = $modal.open({
+                templateUrl: '/src/channels/channel-exit.html',
+                controller: 'ChannelInviteController',
+                controllerAs: 'vm',
+                size: 'md',
+                backdrop: 'static',
+                resolve: {
+                  project: function () {
+                    return vm.project;
+                  },
+                  user: function () {
+                    return user;
+                  },
+                  channel: function () {
+                    return vm.channel;
+                  }
+               }
+             });
+             /*
+             modalInstance.result.then(function (updatedChannel) {
+               vm.channel = updatedChannel;
+               $rootScope.$broadcast('channelUpdated', updatedChannel);
+             });*/
+           }
         }
 })();
