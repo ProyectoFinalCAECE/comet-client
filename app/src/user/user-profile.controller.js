@@ -55,6 +55,16 @@
           vm.imSure = false;
           vm.closeAccount = closeAccount;
 
+          activate();
+
+          /**
+           * @name activate
+           * @desc controler activation logic
+           */
+          function activate () {
+            dashboardServiceModel.setCurrentProject(null);
+          }
+
           /**
            * @name update
            * @desc calls the backend endpoint to update the user profile
@@ -96,7 +106,7 @@
               var dlg = dialogService.showModalAlert('Editar Perfil', msg);
 
               dlg.result.finally(function () {
-                $previousState.go();
+                gotoPreviousState();
               });
             });
           }
@@ -112,7 +122,7 @@
                 var msg = 'Tus datos se actualizaron exitosamente.';
                 var dlg = dialogService.showModalAlert('Editar Perfil', msg);
                 dlg.result.finally(function () {
-                  $previousState.go();
+                  gotoPreviousState();
                 });
             });
           }
@@ -147,7 +157,7 @@
            * @desc send the user to the previos view
            */
           function cancel () {
-            $previousState.go();
+            gotoPreviousState();
           }
 
           /**
@@ -157,6 +167,20 @@
           function onTabSelected() {
             // reset validation state
             vm.validationErrors = null;
+          }
+
+          /**
+           * @name gotoPreviousState
+           * @desc navigates to the previos state. if there is no previous state
+           *       then to the dashboard
+           */
+          function gotoPreviousState() {
+            try {
+              $previousState.go();
+            }
+            catch (e) {
+              $state.go('dashboard');
+            }
           }
       }
 })();
