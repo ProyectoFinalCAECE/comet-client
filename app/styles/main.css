@@ -359,6 +359,11 @@
   float: right;
  }
 
+ .ButtonAdminList div{
+   float: right;
+   padding-right: 20px;
+  }
+
 .ButtonAdminList li{
   padding-left:20px;
   position: relative;
@@ -394,7 +399,7 @@
 .messageInputText{
   position:fixed;
   background-color: white;
-  bottom:10px;
+  bottom:0;
   height:45px;
   width:85%;
   padding-top:5px;
@@ -406,4 +411,5 @@
 
 .messageInputText textarea{
   height:35px;
+  overflow:hidden;
 }
