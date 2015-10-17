@@ -61,22 +61,6 @@
             // notifications
 
 
-            chatService.on('message', function (data) {
-              // $scope.name = data.name;
-              // $scope.users = data.users;
-              $log.log('chatService data', data);
-              $log.log('chatService message', data.message);
-            });
-
-            chatService.emit('join-room', {
-              room: '123'
-            });
-
-            chatService.emit('message', {
-              room: '123',
-              message: 'Hola juan'
-            });
-
             // listen to project updates
             $scope.$on('currentProjectUpdated', function() {
               vm.project = dashboardServiceModel.getCurrentProject();

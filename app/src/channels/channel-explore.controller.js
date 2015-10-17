@@ -50,37 +50,79 @@
           vm.validationErrors = null;
           vm.isMember = false;
           vm.message = null;
+          vm.messages = [];
           vm.invite = invite;
           vm.canInvite = canInvite;
           vm.sendMessage = sendMessage;
 
           activate();
 
-          // listen to channel updates
-          $scope.$on('channelUpdated', function(event, args) {
-            vm.channel = args.channel;
-            activate();
-          });
-
-          chatService.on('init', function (data) {
-            // $scope.name = data.name;
-            // $scope.users = data.users;
-            $log.log('chatService init', data);
-          });
-
-          chatService.on('send:message', function (message) {
-            $log.log('chatService message received', message);
-          });
-
           /**
            * @name activate
            * @desc controller activation logic
           */
           function activate () {
+
             if (lodash.find(vm.channel.members, 'id', user.id) !== undefined) {
               vm.isMember = true;
             }
+
             vm.isClosed = (vm.channel.state === 'C');
+
+            // listen to channel updates
+            $scope.$on('channelUpdated', function(event, args) {
+              vm.channel = args.channel;
+              activate();
+            });
+
+            // initialize chat session
+            chatService.emit('join-room', {
+              room: vm.channel.id
+            });
+
+            // listen to new messages
+            chatService.on('message', function (data) {
+              processMessageReceived(data);
+            });
+          }
+
+          /**
+           * @name processMessageReceived
+           * @desc process a message received on the channel
+          */
+          function processMessageReceived (data) {
+
+            // data validation
+            if (!data || !data.message) {
+              $log.log('Mensaje recibido: invalido');
+              return ;
+            }
+
+            var msgPayload = data.message;
+
+            // convert server date to local date
+            msgPayload.date = convertUTCDateToLocalDate(new Date(msgPayload.date));
+
+            // add message to message list
+            addMessageToList(msgPayload);
+          }
+
+          /**
+           * @name convertUTCDateToLocalDate
+           * @desc converts a UTC date to local datetime
+           *       http://stackoverflow.com/questions/6525538/convert-utc-date-time-to-local-date-time-using-javascript
+          */
+          function convertUTCDateToLocalDate(date) {
+
+            var newDate = new Date(date.getTime() +
+                          date.getTimezoneOffset() * 60 * 1000);
+
+            var offset = date.getTimezoneOffset() / 60;
+            var hours = date.getHours();
+
+            newDate.setHours(hours - offset);
+
+            return newDate;
           }
 
           /**
@@ -88,11 +130,34 @@
            * @desc send message to the channel
           */
           function sendMessage() {
-            console.log('sendMessage', vm.message);
-            chatService.emit('send:message', {
-              message: vm.message
+
+            // construct the message payload
+            var msgPayload = {
+              text: vm.message,
+              user: user.id,
+              // for local use only, the server overwrites the date
+              date: new Date().getTime()
+            };
+
+            // send the data to the server
+            chatService.emit('message', {
+              room: vm.channel.id,
+              message: {
+                message: msgPayload
+              }
             });
+
+            // add the message to the view
+            addMessageToList(msgPayload);
             vm.message = '';
+          }
+
+          /**
+           * @name addMessageToList
+           * @desc adds the message to the list so it can be viewed on the page
+          */
+          function addMessageToList(msg) {
+            vm.messages.push(msg);
           }
 
           /**
