@@ -63,6 +63,15 @@
           controller: 'ChannelClosedListController',
           controllerAs: 'vm'
         }
+      },
+      resolve: {
+        channels: ['channelService', '$stateParams', '$state', function (channelService, $stateParams, $state) {
+          return channelService.getAll($stateParams.id).error(function() {
+            $state.go('dashboard');
+          }).then(function (response) {
+            return response.data;
+          });
+        }]
       }
       });
     }

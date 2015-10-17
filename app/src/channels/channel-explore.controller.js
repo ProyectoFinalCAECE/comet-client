@@ -11,6 +11,7 @@
 
         ChannelExploreController.$inject = ['$log',
                                            '$rootScope',
+                                           '$scope',
                                            '$state',
                                            '$timeout',
                                            '$modal',
@@ -26,6 +27,7 @@
 
         function ChannelExploreController ($log,
                                           $rootScope,
+                                          $scope,
                                           $state,
                                           $timeout,
                                           $modal,
@@ -41,6 +43,7 @@
 
           var vm = this;
           vm.channel = channel;
+          vm.isClosed = false;
           vm.project = project;
           vm.validationErrors = null;
           vm.invite = invite;
@@ -48,6 +51,12 @@
           vm.canInvite = canInvite;
 
           activate();
+
+          // listen to channel updates
+          $scope.$on('channelUpdated', function(event, args) {
+            vm.channel = args.channel;
+            activate();
+          });
 
           /**
            * @name activate
@@ -57,6 +66,8 @@
             if (lodash.find(vm.channel.members, 'id', user.id) !== undefined) {
               vm.isMember = true;
             }
+
+            vm.isClosed = (vm.channel.state === 'C');
           }
 
           /**
@@ -64,6 +75,10 @@
            * @desc returns if the user can add members to the channel
           */
           function canInvite () {
+            if (vm.isClosed) {
+              return false;
+            }
+
             return (vm.channel.members.length < vm.project.members.length);
           }
 
@@ -103,9 +118,8 @@
               channelService.invite(vm.project.id, vm.channel.id, invites)
                 .error(channelInviteError)
                 .then(function (response) {
-                  vm.channel = response.data;
-                  activate();
-                  $rootScope.$broadcast('channelUpdated', response.data);
+                  console.log('add current', response.data);
+                  $rootScope.$broadcast('channelUpdated', { channel: response.data });
                   $rootScope.$broadcast('channelsUpdated');
                   ngToast.success('Canal agregado.');
                 });
@@ -147,9 +161,8 @@
                 }
              }
            });
-           modalInstance.result.then(function (updatedChannel) {
-             vm.channel = updatedChannel;
-             $rootScope.$broadcast('channelUpdated', updatedChannel);
+           modalInstance.result.then(function (response) {
+             $rootScope.$broadcast('channelUpdated', response.data);
            });
           }
       }

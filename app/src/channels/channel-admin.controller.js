@@ -31,6 +31,7 @@
 
           var vm = this;
           vm.channel = channel;
+          vm.isClosed = false;
           vm.project = project;
           vm.validationErrors = null;
 
@@ -58,7 +59,7 @@
            * @desc controller activation logic
           */
           function activate () {
-
+            vm.isClosed = (vm.channel.state === 'C');
           }
 
           /**

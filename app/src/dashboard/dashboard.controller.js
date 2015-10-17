@@ -65,7 +65,7 @@
               vm.user = dashboardServiceModel.getCurrentUser();
             });
 
-            // listen to user updates
+            // listen to channel updates
             $scope.$on('channelsUpdated', function() {
               loadChannels(vm.project);
             });

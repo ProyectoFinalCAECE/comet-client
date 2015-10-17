@@ -15,6 +15,7 @@
                                                'filterFilter',
                                                'userService',
                                                'dialogService',
+                                               'project',
                                                'channels'];
 
         function ChannelClosedListController ($rootScope,
@@ -23,9 +24,11 @@
                                               filterFilter,
                                               userService,
                                               dialogService,
+                                              project,
                                               channels) {
 
           var vm = this;
+          vm.project = project;
           vm.channels = null;
           vm.isEmpty = true;
 
