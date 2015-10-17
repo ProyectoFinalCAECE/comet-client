@@ -9,6 +9,9 @@
     chatService.$inject = ['socketFactory'];
 
     function chatService (socketFactory) {
-      return socketFactory();
+      //return socketFactory();
+      return socketFactory({
+        ioSocket: window.io.connect('/messages')
+      });
     }
 })();

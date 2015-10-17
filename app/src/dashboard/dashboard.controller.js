@@ -67,6 +67,10 @@
               $log.log('chatService init', data);
             });
 
+            chatService.emit('send:message', {
+              message: 'Hola juan'
+            });
+
             // listen to project updates
             $scope.$on('currentProjectUpdated', function() {
               vm.project = dashboardServiceModel.getCurrentProject();
