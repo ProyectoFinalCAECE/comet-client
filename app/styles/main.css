@@ -354,24 +354,17 @@
 
 }
 
-.ExplorarCanalLeftSidebar{
-  float: left;
-  width:  220px;
 
-}
-
-.ExplorarCanalRightSidebar{
+.ButtonAdminList{
   float: right;
-  width:  220px;
-  padding-top: 82px;  /*REMPLANTEAR!!!! */
-}
+ }
 
-.ExplorarCanalRightSidebar li{
+.ButtonAdminList li{
   padding-left:20px;
   position: relative;
 }
 
-.ExplorarCanalRightSidebar li a.disabled {
+.ButtonAdminList li a.disabled {
   color: #CCC;
   cursor:default;
 }
@@ -396,4 +389,21 @@
   border: 1px solid rgb(229, 230, 231);
   padding: 3px;
   text-align: center;
+}
+
+.messageInputText{
+  position:fixed;
+  background-color: white;
+  bottom:10px;
+  height:45px;
+  width:85%;
+  padding-top:5px;
+}
+
+.messageInputText .fa{
+  font-size:30px;
+}
+
+.messageInputText textarea{
+  height:35px;
 }
