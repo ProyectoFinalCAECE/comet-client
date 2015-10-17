@@ -20,6 +20,7 @@
                                            'constraints',
                                            'dialogService',
                                            'dashboardServiceModel',
+                                           'chatService',
                                            'channelService',
                                            'user',
                                            'project',
@@ -36,19 +37,22 @@
                                           constraints,
                                           dialogService,
                                           dashboardServiceModel,
+                                          chatService,
                                           channelService,
                                           user,
                                           project,
                                           channel) {
 
           var vm = this;
+          vm.project = project;
           vm.channel = channel;
           vm.isClosed = false;
-          vm.project = project;
           vm.validationErrors = null;
-          vm.invite = invite;
           vm.isMember = false;
+          vm.message = null;
+          vm.invite = invite;
           vm.canInvite = canInvite;
+          vm.sendMessage = sendMessage;
 
           activate();
 
@@ -56,6 +60,16 @@
           $scope.$on('channelUpdated', function(event, args) {
             vm.channel = args.channel;
             activate();
+          });
+
+          chatService.on('init', function (data) {
+            // $scope.name = data.name;
+            // $scope.users = data.users;
+            $log.log('chatService init', data);
+          });
+
+          chatService.on('send:message', function (message) {
+            $log.log('chatService message received', message);
           });
 
           /**
@@ -66,8 +80,19 @@
             if (lodash.find(vm.channel.members, 'id', user.id) !== undefined) {
               vm.isMember = true;
             }
-
             vm.isClosed = (vm.channel.state === 'C');
+          }
+
+          /**
+           * @name sendMessage
+           * @desc send message to the channel
+          */
+          function sendMessage() {
+            console.log('sendMessage', vm.message);
+            chatService.emit('send:message', {
+              message: vm.message
+            });
+            vm.message = '';
           }
 
           /**

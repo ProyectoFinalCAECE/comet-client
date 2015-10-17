@@ -10,14 +10,15 @@
      */
     angular
         .module('cometApp', [
+            'angularUtils.directives.dirPagination',
+            'btford.socket-io',
+            'ct.ui.router.extras.previous',
+            'ncy-angular-breadcrumb',
             'ngAnimate',
             'ngMessages',
             'ngSanitize',
             'ngToast',
             'ngTouch',
-            'angularUtils.directives.dirPagination',
-            'ncy-angular-breadcrumb',
-            'ct.ui.router.extras.previous',
             'ui.bootstrap',
             'ui.bootstrap.showErrors',
             'ui.router',

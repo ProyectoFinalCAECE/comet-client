@@ -17,6 +17,7 @@
                                        'dashboardServiceModel',
                                        'accountService',
                                        'channelService',
+                                       'chatService',
                                        'user'];
 
         function DashboardController ($log,
@@ -28,6 +29,7 @@
                                       dashboardServiceModel,
                                       accountService,
                                       channelService,
+                                      chatService,
                                       user) {
 
           var vm = this;
@@ -47,12 +49,23 @@
            */
           function activate() {
 
+            console.log(user);
+
             if (!vm.user.confirmed) {
               ngToast.warning({
                 content: 'Recuerda confirmar tu dirección de correo.',
                 dismissButton: true
               });
             }
+
+            // notifications
+
+
+            chatService.on('init', function (data) {
+              // $scope.name = data.name;
+              // $scope.users = data.users;
+              $log.log('chatService init', data);
+            });
 
             // listen to project updates
             $scope.$on('currentProjectUpdated', function() {
