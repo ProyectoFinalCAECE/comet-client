@@ -1,27 +1,29 @@
 <nav class="navbar-default navbar-static-side" role="navigation">
   <div class="sidebar-collapse">
-    <ul class="nav" id="side-menu" metis-menu>
+    <ul class="nav" id="side-menu">
       <li class="nav-header">
         <div class="dropdown profile-element">
           <span>
             <img alt="image" class="img-circle" ng-src="{{vm.user.profilePicture}}" width="48" height="48" />
           </span>
           <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-            <span class="clear"> <span class="block m-t-xs">
-              <strong class="font-bold">{{ vm.user.firstName + ' ' + vm.user.lastName }}</strong>
+            <span class="clear">
+              <span class="block m-t-xs">
+                <strong class="font-bold">{{ vm.user.firstName + ' ' + vm.user.lastName }}</strong>
+                <b class="caret"></b>
+              </span>
             </span>
-            <span class="text-muted text-xs block">Online <b class="caret"></b></span> </span> </a>
-            <ul class="dropdown-menu m-t-xs">
-              <li><a ui-sref="dashboard.profile">Perfil</a></li>
-              <li class="divider"></li>
-              <li><a ng-click="vm.logout()">Salir</a></li>
-            </ul>
+          </a>
+          <ul class="dropdown-menu m-t-xs">
+            <li><a ui-sref="dashboard.profile">Perfil</a></li>
+            <li class="divider"></li>
+            <li><a ng-click="vm.logout()">Salir</a></li>
+          </ul>
         </div>
         </li>
         <li ng-show="vm.project != null">
-          <a href="#">
+          <a ui-sref="dashboard.project.project-explore">
             <span class="nav-label">Canales públicos</span>
-            <span class="fa arrow"></span>
           </a>
           <ul class="nav nav-second-level">
             <li ng-repeat="channel in vm.publicChannels">
@@ -34,7 +36,6 @@
         <li class="active" ng-show="vm.project != null">
           <a href="#">
             <span class="nav-label">Participantes</span>
-            <span class="fa arrow"></span>
           </a>
           <ul class="nav">
               <li ng-repeat="member in vm.project.members">
@@ -46,7 +47,6 @@
         <li ng-show="vm.project != null">
           <a href="#">
             <span class="nav-label">Canales privados</span>
-            <span class="fa arrow"></span>
           </a>
           <ul class="nav nav-second-level">
             <li ng-repeat="channel in vm.privateChannels">
