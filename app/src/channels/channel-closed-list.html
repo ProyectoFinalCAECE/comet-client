@@ -1,29 +1,40 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+  <div class="col-lg-9">
+    <h2><strong>{{vm.project.name}}</strong></h2>
+    <button ng-show="vm.project.isOwner" ng-click="vm.gotoEditProject()" type="button" name="btnCrearProyecto" class="btn btn-primary" style="float:right">Administrar</button>
+    <h4 class="ProjDesc">{{vm.project.description}}</h4>
+    <ol class="breadcrumb2">
+      <li>
+        <div ncy-breadcrumb></div>
+      </li>
+    </ol>
+  </div>
+</div>
 <div class="wrapper wrapper-content animated fadeInRight">
   <div class="row">
     <!-- No tiene canales -->
-    <div ng-show="vmc.isEmpty" class="jumbotron text-center">
-        <p>No encontramos canales en este proyecto <i class="fa fa-frown-o"></i></p>
+    <div ng-show="vm.isEmpty" class="jumbotron text-center">
+        <p>No existen canales cerrados en este proyecto</i></p>
         <p>
-          <a ng-click="vmc.gotoCreateChannel()" class="btn btn-xl btn-primary">Crear Canal</a>
+          <a ui-sref="dashboard.project.project-explore({id:vm.project.id})" class="btn btn-xl btn-primary">Volver</a>
         </p>
     </div>
     <!-- listado de canales -->
-    <div ng-hide="vmc.isEmpty">
+    <div ng-hide="vm.isEmpty">
       <div class="col-lg-12">
         <div class="ibox float-e-margins">
           <div class="ibox-title">
-            <h5>Canales</h5>
+            <h5>Canales cerrados</h5>
           </div>
           <div class="ibox-content">
             <div class="row wrapper border-bottom white-bg page-heading">
               <div class="col-lg-9">
                 <ol class="breadcrumb2">
                   <li>
-                    <input ng-model="vmc.filterQuery" type="text" placeholder="Filtrar..." class="form-control" name="top-search"/>
+                    <input ng-model="vm.filterQuery" type="text" placeholder="Filtrar..." class="form-control" name="top-search"/>
                   </li>
                   <li class="buttonRight">
-                    <button ui-sref="dashboard.project.channel-create" type="button" name="btnCrearProyecto buttonRight" class="btn btn-primary" style="float:right">Crear Canal</button>
-                    <a style="float: right; margin-top: 15px; margin-right: 20px;" ui-sref="dashboard.project.channel-closed-list">Ver canales cerrados</a>
+                    <a ui-sref="dashboard.project.project-explore({id:vm.project.id})" class="btn btn-xl btn-primary">Volver</a>
                   </li>
                 </ol>
               </div>
@@ -37,12 +48,12 @@
                     <th class="columnaMiembros">Miembros</th>
                     <th class="columnaIntegraciones">Integraciones</th>
                     <th class="columnaFecha">Fecha Creacion</th>
-                    <th class="columnaFecha">Ultimo Mensaje</th>
+                    <th class="columnaFecha">Fecha Cierre</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr style="cursor: pointer;"
-                      dir-paginate="channel in vmc.channels | itemsPerPage: 5 | filter: vmc.filterQuery | orderBy:['-state', '-createdAt']"
+                      dir-paginate="channel in vm.channels | itemsPerPage: 5 | filter: vm.filterQuery | orderBy:['-state', '-createdAt']"
                       ui-sref="dashboard.project.channel-explore({projectId: vm.project.id, channelId:channel.id})">
                       <td class="columnaCanal">
                         <b>{{channel.name}}</b>
@@ -62,21 +73,10 @@
                       </td>
                       <td class="columnaIntegraciones">
                         <ul>
-                        <!--
-                          <li>
-                            <img alt="image" class="img-circle" src="../../images/integraciones/googledrive.jpg" />
-                          </li>
-                          <li>
-                            <img alt="image" class="img-circle" src="../../images/integraciones/dropbox.png" />
-                          </li>
-                        -->
-                          <li>
-                            <img alt="image" class="img-circle" src="../../images/integraciones/github.png" />
-                          </li>
                         </ul>
                       </td>
                       <td class="columnaFecha">{{channel.createdAt | date}}</td>
-                      <td class="columnaUltimoMensaje">{{channel.createdAt | date}}</td>
+                      <td class="columnaUltimoMensaje">{{channel.closedAt | date}}</td>
                   </tr>
                 </tbody>
               </table>

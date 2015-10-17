@@ -1,9 +1,3 @@
-<li>
-  <!--<a ng-class="vm.isMember ? 'dropdown-toggle' : 'disabled'" data-toggle="{{vm.isMember ? 'dropdown' : ''}}">
-    <i class="fa fa-group"></i>
-  </a> -->
-  <a ng-click="vm.exit()" >Salir del canal</a>
-</li>
 <li class="dropdown">
   <a ng-class="vm.isMember ? 'dropdown-toggle' : 'disabled'" data-toggle="{{vm.isMember ? 'dropdown' : ''}}">
     <i class="fa fa-group"></i>
@@ -11,7 +5,12 @@
   <ul class="dropdown-menu dropdown-user">
     <h4>Miembros</h4>
     <li ng-repeat="member in vm.project.members">
-      <div><i class="fa fa-circle text-navy" style="float:left; padding:0px 10px;"></i> {{member.alias}} <a href="#" ng-click="vmc.deleteMember({{member}})" > <i class="fa fa-times" style="float:right; padding:0px 20px;"></i> </a></div>
+      <div>
+        <i class="fa fa-circle text-navy" style="float:left; padding:0px 10px;"></i> {{member.alias}}
+        <a href="#" ng-click="vmc.deleteMember({{member}})">
+          <i class="fa fa-times" style="float:right; padding:0px 20px;"></i>
+        </a>
+      </div>
     </li>
   </ul>
 </li>
@@ -20,6 +19,9 @@
     <i class="fa fa-cog"></i>
   </a>
   <ul class="dropdown-menu dropdown-user">
+    <li>
+      <a ng-click="vmc.exit()">Salir del Canal</a>
+    </li>
     <li>
       <a ng-click="vmc.closeChannel()">Cerrar Canal</a>
     </li>

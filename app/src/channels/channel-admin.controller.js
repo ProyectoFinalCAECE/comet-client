@@ -16,7 +16,8 @@
                                           'dialogService',
                                           'channelService',
                                           'channel',
-                                          'project'];
+                                          'project',
+                                          'user'];
 
         function ChannelAdminController ( $log,
                                           $rootScope,
@@ -25,7 +26,8 @@
                                           dialogService,
                                           channelService,
                                           channel,
-                                          project) {
+                                          project,
+                                          user) {
 
           var vm = this;
           vm.channel = channel;
@@ -37,6 +39,9 @@
 
           // invite / delete members
           vm.deleteMember = deleteMember;
+
+          // exit from the channel
+          vm.exit = exit;
 
           //close channel
           vm.imSure = false;
@@ -74,6 +79,25 @@
                   $state.go('dashboard.project-list');
                 });
             });*/
+          }
+
+          /**
+           * @name exit
+           * @desc opens the 'exit channel' dialog
+          */
+          function exit () {
+            var msg = '¿Desea salir del canal?';
+            var dlg = dialogService.showModalConfirm('Salir de canal', msg);
+            dlg.result.then(function () {
+              channelService
+                .deleteMember(vm.project.id, vm.channel.id, user.id)
+                .then(function (response) {
+                  ngToast.success('Has salido del canal.');
+                  $rootScope.$broadcast('channelUpdated', response.data);
+                  $rootScope.$broadcast('channelsUpdated');
+                  $state.go('dashboard.project.project-explore', { id: vm.project.id });
+                });
+              });
           }
 
           /**

@@ -47,7 +47,6 @@
         resolve: {
           project: ['$stateParams', '$state', 'projectService', 'dashboardServiceModel',
           function ($stateParams, $state, projectService, dashboardServiceModel) {
-            console.log('dashboard.project resolve', $stateParams.id);
             return projectService.getById($stateParams.id).error(function() {
               $state.go('dashboard');
             }).then(function (response) {
