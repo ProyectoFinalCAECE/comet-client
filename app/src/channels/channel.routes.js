@@ -34,11 +34,6 @@
           templateUrl: '/src/channels/channel-explore.html',
           controller: 'ChannelExploreController',
           controllerAs: 'vm'
-        },
-        'channel-admin@dashboard.project.channel-explore': {
-          templateUrl: '/src/channels/channel-admin.html',
-          controller: 'ChannelAdminController',
-          controllerAs: 'vmc',
         }
       },
       resolve: {
