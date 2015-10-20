@@ -57,7 +57,7 @@
           vm.formatMessageDate = formatMessageDate;
           vm.sendMessage = sendMessage;
           // update info
-          vm.update = update;
+          vm.edit = edit;
           // invite / delete members
           vm.showMembers = false;
           vm.invite = invite;
@@ -291,23 +291,28 @@
           }
 
           /**
-           * @name update
+           * @name edit
            * @desc channel update logic
           */
-          function update () {
-          /*  projectService.update(vm.project).error(function(data) {
-              vm.validationErrors = $rootScope.helpers.loadServerErrors(data);
-              if (vm.validationErrors === null) {
-                ngToast.danger('Ocurrió un error al consultar al servidor.');
-              }
-            }).then(function() {
-                var msg = 'El proyecto "' + vm.project.name +
-                          '" ha sido editado exitosamente.';
-                var dlg = dialogService.showModalAlert('Administrar proyecto', msg);
-                dlg.result.then(function () {
-                  $state.go('dashboard.project-list');
-                });
-            });*/
+          function edit () {
+            var modalInstance = $modal.open({
+              templateUrl: '/src/channels/channel-edit.html',
+              controller: 'ChannelEditController',
+              controllerAs: 'vm',
+              size: 'md',
+              backdrop: 'static',
+              resolve: {
+                project: function () {
+                  return vm.project;
+                },
+                channel: function () {
+                  return vm.channel;
+                }
+             }
+           });
+           modalInstance.result.then(function (response) {
+             $rootScope.$broadcast('channelUpdated', response.data);
+           });
           }
 
           /**

@@ -15,6 +15,7 @@
 
         return {
             create: create,
+            update: update,
             invite: invite,
             getAll: getAll,
             getById: getById,
@@ -48,6 +49,15 @@
         function getById (projectId, channelId) {
           var url = getBaseUrl(projectId) + channelId;
           return $http.get(url, authService.getJwtHeader());
+        }
+
+        /**
+         * @name update
+         * @desc update channel info
+         */
+        function update (projectId, channel) {
+          var url = getBaseUrl(projectId) + channel.id;
+          return $http.put(url, channel, authService.getJwtHeader());
         }
 
         /**
