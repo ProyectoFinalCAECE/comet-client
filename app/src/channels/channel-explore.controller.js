@@ -16,6 +16,7 @@
                                            '$timeout',
                                            '$modal',
                                            'lodash',
+                                           'moment',
                                            'ngToast',
                                            'constraints',
                                            'dialogService',
@@ -33,6 +34,7 @@
                                           $timeout,
                                           $modal,
                                           lodash,
+                                          moment,
                                           ngToast,
                                           constraints,
                                           dialogService,
@@ -180,10 +182,18 @@
             vm.lastMessage = msg.date;
           }
 
+          /**
+           * @name getMember
+           * @desc returns a member object by id
+          */
           function getMember(memberId) {
             return lodash.find(vm.channel.members, 'id', memberId);
           }
 
+          /**
+           * @name formatMessageDate
+           * @desc returns the message timestamp in a readable format
+          */
           function formatMessageDate (msgDate) {
             return moment(msgDate).calendar();
           }

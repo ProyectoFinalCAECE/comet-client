@@ -26,6 +26,8 @@
         ])
         // lodash support
         .constant('lodash', window._)
+        // momentJS support
+        .constant('moment', window.moment)
         // global forms configuration
         .constant('formsConfig', {
           'passwordLabel': 'Debe tener entre 6 y 40 caracteres ' +
