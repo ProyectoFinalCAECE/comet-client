@@ -49,8 +49,7 @@
            */
           function activate() {
 
-            console.log(user);
-
+            // user account confirmation alert
             if (!vm.user.confirmed) {
               ngToast.warning({
                 content: 'Recuerda confirmar tu dirección de correo.',
@@ -58,8 +57,10 @@
               });
             }
 
-            // notifications
+            // project channels
+            loadChannels(vm.project);
 
+            // notifications
 
             // listen to project updates
             $scope.$on('currentProjectUpdated', function() {
