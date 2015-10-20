@@ -13,7 +13,6 @@
                                            '$rootScope',
                                            '$scope',
                                            '$state',
-                                           '$timeout',
                                            '$modal',
                                            'lodash',
                                            'moment',
@@ -31,7 +30,6 @@
                                           $rootScope,
                                           $scope,
                                           $state,
-                                          $timeout,
                                           $modal,
                                           lodash,
                                           moment,
@@ -368,11 +366,8 @@
                   ngToast.danger('Ocurrió un error al consultar al servidor.');
                 }
               }).then(function() {
-                  var msg = 'El canal se cerró exitosamente.';
-                  var dlg = dialogService.showModalAlert('Administrar canal', msg);
-                  dlg.result.finally(function () {
-                    $state.go('dashboard.project.project-explore', { id: vm.project.id });
-                  });
+                ngToast.success('Canal cerrado.');
+                $state.go('dashboard.project.project-explore', { id: vm.project.id });
               });
             });
           }
@@ -393,11 +388,8 @@
                   ngToast.danger('Ocurrió un error al consultar al servidor.');
                 }
               }).then(function() {
-                  var msg = 'El canal se eliminó exitosamente.';
-                  var dlg = dialogService.showModalAlert('Administrar canal', msg);
-                  dlg.result.finally(function () {
-                    $state.go('dashboard.project.project-explore', { id: vm.project.id });
-                  });
+                  ngToast.success('Canal eliminado.');
+                  $state.go('dashboard.project.project-explore', { id: vm.project.id });
               });
             });
           }

@@ -37,6 +37,11 @@
                 </li>
               </ul>
             </li>
+            <li>
+              <a ng-show="!vm.isMember" ng-click="vm.invite()">
+                <i class="fa fa-plus"></i>
+              </a>
+            </li>
           </ul>
         </div>
       </div>
@@ -65,7 +70,7 @@
               <div class="col-md-3" ng-show="vm.showMembers">
                 <h4 style="padding-left:20px;">Miembros</h4>
                   <div class="chat-users">
-                    <li ng-repeat="member in vm.project.members">
+                    <li ng-repeat="member in vm.channel.members">
                       <div class="chat-user">
                           <span class="pull-right">
                             <a href="#" ng-click="vm.deleteMember(member)">
@@ -80,7 +85,7 @@
                     </li>
                   </div>
                   <a ng-click="vm.invite()" a-disabled="!vm.canInvite()">
-                    <p><i class="fa fa-plus" style="padding:0 10px 0 0"></i>Invitar participante</p>
+                    <p><i class="fa fa-plus" style="padding:0 10px 0 0"></i>Invitar participantes</p>
                   </a>
             </div>
             <div class="row messageInputText">
