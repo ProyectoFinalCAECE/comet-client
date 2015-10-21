@@ -75,11 +75,6 @@
                   <div class="chat-users">
                     <li ng-repeat="member in vm.channel.members">
                       <div class="chat-user">
-                          <span class="pull-right">
-                            <a href="#" ng-click="vm.deleteMember(member)">
-                              <i class="fa fa-times" style="float:right; padding:13px 20px;"></i>
-                            </a>
-                          </span>
                           <img alt="image" class="chat-avatar" title="{{member.alias}}" ng-src="{{member.profilePicture}}"/>
                           <div class="chat-user-name">
                             {{member.firstName}} {{member.lastName}}
