@@ -404,6 +404,14 @@ a.disabled {
   text-align: center;
 }
 
+/* Explorar canal */
+
+.badge-channel-type {
+  margin-left: 15px;
+  vertical-align: middle;
+  font-family: verdana;
+}
+
 .messageInputText{
   position:fixed;
   background-color: white;
