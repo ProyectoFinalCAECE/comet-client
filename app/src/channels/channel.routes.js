@@ -24,7 +24,7 @@
       }
     })
     .state('dashboard.project.channel-explore', {
-      url: '/channels/:channelId',
+      url: '/channels/:channelId?:isDirect',
       ncyBreadcrumb: {
         label: '{{vm.channel.name}}',
         parent: 'dashboard.project.project-explore'
@@ -37,13 +37,25 @@
         }
       },
       resolve: {
-        channel: ['$stateParams', 'project','channelService',
-        function($stateParams, project, channelService) {
-          return channelService.getById(project.id, $stateParams.channelId)
-          .then(function(data) {
-            return data.data;
-          });
-        }]
+        isDirect: ['$stateParams', function ($stateParams) {
+          return ($stateParams.isDirect === 'true');
+        }],
+        channel: ['$stateParams', 'userService', 'channelService', 'project', 'user',
+          function($stateParams, userService, channelService, project, user) {
+            if ($stateParams.isDirect === 'true') {
+              var destUserId = $stateParams.channelId;
+              return userService.getById(destUserId).then(function(destUser) {
+                console.log('user by id', destUserId, destUser);
+                return channelService.getDirectChannel(user, destUser);
+              });
+            }
+            else {
+              return channelService.getById(project.id, $stateParams.channelId)
+              .then(function(data) {
+                return data.data;
+              });
+            }
+          }]
       }
     })
     .state('dashboard.project.channel-closed-list', {

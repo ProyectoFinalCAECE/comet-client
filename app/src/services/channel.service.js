@@ -19,6 +19,7 @@
             invite: invite,
             getAll: getAll,
             getById: getById,
+            getDirectChannel: getDirectChannel,
             close: close,
             deleteChannel: deleteChannel,
             deleteMember: deleteMember,
@@ -50,6 +51,33 @@
         function getById (projectId, channelId) {
           var url = getBaseUrl(projectId) + channelId;
           return $http.get(url, authService.getJwtHeader());
+        }
+
+        /**
+         * @name getDirectChannel
+         * @desc returns a virtual channel for one to one communication
+         */
+        function getDirectChannel (user, destUser) {
+
+          var members = [],
+              description = 'Comunicación privada con ' +
+                            destUser.firstName + ' ' +
+                            destUser.lastName;
+
+          // channel members
+          members.push(user);
+          members.push(destUser);
+
+          return {
+            id: destUser.id,
+            name:destUser.firstName + ' ' + destUser.lastName,
+            description: description,
+            createdAt: new Date().getTime(),
+            type:"P",
+            state:"O",
+            members:members,
+            integrations:[]
+          };
         }
 
         /**

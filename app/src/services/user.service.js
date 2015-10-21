@@ -16,6 +16,7 @@
         return {
             create: create,
             get:get,
+            getById:getById,
             update:update,
             getCurrentUser:getCurrentUser,
             uploadProfilePicture:uploadProfilePicture
@@ -37,6 +38,18 @@
          */
         function get () {
           return $http.get(resourceUrl, authService.getJwtHeader()).then(function (res) {
+            return res.data.user;
+          }, function () {
+            return null;
+          });
+        }
+
+        /**
+         * @name getById
+         * @desc calls the backend endpoint to get user data by id
+         */
+        function getById (userId) {
+          return $http.get(resourceUrl + userId, authService.getJwtHeader()).then(function (res) {
             return res.data.user;
           }, function () {
             return null;

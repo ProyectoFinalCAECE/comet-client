@@ -24,7 +24,8 @@
                                            'channelService',
                                            'user',
                                            'project',
-                                           'channel'];
+                                           'channel',
+                                           'isDirect'];
 
         function ChannelExploreController ($log,
                                           $rootScope,
@@ -41,12 +42,14 @@
                                           channelService,
                                           user,
                                           project,
-                                          channel) {
+                                          channel,
+                                          isDirect) {
 
           var vm = this;
           vm.project = project;
           vm.channel = channel;
           vm.isClosed = false;
+          vm.isDirect = isDirect;
           vm.validationErrors = null;
           vm.isMember = false;
           vm.message = null;
@@ -72,6 +75,8 @@
           vm.imSureDelete = false;
           vm.deleteChannel = deleteChannel;
 
+          $log.log('isDirect', isDirect);
+
           activate();
 
           /**
@@ -80,11 +85,7 @@
           */
           function activate () {
 
-            if (lodash.find(vm.channel.members, 'id', user.id) !== undefined) {
-              vm.isMember = true;
-            }
-
-            vm.isClosed = (vm.channel.state === 'C');
+            setFlags();
 
             // load channel messages
             channelService.getMessages(vm.project.id, vm.channel.id, 0, 0).then(function (response) {
@@ -95,19 +96,41 @@
 
             // listen to channel updates
             $scope.$on('channelUpdated', function(event, args) {
+              if (vm.isDirect) {
+                return;
+              }
               vm.channel = args.channel;
-              activate();
+              setFlags();
             });
 
             // initialize chat session
             chatService.emit('join-room', {
-              room: vm.channel.id
+              room: getRoomId()
             });
 
             // listen to new messages
             chatService.on('message', function (data) {
               processMessageReceived(data);
             });
+          }
+
+          /**
+           * @name loadFlags
+           * @desc sets the flags that enables/disables actions in the view
+          */
+          function setFlags() {
+
+            if (vm.isDirect) {
+              vm.isMember = true;
+              vm.isClosed = false;
+              return;
+            }
+
+            if (lodash.find(vm.channel.members, 'id', user.id) !== undefined) {
+              vm.isMember = true;
+            }
+
+            vm.isClosed = (vm.channel.state === 'C');
           }
 
           /**
@@ -159,13 +182,13 @@
             var msgPayload = {
               text: vm.message,
               user: user.id,
-              // for local use only, the server overwrites the date
-              date: new Date().getTime()
+              destinationUser: (isDirect ? vm.channel.id : 0),
+              date: new Date().getTime()  // for local use only, the server overwrites the date
             };
 
             // send the data to the server
             chatService.emit('message', {
-              room: vm.channel.id,
+              room: getRoomId(),
               message: {
                 message: msgPayload
               }
@@ -190,6 +213,7 @@
            * @desc returns a member object by id
           */
           function getMember(memberId) {
+            $log.log(vm.channel.members);
             return lodash.find(vm.channel.members, 'id', memberId);
           }
 
@@ -199,6 +223,29 @@
           */
           function formatMessageDate (msgDate) {
             return moment(msgDate).calendar();
+          }
+
+          /**
+           * @name getRoomId
+           * @desc returns the room id used to broadcast the message
+          */
+          function getRoomId() {
+            if (isDirect) {
+              // the direct channel room is put together using
+              // the users id's in ascending order
+              var userIdFrom = user.id,
+                  userIdTo = vm.channel.id;
+
+              if (userIdFrom > userIdTo) {
+                userIdTo = userIdFrom;
+                userIdFrom = vm.channel.id;
+              }
+
+              return 'Direct_' + userIdFrom + '_' + userIdTo;
+            }
+            else {
+              return vm.channel.id;
+            }
           }
 
           /**

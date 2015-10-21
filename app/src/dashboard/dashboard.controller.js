@@ -39,6 +39,7 @@
 
           vm.publicChannels = null;
           vm.privateChannels = null;
+          vm.availableMembers = null;
           vm.logout = logout;
 
           activate();
@@ -96,6 +97,11 @@
                 var isMember = (lodash.find(c.members, 'id', vm.user.id) !== undefined);
                 return c.type === 'S' && isMember;
               });
+            });
+
+            // members for direct chat
+            vm.availableMembers = lodash.filter(vm.project.members, function(m) {
+              return (m.id !== vm.user.id);
             });
           }
 

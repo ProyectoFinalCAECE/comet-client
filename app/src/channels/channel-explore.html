@@ -14,7 +14,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-lg-2 ButtonAdminList">
+        <div class="col-lg-2 ButtonAdminList" ng-show="!vm.isDirect">
           <ul>
             <li class="dropdown">
               <a ng-class="vm.isMember ? '' : 'disabled'" ng-click="vm.showMembers = !vm.showMembers">
