@@ -4226,10 +4226,10 @@ dd.project-people {
   border-radius: 4px;
 }
 .chat-discussion .chat-message:nth-child(2n+1) .message-date {
-  float: left;
+  float:right
 }
 .chat-discussion .chat-message:nth-child(2n) .message-date {
-  float: left;
+  float:right
 }
 .chat-discussion .chat-message:nth-child(2n+1) .message {
   text-align: left;
