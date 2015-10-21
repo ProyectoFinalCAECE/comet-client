@@ -22,7 +22,7 @@
 
         function setCurrentProject (newProject) {
           project = newProject;
-          $rootScope.$broadcast("currentProjectUpdated");
+          $rootScope.$broadcast('currentProjectUpdated');
         }
 
         function getCurrentProject () {
@@ -31,7 +31,7 @@
 
         function setCurrentUser (newUser) {
           user = newUser;
-          $rootScope.$broadcast("currentUserUpdated");
+          $rootScope.$broadcast('currentUserUpdated');
         }
 
         function getCurrentUser () {
