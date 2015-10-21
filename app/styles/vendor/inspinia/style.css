@@ -4213,8 +4213,8 @@ dd.project-people {
   margin-right: 10px;
 }
 .chat-discussion .chat-message:nth-child(2n) .message-avatar {
-  float: right;
-  margin-left: 10px;
+  float: left;
+  margin-right: 10px;
 }
 .message {
   background-color: #fff;
@@ -4226,7 +4226,7 @@ dd.project-people {
   border-radius: 4px;
 }
 .chat-discussion .chat-message:nth-child(2n+1) .message-date {
-  float: right;
+  float: left;
 }
 .chat-discussion .chat-message:nth-child(2n) .message-date {
   float: left;
@@ -4236,8 +4236,8 @@ dd.project-people {
   margin-left: 55px;
 }
 .chat-discussion .chat-message:nth-child(2n) .message {
-  text-align: right;
-  margin-right: 55px;
+  text-align: left;
+  margin-left: 55px;
 }
 .message-date {
   font-size: 10px;
