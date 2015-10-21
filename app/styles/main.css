@@ -408,13 +408,11 @@ a.disabled {
   position:fixed;
   background-color: white;
   bottom:0;
-  height:45px;
-  width:85%;
-  padding-top:5px;
+  padding: 10px;
 }
 
 .messageInputText .fa{
-  font-size:30px;
+  font-size:20px;
 }
 
 .messageInputText textarea{
