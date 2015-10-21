@@ -39,6 +39,7 @@
 
           vm.publicChannels = null;
           vm.privateChannels = null;
+          vm.availableMembers = null;
           vm.logout = logout;
 
           activate();
@@ -49,8 +50,7 @@
            */
           function activate() {
 
-            console.log(user);
-
+            // user account confirmation alert
             if (!vm.user.confirmed) {
               ngToast.warning({
                 content: 'Recuerda confirmar tu dirección de correo.',
@@ -58,18 +58,10 @@
               });
             }
 
+            // project channels
+            loadChannels(vm.project);
+
             // notifications
-
-
-            chatService.on('init', function (data) {
-              // $scope.name = data.name;
-              // $scope.users = data.users;
-              $log.log('chatService init', data);
-            });
-
-            chatService.emit('send:message', {
-              message: 'Hola juan'
-            });
 
             // listen to project updates
             $scope.$on('currentProjectUpdated', function() {
@@ -105,6 +97,11 @@
                 var isMember = (lodash.find(c.members, 'id', vm.user.id) !== undefined);
                 return c.type === 'S' && isMember;
               });
+            });
+
+            // members for direct chat
+            vm.availableMembers = lodash.filter(vm.project.members, function(m) {
+              return (m.id !== vm.user.id);
             });
           }
 

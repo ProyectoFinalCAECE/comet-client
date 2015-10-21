@@ -1,0 +1,35 @@
+<div class="modal-header">
+    <h3 class="modal-title">Editar canal</h3>
+</div>
+<div class="modal-body text-center">
+  <!-- Lista usuarios -->
+  <div class="row">
+    <form name="vm.frmEditar" class="form-horizontal m-t" role="form" novalidate="">
+      <!-- Nombre -->
+      <div class="form-group cometInput" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'name') }">
+        <label class="col-sm-2 control-label">Nombre</label>
+        <div class="col-sm-10">
+          <input type="text" name="name" ng-model="vm.channel.name" class="form-control" placeholder="Nombre del canal">
+          <div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'name')" class="control-label" role="alert">
+            <div>{{ vm.validationErrors['name'] }}</div>
+          </div>
+        </div>
+      </div>
+      <!-- Descripcion -->
+      <div class="form-group cometInput" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'description') }">
+        <label class="col-sm-2 control-label">Descripción</label>
+        <div class="col-sm-10">
+          <textarea cols="25" rows="2" ng-model="vm.channel.description" class="form-control" placeholder="Breve descripcion del propósito del canal"></textarea>
+          <div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'description')" class="control-label" role="alert">
+            <div>{{ vm.validationErrors['description'] }}</div>
+            <div>{{ vm.validationErrors['all'] }}</div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-warning" type="button" ng-click="vm.cancel()">Cancelar</button>
+    <button class="btn btn-primary" type="button" ng-click="vm.update()">Aceptar</button>
+</div>

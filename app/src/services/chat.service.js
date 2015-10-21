@@ -11,7 +11,7 @@
     function chatService (socketFactory) {
       //return socketFactory();
       return socketFactory({
-        ioSocket: window.io.connect('/messages')
+        ioSocket: window.io.connect(':4000/messages')
       });
     }
 })();

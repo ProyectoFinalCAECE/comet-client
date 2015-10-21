@@ -35,7 +35,6 @@
            */
           function activate () {
               vm.project = project;
-              dashboardServiceModel.setCurrentProject(project);
           }
 
           /**

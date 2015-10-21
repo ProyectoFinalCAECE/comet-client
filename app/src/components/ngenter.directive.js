@@ -3,7 +3,8 @@
   'use strict';
 
   /**
-  * @desc
+  * @desc directive to call a function whenever the user presses the enter key
+  * @example <input ngEnter="handleEnterKey()" />
   */
   angular
       .module('cometApp')

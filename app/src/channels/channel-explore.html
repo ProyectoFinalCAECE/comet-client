@@ -14,10 +14,37 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-lg-2 ButtonAdminList">
+        <div class="col-lg-2 ButtonAdminList" ng-show="!vm.isDirect">
           <ul>
-            <div ui-view="channel-admin">
-            </div>
+            <li class="dropdown">
+              <a ng-class="vm.isMember ? '' : 'disabled'" ng-click="vm.showMembers = !vm.showMembers">
+                <i class="fa fa-group"></i>
+              </a>
+            </li>
+            <li class="dropdown">
+              <a ng-class="vm.isMember && !vm.isClosed ? 'dropdown-toggle' : 'disabled'" data-toggle="{{vm.isMember ? 'dropdown' : ''}}">
+                <i class="fa fa-cog"></i>
+              </a>
+              <ul class="dropdown-menu dropdown-user">
+                <li>
+                  <a ng-click="vm.edit()">Editar Canal</a>
+                </li>
+                <li>
+                  <a ng-click="vm.exit()">Salir del Canal</a>
+                </li>
+                <li>
+                  <a ng-click="vm.closeChannel()">Cerrar Canal</a>
+                </li>
+                <li>
+                  <a ng-click="vm.deleteChannel()">Eliminar Canal</a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a ng-show="!vm.isMember" ng-click="vm.invite()">
+                <i class="fa fa-plus"></i>
+              </a>
+            </li>
           </ul>
         </div>
       </div>
@@ -25,393 +52,35 @@
       <div class="col-lg-12">
         <div class="ibox chat-view">
           <div class="ibox-title">
-            <small class="pull-right text-muted">Ultimo mensaje:  Lunes 26/09/2015 - 18:39:23</small>
+            <small ng-show="vm.lastMessage != null" class="pull-right text-muted">Ultimo mensaje: {{vm.formatMessageDate(vm.lastMessage)}}</small>
           </div>
           <div class="ibox-content">
             <div class="row">
-              <div class="col-md-9 ">
+              <div ng-class="vm.showMembers ? 'col-md-9' : 'col-md-12'">
                 <div class="chat-discussion" style="height:450px">
-
-                  <div class="chat-message">
-                    <img class="message-avatar" src="images/vendor/a1.jpg" alt="" >
+                  <div class="chat-message" ng-repeat="message in vm.messages" ng-init="msgMember = vm.getMember(message.user)">
+                    <img class="message-avatar" ng-src="{{msgMember.profilePicture}}" alt="" >
                     <div class="message">
-                      <a class="message-author" href="#"> Carlos Perez </a>
-                      <span class="message-date"> Lunes 26/09/2015 - 18:39:23 </span>
+                      <a class="message-author">{{msgMember.firstName}}</a>
+                      <span class="message-date">{{ vm.formatMessageDate(message.date) }}</span>
                       <span class="message-content">
-                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+                        {{message.text}}
                       </span>
                     </div>
                   </div>
-                  <div class="chat-message">
-                    <img class="message-avatar" src="images/vendor/a4.jpg" alt="" >
-                    <div class="message">
-                      <a class="message-author" href="#"> José Paso </a>
-                      <span class="message-date"> Lunes 26/09/2015 - 18:39:23 </span>
-                      <span class="message-content">
-                        Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover.
-                      </span>
-                    </div>
-                  </div>
-                  <div class="chat-message">
-                    <img class="message-avatar" src="images/vendor/a2.jpg" alt="" >
-                    <div class="message">
-                      <a class="message-author" href="#"> Miguel Perez </a>
-                      <span class="message-date"> Lunes 26/09/2015 - 18:39:23 </span>
-                      <span class="message-content">
-                        There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration.
-                      </span>
-                    </div>
-                  </div>
-                  <div class="chat-message">
-                    <img class="message-avatar" src="images/vendor/a5.jpg" alt="" >
-                    <div class="message">
-                      <a class="message-author" href="#"> Alicia Jordania </a>
-                      <span class="message-date"> Lunes 26/09/2015 - 18:39:23 </span>
-                      <span class="message-content">
-                        All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.
-                        It uses a dictionary of over 200 Latin words.
-                      </span>
-                    </div>
-                  </div>
-                  <div class="chat-message">
-                    <img class="message-avatar" src="images/vendor/a6.jpg" alt="" >
-                    <div class="message">
-                      <a class="message-author" href="#"> Marcos Perez </a>
-                      <span class="message-date"> Lunes 26/09/2015 - 18:39:23 </span>
-                      <span class="message-content">
-                        All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.
-                        It uses a dictionary of over 200 Latin words.
-                      </span>
-                    </div>
-                  </div>
-                  <div class="chat-message">
-                    <img class="message-avatar" src="images/vendor/a2.jpg" alt="" >
-                    <div class="message">
-                      <a class="message-author" href="#"> Miguel Perez </a>
-                      <span class="message-date"> Lunes 26/09/2015 - 18:39:23 </span>
-                      <span class="message-content">
-                        There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration.
-                      </span>
-                    </div>
-                  </div>
-                  <div class="chat-message">
-                    <img class="message-avatar" src="images/vendor/a5.jpg" alt="" >
-                    <div class="message">
-                      <a class="message-author" href="#"> Alicia Jordania </a>
-                      <span class="message-date"> Lunes 26/09/2015 - 18:39:23 </span>
-                      <span class="message-content">
-                        All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.
-                        It uses a dictionary of over 200 Latin words.
-                      </span>
-                    </div>
-                  </div>
-                  <div class="chat-message">
-                    <img class="message-avatar" src="images/vendor/a6.jpg" alt="" >
-                    <div class="message">
-                      <a class="message-author" href="#"> Marcos Perez </a>
-                      <span class="message-date"> Lunes 26/09/2015 - 18:39:23 </span>
-                      <span class="message-content">
-                        All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.
-                        It uses a dictionary of over 200 Latin words.
-                      </span>
-                    </div>
-                  </div>
-                  <div class="chat-message">
-                    <img class="message-avatar" src="images/vendor/a2.jpg" alt="" >
-                    <div class="message">
-                      <a class="message-author" href="#"> Miguel Perez </a>
-                      <span class="message-date"> Lunes 26/09/2015 - 18:39:23 </span>
-                      <span class="message-content">
-                        There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration.
-                      </span>
-                    </div>
-                  </div>
-                  <div class="chat-message">
-                    <img class="message-avatar" src="images/vendor/a5.jpg" alt="" >
-                    <div class="message">
-                      <a class="message-author" href="#"> Alicia Jordania </a>
-                      <span class="message-date"> Lunes 26/09/2015 - 18:39:23 </span>
-                      <span class="message-content">
-                        All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.
-                        It uses a dictionary of over 200 Latin words.
-                      </span>
-                    </div>
-                  </div>
-                  <div class="chat-message">
-                    <img class="message-avatar" src="images/vendor/a6.jpg" alt="" >
-                    <div class="message">
-                      <a class="message-author" href="#"> Marcos Perez </a>
-                      <span class="message-date"> Lunes 26/09/2015 - 18:39:23 </span>
-                      <span class="message-content">
-                        All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.
-                        It uses a dictionary of over 200 Latin words.
-                      </span>
-                    </div>
-                  </div>
-                  <div class="chat-message">
-                    <img class="message-avatar" src="images/vendor/a2.jpg" alt="" >
-                    <div class="message">
-                      <a class="message-author" href="#"> Miguel Perez </a>
-                      <span class="message-date"> Lunes 26/09/2015 - 18:39:23 </span>
-                      <span class="message-content">
-                        There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration.
-                      </span>
-                    </div>
-                  </div>
-                  <div class="chat-message">
-                    <img class="message-avatar" src="images/vendor/a5.jpg" alt="" >
-                    <div class="message">
-                      <a class="message-author" href="#"> Alicia Jordania </a>
-                      <span class="message-date"> Lunes 26/09/2015 - 18:39:23 </span>
-                      <span class="message-content">
-                        All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.
-                        It uses a dictionary of over 200 Latin words.
-                      </span>
-                    </div>
-                  </div>
-                  <div class="chat-message">
-                    <img class="message-avatar" src="images/vendor/a6.jpg" alt="" >
-                    <div class="message">
-                      <a class="message-author" href="#"> Marcos Perez </a>
-                      <span class="message-date"> Lunes 26/09/2015 - 18:39:23 </span>
-                      <span class="message-content">
-                        All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.
-                        It uses a dictionary of over 200 Latin words.
-                      </span>
-                    </div>
-                  </div>
-                  <div class="chat-message">
-                    <img class="message-avatar" src="images/vendor/a2.jpg" alt="" >
-                    <div class="message">
-                      <a class="message-author" href="#"> Miguel Perez </a>
-                      <span class="message-date"> Lunes 26/09/2015 - 18:39:23 </span>
-                      <span class="message-content">
-                        There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration.
-                      </span>
-                    </div>
-                  </div>
-                  <div class="chat-message">
-                    <img class="message-avatar" src="images/vendor/a5.jpg" alt="" >
-                    <div class="message">
-                      <a class="message-author" href="#"> Alicia Jordania </a>
-                      <span class="message-date"> Lunes 26/09/2015 - 18:39:23 </span>
-                      <span class="message-content">
-                        All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.
-                        It uses a dictionary of over 200 Latin words.
-                      </span>
-                    </div>
-                  </div>
-                  <div class="chat-message">
-                    <img class="message-avatar" src="images/vendor/a6.jpg" alt="" >
-                    <div class="message">
-                      <a class="message-author" href="#"> Marcos Perez </a>
-                      <span class="message-date"> Lunes 26/09/2015 - 18:39:23 </span>
-                      <span class="message-content">
-                        All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.
-                        It uses a dictionary of over 200 Latin words.
-                      </span>
-                    </div>
-                  </div>
-                  <div class="chat-message">
-                    <img class="message-avatar" src="images/vendor/a2.jpg" alt="" >
-                    <div class="message">
-                      <a class="message-author" href="#"> Miguel Perez </a>
-                      <span class="message-date"> Lunes 26/09/2015 - 18:39:23 </span>
-                      <span class="message-content">
-                        There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration.
-                      </span>
-                    </div>
-                  </div>
-                  <div class="chat-message">
-                    <img class="message-avatar" src="images/vendor/a5.jpg" alt="" >
-                    <div class="message">
-                      <a class="message-author" href="#"> Alicia Jordania </a>
-                      <span class="message-date"> Lunes 26/09/2015 - 18:39:23 </span>
-                      <span class="message-content">
-                        All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.
-                        It uses a dictionary of over 200 Latin words.
-                      </span>
-                    </div>
-                  </div>
-                  <div class="chat-message">
-                    <img class="message-avatar" src="images/vendor/a6.jpg" alt="" >
-                    <div class="message">
-                      <a class="message-author" href="#"> Marcos Perez </a>
-                      <span class="message-date"> Lunes 26/09/2015 - 18:39:23 </span>
-                      <span class="message-content">
-                        All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.
-                        It uses a dictionary of over 200 Latin words.
-                      </span>
-                    </div>
-                  </div>
-                  <div class="chat-message">
-                    <img class="message-avatar" src="images/vendor/a2.jpg" alt="" >
-                    <div class="message">
-                      <a class="message-author" href="#"> Miguel Perez </a>
-                      <span class="message-date"> Lunes 26/09/2015 - 18:39:23 </span>
-                      <span class="message-content">
-                        There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration.
-                      </span>
-                    </div>
-                  </div>
-                  <div class="chat-message">
-                    <img class="message-avatar" src="images/vendor/a5.jpg" alt="" >
-                    <div class="message">
-                      <a class="message-author" href="#"> Alicia Jordania </a>
-                      <span class="message-date"> Lunes 26/09/2015 - 18:39:23 </span>
-                      <span class="message-content">
-                        All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.
-                        It uses a dictionary of over 200 Latin words.
-                      </span>
-                    </div>
-                  </div>
-                  <div class="chat-message">
-                    <img class="message-avatar" src="images/vendor/a6.jpg" alt="" >
-                    <div class="message">
-                      <a class="message-author" href="#"> Marcos Perez </a>
-                      <span class="message-date"> Lunes 26/09/2015 - 18:39:23 </span>
-                      <span class="message-content">
-                        All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.
-                        It uses a dictionary of over 200 Latin words.
-                      </span>
-                    </div>
-                  </div>
-                  <div class="chat-message">
-                    <img class="message-avatar" src="images/vendor/a2.jpg" alt="" >
-                    <div class="message">
-                      <a class="message-author" href="#"> Miguel Perez </a>
-                      <span class="message-date"> Lunes 26/09/2015 - 18:39:23 </span>
-                      <span class="message-content">
-                        There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration.
-                      </span>
-                    </div>
-                  </div>
-                  <div class="chat-message">
-                    <img class="message-avatar" src="images/vendor/a5.jpg" alt="" >
-                    <div class="message">
-                      <a class="message-author" href="#"> Alicia Jordania </a>
-                      <span class="message-date"> Lunes 26/09/2015 - 18:39:23 </span>
-                      <span class="message-content">
-                        All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.
-                        It uses a dictionary of over 200 Latin words.
-                      </span>
-                    </div>
-                  </div>
-                  <div class="chat-message">
-                    <img class="message-avatar" src="images/vendor/a6.jpg" alt="" >
-                    <div class="message">
-                      <a class="message-author" href="#"> Marcos Perez </a>
-                      <span class="message-date"> Lunes 26/09/2015 - 18:39:23 </span>
-                      <span class="message-content">
-                        All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.
-                        It uses a dictionary of over 200 Latin words.
-                      </span>
-                    </div>
-                  </div>
-                  <div class="chat-message">
-                    <img class="message-avatar" src="images/vendor/a2.jpg" alt="" >
-                    <div class="message">
-                      <a class="message-author" href="#"> Miguel Perez </a>
-                      <span class="message-date"> Lunes 26/09/2015 - 18:39:23 </span>
-                      <span class="message-content">
-                        There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration.
-                      </span>
-                    </div>
-                  </div>
-                  <div class="chat-message">
-                    <img class="message-avatar" src="images/vendor/a5.jpg" alt="" >
-                    <div class="message">
-                      <a class="message-author" href="#"> Alicia Jordania </a>
-                      <span class="message-date"> Lunes 26/09/2015 - 18:39:23 </span>
-                      <span class="message-content">
-                        All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.
-                        It uses a dictionary of over 200 Latin words.
-                      </span>
-                    </div>
-                  </div>
-                  <div class="chat-message">
-                    <img class="message-avatar" src="images/vendor/a5.jpg" alt="" >
-                    <div class="message">
-                      <a class="message-author" href="#"> Alicia Jordania </a>
-                      <span class="message-date"> Lunes 26/09/2015 - 18:39:23 </span>
-                      <span class="message-content">
-                        All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.
-                        It uses a dictionary of over 200 Latin words.
-                      </span>
-                    </div>
-                  </div>
-                  <div class="chat-message">
-                    <img class="message-avatar" src="images/vendor/a6.jpg" alt="" >
-                    <div class="message">
-                      <a class="message-author" href="#"> Marcos Perez </a>
-                      <span class="message-date"> Lunes 26/09/2015 - 18:39:23 </span>
-                      <span class="message-content">
-                        All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.
-                        It uses a dictionary of over 200 Latin words.
-                      </span>
-                    </div>
-                  </div>
-                  <div class="chat-message">
-                    <img class="message-avatar" src="images/vendor/a2.jpg" alt="" >
-                    <div class="message">
-                      <a class="message-author" href="#"> Miguel Perez </a>
-                      <span class="message-date"> Lunes 26/09/2015 - 18:39:23 </span>
-                      <span class="message-content">
-                        There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration.
-                      </span>
-                    </div>
-                  </div>
-                  <div class="chat-message">
-                    <img class="message-avatar" src="images/vendor/a5.jpg" alt="" >
-                    <div class="message">
-                      <a class="message-author" href="#"> Alicia Jordania </a>
-                      <span class="message-date"> Lunes 26/09/2015 - 18:39:23 </span>
-                      <span class="message-content">
-                        All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.
-                        It uses a dictionary of over 200 Latin words.
-                      </span>
-                    </div>
-                  </div>
-                  <div class="chat-message">
-                    <img class="message-avatar" src="images/vendor/a6.jpg" alt="" >
-                    <div class="message">
-                      <a class="message-author" href="#"> Marcos Perez </a>
-                      <span class="message-date"> Lunes 26/09/2015 - 18:39:23 </span>
-                      <span class="message-content">
-                        All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.
-                        It uses a dictionary of over 200 Latin words.
-                      </span>
-                    </div>
-                  </div>
-
                 </div>
               </div>
-              <div class="col-md-3">
+              <div class="col-md-3" ng-show="vm.showMembers">
                 <h4 style="padding-left:20px;">Miembros</h4>
-
                   <div class="chat-users">
-                    <li ng-repeat="member in vm.project.members">
-
-
+                    <li ng-repeat="member in vm.channel.members">
                       <div class="chat-user">
-
-                          <span class="pull-right">
-                            <a href="#" ng-click="vmc.deleteMember({{member}})">
-                              <i class="fa fa-times" style="float:right; padding:13px 20px;"></i>
-                            </a>
-                          </span>
-                          <span class="pull-right">
-                            <a href="#">
-                              <i class="fa fa-circle text-navy" style="float:left; padding:13px 10px;"></i>
-                            </a>
-                          </span>
                           <img alt="image" class="chat-avatar" title="{{member.alias}}" ng-src="{{member.profilePicture}}"/>
                           <div class="chat-user-name">
-                            <a href="#">{{member.firstName}} {{member.lastName}}</a>
+                            {{member.firstName}} {{member.lastName}}
                           </div>
                       </div>
                     </li>
-
                   </div>
                   <a ng-click="vm.invite()" ng-class="{ disabled: !vm.canInvite() }">
                       <p><i class="fa fa-plus" style="padding:0 10px 0 0"></i>Agregar participante</p>
