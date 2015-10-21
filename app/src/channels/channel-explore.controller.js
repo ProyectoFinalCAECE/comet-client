@@ -14,6 +14,8 @@
                                            '$scope',
                                            '$state',
                                            '$modal',
+                                           '$location',
+                                           '$anchorScroll',
                                            'lodash',
                                            'moment',
                                            'ngToast',
@@ -32,6 +34,8 @@
                                           $scope,
                                           $state,
                                           $modal,
+                                          $location,
+                                          $anchorScroll,
                                           lodash,
                                           moment,
                                           ngToast,
@@ -75,7 +79,8 @@
           vm.imSureDelete = false;
           vm.deleteChannel = deleteChannel;
 
-          $log.log('isDirect', isDirect);
+          // current message Id counter
+          var lastMsgId = 0;
 
           activate();
 
@@ -91,6 +96,7 @@
             channelService.getMessages(vm.project.id, vm.channel.id, 0, 0, vm.isDirect).then(function (response) {
               response.data.messages.forEach(function(entry) {
                   processMessageReceived(entry);
+                  scrollToLast();
               });
             });
 
@@ -111,6 +117,7 @@
             // listen to new messages
             chatService.on('message', function (data) {
               processMessageReceived(data);
+              scrollToLast();
             });
           }
 
@@ -152,6 +159,8 @@
 
             // add message to message list
             addMessageToList(msgPayload);
+
+            lastMsgId = msgPayload.id;
           }
 
           /**
@@ -178,8 +187,11 @@
           */
           function sendMessage() {
 
+            lastMsgId++;
+
             // construct the message payload
             var msgPayload = {
+              id: lastMsgId,
               text: vm.message,
               user: user.id,
               destinationUser: (isDirect ? vm.channel.id : 0),
@@ -197,6 +209,17 @@
             // add the message to the view
             addMessageToList(msgPayload);
             vm.message = '';
+
+            scrollToLast();
+          }
+
+          /**
+           * @name scrollToLast
+           * @desc scroll the window to the last message
+          */
+          function scrollToLast() {
+            $location.hash('msg_' + lastMsgId);
+            $anchorScroll();
           }
 
           /**
