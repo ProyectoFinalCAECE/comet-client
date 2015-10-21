@@ -87,6 +87,11 @@
             vm.isClosed = (vm.channel.state === 'C');
 
             // load channel messages
+            channelService.getMessages(vm.project.id, vm.channel.id, 0, 0).then(function (response) {
+              response.data.messages.forEach(function(entry) {
+                  processMessageReceived(entry);
+              });
+            });
 
             // listen to channel updates
             $scope.$on('channelUpdated', function(event, args) {

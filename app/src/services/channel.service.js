@@ -21,7 +21,8 @@
             getById: getById,
             close: close,
             deleteChannel: deleteChannel,
-            deleteMember: deleteMember
+            deleteMember: deleteMember,
+            getMessages: getMessages,
         };
 
         /**
@@ -102,6 +103,15 @@
          */
         function getBaseUrl(projectId) {
           return parentUrl + projectId + resourceUrl;
+        }
+
+        /**
+         * @name getMessages
+         * @desc returns channel's messages by channelId
+         */
+        function getMessages (projectId, channelId, offset, limit) {
+          var url = getBaseUrl(projectId) + channelId;
+          return $http.get(url + '/messages', authService.getJwtHeader());
         }
     }
 })();
