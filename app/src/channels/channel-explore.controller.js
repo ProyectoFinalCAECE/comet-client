@@ -88,7 +88,7 @@
             setFlags();
 
             // load channel messages
-            channelService.getMessages(vm.project.id, vm.channel.id, 0, 0).then(function (response) {
+            channelService.getMessages(vm.project.id, vm.channel.id, 0, 0, vm.isDirect).then(function (response) {
               response.data.messages.forEach(function(entry) {
                   processMessageReceived(entry);
               });

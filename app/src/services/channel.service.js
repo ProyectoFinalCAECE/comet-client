@@ -137,8 +137,11 @@
          * @name getMessages
          * @desc returns channel's messages by channelId
          */
-        function getMessages (projectId, channelId, offset, limit) {
+        function getMessages (projectId, channelId, offset, limit, isDirect) {
           var url = getBaseUrl(projectId) + channelId;
+          if(isDirect){
+              return $http.get(url + '/messages?isDirect=true', authService.getJwtHeader());
+          }
           return $http.get(url + '/messages', authService.getJwtHeader());
         }
     }
