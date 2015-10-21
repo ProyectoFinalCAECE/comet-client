@@ -57,7 +57,7 @@
           <div class="ibox-content">
             <div class="row">
               <div ng-class="vm.showMembers ? 'col-md-9' : 'col-md-12'">
-                <div class="chat-discussion" style="height:450px">
+                <div class="chat-discussion">
                   <div class="chat-message" ng-repeat="message in vm.messages" ng-init="msgMember = vm.getMember(message.user)">
                     <img class="message-avatar" ng-src="{{msgMember.profilePicture}}" alt="" >
                     <div class="message">
