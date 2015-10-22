@@ -96,8 +96,8 @@
             channelService.getMessages(vm.project.id, vm.channel.id, 0, 0, vm.isDirect).then(function (response) {
               response.data.messages.forEach(function(entry) {
                   processMessageReceived(entry);
-                  scrollToLast();
               });
+              scrollToLast();
             });
 
             // listen to channel updates
@@ -105,6 +105,7 @@
               if (vm.isDirect) {
                 return;
               }
+
               vm.channel = args.channel;
               setFlags();
             });
@@ -236,8 +237,7 @@
            * @desc returns a member object by id
           */
           function getMember(memberId) {
-            $log.log(vm.channel.members);
-            return lodash.find(vm.channel.members, 'id', memberId);
+            return lodash.find(vm.project.members, 'id', memberId);
           }
 
           /**
@@ -360,8 +360,8 @@
                 }
              }
            });
-           modalInstance.result.then(function (response) {
-             $rootScope.$broadcast('channelUpdated', response.data);
+           modalInstance.result.then(function (updatedChannel) {
+             $rootScope.$broadcast('channelUpdated', { channel: updatedChannel });
            });
           }
 
@@ -386,7 +386,7 @@
              }
            });
            modalInstance.result.then(function (response) {
-             $rootScope.$broadcast('channelUpdated', response.data);
+             $rootScope.$broadcast('channelUpdated', { channel: response.data });
            });
           }
 
@@ -400,9 +400,8 @@
             dlg.result.then(function () {
               channelService
                 .deleteMember(vm.project.id, vm.channel.id, user.id)
-                .then(function (response) {
+                .then(function () {
                   ngToast.success('Has salido del canal.');
-                  $rootScope.$broadcast('channelUpdated', response.data);
                   $rootScope.$broadcast('channelsUpdated');
                   $state.go('dashboard.project.project-explore', { id: vm.project.id });
                 });
