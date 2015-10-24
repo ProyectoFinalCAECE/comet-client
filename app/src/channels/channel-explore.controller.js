@@ -138,7 +138,8 @@
               vm.isMember = true;
             }
 
-            vm.isClosed = (vm.channel.state === 'C');
+            vm.isClosed = (vm.channel.state === 'C' ||
+                           vm.project.state === 'C');
           }
 
           /**
@@ -187,6 +188,10 @@
            * @desc send message to the channel
           */
           function sendMessage() {
+
+            if (vm.message.length === 0) {
+              return;
+            }
 
             lastMsgId++;
 
