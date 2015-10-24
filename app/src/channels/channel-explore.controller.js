@@ -189,6 +189,10 @@
           */
           function sendMessage() {
 
+            if (vm.message.length === 0) {
+              return;
+            }
+
             lastMsgId++;
 
             // construct the message payload
