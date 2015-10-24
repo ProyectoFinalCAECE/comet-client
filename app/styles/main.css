@@ -368,6 +368,10 @@ a.disabled {
 
 .columnaCanal{
   width:160px;
+  max-width: 160px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .columnaFecha{
@@ -376,6 +380,10 @@ a.disabled {
 
 .columnaDescripcion{
   	width:130px;
+    max-width: 130px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .cometProjects:hover{
