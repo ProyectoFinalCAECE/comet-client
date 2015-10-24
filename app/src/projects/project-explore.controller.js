@@ -25,6 +25,7 @@
 
           var vm = this;
           vm.project = null;
+          vm.isClosed = false;
           vm.gotoEditProject = gotoEditProject;
 
           activate();
@@ -35,6 +36,7 @@
            */
           function activate () {
               vm.project = project;
+              vm.isClosed = (project.state === 'C');
           }
 
           /**

@@ -138,7 +138,8 @@
               vm.isMember = true;
             }
 
-            vm.isClosed = (vm.channel.state === 'C');
+            vm.isClosed = (vm.channel.state === 'C' ||
+                           vm.project.state === 'C');
           }
 
           /**
