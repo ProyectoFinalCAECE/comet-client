@@ -43,7 +43,7 @@ a.disabled {
     background: #213A53 none repeat scroll 0% 0%;
 }
 
-.skin-2 #side-menu > li.active,
+.skin-2 #side-menu > div > li.active,
 .skin-2 .welcome-message {
   /*color: #edf6ff;*/
   background: #213A53;
@@ -54,8 +54,10 @@ a.disabled {
     color: #EDF6FF;
 }*/
 
+.skin-2 #side-menu > div > li > a,
+.skin-2 #side-menu .nav > div > li > a
 .skin-2 #side-menu > li > a,
-.skin-2 #side-menu .nav > li > a {
+.skin-2 #side-menu .nav > li > a  {
     color: #EDF6FF;
     font-weight: normal;
 }
@@ -63,6 +65,35 @@ a.disabled {
 
 .nav-second-level li:last-child {
     margin-bottom: 0;
+}
+
+/*Dashboard Fijo*/
+
+.dash-side-fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  height: 100%;
+  z-index: 1001;
+}
+
+.scroll-content{
+  position: absolute;
+  max-height: 80%;
+  overflow-y: scroll;
+}
+
+.dash-top-fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+#page-wrapper {
+  margin-top: 60px;
 }
 
 /* Cambios del skin-2 */
