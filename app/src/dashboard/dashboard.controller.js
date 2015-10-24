@@ -90,12 +90,12 @@
               var channels = response.data;
 
               vm.privateChannels = lodash.filter(channels, function(c) {
-                return c.type === 'P';
+                return c.type === 'P' && c.state !== 'C';
               });
 
               vm.publicChannels = lodash.filter(channels, function(c) {
                 var isMember = (lodash.find(c.members, 'id', vm.user.id) !== undefined);
-                return c.type === 'S' && isMember;
+                return c.type === 'S' && c.state !== 'C' && isMember;
               });
             });
 
