@@ -64,7 +64,7 @@
                       <a id="msg_{{message.id}}" class="message-author">{{msgMember.firstName}}</a>
                       <span class="message-date">{{ vm.formatMessageDate(message.date) }}</span>
                       <span class="message-content">
-                        {{message.text}}
+                        <pre>{{message.text}}</pre>
                       </span>
                     </div>
                   </div>
@@ -98,6 +98,7 @@
                     <textarea ng-enter="vm.sendMessage()"
                               ng-model="vm.message"
                               ng-disabled="vm.isClosed"
+                              maxlength="500"
                               class="form-control col-lg-10"
                               style="resize: none;"
                               name="message"
