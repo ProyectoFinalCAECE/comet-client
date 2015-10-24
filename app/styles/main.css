@@ -203,6 +203,10 @@ a.disabled {
     width:450px;
 }
 
+.cometInput textarea{
+  resize:none;
+}
+
 .crearProyecto-sm-8 label{
   margin-right:10px;
   padding-left: 0px;
@@ -465,4 +469,9 @@ a.disabled {
 .messageInputText textarea{
   height:35px;
   overflow:hidden;
+}
+
+.form-horizontal .control-label{
+  padding-top:0;
+  text-align: left;
 }
