@@ -425,6 +425,52 @@ a.disabled {
   cursor:default;
 }
 
+/* Piso los estilos de inspinia que ponen un msj a la izquierda y otro a derecha */
+.chat-discussion .chat-message:nth-child(2n+1) .message-avatar,
+.chat-discussion .chat-message:nth-child(2n) .message-avatar {
+  float: left;
+  margin-right: 10px;
+}
+
+.chat-discussion .chat-message:nth-child(2n+1) .message-date,
+.chat-discussion .chat-message:nth-child(2n) .message-date {
+  float: right;
+}
+
+.chat-discussion .chat-message:nth-child(2n+1) .message,
+.chat-discussion .chat-message:nth-child(2n) .message {
+  text-align: left;
+  margin-left: 55px;
+}
+
+/* los mensajes del usuario se ven a la derecha */
+.chat-discussion .chat-message.mine .message-avatar {
+  float: right;
+  margin-right: 0px;
+}
+
+.chat-discussion .chat-message.mine .message-date {
+  float: left;
+}
+
+.chat-discussion .chat-message.mine .message {
+  text-align: right;
+  margin-right: 55px;
+}
+
+.chat-discussion {
+  height: auto;
+}
+
+/* contenido del mensaje */
+.chat-discussion .chat-message pre.message-text {
+  border:0;
+  background-color: #FFF;
+  margin:0;
+  padding:0;
+  font-family: 'open sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
 /*
   Dialogo Invitar Participantes
 */

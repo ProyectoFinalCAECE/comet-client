@@ -4213,8 +4213,8 @@ dd.project-people {
   margin-right: 10px;
 }
 .chat-discussion .chat-message:nth-child(2n) .message-avatar {
-  float: left;
-  margin-right: 10px;
+  float: right;
+  margin-left: 10px;
 }
 .message {
   background-color: #fff;
@@ -4226,18 +4226,18 @@ dd.project-people {
   border-radius: 4px;
 }
 .chat-discussion .chat-message:nth-child(2n+1) .message-date {
-  float:right
+  float: right;
 }
 .chat-discussion .chat-message:nth-child(2n) .message-date {
-  float:right
+  float: left;
 }
 .chat-discussion .chat-message:nth-child(2n+1) .message {
   text-align: left;
   margin-left: 55px;
 }
 .chat-discussion .chat-message:nth-child(2n) .message {
-  text-align: left;
-  margin-left: 55px;
+  text-align: right;
+  margin-right: 55px;
 }
 .message-date {
   font-size: 10px;
@@ -4249,7 +4249,7 @@ dd.project-people {
 .chat-discussion {
   background: #eee;
   padding: 15px;
-  height: 100%;
+  height: 400px;
   overflow-y: auto;
 }
 .chat-users {

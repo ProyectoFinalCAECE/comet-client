@@ -61,6 +61,7 @@
           // messages
           vm.lastMessage = null;
           vm.getMember = getMember;
+          vm.messageIsFromUser = messageIsFromUser;
           vm.formatMessageDate = formatMessageDate;
           vm.sendMessage = sendMessage;
           // update info
@@ -78,6 +79,30 @@
           //delete channel
           vm.imSureDelete = false;
           vm.deleteChannel = deleteChannel;
+
+          // ngEmbed options
+          vm.options = {
+              linkTarget: '_blank',
+              basicVideo: false,
+              code: {
+                  highlight: true,
+                  lineNumbers: true
+              },
+              gdevAuth: 'AIzaSyAQONTdSSaKwqB1X8i6dHgn9r_PtusDhq0',
+              video: {
+                  embed: true,
+                  width: 800,
+                  ytTheme: 'light',
+                  details: true
+              },
+              tweetEmbed       : true,
+              tweetOptions     : {
+                  lang      : 'es'
+              },
+              image: {
+                  embed: true
+              }
+          };
 
           // current message Id counter
           var lastMsgId = 0;
@@ -243,6 +268,14 @@
           */
           function getMember(memberId) {
             return lodash.find(vm.project.members, 'id', memberId);
+          }
+
+          /**
+           * @name messageIsFromUser
+           * @desc returns if the message author is the logged in user
+          */
+          function messageIsFromUser(message) {
+            return (message.user === user.id);
           }
 
           /**

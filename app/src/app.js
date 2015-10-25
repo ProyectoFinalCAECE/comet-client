@@ -15,6 +15,7 @@
             'ct.ui.router.extras.previous',
             'ncy-angular-breadcrumb',
             'ngAnimate',
+            'ngEmbed',
             'ngMessages',
             'ngSanitize',
             'ngToast',
