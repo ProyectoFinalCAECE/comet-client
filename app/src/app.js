@@ -13,6 +13,7 @@
             'angularUtils.directives.dirPagination',
             'btford.socket-io',
             'ct.ui.router.extras.previous',
+            'inspinia',
             'ncy-angular-breadcrumb',
             'ngAnimate',
             'ngEmbed',
