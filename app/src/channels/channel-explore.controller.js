@@ -448,12 +448,12 @@
                   return vm.project;
                 },
                 channel: function () {
-                  return vm.channel;
+                  return angular.copy(vm.channel);
                 }
              }
            });
-           modalInstance.result.then(function (response) {
-             $rootScope.$broadcast('channelUpdated', { channel: response.data });
+           modalInstance.result.then(function (updatedChannel) {
+             $rootScope.$broadcast('channelUpdated', { channel: updatedChannel });
            });
           }
 
