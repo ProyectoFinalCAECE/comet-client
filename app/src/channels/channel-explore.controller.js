@@ -454,6 +454,7 @@
            });
            modalInstance.result.then(function (updatedChannel) {
              $rootScope.$broadcast('channelUpdated', { channel: updatedChannel });
+             $rootScope.$broadcast('channelsUpdated');
            });
           }
 
@@ -513,6 +514,7 @@
                 }
               }).then(function() {
                 ngToast.success('Canal cerrado.');
+                $rootScope.$broadcast('channelsUpdated');
                 $state.go('dashboard.project.project-explore', { id: vm.project.id });
               });
             });
@@ -526,7 +528,6 @@
             var msg = '¿Esta seguro que desea eliminar el canal? Esta operación no puede revertirse.';
             var dlg = dialogService.showModalConfirm('Administrar proyecto', msg);
             dlg.result.then(function () {
-              $log.log('deleteChannel', vm.channel.id);
               channelService.deleteChannel(vm.project.id, vm.channel.id).error(function(data) {
                 vm.validationErrors = $rootScope.helpers.loadServerErrors(data);
                 if (vm.validationErrors === null)
@@ -535,6 +536,7 @@
                 }
               }).then(function() {
                   ngToast.success('Canal eliminado.');
+                  $rootScope.$broadcast('channelsUpdated');
                   $state.go('dashboard.project.project-explore', { id: vm.project.id });
               });
             });
