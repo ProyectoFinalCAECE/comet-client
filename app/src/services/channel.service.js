@@ -121,8 +121,8 @@
          * @desc delete a member from project
          */
         function deleteMember (projectId, id, member_id) {
-         var url = getBaseUrl(projectId);
-         return $http.delete(url + id + '/members/' + member_id, authService.getJwtHeader());
+          var url = getBaseUrl(projectId);
+          return $http.delete(url + id + '/members/' + member_id, authService.getJwtHeader());
         }
 
         /**

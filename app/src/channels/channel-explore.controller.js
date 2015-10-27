@@ -122,14 +122,7 @@
           function activate () {
 
             setFlags();
-
-            // load channel messages
-            channelService.getMessages(vm.project.id, vm.channel.id, 0, 0, vm.isDirect).then(function (response) {
-              response.data.messages.forEach(function(entry) {
-                  processMessageReceived(entry);
-              });
-              scrollToLast();
-            });
+            loadChannelMessages();
 
             // listen to channel updates
             $scope.$on('channelUpdated', function(event, args) {
@@ -171,6 +164,19 @@
 
             vm.isClosed = (vm.channel.state === 'C' ||
                            vm.project.state === 'C');
+          }
+
+          /**
+           * @name loadChannelMessages
+           * @desc loads the channel message history
+          */
+          function loadChannelMessages() {
+            channelService.getMessages(vm.project.id, vm.channel.id, 0, 0, vm.isDirect).then(function (response) {
+              response.data.messages.forEach(function(entry) {
+                  processMessageReceived(entry);
+              });
+              scrollToLast();
+            });
           }
 
           /**
