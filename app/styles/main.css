@@ -461,6 +461,7 @@ a.disabled {
 
 .chat-discussion {
   height: auto;
+  padding: 15px 0px 40px;
 }
 
 /* contenido del mensaje */
