@@ -64,6 +64,9 @@
           vm.messageIsFromUser = messageIsFromUser;
           vm.formatMessageDate = formatMessageDate;
           vm.sendMessage = sendMessage;
+          vm.loadOlderMessages = loadOlderMessages;
+          var nextRequestOffset = 0;
+          vm.noMoreMessages = false;
           // update info
           vm.edit = edit;
           // invite / delete members
@@ -171,11 +174,16 @@
            * @desc loads the channel message history
           */
           function loadChannelMessages() {
-            channelService.getMessages(vm.project.id, vm.channel.id, 0, 0, vm.isDirect).then(function (response) {
-              response.data.messages.forEach(function(entry) {
-                  processMessageReceived(entry);
-              });
-              scrollToLast();
+            var limit = 5;
+            channelService.getMessages(vm.project.id, vm.channel.id, nextRequestOffset, limit, vm.isDirect).then(function (response) {
+              nextRequestOffset = response.data.next_offset;
+              if(response.data.messages.length === 0){
+                vm.noMoreMessages = true;
+              }else{
+                response.data.messages.forEach(function(entry) {
+                    processMessageReceived(entry);
+                });
+              }
             });
           }
 
@@ -270,7 +278,7 @@
            * @desc adds the message to the list so it can be viewed on the page
           */
           function addMessageToList(msg) {
-            vm.messages.push(msg);
+            vm.messages.unshift(msg);
             vm.lastMessage = msg.date;
           }
 
@@ -546,6 +554,16 @@
                   $state.go('dashboard.project.project-explore', { id: vm.project.id });
               });
             });
+          }
+
+          /*
+          * @name loadOlderMessages
+          * @desc calls method to retrieve older messages
+          */
+          function loadOlderMessages(){
+            if(!vm.noMoreMessages){
+              loadChannelMessages();
+            }
           }
       }
 })();

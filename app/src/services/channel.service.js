@@ -139,10 +139,11 @@
          */
         function getMessages (projectId, channelId, offset, limit, isDirect) {
           var url = getBaseUrl(projectId) + channelId;
+
           if(isDirect){
-              return $http.get(url + '/messages?isDirect=true', authService.getJwtHeader());
+              return $http.get(url + '/messages?isDirect=true&offset=' + offset + '&limit=' + limit, authService.getJwtHeader());
           }
-          return $http.get(url + '/messages', authService.getJwtHeader());
+          return $http.get(url + '/messages?offset=' + offset + '&limit=' + limit, authService.getJwtHeader());
         }
     }
 })();
