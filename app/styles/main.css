@@ -6,6 +6,25 @@
     cursor: pointer;
 }
 
+/*ngImgCrop*/
+.cropArea {
+    background: #E4E4E4;
+    overflow: hidden;
+    width:250px;
+    height:250px;
+}
+
+.progress {
+    display: inline-block;
+    width: 100px;
+    border: 3px groove #CCC;
+}
+.progress div {
+    font-size: smaller;
+    background: orange;
+    width: 0;
+}
+
 /* links deshabilitados */
 a.disabled {
     color: #AAAAAA;

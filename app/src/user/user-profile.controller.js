@@ -14,35 +14,47 @@
                                          '$scope',
                                          '$state',
                                          '$previousState',
+                                         '$modal',
+                                         'ngToast',
+                                         'authService',
                                          'dialogService',
+                                         'Upload',
                                          'formsConfig',
                                          'dashboardServiceModel',
                                          'accountService',
                                          'userService',
-                                         'user',
-                                         'fileReader'];
+                                         'user'];
 
         function UserProfileController ($log,
                                         $rootScope,
                                         $scope,
                                         $state,
                                         $previousState,
+                                        $modal,
+                                        ngToast,
+                                        authService,
                                         dialogService,
+                                        Upload,
                                         formsConfig,
                                         dashboardServiceModel,
                                         accountService,
                                         userService,
-                                        user,
-                                        fileReader) {
+                                        user) {
 
           var vm = this;
           vm.validationErrors = null;
           vm.onTabSelected = onTabSelected;
           vm.cancel = cancel;
+          vm.user = user;
 
           // profile update
-          vm.user = angular.copy(user);
           vm.update = update;
+
+          // avatar
+          vm.sourceImage = '';
+          vm.croppedImageDataUrl = '';
+          vm.progress = -1;
+          vm.upload = upload;
 
           // change password
           vm.password = null;
@@ -70,33 +82,15 @@
            * @desc calls the backend endpoint to update the user profile
            */
           function update() {
-            console.log('vm.user.profilePicture.mediaType is: ' + vm.user.profilePicture.type);
             userService.update(vm.user).error(function(data) {
                 vm.validationErrors = $rootScope.helpers.loadServerErrors(data);
-            }).then(function() {
-                // if(vm.user.profilePicture.type.indexOf('image/') > -1){
-                //     //updating profile picture if required
-                //     userService.uploadProfilePicture(vm.user.profilePicture).error(function(data) {
-                //         vm.validationErrors = $rootScope.helpers.loadServerErrors(data);
-                //     }).then(function(response) {
-                //       console.log('response is: '+ JSON.stringify(response));
-                //       vm.user.profilePicture = response.data.profilePicture;
-                //       var msg = 'Tus datos se actualizaron exitosamente.';
-                //       var dlg = dialogService.showModalAlert('Editar Perfil', msg);
-                //       dlg.result.finally(function () {
-                //         $state.go('dashboard.project-list');
-                //       });
-                //     });
-                // } else {
-                //   var msg = 'Tus datos se actualizaron exitosamente.';
-                //   var dlg = dialogService.showModalAlert('Editar Perfil', msg);
-                //   dlg.result.finally(function () {
-                //     $state.go('dashboard.project-list');
-                //   });
-                // }
             }).then(userUpdateSuccess);
           }
 
+          /**
+           * @name userUpdateSuccess
+           * @desc displays a successful message to the user
+           */
           function userUpdateSuccess() {
             // get the updated user from backend
             userService.get().then(function (updatedUser) {
@@ -108,6 +102,41 @@
               dlg.result.finally(function () {
                 gotoPreviousState();
               });
+            });
+          }
+
+          /**
+           * @name upload
+           * @desc uploads the avatar image to the server
+          */
+          function upload (dataUrl) {
+            Upload.upload({
+                url: '/users/image',
+                data: {
+                  profilePicture: Upload.dataUrltoBlob(dataUrl)
+                },
+                headers: {
+                  'Authorization':'Bearer ' + authService.getToken()
+                }
+            }).then(function (response) {
+                vm.progress = -1;
+                console.log(vm.user.profilePicture, response.data.user.profilePicture);
+                vm.user.profilePicture = response.data.user.profilePicture;
+                dashboardServiceModel.setCurrentUser(response.data.user);
+                // success dialog
+                var msg = 'Tu foto se actualizó exitosamente.';
+                var dlg = dialogService.showModalAlert('Foto de perfil', msg);
+                dlg.result.finally(function () {
+                  gotoPreviousState();
+                });
+            }, function (response) {
+                vm.progress = -1;
+                if (response.status > 0) {
+                  ngToast.danger('Ocurrió un error al consultar el servidor.');
+                  console.log(response.status);
+                }
+            }, function (evt) {
+                vm.progress = parseInt(100.0 * evt.loaded / evt.total);
             });
           }
 
@@ -137,20 +166,10 @@
                 vm.validationErrors = $rootScope.helpers.loadServerErrors(data);
             }).then(function () {
               //closing client session.
-              console.log('pre logout angular');
               accountService.logout();
-              console.log('pre logout angular');
               $state.go('home');
             });
           }
-
-          $scope.getFile = function () {
-            $scope.progress = 0;
-              fileReader.readAsDataUrl($scope.file, $scope)
-                            .then(function(result) {
-                                $scope.imageSrc = result;
-                            });
-          };
 
           /**
            * @name cancel

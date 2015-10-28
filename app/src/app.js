@@ -17,6 +17,8 @@
             'ncy-angular-breadcrumb',
             'ngAnimate',
             'ngEmbed',
+            'ngFileUpload',
+            'ngImgCrop',
             'ngMessages',
             'ngSanitize',
             'ngToast',

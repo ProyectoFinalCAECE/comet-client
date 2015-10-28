@@ -1,0 +1,30 @@
+<div class="modal-header">
+    <h3 class="modal-title">Cambiar avatar</h3>
+</div>
+<div class="modal-body text-center">
+  <!-- Lista usuarios -->
+  <div class="row">
+    <form name="frmAvatar">
+        <button ngf-select ng-model="vm.sourceImage" accept="image/*">
+            Seleccionar imagen
+        </button>
+        <div ngf-drop ng-model="vm.sourceImage"
+             ngf-pattern="image/*"
+             class="cropArea">
+            <img-crop image="vm.sourceImage  | ngfDataUrl"
+                      result-image="vm.croppedImageDataUrl">
+            </img-crop>
+        </div>
+        <div>
+            <img ng-src="{{vm.croppedImageDataUrl}}" />
+        </div>
+        <span class="progress" ng-show="vm.progress >= 0">
+          <div style="width:{{vm.progress}}%" ng-bind="vm.progress + '%'"></div>
+        </span>
+    </form>
+  </div>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-warning" type="button" ng-click="vm.cancel()">Cancelar</button>
+  <button class="btn btn-primary" type="button" ng-click="vm.upload(vm.croppedImageDataUrl)">Aceptar</button>
+</div>
