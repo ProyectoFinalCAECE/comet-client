@@ -6,6 +6,25 @@
     cursor: pointer;
 }
 
+/*ngImgCrop*/
+.cropArea {
+    background: #E4E4E4;
+    overflow: hidden;
+    width:250px;
+    height:250px;
+}
+
+.progress {
+    display: inline-block;
+    width: 100px;
+    border: 3px groove #CCC;
+}
+.progress div {
+    font-size: smaller;
+    background: orange;
+    width: 0;
+}
+
 /* links deshabilitados */
 a.disabled {
     color: #AAAAAA;
@@ -43,7 +62,7 @@ a.disabled {
     background: #213A53 none repeat scroll 0% 0%;
 }
 
-.skin-2 #side-menu > li.active,
+.skin-2 #side-menu > div > li.active,
 .skin-2 .welcome-message {
   /*color: #edf6ff;*/
   background: #213A53;
@@ -54,8 +73,10 @@ a.disabled {
     color: #EDF6FF;
 }*/
 
+.skin-2 #side-menu > div > li > a,
+.skin-2 #side-menu .nav > div > li > a
 .skin-2 #side-menu > li > a,
-.skin-2 #side-menu .nav > li > a {
+.skin-2 #side-menu .nav > li > a  {
     color: #EDF6FF;
     font-weight: normal;
 }
@@ -63,6 +84,35 @@ a.disabled {
 
 .nav-second-level li:last-child {
     margin-bottom: 0;
+}
+
+/*Dashboard Fijo*/
+
+.dash-side-fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  height: 100%;
+  z-index: 1001;
+}
+
+.scroll-content{
+  position: absolute;
+  max-height: 80%;
+  overflow-y: scroll;
+}
+
+.dash-top-fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+#page-wrapper {
+  margin-top: 60px;
 }
 
 /* Cambios del skin-2 */
@@ -170,6 +220,10 @@ a.disabled {
 
 .cometInput input, .cometInput textarea, .cometInput div{
     width:450px;
+}
+
+.cometInput textarea{
+  resize:none;
 }
 
 .crearProyecto-sm-8 label{
@@ -337,6 +391,10 @@ a.disabled {
 
 .columnaCanal{
   width:160px;
+  max-width: 160px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .columnaFecha{
@@ -345,6 +403,10 @@ a.disabled {
 
 .columnaDescripcion{
   	width:130px;
+    max-width: 130px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .cometProjects:hover{
@@ -365,6 +427,7 @@ a.disabled {
 
 .ButtonAdminList{
   float: right;
+  padding-top: 50px;
  }
 
  .ButtonAdminList div{
@@ -380,6 +443,73 @@ a.disabled {
 .ButtonAdminList li a.disabled {
   color: #CCC;
   cursor:default;
+}
+
+/* Piso los estilos de inspinia que ponen un msj a la izquierda y otro a derecha */
+.chat-discussion .chat-message:nth-child(2n+1) .message-avatar,
+.chat-discussion .chat-message:nth-child(2n) .message-avatar {
+  float: left;
+  margin-right: 10px;
+}
+
+.chat-discussion .chat-message:nth-child(2n+1) .message-date,
+.chat-discussion .chat-message:nth-child(2n) .message-date {
+  float: right;
+}
+
+.chat-discussion .chat-message:nth-child(2n+1) .message,
+.chat-discussion .chat-message:nth-child(2n) .message {
+  text-align: left;
+  margin-left: 55px;
+}
+
+/* los mensajes del usuario se ven a la derecha */
+.chat-discussion .chat-message.mine .message-avatar {
+  float: right;
+  margin-right: 0px;
+}
+
+.chat-discussion .chat-message.mine .message-date {
+  float: left;
+}
+
+.chat-discussion .chat-message.mine .message {
+  text-align: right;
+  margin-right: 55px;
+}
+
+.chat-discussion {
+  height: auto;
+  padding: 15px 0px 40px;
+}
+
+/* contenido del mensaje */
+.chat-discussion .chat-message pre.message-text {
+  border:0;
+  background-color: #FFF;
+  margin:0;
+  padding:0;
+  font-family: 'open sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+/* Emojis */
+.emoji-container {
+    height: 300px;
+    width: 270px;
+    overflow: auto;
+    position: absolute;
+    top: -305px;
+    border-radius: 8px;
+    border: 1px solid #CCC;
+    padding: 5px;
+    background-color: #f7f7f7;
+}
+
+.emoji-container li.emoji {
+  width: 36px;
+  padding: 2px;
+  display: inline-block;
+  float: left;
 }
 
 /*
@@ -404,20 +534,37 @@ a.disabled {
   text-align: center;
 }
 
+/* Explorar canal */
+
+.badge-channel-type {
+  margin-left: 15px;
+  vertical-align: middle;
+  font-family: verdana;
+}
+
 .messageInputText{
   position:fixed;
   background-color: white;
   bottom:0;
-  height:45px;
-  width:85%;
-  padding-top:5px;
+  padding: 10px;
 }
 
 .messageInputText .fa{
-  font-size:30px;
+  font-size:20px;
 }
 
 .messageInputText textarea{
   height:35px;
   overflow:hidden;
+}
+
+.form-horizontal .control-label{
+  padding-top:0;
+  text-align: left;
+}
+
+.channel-explore-header {
+  z-index: 100;
+  background-color:white;
+  border-bottom: 1px solid #e7eaec !important;
 }

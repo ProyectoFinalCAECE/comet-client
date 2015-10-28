@@ -121,8 +121,8 @@
          * @desc delete a member from project
          */
         function deleteMember (projectId, id, member_id) {
-         var url = getBaseUrl(projectId);
-         return $http.delete(url + id + '/members/' + member_id, authService.getJwtHeader());
+          var url = getBaseUrl(projectId);
+          return $http.delete(url + id + '/members/' + member_id, authService.getJwtHeader());
         }
 
         /**
@@ -137,8 +137,11 @@
          * @name getMessages
          * @desc returns channel's messages by channelId
          */
-        function getMessages (projectId, channelId, offset, limit) {
+        function getMessages (projectId, channelId, offset, limit, isDirect) {
           var url = getBaseUrl(projectId) + channelId;
+          if(isDirect){
+              return $http.get(url + '/messages?isDirect=true', authService.getJwtHeader());
+          }
           return $http.get(url + '/messages', authService.getJwtHeader());
         }
     }

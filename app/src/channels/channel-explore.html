@@ -1,54 +1,52 @@
-<div class="row wrapper border-bottom white-bg page-heading">
+<div class="row wrapper border-bottom white-bg" data-view="channel-explore">
   <div class="col-lg-9 ExplorarCanal">
+    <div class="row channel-explore-header" sticky offset="50">
+      <div class="col-lg-10" style="float:left;">
+        <h2><strong>{{vm.channel.name}}</strong><span class="badge badge-success badge-channel-type" ng-show="{{ vm.channel.type === 'P' }}">
+          Privado
+        </span></h2>
+        <h4 class="ProjDesc">{{vm.channel.description}}</h4>
+        <ol class="breadcrumb2">
+          <li>
+            <div ncy-breadcrumb></div>
+          </li>
+        </ol>
+      </div>
+      <div class="col-lg-2 ButtonAdminList" ng-show="!vm.isDirect">
+        <ul>
+          <li class="dropdown">
+            <a ng-class="vm.isMember ? '' : 'disabled'" ng-click="vm.showMembers = !vm.showMembers">
+              <i class="fa fa-group"></i>
+            </a>
+          </li>
+          <li class="dropdown">
+            <a ng-class="vm.isMember && !vm.isClosed ? 'dropdown-toggle' : 'disabled'" data-toggle="{{vm.isMember ? 'dropdown' : ''}}">
+              <i class="fa fa-cog"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-user">
+              <li>
+                <a ng-click="vm.edit()">Editar Canal</a>
+              </li>
+              <li>
+                <a ng-click="vm.exit()">Salir del Canal</a>
+              </li>
+              <li>
+                <a ng-click="vm.closeChannel()">Cerrar Canal</a>
+              </li>
+              <li>
+                <a ng-click="vm.deleteChannel()">Eliminar Canal</a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a ng-hide="vm.isClosed || vm.isMember" ng-click="vm.invite()">
+              <i class="fa fa-plus"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
     <div class="row">
-        <div class="col-lg-10">
-          <h2><strong>{{vm.channel.name}}</strong><span class="badge badge-success" ng-show="{{ vm.channel.type === 'P' }}">
-            Privado
-          </span></h2>
-          <h4 class="ProjDesc">{{vm.channel.description}}</h4>
-          <ol class="breadcrumb2">
-            <li>
-              <div ncy-breadcrumb></div>
-            </li>
-          </ol>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-lg-2 ButtonAdminList" ng-show="!vm.isDirect">
-          <ul>
-            <li class="dropdown">
-              <a ng-class="vm.isMember ? '' : 'disabled'" ng-click="vm.showMembers = !vm.showMembers">
-                <i class="fa fa-group"></i>
-              </a>
-            </li>
-            <li class="dropdown">
-              <a ng-class="vm.isMember && !vm.isClosed ? 'dropdown-toggle' : 'disabled'" data-toggle="{{vm.isMember ? 'dropdown' : ''}}">
-                <i class="fa fa-cog"></i>
-              </a>
-              <ul class="dropdown-menu dropdown-user">
-                <li>
-                  <a ng-click="vm.edit()">Editar Canal</a>
-                </li>
-                <li>
-                  <a ng-click="vm.exit()">Salir del Canal</a>
-                </li>
-                <li>
-                  <a ng-click="vm.closeChannel()">Cerrar Canal</a>
-                </li>
-                <li>
-                  <a ng-click="vm.deleteChannel()">Eliminar Canal</a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a ng-show="!vm.isMember" ng-click="vm.invite()">
-                <i class="fa fa-plus"></i>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    <div class="row" style="heigth: 100%;">
       <div class="col-lg-12">
         <div class="ibox chat-view">
           <div class="ibox-title">
@@ -57,14 +55,17 @@
           <div class="ibox-content">
             <div class="row">
               <div ng-class="vm.showMembers ? 'col-md-9' : 'col-md-12'">
-                <div class="chat-discussion" style="height:450px">
-                  <div class="chat-message" ng-repeat="message in vm.messages" ng-init="msgMember = vm.getMember(message.user)">
+                <div class="chat-discussion">
+                  <div class="chat-message" ng-class="vm.messageIsFromUser(message) ? 'mine' : ''" ng-repeat="message in vm.messages" ng-init="msgMember = vm.getMember(message.user)">
                     <img class="message-avatar" ng-src="{{msgMember.profilePicture}}" alt="" >
                     <div class="message">
-                      <a class="message-author">{{msgMember.firstName}}</a>
+                      <span id="msg_{{message.id}}" class="message-author"><b>{{msgMember.firstName}}</b></span>
                       <span class="message-date">{{ vm.formatMessageDate(message.date) }}</span>
                       <span class="message-content">
-                        {{message.text}}
+                        <ng-embed embed-data="message.text"
+                        embed-options="vm.options"
+                        embed-template-url="/src/components/ngEmbed.template.html">
+                      </ng-embed>
                       </span>
                     </div>
                   </div>
@@ -72,47 +73,61 @@
               </div>
               <div class="col-md-3" ng-show="vm.showMembers">
                 <h4 style="padding-left:20px;">Miembros</h4>
-                  <div class="chat-users">
-                    <li ng-repeat="member in vm.channel.members">
-                      <div class="chat-user">
-                          <img alt="image" class="chat-avatar" title="{{member.alias}}" ng-src="{{member.profilePicture}}"/>
-                          <div class="chat-user-name">
-                            {{member.firstName}} {{member.lastName}}
-                          </div>
+                <div class="chat-users">
+                  <li ng-repeat="member in vm.channel.members">
+                    <div class="chat-user">
+                      <img alt="image" class="chat-avatar" title="{{member.alias}}" ng-src="{{member.profilePicture}}"/>
+                      <div class="chat-user-name">
+                        {{member.firstName}} {{member.lastName}}
                       </div>
-                    </li>
-                  </div>
-                  <a ng-click="vm.invite()" ng-class="{ disabled: !vm.canInvite() }">
-                      <p><i class="fa fa-plus" style="padding:0 10px 0 0"></i>Agregar participante</p>
-
-                  </a>
-            </div>
-            <div class="row messageInputText">
-              <div class="col-lg-12">
-                <div class="chat-message-form">
-                  <div class="form-group">
-                    <div class="col-lg-1">
-                      <i class="fa fa-paperclip"></i>
                     </div>
-                    <div class="col-lg-1">
-                      <i class="fa fa-smile-o"></i>
-                    </div>
-                    <div class="col-lg-10">
-                        <textarea ng-enter="vm.sendMessage()"
-                                  ng-model="vm.message"
-                                  ng-disabled="vm.isClosed"
-                                  class="form-control"
-                                  name="message"
-                                  placeholder="Ingrese el mensaje">
-                        </textarea>
-                    </div>
-                  </div>
+                  </li>
                 </div>
+                <a ng-click="vm.invite()" ng-class="{ disabled: !vm.canInvite() }">
+                  <p><i class="fa fa-plus" style="padding:0 10px 0 0"></i>Agregar participante</p>
+                </a>
               </div>
+              <div class="messageInputText">
+                <div class="col-lg-12" style="padding-left:0;">
+                  <div class="chat-message-form">
+                    <div class="input-group">
+                      <div class="input-group-btn">
+                        <button ng-disabled="vm.isClosed"
+                                style="height:35px;"
+                                tabindex="-1"
+                                class="btn btn-white"
+                                type="button"
+                                ng-click="vm.displayEmoji()">
+                          <i class="fa fa-smile-o"></i>
+                        </button>
+                        <div class="emoji-container" ng-show="vm.showEmoji">
+                          <ul>
+                            <li ng-repeat="emoji in vm.emojiList"
+                                ng-click="vm.setEmoji(emoji)"
+                                class="emoji">
+                              <a><i class="emoticon emoticon-{{emoji}}" title=":{{emoji}}:"></i></a>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                      <textarea id="message-input"
+                                name="message"
+                                ng-enter="vm.sendMessage()"
+                                ng-model="vm.message"
+                                ng-disabled="vm.isClosed"
+                                maxlength="500"
+                                class="form-control col-lg-10"
+                                style="resize: none;"
+                                placeholder="Ingrese el mensaje">
+                    </textarea>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
             </div>
-          </div>
-        </div>
+         </div>
       </div>
-    </div>
-  </div>
+   </div>
 </div>

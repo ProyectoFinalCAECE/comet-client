@@ -13,7 +13,7 @@
       function ngEnterDirective () {
           return function(scope, element, attrs) {
               element.bind("keydown", function(e) {
-                  if(e.which === 13) {
+                  if(e.which === 13 && !event.shiftKey) {
                       scope.$apply(function(){
                           scope.$eval(attrs.ngEnter, {'e': e});
                       });

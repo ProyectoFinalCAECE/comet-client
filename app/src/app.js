@@ -13,8 +13,12 @@
             'angularUtils.directives.dirPagination',
             'btford.socket-io',
             'ct.ui.router.extras.previous',
+            'inspinia',
             'ncy-angular-breadcrumb',
             'ngAnimate',
+            'ngEmbed',
+            'ngFileUpload',
+            'ngImgCrop',
             'ngMessages',
             'ngSanitize',
             'ngToast',
@@ -22,7 +26,8 @@
             'ui.bootstrap',
             'ui.bootstrap.showErrors',
             'ui.router',
-            'ui.select'
+            'ui.select',
+            'sticky'
         ])
         // lodash support
         .constant('lodash', window._)
@@ -81,7 +86,5 @@
               }
 
             };
-
-
-          })  ;
+          });
 })();

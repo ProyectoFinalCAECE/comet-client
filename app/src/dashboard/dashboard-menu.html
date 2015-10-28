@@ -1,4 +1,4 @@
-<nav class="navbar-default navbar-static-side" role="navigation">
+<nav class="navbar-default navbar-static-side dash-side-fixed" role="navigation">
   <div class="sidebar-collapse">
     <ul class="nav" id="side-menu">
       <li class="nav-header">
@@ -9,7 +9,7 @@
           <a data-toggle="dropdown" class="dropdown-toggle" href="#">
             <span class="clear">
               <span class="block m-t-xs">
-                <strong class="font-bold">{{ vm.user.firstName + ' ' + vm.user.lastName }}</strong>
+                <strong class="font-bold">{{ vm.user.fullName }}</strong>
                 <b class="caret"></b>
               </span>
             </span>
@@ -21,6 +21,7 @@
           </ul>
         </div>
         </li>
+        <div class="scroll-content">
         <li ng-show="vm.project != null">
           <a ui-sref="dashboard.project.project-explore">
             <span class="nav-label">Canales públicos</span>
@@ -59,6 +60,7 @@
             </li>
           </ul>
         </li>
+      </div>
     </ul>
   </div>
 </nav>

@@ -1,10 +1,10 @@
-<div class="wrapper wrapper-content animated fadeInRight">
+<div class="wrapper wrapper-content animated fadeInRight" data-view="channel-list">
   <div class="row">
     <!-- No tiene canales -->
     <div ng-show="vmc.isEmpty" class="jumbotron text-center">
         <p>No encontramos canales en este proyecto <i class="fa fa-frown-o"></i></p>
         <p>
-          <a ng-click="vmc.gotoCreateChannel()" class="btn btn-xl btn-primary">Crear Canal</a>
+          <a ng-disabled="vm.isClosed" ng-click="vmc.gotoCreateChannel()" name="btnCrearCanal" class="btn btn-xl btn-primary">Crear Canal</a>
         </p>
     </div>
     <!-- listado de canales -->
@@ -22,7 +22,7 @@
                     <input ng-model="vmc.filterQuery" type="text" placeholder="Filtrar..." class="form-control" name="top-search"/>
                   </li>
                   <li class="buttonRight">
-                    <button ui-sref="dashboard.project.channel-create" type="button" name="btnCrearProyecto buttonRight" class="btn btn-primary" style="float:right">Crear Canal</button>
+                    <button ui-sref="dashboard.project.channel-create" type="button" ng-disabled="vm.isClosed" name="btnCrearCanal" class="btn btn-primary" style="float:right">Crear Canal</button>
                     <a style="float: right; margin-top: 15px; margin-right: 20px;" ui-sref="dashboard.project.channel-closed-list">Ver canales cerrados</a>
                   </li>
                 </ol>
@@ -71,12 +71,12 @@
                           </li>
                         -->
                           <li>
-                            <img alt="image" class="img-circle" src="../../images/integraciones/github.png" />
+                            <!-- img alt="image" class="img-circle" src="../../images/integraciones/github.png" -->
                           </li>
                         </ul>
                       </td>
                       <td class="columnaFecha">{{channel.createdAt | date}}</td>
-                      <td class="columnaUltimoMensaje">{{channel.createdAt | date}}</td>
+                      <td class="columnaFecha">{{channel.createdAt | date}}</td>
                   </tr>
                 </tbody>
               </table>
