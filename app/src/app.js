@@ -24,7 +24,8 @@
             'ui.bootstrap',
             'ui.bootstrap.showErrors',
             'ui.router',
-            'ui.select'
+            'ui.select',
+            'sticky'
         ])
         // lodash support
         .constant('lodash', window._)
@@ -83,7 +84,5 @@
               }
 
             };
-
-
-          })  ;
+          });
 })();

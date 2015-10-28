@@ -1,7 +1,7 @@
 <div class="row wrapper border-bottom white-bg" data-view="channel-explore">
   <div class="col-lg-9 ExplorarCanal">
-    <div class="row">
-      <div class="col-lg-10">
+    <div class="row channel-explore-header" sticky offset="50">
+      <div class="col-lg-10" style="float:left;">
         <h2><strong>{{vm.channel.name}}</strong><span class="badge badge-success badge-channel-type" ng-show="{{ vm.channel.type === 'P' }}">
           Privado
         </span></h2>
@@ -12,8 +12,6 @@
           </li>
         </ol>
       </div>
-    </div>
-    <div class="row">
       <div class="col-lg-2 ButtonAdminList" ng-show="!vm.isDirect">
         <ul>
           <li class="dropdown">
@@ -122,13 +120,14 @@
                                 style="resize: none;"
                                 placeholder="Ingrese el mensaje">
                     </textarea>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
                   </div>
-                </div>
-              </div>
+               </div>
             </div>
-          </div>
-        </div>
+         </div>
       </div>
-    </div>
-  </div>
+   </div>
 </div>
