@@ -408,6 +408,7 @@ a.disabled {
 
 .ButtonAdminList{
   float: right;
+  padding-top: 50px;
  }
 
  .ButtonAdminList div{
@@ -540,4 +541,10 @@ a.disabled {
 .form-horizontal .control-label{
   padding-top:0;
   text-align: left;
+}
+
+.channel-explore-header {
+  z-index: 100;
+  background-color:white;
+  border-bottom: 1px solid #e7eaec !important;
 }
