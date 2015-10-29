@@ -450,6 +450,7 @@ a.disabled {
 .chat-discussion .chat-message:nth-child(2n) .message-avatar {
   float: left;
   margin-right: 10px;
+  margin-left: 0px;
 }
 
 .chat-discussion .chat-message:nth-child(2n+1) .message-date,
@@ -461,6 +462,7 @@ a.disabled {
 .chat-discussion .chat-message:nth-child(2n) .message {
   text-align: left;
   margin-left: 55px;
+  background-color: #F5F5F5;
 }
 
 /* los mensajes del usuario se ven a la derecha */
@@ -481,12 +483,13 @@ a.disabled {
 .chat-discussion {
   height: auto;
   padding: 15px 0px 40px;
+  background-color: #FFF;
 }
 
 /* contenido del mensaje */
 .chat-discussion .chat-message pre.message-text {
   border:0;
-  background-color: #FFF;
+  background-color: #F5F5F5;
   margin:0;
   padding:0;
   font-family: 'open sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
