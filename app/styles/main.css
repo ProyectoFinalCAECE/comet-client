@@ -74,13 +74,17 @@ a.disabled {
 }*/
 
 .skin-2 #side-menu > div > li > a,
-.skin-2 #side-menu .nav > div > li > a
+.skin-2 #side-menu .nav > div > li > a,
 .skin-2 #side-menu > li > a,
 .skin-2 #side-menu .nav > li > a  {
     color: #EDF6FF;
     font-weight: normal;
+    padding-top: 10px;
 }
 
+.skin-2 #side-menu > div > li > a > span {
+  padding-left: 20px;
+}
 
 .nav-second-level li:last-child {
     margin-bottom: 0;
@@ -97,10 +101,16 @@ a.disabled {
   z-index: 1001;
 }
 
-.scroll-content{
+.scroll-content {
   position: absolute;
+  height: 80%;
   max-height: 80%;
-  overflow-y: scroll;
+  width: 220px;
+  overflow: hidden;
+}
+
+.scroll-content:hover {
+  overflow-y: auto;
 }
 
 .dash-top-fixed {
