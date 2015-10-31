@@ -371,8 +371,8 @@
             if (vm.message === null) {
               vm.message = ' :' + emoji + ': ';
             }
-            else {
-              vm.message += ' :' + emoji + ': ';
+            else if (vm.message.length + (emoji.length + 2) <= 500) {
+              vm.message += ':' + emoji + ':';
             }
             vm.showEmoji = false;
             angular.element('#message-input').focus();
