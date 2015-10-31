@@ -92,6 +92,7 @@ a.disabled {
 
 /*Dashboard Fijo*/
 
+
 .dash-side-fixed {
   position: fixed;
   top: 0;
@@ -112,6 +113,13 @@ a.disabled {
 .scroll-content:hover {
   overflow-y: auto;
 }
+
+.scroll-content > li > ul > li > a {
+  width: 220px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
 
 .dash-top-fixed {
   position: fixed;
