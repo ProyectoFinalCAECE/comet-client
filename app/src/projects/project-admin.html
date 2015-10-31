@@ -90,8 +90,8 @@
                   </table>
                 </div>
                 <!-- Invitar -->
-                <div class="crearProyectoSubmit">
-                  <h3>Invitar participantes</h3>
+                <div class="crearProyectoSubmit">                  
+                  <label class="control-label">Personas a invitar</label>
                   <div ng-repeat="invite in vm.invites" class="m-b" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'address_' + ($index + 1))}">
                       <div class="input-group invitarEmails">
                           <input type="text" name="email" ng-model="invite.address" class="form-control" placeholder="Dirección de correo"/>
