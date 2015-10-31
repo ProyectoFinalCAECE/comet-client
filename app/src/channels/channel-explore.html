@@ -56,7 +56,9 @@
             <div class="row">
               <div ng-class="vm.showMembers ? 'col-md-9' : 'col-md-12'">
                 <div class="chat-discussion" lr-infinite-scroll="vm.loadOlderMessages">
-                  <small ng-show="vm.noMoreMessages">  No hay mas mensajes </small>
+                  <div ng-show="vm.noMoreMessages" class="jumbotron text-center">
+                      <p>No hay mensajes para este canal</p>
+                  </div>
                   <div class="chat-message" ng-class="vm.messageIsFromUser(message) ? 'mine' : ''" ng-repeat="message in vm.messages" ng-init="msgMember = vm.getMember(message.user)">
                     <img class="message-avatar" ng-src="{{::msgMember.profilePicture}}" alt="" >
                     <div class="message">

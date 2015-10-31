@@ -113,12 +113,6 @@ a.disabled {
   overflow-y: auto;
 }
 
-.scroll-content > li > ul > li > a {
-  width: 220px;
-  text-overflow: ellipsis;
-  overflow: hidden;
-}
-
 .dash-top-fixed {
   position: fixed;
   top: 0;
@@ -590,4 +584,27 @@ a.disabled {
   z-index: 100;
   background-color:white;
   border-bottom: 1px solid #e7eaec !important;
+}
+
+.cometProjectUsersIcon{
+	background: #1AB394;
+	color: #FFF;
+  position: fixed;
+  padding: 7px 10px 7px 13px;
+  border-radius: 20px 0px 0px 20px;
+  font-size: 16px;
+  top: 70px;
+  right: 0px;
+  width: 40px;
+  cursor: pointer;
+}
+
+
+.cometProjectUsers{
+  position: fixed;
+  font-size: 16px;
+  top: 70px;
+  right: 30px;
+  width: 150px;
+  background-color:white;
 }
