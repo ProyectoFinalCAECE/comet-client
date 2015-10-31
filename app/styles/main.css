@@ -602,7 +602,7 @@ a.disabled {
   border-radius: 20px 0px 0px 20px;
   font-size: 16px;
   top: 70px;
-  right: 0px;
+  right: 160px;
   width: 40px;
   cursor: pointer;
 }
@@ -610,9 +610,16 @@ a.disabled {
 
 .cometProjectUsers{
   position: fixed;
-  font-size: 16px;
+  font-size: 12px;
   top: 70px;
-  right: 30px;
-  width: 150px;
+  right: 0px;
+  width: 160px;
   background-color:white;
+  overflow-y: hidden;
+  height: 500px;
+  max-height:500px;
+}
+
+.cometProjectUsers:hover {
+  overflow-y: auto;
 }
