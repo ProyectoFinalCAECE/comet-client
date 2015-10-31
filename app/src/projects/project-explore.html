@@ -2,25 +2,26 @@
   <div class="col-lg-9">
     <h2><strong>{{vm.project.name}}</strong></h2>
     <button ng-show="vm.project.isOwner" ng-disabled="vm.isClosed" ng-click="vm.gotoEditProject()" type="button" name="btnAdmProyecto" class="btn btn-primary" style="float:right; margin-right:30px">Administrar</button>
-    <div class="theme-config-box">
-        <div class="cometProjectUsersIcon">
-            <i class="fa fa-user"></i>
-        </div>
-        <div class="skin-setttings">
-            <div class="setings-item">
-                <div class="cometProjectUsers">
-                  <div class="title">Miembros</div>
-                  <li ng-repeat="member in vm.project.members">
-                    <div class="chat-user">
-                      <img alt="image" class="chat-avatar" title="{{member.alias}}" ng-src="{{member.profilePicture}}"/>
-                      <div class="chat-user-name">
-                        {{member.firstName}} {{member.lastName}}
-                      </div>
-                    </div>
-                  </li>
-                </div>
+
+
+  <!-- Lista de Usuarios flotante -->
+      <div class="MenuFlotante">
+      <div class="cometProjectUsersIcon">
+          <i class="fa fa-user"></i>
+      </div>
+      <div class="skin-setttings">
+        <div class="cometProjectUsers">
+          <div class="title">Miembros</div>
+          <li ng-repeat="member in vm.project.members">
+            <div class="chat-user">
+              <img alt="image" class="chat-avatar" title="{{member.alias}}" ng-src="{{member.profilePicture}}"/>
+              <div class="chat-user-name">
+                {{member.firstName}} {{member.lastName}}
+              </div>
             </div>
+          </li>
         </div>
+      </div>
     </div>
 
 
