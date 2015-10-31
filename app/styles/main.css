@@ -113,6 +113,12 @@ a.disabled {
   overflow-y: auto;
 }
 
+.scroll-content > li > ul > li > a {
+  width: 220px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
 .dash-top-fixed {
   position: fixed;
   top: 0;
