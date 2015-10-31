@@ -629,5 +629,9 @@ a.disabled {
 }
 
 .has-notification {
-  font-weight: bold !important; 
+  font-weight: bold !important;
+}
+
+.selected-channel {
+  background-color: #1ab394 !important;
 }
