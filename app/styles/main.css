@@ -616,7 +616,6 @@ a.disabled {
   width: 160px;
   background-color:white;
   overflow-y: hidden;
-  height: 500px;
   max-height:500px;
 }
 
