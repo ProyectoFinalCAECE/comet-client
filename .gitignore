@@ -4,3 +4,5 @@
 *.log
 /.sass-cache
 /bower_components
+typings
+angular.d.ts

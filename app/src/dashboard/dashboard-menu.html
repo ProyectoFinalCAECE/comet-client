@@ -35,21 +35,6 @@
             </li>
           </ul>
         </li>
-        <li class="active" ng-show="vm.project != null">
-          <a href="#">
-            <span class="nav-label">Participantes</span>
-          </a>
-          <ul class="nav">
-              <li ng-repeat="member in vm.availableMembers">
-                <a ng-class="{ 'has-notification': member.hasNotification }"
-                   ui-sref="dashboard.project.channel-explore({projectId: vm.project.id, channelId:member.id, isDirect:true})">
-                   <i class="fa fa-circle text-navy"></i>
-                   {{member.alias}}
-                </a>
-              </li>
-            </li>
-          </ul>
-        </li>
         <li ng-show="vm.project != null">
           <a href="#">
             <span class="nav-label">Canales privados</span>

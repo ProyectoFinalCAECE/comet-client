@@ -148,21 +148,6 @@
           */
           function initializeSocket() {
 
-            // chatService.emit('authenticate', {
-            //   token: authService.getToken()
-            // });
-            //
-            // chatService.on('connect', function (socket) {
-            //   $log.log('chat service connect', socket);
-            //   socket
-            //     .on('authenticated', function () {
-            //       //do other things
-            //     })
-            //     .emit('authenticate', {
-            //       token: authService.getToken()
-            //     });
-            // });
-
             chatService.on('reconnect', function () {
               $log.log('chat reconnect');
               chatService.emit('join-room', {

@@ -42,6 +42,10 @@
           vm.publicChannels = null;
           vm.privateChannels = null;
           vm.availableMembers = null;
+          
+          vm.membersVisible = false;
+          vm.showMembers = showMembers;
+          
           vm.logout = logout;
 
           activate();
@@ -215,6 +219,14 @@
            */
           function getProjectRoomId() {
             return 'Project_' + vm.project.id;
+          }
+          
+          /**
+           * @name showMembers
+           * @desc shows/hide the members panel
+           */
+          function showMembers() {
+            vm.membersVisible = !vm.membersVisible;
           }
 
           /**
