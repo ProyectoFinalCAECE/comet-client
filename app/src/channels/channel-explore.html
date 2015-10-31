@@ -58,10 +58,10 @@
                 <div class="chat-discussion" lr-infinite-scroll="vm.loadOlderMessages">
                   <small ng-show="vm.noMoreMessages">  No hay mas mensajes </small>
                   <div class="chat-message" ng-class="vm.messageIsFromUser(message) ? 'mine' : ''" ng-repeat="message in vm.messages" ng-init="msgMember = vm.getMember(message.user)">
-                    <img class="message-avatar" ng-src="{{msgMember.profilePicture}}" alt="" >
+                    <img class="message-avatar" ng-src="{{::msgMember.profilePicture}}" alt="" >
                     <div class="message">
-                      <span id="msg_{{message.id}}" class="message-author"><b>{{msgMember.firstName}}</b></span>
-                      <span class="message-date">{{ vm.formatMessageDate(message.date) }}</span>
+                      <span id="msg_{{::message.id}}" class="message-author"><b>{{::msgMember.alias}}</b></span>
+                      <span class="message-date">{{::vm.formatMessageDate(message.date) }}</span>
                       <span class="message-content">
                         <ng-embed embed-data="message.text"
                         embed-options="vm.options"
