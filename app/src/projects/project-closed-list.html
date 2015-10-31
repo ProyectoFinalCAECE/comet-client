@@ -40,7 +40,6 @@
                   <th class="columnaCanal">Nombre</th>
                   <th class="columnaDescripcion">Descripcion</th>
                   <th class="columnaMiembros">Miembros</th>
-                  <th class="columnaIntegraciones">Integraciones</th>
                   <th class="columnaFecha">Fecha Creacion</th>
                   <th class="columnaFecha">Fecha Cierre</th>
                 </tr>
@@ -64,8 +63,6 @@
                           <p>+{{project.members.length - 6 }}</p>
                         </li>
                       </ul>
-                    </td>
-                    <td class="columnaIntegraciones">
                     </td>
                     <td class="columnaFecha">{{project.createdAt | date}}</td>
                     <td class="columnaFecha">{{project.closedAt | date}}</td>
