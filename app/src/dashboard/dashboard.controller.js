@@ -12,24 +12,26 @@
                                        '$scope',
                                        '$state',
                                        '$stateParams',
+                                       '$timeout',
                                        'ngToast',
                                        'lodash',
                                        'dashboardServiceModel',
                                        'accountService',
                                        'channelService',
-                                       'chatService',
+                                       'notificationService',
                                        'user'];
 
         function DashboardController ($log,
                                       $scope,
                                       $state,
                                       $stateParams,
+                                      $timeout,
                                       ngToast,
                                       lodash,
                                       dashboardServiceModel,
                                       accountService,
                                       channelService,
-                                      chatService,
+                                      notificationService,
                                       user) {
 
           var vm = this;
@@ -61,12 +63,11 @@
             // project channels
             loadChannels(vm.project);
 
-            // notifications
-
             // listen to project updates
             $scope.$on('currentProjectUpdated', function() {
               vm.project = dashboardServiceModel.getCurrentProject();
               loadChannels(vm.project);
+              notificationsJoinRoom();
             });
 
             // listen to user updates
@@ -78,8 +79,79 @@
             $scope.$on('channelsUpdated', function() {
               loadChannels(vm.project);
             });
+
+            // notifications
+            initializeNotifications();
           }
 
+          /**
+           * @name initializeNotifications
+           * @desc initializes the notifications socket
+           */
+          function initializeNotifications() {
+
+            if (vm.project === null) {
+              return;
+            }
+
+            notificationService.on('channels-updates', function (data) {
+              $log.log('notifications channels-updates', data);
+              setChannelsUpdates(data);
+            });
+
+            notificationService.on('reconnect', function () {
+              // re join project room
+              $log.log('notifications reconnect');
+              notificationsJoinRoom();
+            });
+
+            notificationsJoinRoom();
+            notificationsSendPing();
+          }
+
+          /**
+           * @name notificationsSendPing
+           * @desc sends a ping message to the server to save the
+           *       user activity date.
+           *        this function calls itself recursively
+           */
+          function notificationsSendPing() {
+
+            if (vm.project === null) {
+              return;
+            }
+
+            notificationService.emit('ping', {
+              projectId: vm.project.id,
+              userId: vm.user.id
+            });
+
+            $timeout(notificationsSendPing, 10 * 1000);
+          }
+
+          /**
+           * @name notificationsJoinRoom
+           * @desc joins the current project room
+           */
+          function notificationsJoinRoom() {
+
+            $log.log('notificationsJoinRoom', vm.project);
+
+            if (vm.project === null) {
+              return;
+            }
+
+            notificationService.emit('join-room', {
+              room: getProjectRoomId(),
+              projectId: vm.project.id,
+              userId: vm.user.id
+            });
+          }
+
+          /**
+           * @name loadChannels
+           * @desc loads the proyect channels
+           */
           function loadChannels (project) {
 
             if (project === null ) {
@@ -103,6 +175,46 @@
             vm.availableMembers = lodash.filter(vm.project.members, function(m) {
               return (m.id !== vm.user.id);
             });
+          }
+
+          /**
+           * @name setChannelsUpdates
+           * @desc marks the channels with updates
+           */
+          function setChannelsUpdates(data) {
+
+            // public and private channels
+            var channelUpdatesLen = data.channels_with_updates.length;
+            for (var i = 0; i < channelUpdatesLen; i++) {
+              var update = data.channels_with_updates[i];
+              // search in public channels
+              var channel = lodash.find(vm.publicChannels, 'id', update.id);
+              if (channel === undefined) {
+                // search in private channels
+                channel = lodash.find(vm.privateChannels, 'id', update.id);
+              }
+              if (channel !== undefined) {
+                channel.hasNotification = true;
+              }
+            }
+
+            // direct channels
+            var userUpdatesLen = data.users_with_updates.length;
+            for (var j = 0; j < userUpdatesLen; j++) {
+              var user = data.users_with_updates[j];
+              var userChannel = lodash.find(vm.availableMembers, 'id', user.id);
+              if (userChannel !== undefined) {
+                userChannel.hasNotification = true;
+              }
+            }
+          }
+
+          /**
+           * @name getProjectRoomId
+           * @desc returns the room id for the notifications socket
+           */
+          function getProjectRoomId() {
+            return 'Project_' + vm.project.id;
           }
 
           /**

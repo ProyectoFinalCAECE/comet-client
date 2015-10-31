@@ -28,8 +28,9 @@
           </a>
           <ul class="nav nav-second-level">
             <li ng-repeat="channel in vm.publicChannels">
-              <a ui-sref="dashboard.project.channel-explore({projectId: vm.project.id, channelId:channel.id, isDirect:false})">
-                {{channel.name}}
+              <a ng-class="{ 'has-notification': channel.hasNotification }"
+                 ui-sref="dashboard.project.channel-explore({projectId: vm.project.id, channelId:channel.id, isDirect:false})">
+                 {{channel.name}}
               </a>
             </li>
           </ul>
@@ -40,9 +41,10 @@
           </a>
           <ul class="nav">
               <li ng-repeat="member in vm.availableMembers">
-                <a ui-sref="dashboard.project.channel-explore({projectId: vm.project.id, channelId:member.id, isDirect:true})">
-                  <i class="fa fa-circle text-navy"></i>
-                  {{member.alias}}
+                <a ng-class="{ 'has-notification': member.hasNotification }"
+                   ui-sref="dashboard.project.channel-explore({projectId: vm.project.id, channelId:member.id, isDirect:true})">
+                   <i class="fa fa-circle text-navy"></i>
+                   {{member.alias}}
                 </a>
               </li>
             </li>
@@ -54,8 +56,9 @@
           </a>
           <ul class="nav nav-second-level">
             <li ng-repeat="channel in vm.privateChannels">
-              <a ui-sref="dashboard.project.channel-explore({projectId: vm.project.id, channelId:channel.id, isDirect:false})">
-                {{channel.name}}
+              <a ng-class="{ 'has-notification': channel.hasNotification }"
+                 ui-sref="dashboard.project.channel-explore({projectId: vm.project.id, channelId:channel.id, isDirect:false})">
+                 {{channel.name}}
               </a>
             </li>
           </ul>

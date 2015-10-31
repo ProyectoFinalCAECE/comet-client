@@ -22,6 +22,7 @@
                                            'constraints',
                                            'dialogService',
                                            'dashboardServiceModel',
+                                           'authService',
                                            'chatService',
                                            'channelService',
                                            'user',
@@ -42,6 +43,7 @@
                                           constraints,
                                           dialogService,
                                           dashboardServiceModel,
+                                          authService,
                                           chatService,
                                           channelService,
                                           user,
@@ -137,15 +139,53 @@
               setFlags();
             });
 
-            // initialize chat session
-            chatService.emit('join-room', {
-              room: getRoomId()
+            initializeSocket();
+          }
+
+          /**
+           * @name initializeSocket
+           * @desc initialize socket.io events
+          */
+          function initializeSocket() {
+
+            // chatService.emit('authenticate', {
+            //   token: authService.getToken()
+            // });
+            //
+            // chatService.on('connect', function (socket) {
+            //   $log.log('chat service connect', socket);
+            //   socket
+            //     .on('authenticated', function () {
+            //       //do other things
+            //     })
+            //     .emit('authenticate', {
+            //       token: authService.getToken()
+            //     });
+            // });
+
+            chatService.on('reconnect', function () {
+              $log.log('chat reconnect');
+              chatService.emit('join-room', {
+                room: getChannelRoomId()
+              });
             });
 
-            // listen to new messages
             chatService.on('message', function (data) {
+              $log.log('chat message received', data);
               processMessageReceived(data);
               scrollToLast();
+            });
+
+            chatService.on("error", function(error) {
+              $log.log('chatservice error', error);
+              //if (error.type === "UnauthorizedError" || error.code === "invalid_token") {
+                // redirect user to login page perhaps?
+                //console.log("User's token has expired");
+              //}
+            });
+
+            chatService.emit('join-room', {
+              room: getChannelRoomId()
             });
           }
 
@@ -246,12 +286,13 @@
               text: vm.message,
               user: user.id,
               destinationUser: (isDirect ? vm.channel.id : 0),
+              projectId: vm.project.id,
               date: new Date().getTime()  // for local use only, the server overwrites the date
             };
 
             // send the data to the server
             chatService.emit('message', {
-              room: getRoomId(),
+              room: getChannelRoomId(),
               message: {
                 message: msgPayload
               }
@@ -307,10 +348,10 @@
           }
 
           /**
-           * @name getRoomId
+           * @name getChannelRoomId
            * @desc returns the room id used to broadcast the message
           */
-          function getRoomId() {
+          function getChannelRoomId() {
             if (isDirect) {
               // the direct channel room is put together using
               // the users id's in ascending order
