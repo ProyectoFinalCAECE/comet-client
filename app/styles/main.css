@@ -627,3 +627,7 @@ a.disabled {
 .cometProjectUsers:hover {
   overflow-y: auto;
 }
+
+.has-notification {
+  font-weight: bold !important; 
+}
