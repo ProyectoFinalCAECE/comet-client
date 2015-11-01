@@ -278,6 +278,7 @@
             // send the data to the server
             chatService.emit('message', {
               room: getChannelRoomId(),
+              project_room: 'Project_' + vm.project.id,
               message: {
                 message: msgPayload
               }
