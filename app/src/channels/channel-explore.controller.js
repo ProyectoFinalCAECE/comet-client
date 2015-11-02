@@ -129,6 +129,12 @@
             setFlags();
             loadChannelMessages();
 
+            // set active channel
+            $rootScope.$broadcast('channelActivated', {
+              type: (vm.isDirect ? 'direct' : 'channel'),
+              id: vm.channel.id
+            });
+
             // listen to channel updates
             $scope.$on('channelUpdated', function(event, args) {
               if (vm.isDirect) {
@@ -201,7 +207,6 @@
            * @desc loads the channel message history
           */
           function loadChannelMessages() {
-            console.log("request to load");
             var limit = 5;
             channelService.getMessages(vm.project.id, vm.channel.id, nextRequestOffset, limit, vm.isDirect).then(function (response) {
               nextRequestOffset = response.data.next_offset;

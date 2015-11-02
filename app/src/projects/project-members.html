@@ -1,25 +1,26 @@
 <div class="theme-config-box" ng-hide="vm.project === null">
-	<div class="cometProjectUsersIcon" 
-       ng-class="{ 'minimized': !vm.membersVisible }" 
+	<div class="cometProjectUsersIcon"
+       ng-class="{ 'minimized': !vm.membersVisible }"
        ng-click="vm.showMembers()">
 		<i class="fa fa-user"></i>
 	</div>
-	<div class="skin-setttings" 
+	<div class="skin-setttings"
        ng-show="vm.membersVisible">
     <div class="cometProjectUsers">
       <div class="title" ng-click="vm.showMembers()">Miembros</div>
-      <li ng-repeat="member in vm.availableMembers">
+      <li ng-repeat="member in vm.availableMembers"  ng-class="{ 'selected-channel':member.isActive}">
         <div class="chat-user">
           <a ui-sref="dashboard.project.channel-explore({projectId: vm.project.id, channelId:member.id, isDirect:true})">
             <img alt="image" class="chat-avatar" title="{{member.alias}}" ng-src="{{member.profilePicture}}" />
           </a>
           <div class="chat-user-name">
-            <a ui-sref="dashboard.project.channel-explore({projectId: vm.project.id, channelId:member.id, isDirect:true})">
+            <a ui-sref="dashboard.project.channel-explore({projectId: vm.project.id, channelId:member.id, isDirect:true})"
+							 ng-class="{ 'has-notification': member.hasNotification }">
               {{member.alias}}
             </a>
           </div>
         </div>
-      </li>	
+      </li>
 		</div>
 	</div>
 </div>
