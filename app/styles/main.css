@@ -1,3 +1,7 @@
+html {
+  background-color: #E7EAEC;
+}
+
 /* Para Angular Bootstrap */
 .nav,
 .pagination,
@@ -131,6 +135,11 @@ a.disabled {
 
 #page-wrapper {
   margin-top: 60px;
+  min-height: auto;
+}
+
+.skin-2 #page-wrapper {
+  background: #E7EAEC;  /* igual al background color del elemento html */
 }
 
 /* Cambios del skin-2 */
@@ -635,10 +644,6 @@ a.disabled {
   padding: 0;
 }
 
-.cometProjectUsers{
-  
-}
-
 .cometProjectUsers:hover {
   overflow-y: auto;
 }
@@ -646,32 +651,6 @@ a.disabled {
 .cometProjectUsers li {
   list-style: none;
 }
-
-.animate-enter, 
-.animate-leave
-{ 
-    -webkit-transition: 300ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
-    -moz-transition: 300ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
-    -ms-transition: 300ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
-    -o-transition: 300ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
-    transition: 300ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
-} 
- 
-.animate-enter {
-    left: -100%;
-}
-.animate-enter.animate-enter-active {
-    left: 0;
-}
- 
-.animate-leave {
-    left: 0;
-}
-.animate-leave.animate-leave-active{
-    left: 100%;
-}
-
-
 
 /* para marcar canal con notificacion en menu */
 .has-notification {

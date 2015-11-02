@@ -285,6 +285,7 @@
             });
 
             // add the message to the view
+            vm.noMoreMessages = false;
             addMessageToList(msgPayload);
             vm.message = '';
 

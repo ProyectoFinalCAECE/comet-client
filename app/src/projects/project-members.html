@@ -1,10 +1,11 @@
 <div class="theme-config-box" ng-hide="vm.project === null">
-	<div class="cometProjectUsersIcon" ng-class="{ 'minimized': !vm.membersVisible }" ng-click="vm.showMembers()">
+	<div class="cometProjectUsersIcon" 
+       ng-class="{ 'minimized': !vm.membersVisible }" 
+       ng-click="vm.showMembers()">
 		<i class="fa fa-user"></i>
 	</div>
 	<div class="skin-setttings" 
-       ng-show="vm.membersVisible"
-       ng-animate="{show: 'animate-enter', hide: 'animate-leave'}">
+       ng-show="vm.membersVisible">
     <div class="cometProjectUsers">
       <div class="title" ng-click="vm.showMembers()">Miembros</div>
       <li ng-repeat="member in vm.availableMembers">

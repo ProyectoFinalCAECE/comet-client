@@ -6,6 +6,7 @@ $(document).ready(function () {
         var heightWithoutNavbar = $("body > #wrapper").height() - 61;
         $(".sidebard-panel").css("min-height", heightWithoutNavbar + "px");
     }
+    
     $(window).bind("load resize click scroll", function() {
         if(!$("body").hasClass('body-small')) {
             fix_height();
