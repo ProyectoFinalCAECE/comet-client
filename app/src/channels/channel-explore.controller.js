@@ -491,7 +491,7 @@
            modalInstance.result.then(function (updatedChannel) {
              // added members
              var added = lodash.filter(updatedChannel.members, function(m) {
-               return (lodash.find(vm.channel.members, 'id', m.id) === undefined)
+               return (lodash.find(vm.channel.members, 'id', m.id) === undefined);
              });
 
              $rootScope.$broadcast('channelUpdated', { channel: updatedChannel });

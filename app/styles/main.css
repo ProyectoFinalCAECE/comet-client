@@ -493,6 +493,7 @@ a.disabled {
 .chat-discussion .chat-message:nth-child(2n) .message {
   text-align: left;
   margin-left: 55px;
+  margin-right: 55px;
   background-color: #F5F5F5;
 }
 
