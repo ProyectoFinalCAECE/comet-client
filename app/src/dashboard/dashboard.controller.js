@@ -68,7 +68,14 @@
             loadChannels(vm.project);
 
             // listen to project updates
-            $scope.$on('currentProjectUpdated', function() {
+            $scope.$on('currentProjectUpdated', function(event, args) {
+
+              var previousProject = args.previous;
+              if (previousProject !== null) {
+                // leave the previous project room
+                notificationsLeaveRoom(previousProject);
+              }
+
               vm.project = dashboardServiceModel.getCurrentProject();
               loadChannels(vm.project);
               notificationsJoinRoom();
@@ -89,6 +96,35 @@
           }
 
           /**
+           * @name loadChannels
+           * @desc loads the proyect channels
+           */
+          function loadChannels (project) {
+
+            if (project === null ) {
+              return;
+            }
+
+            channelService.getAll(project.id).then(function (response) {
+              var channels = response.data;
+
+              vm.privateChannels = lodash.filter(channels, function(c) {
+                return c.type === 'P' && c.state !== 'C';
+              });
+
+              vm.publicChannels = lodash.filter(channels, function(c) {
+                var isMember = (lodash.find(c.members, 'id', vm.user.id) !== undefined);
+                return c.type === 'S' && c.state !== 'C' && isMember;
+              });
+            });
+
+            // members for direct chat
+            vm.availableMembers = lodash.filter(vm.project.members, function(m) {
+              return (m.id !== vm.user.id);
+            });
+          }
+
+          /**
            * @name initializeNotifications
            * @desc initializes the notifications socket
            */
@@ -98,18 +134,20 @@
               return;
             }
 
+            // the server sends the channel with updates after a page load or a reconnect
             notificationService.on('channels-updates', function (data) {
               $log.log('notifications channels-updates', data);
-              setChannelsUpdates(data);
+              loadChannelsUpdates(data);
             });
 
-            notificationService.on('transient-notification', function (data) {
-              $log.log('transient-notification', data);
-              //setChannelsUpdates(data);
+            // notifications on the channels the user is member of
+            notificationService.on('transient-notification', function (notification) {
+              $log.log('transient-notification', notification);
+              loadNotification(notification);
             });
 
+            // join notifications room on reconnect
             notificationService.on('reconnect', function () {
-              // re join project room
               $log.log('notifications reconnect');
               notificationsJoinRoom();
             });
@@ -150,39 +188,33 @@
               return;
             }
 
+            // group channels notifications
             notificationService.emit('join-room', {
-              room: getProjectRoomId(),
+              room: getProjectRoomId(vm.project),
+              projectId: vm.project.id,
+              userId: vm.user.id
+            });
+
+            // direct channels notifications
+            notificationService.emit('join-room', {
+              room: getDirectRoomId(),
               projectId: vm.project.id,
               userId: vm.user.id
             });
           }
 
           /**
-           * @name loadChannels
-           * @desc loads the proyect channels
+           * @name notificationsLeaveRoom
+           * @desc leave a project notifications room
            */
-          function loadChannels (project) {
+          function notificationsLeaveRoom(project) {
 
-            if (project === null ) {
-              return;
-            }
-
-            channelService.getAll(project.id).then(function (response) {
-              var channels = response.data;
-
-              vm.privateChannels = lodash.filter(channels, function(c) {
-                return c.type === 'P' && c.state !== 'C';
-              });
-
-              vm.publicChannels = lodash.filter(channels, function(c) {
-                var isMember = (lodash.find(c.members, 'id', vm.user.id) !== undefined);
-                return c.type === 'S' && c.state !== 'C' && isMember;
-              });
+            notificationService.emit('leave-room', {
+              room: getProjectRoomId(project)
             });
 
-            // members for direct chat
-            vm.availableMembers = lodash.filter(vm.project.members, function(m) {
-              return (m.id !== vm.user.id);
+            notificationService.emit('leave-room', {
+              room: getDirectRoomId(user)
             });
           }
 
@@ -190,7 +222,7 @@
            * @name setChannelsUpdates
            * @desc marks the channels with updates
            */
-          function setChannelsUpdates(data) {
+          function loadChannelsUpdates(data) {
 
             // public and private channels
             var channelUpdatesLen = data.channels_with_updates.length;
@@ -219,11 +251,63 @@
           }
 
           /**
+           * @name loadNotification
+           * @desc marks the chanell with a (transient) notification
+           */
+          function loadNotification(notification) {
+
+            // public and private channels
+            if (notification.type === 'channel') {
+              var channel = findChannel(notification.id);
+              if (channel !== undefined) {
+                channel.hasNotification = true;
+              }
+            }
+            else {
+              if (notification.type === 'direct') {
+                var userChannel = findDirectChannel(notification.id);
+                if (userChannel !== undefined) {
+                  userChannel.hasNotification = true;
+                }
+              }
+            }
+          }
+
+          /**
+           * @name findChannel
+           * @desc returns a channel searching by id
+           */
+          function findChannel(channelId) {
+            var channel = lodash.find(vm.publicChannels, 'id', channelId);
+            if (channel === undefined) {
+              // search in private channels
+              channel = lodash.find(vm.privateChannels, 'id', channelId);
+            }
+            return channel;
+          }
+
+          /**
+           * @name findChannel
+           * @desc returns a direct channel searching by id
+           */
+          function findDirectChannel(userId) {
+            return lodash.find(vm.availableMembers, 'id', userId);
+          }
+
+          /**
            * @name getProjectRoomId
            * @desc returns the room id for the notifications socket
            */
-          function getProjectRoomId() {
-            return 'Project_' + vm.project.id;
+          function getProjectRoomId(project) {
+            return 'Project_' + project.id;
+          }
+
+          /**
+           * @name getDirectRoomId
+           * @desc returns the room id for the direct messages notifications socket
+           */
+          function getDirectRoomId() {
+            return 'SELF_' + user.id;
           }
 
           /**

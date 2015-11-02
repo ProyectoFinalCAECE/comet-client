@@ -21,8 +21,12 @@
         };
 
         function setCurrentProject (newProject) {
+          var previous = project;
           project = newProject;
-          $rootScope.$broadcast('currentProjectUpdated');
+          $rootScope.$broadcast('currentProjectUpdated', {
+            previous: previous,
+            new: newProject
+          });
         }
 
         function getCurrentProject () {

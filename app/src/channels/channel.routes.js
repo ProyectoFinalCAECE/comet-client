@@ -44,16 +44,16 @@
           function($stateParams, userService, channelService, project, user) {
             if ($stateParams.isDirect === 'true') {
               var destUserId = $stateParams.channelId;
-              return userService.getById(destUserId).then(function(destUser) {
-                console.log('user by id', destUserId, destUser);
+              return userService.getById(destUserId)
+                    .then(function(destUser) {
                 return channelService.getDirectChannel(user, destUser);
               });
             }
             else {
               return channelService.getById(project.id, $stateParams.channelId)
-              .then(function(data) {
-                return data.data;
-              });
+                     .then(function(data) {
+                       return data.data;
+                     });
             }
           }]
       }

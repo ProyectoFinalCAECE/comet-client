@@ -168,6 +168,12 @@
             chatService.emit('join-room', {
               room: getChannelRoomId()
             });
+
+            $scope.$on("$destroy", function(){
+              chatService.emit('leave-room', {
+                room: getChannelRoomId()
+              });
+            });
           }
 
           /**
