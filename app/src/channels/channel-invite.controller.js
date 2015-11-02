@@ -103,6 +103,7 @@
                 return { id: m.id };
               })
             };
+
             channelService.invite(vm.project.id, vm.channel.id, invites)
               .error(channelInviteError)
               .then(channelInviteSuccess);

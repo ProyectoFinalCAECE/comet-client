@@ -65,7 +65,7 @@
           vm.getMember = getMember;
           vm.messageIsFromUser = messageIsFromUser;
           vm.formatMessageDate = formatMessageDate;
-          vm.sendMessage = sendMessage;
+          vm.sendUserMessage = sendUserMessage;
           vm.loadOlderMessages = loadOlderMessages;
           var nextRequestOffset = 0;
           vm.noMoreMessages = false;
@@ -163,10 +163,6 @@
 
             chatService.on("error", function(error) {
               $log.log('chatservice error', error);
-              //if (error.type === "UnauthorizedError" || error.code === "invalid_token") {
-                // redirect user to login page perhaps?
-                //console.log("User's token has expired");
-              //}
             });
 
             chatService.emit('join-room', {
@@ -254,26 +250,24 @@
           }
 
           /**
-           * @name sendMessage
-           * @desc send message to the channel
+           * @name sendUserMessage
+           * @desc send message to the channel using the text in the input
           */
-          function sendMessage() {
-
+          function sendUserMessage() {
             if (vm.message.length === 0) {
               return;
             }
+            sendMessage(vm.message, user.id);
+            vm.message = '';
+          }
 
-            lastMsgId++;
+          /**
+           * @name sendMessage
+           * @desc sends a message to the channel
+          */
+          function sendMessage(messageText, authorId) {
 
-            // construct the message payload
-            var msgPayload = {
-              id: lastMsgId,
-              text: vm.message,
-              user: user.id,
-              destinationUser: (isDirect ? vm.channel.id : 0),
-              projectId: vm.project.id,
-              date: new Date().getTime()  // for local use only, the server overwrites the date
-            };
+            var msgPayload = buildMessageObject(messageText, authorId);
 
             // send the data to the server
             chatService.emit('message', {
@@ -287,9 +281,26 @@
             // add the message to the view
             vm.noMoreMessages = false;
             addMessageToList(msgPayload);
-            vm.message = '';
 
             scrollToLast();
+          }
+
+          /**
+           * @name buildMessageObject
+           * @desc build the message payload object
+          */
+          function buildMessageObject(messageText, authorId) {
+
+            lastMsgId++;
+
+            return {
+              id: lastMsgId,
+              text: messageText,
+              user: authorId,
+              destinationUser: (isDirect ? vm.channel.id : 0),
+              projectId: vm.project.id,
+              date: new Date().getTime()  // for local use only, the server overwrites the date
+            };
           }
 
           /**
@@ -426,10 +437,11 @@
               channelService.invite(vm.project.id, vm.channel.id, invites)
                 .error(channelInviteError)
                 .then(function (response) {
-                  console.log('add current', response.data);
                   $rootScope.$broadcast('channelUpdated', { channel: response.data });
                   $rootScope.$broadcast('channelsUpdated');
                   ngToast.success('Canal agregado.');
+                  // sends an auto generated message
+                  sendMessage(user.fullName + ' se ha unido al canal.', user.id);
                 });
             });
           }
@@ -470,7 +482,17 @@
              }
            });
            modalInstance.result.then(function (updatedChannel) {
+             // added members
+             var added = lodash.filter(updatedChannel.members, function(m) {
+               return (lodash.find(vm.channel.members, 'id', m.id) === undefined)
+             });
+
              $rootScope.$broadcast('channelUpdated', { channel: updatedChannel });
+
+             // sends an auto generated message for each added member
+             for (var i = 0; i < added.length; i++) {
+               sendMessage(added[i].fullName + ' se ha unido al canal.', added[i].id);
+             }
            });
           }
 
@@ -495,8 +517,12 @@
              }
            });
            modalInstance.result.then(function (updatedChannel) {
-             $rootScope.$broadcast('channelUpdated', { channel: updatedChannel });
+             $rootScope.$broadcast('channelUpdated', {
+               channel: updatedChannel
+             });
              $rootScope.$broadcast('channelsUpdated');
+             // sends an auto generated message
+             sendMessage('Ha editado la información del canal.', user.id);
            });
           }
 
@@ -511,6 +537,7 @@
               channelService
                 .deleteMember(vm.project.id, vm.channel.id, user.id)
                 .then(function () {
+                  sendMessage('Ha salido del canal.', user.id);
                   ngToast.success('Has salido del canal.');
                   $rootScope.$broadcast('channelsUpdated');
                   $state.go('dashboard.project.project-explore', { id: vm.project.id });
@@ -535,6 +562,7 @@
             }).then(function() {
                 var index = vm.project.members.indexOf(member);
                 vm.project.members.splice(index, 1);
+                sendMessage('Ha salido del canal.', member.id);
                 ngToast.success('El participante ha sido eliminado.');
             });
           }
@@ -555,6 +583,7 @@
                   ngToast.danger('Ocurrió un error al consultar al servidor.');
                 }
               }).then(function() {
+                sendMessage('Ha cerrado el canal.', user.id);
                 ngToast.success('Canal cerrado.');
                 $rootScope.$broadcast('channelsUpdated');
                 $state.go('dashboard.project.project-explore', { id: vm.project.id });
