@@ -7,6 +7,10 @@
   </div>
   <div class="row m-l">
     <div class="col-sm-8 crearProyecto-sm-8">
+      <div style="margin-left:-15px">
+         </br>
+         <p>@MichaText</p>
+      </div>
       <form name="vm.frmCreate" ng-submit="vm.create()" class="form-horizontal m-t" role="form" novalidate="">
         <!-- Nombre -->
         <div class="form-group cometInput" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'name') }">
@@ -32,9 +36,13 @@
         <!-- Es Privado -->
         <div class="form-group">
           <label class="col-sm-2 control-label">Es privado</label>
-          <div class="col-sm-5">
+          <div class="col-sm-1">
             <input type="checkbox" ng-model="vm.isPrivate" class="">
           </div>
+          <div class="col-sm-6" style="margin-left:-40px">
+             <p>@MichaText - Un canal privado es....</p>
+          </div>
+
         </div>
         <!-- Invitar -->
         <div class="form-group cometInput">
@@ -49,6 +57,10 @@
                 </small>
               </ui-select-choices>
             </ui-select>
+            <div>
+               </br>
+               <p>@MichaText</p>
+            </div>
           </div>
         </div>
         <!-- Submit -->
