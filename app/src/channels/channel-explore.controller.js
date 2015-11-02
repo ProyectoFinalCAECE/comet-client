@@ -195,6 +195,7 @@
            * @desc loads the channel message history
           */
           function loadChannelMessages() {
+            console.log("request to load");
             var limit = 5;
             channelService.getMessages(vm.project.id, vm.channel.id, nextRequestOffset, limit, vm.isDirect).then(function (response) {
               nextRequestOffset = response.data.next_offset;
@@ -317,7 +318,7 @@
            * @desc adds the message to the list so it can be viewed on the page
           */
           function addMessageToList(msg) {
-            vm.messages.unshift(msg);
+            vm.messages.push(msg);
             vm.lastMessage = msg.date;
           }
 
@@ -618,6 +619,7 @@
           * @desc calls method to retrieve older messages
           */
           function loadOlderMessages(){
+            console.log("into loadOlderMessages");
             if(!vm.noMoreMessages){
               loadChannelMessages();
             }
