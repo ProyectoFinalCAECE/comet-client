@@ -91,11 +91,6 @@
               loadChannels(vm.project);
             });
 
-            // channel activated
-            $scope.$on('channelActivated', function(event, args) {
-              setActiveChannel(args);
-            });
-
             // notifications
             initializeNotifications();
           }
@@ -280,50 +275,6 @@
                   if (privatechannel !== undefined) {
                     privatechannel.hasNotification = true;
                   }
-                }
-              }
-            }
-          }
-
-          /**
-           * @name setActiveChannel
-           * @desc removes the channel notification and sets the active channel
-           */
-          function setActiveChannel(channel) {
-
-            // public channels
-            for (var i = 0; i < vm.publicChannels.length; i++) {
-              var publicChannel = vm.publicChannels[i];
-              publicChannel.isActive = false;
-              if (channel.type === 'channel') {
-                if (publicChannel.id === channel.id) {
-                  publicChannel.hasNotification = false;
-                  publicChannel.isActive = true;
-                }
-              }
-
-            }
-
-            // private channels
-            for (var j = 0; j < vm.privateChannels.length; j++) {
-              var privateChannel = vm.publicChannels[j];
-              privateChannel.isActive = false;
-              if (channel.type === 'channel') {
-                if (privateChannel.id === channel.id) {
-                  privateChannel.hasNotification = false;
-                  privateChannel.isActive = true;
-                }
-              }
-            }
-
-            // direct channels
-            for (var k = 0; k < vm.availableMembers.length; k++) {
-              var userChannel = vm.availableMembers[k];
-              userChannel.isActive = false;
-              if (channel.type === 'direct') {
-                if (userChannel.id === channel.id) {
-                  userChannel.hasNotification = false;
-                  userChannel.isActive = true;
                 }
               }
             }

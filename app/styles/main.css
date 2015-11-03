@@ -155,6 +155,20 @@ a.disabled {
   color: #EDF6FF;
 }
 
+/* para marcar canal con notificacion en menu */
+.has-notification {
+  font-weight: bold !important;
+}
+
+.selected-channel {
+  background-color: #1ab394 !important;
+}
+
+.skin-2 .navbar-default .nav > li.selected-channel > a:focus {
+  background-color: #1ab394 !important;
+  color: #FFF;
+}
+
 /* Formularios */
 #formulario.middle-box {
     position: relative;
@@ -620,6 +634,10 @@ a.disabled {
   max-height:500px;
 }
 
+.skin-setttings ul {
+  padding: 0;
+}
+
 .skin-setttings .title {
   cursor: pointer;
 }
@@ -651,13 +669,4 @@ a.disabled {
 
 .cometProjectUsers li {
   list-style: none;
-}
-
-/* para marcar canal con notificacion en menu */
-.has-notification {
-  font-weight: bold !important;
-}
-
-.selected-channel {
-  background-color: #1ab394 !important;
 }
