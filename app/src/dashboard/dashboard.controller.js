@@ -274,6 +274,13 @@
                 if (userChannel !== undefined) {
                   userChannel.hasNotification = true;
                 }
+              } else {
+                if (notification.type === 'private-channel') {
+                  var privatechannel = findChannel(notification.id);
+                  if (privatechannel !== undefined) {
+                    privatechannel.hasNotification = true;
+                  }
+                }
               }
             }
           }
