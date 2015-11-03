@@ -59,7 +59,8 @@
                   <div ng-show="vm.noMoreMessages" class="jumbotron text-center">
                       <p>No hay mensajes para este canal</p>
                   </div>
-                  <div class="chat-message" ng-class="vm.messageIsFromUser(message) ? 'mine' : ''" ng-repeat="message in vm.messages" ng-init="msgMember = vm.getMember(message.user)">
+                  <div class="chat-message"
+                    ng-class="vm.getMessageClass(message)" ng-repeat="message in vm.messages" ng-init="msgMember = vm.getMember(message.user)">
                     <img class="message-avatar" ng-src="{{::msgMember.profilePicture}}" alt="" >
                     <div class="message">
                       <span id="msg_{{::message.id}}" class="message-author"><b>{{::msgMember.alias}}</b></span>
@@ -79,7 +80,10 @@
                 <div class="chat-users">
                   <li ng-repeat="member in vm.channel.members">
                     <div class="chat-user">
-                      <img alt="image" class="chat-avatar" title="{{member.alias}}" ng-src="{{member.profilePicture}}"/>
+                      <img alt="image"
+                           class="chat-avatar"
+                           title="{{member.alias}}"
+                           ng-src="{{member.profilePicture}}"/>
                       <div class="chat-user-name">
                         {{member.firstName}} {{member.lastName}}
                       </div>

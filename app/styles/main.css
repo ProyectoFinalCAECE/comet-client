@@ -541,6 +541,11 @@ a.disabled {
   font-family: 'open sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
+/* mensajes autogenerados */
+.chat-discussion .chat-message.auto pre.message-text {
+  font-style: italic;
+}
+
 /* Emojis */
 .emoji-container {
     height: 300px;

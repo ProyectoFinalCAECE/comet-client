@@ -43,6 +43,13 @@
           ALERT: 1,
           CONFIRM: 2
         })
+        // global message types
+        .constant("messageType", {
+          TEXT: 'T',
+          FILE: 'F',
+          INTEGRATION: 'I',
+          AUTO: 'A'
+        })
         // global constraints
         .constant('constraints', {
           projectPerUser: 30,

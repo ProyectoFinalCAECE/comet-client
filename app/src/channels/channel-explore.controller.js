@@ -19,7 +19,7 @@
                                            'lodash',
                                            'moment',
                                            'ngToast',
-                                           'constraints',
+                                           'messageType',
                                            'dialogService',
                                            'dashboardServiceModel',
                                            'authService',
@@ -40,7 +40,7 @@
                                           lodash,
                                           moment,
                                           ngToast,
-                                          constraints,
+                                          messageType,
                                           dialogService,
                                           dashboardServiceModel,
                                           authService,
@@ -63,6 +63,7 @@
           // messages
           vm.lastMessage = null;
           vm.getMember = getMember;
+          vm.getMessageClass = getMessageClass;
           vm.messageIsFromUser = messageIsFromUser;
           vm.formatMessageDate = formatMessageDate;
           vm.sendUserMessage = sendUserMessage;
@@ -269,7 +270,7 @@
             if (vm.message.length === 0) {
               return;
             }
-            sendMessage(vm.message, user.id);
+            sendMessage(vm.message, user.id, messageType.TEXT);
             vm.message = '';
           }
 
@@ -277,9 +278,9 @@
            * @name sendMessage
            * @desc sends a message to the channel
           */
-          function sendMessage(messageText, authorId) {
+          function sendMessage(messageText, authorId, type) {
 
-            var msgPayload = buildMessageObject(messageText, authorId);
+            var msgPayload = buildMessageObject(messageText, authorId, type);
 
             // send the data to the server
             chatService.emit('message', {
@@ -302,14 +303,18 @@
            * @name buildMessageObject
            * @desc build the message payload object
           */
-          function buildMessageObject(messageText, authorId) {
+          function buildMessageObject(messageText, authorId, type) {
 
             lastMsgId++;
+
+            var msgType = (type === undefined ? messageType.TEXT : type);
+            $log.log('buildMessageObject', type);
 
             return {
               id: lastMsgId,
               text: messageText,
               user: authorId,
+              type: msgType,
               destinationUser: (isDirect ? vm.channel.id : 0),
               projectId: vm.project.id,
               date: new Date().getTime()  // for local use only, the server overwrites the date
@@ -348,6 +353,32 @@
           */
           function messageIsFromUser(message) {
             return (message.user === user.id);
+          }
+
+          function getMessageClass(message) {
+            var cssClass = '';
+            // messages from the current logged in user
+            cssClass += messageIsFromUser(message) ? 'mine' : '';
+
+            // messsage types
+            var cssType = '';
+            switch (message.type) {
+              case messageType.AUTO:
+                cssType = 'auto';
+                break;
+              case messageType.FILE:
+                cssType = 'file';
+                break;
+              case messageType.TEXT:
+                cssType = 'text';
+                break;
+              case messageType.INTEGRATION:
+                cssType = 'integration';
+                break;
+            }
+            cssClass += ' ' + cssType;
+
+            return cssClass;
           }
 
           /**
@@ -454,7 +485,9 @@
                   $rootScope.$broadcast('channelsUpdated');
                   ngToast.success('Canal agregado.');
                   // sends an auto generated message
-                  sendMessage(user.fullName + ' se ha unido al canal.', user.id);
+                  sendMessage(user.fullName + ' se ha unido al canal.',
+                              user.id,
+                              messageType.AUTO);
                 });
             });
           }
@@ -504,7 +537,9 @@
 
              // sends an auto generated message for each added member
              for (var i = 0; i < added.length; i++) {
-               sendMessage(added[i].fullName + ' se ha unido al canal.', added[i].id);
+               sendMessage(added[i].fullName + ' se ha unido al canal.',
+                           added[i].id,
+                           messageType.AUTO);
              }
            });
           }
@@ -535,7 +570,9 @@
              });
              $rootScope.$broadcast('channelsUpdated');
              // sends an auto generated message
-             sendMessage('Ha editado la información del canal.', user.id);
+             sendMessage('Ha editado la información del canal.',
+                         user.id,
+                         messageType.AUTO);
            });
           }
 
@@ -550,7 +587,7 @@
               channelService
                 .deleteMember(vm.project.id, vm.channel.id, user.id)
                 .then(function () {
-                  sendMessage('Ha salido del canal.', user.id);
+                  sendMessage('Ha salido del canal.', user.id, messageType.AUTO);
                   ngToast.success('Has salido del canal.');
                   $rootScope.$broadcast('channelsUpdated');
                   $state.go('dashboard.project.project-explore', { id: vm.project.id });
@@ -575,7 +612,7 @@
             }).then(function() {
                 var index = vm.project.members.indexOf(member);
                 vm.project.members.splice(index, 1);
-                sendMessage('Ha salido del canal.', member.id);
+                sendMessage('Ha salido del canal.', member.id, messageType.AUTO);
                 ngToast.success('El participante ha sido eliminado.');
             });
           }
@@ -596,7 +633,7 @@
                   ngToast.danger('Ocurrió un error al consultar al servidor.');
                 }
               }).then(function() {
-                sendMessage('Ha cerrado el canal.', user.id);
+                sendMessage('Ha cerrado el canal.', user.id, messageType.AUTO);
                 ngToast.success('Canal cerrado.');
                 $rootScope.$broadcast('channelsUpdated');
                 $state.go('dashboard.project.project-explore', { id: vm.project.id });
