@@ -285,6 +285,7 @@
             chatService.emit('message', {
               room: getChannelRoomId(),
               project_room: 'Project_' + vm.project.id,
+              channel_type: vm.channel.type,
               message: {
                 message: msgPayload
               }
