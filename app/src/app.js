@@ -45,10 +45,10 @@
         })
         // global message types
         .constant("messageType", {
-          TEXT: 'T',
-          FILE: 'F',
-          INTEGRATION: 'I',
-          AUTO: 'A'
+          TEXT: '1',
+          FILE: '2',
+          INTEGRATION: '3',
+          AUTO: '4'
         })
         // global constraints
         .constant('constraints', {
