@@ -336,6 +336,10 @@ a.disabled {
     .crearProyecto-sm-8 label{
         float:none;
     }
+
+    .chat-users-wrapper {
+      display: none;
+    }
 }
 
 @media (max-width: 500px) {
@@ -358,6 +362,10 @@ a.disabled {
   .invitarEmails button{
     width:100px;
   }
+
+  .chat-users-wrapper {
+    display: none;
+  }
 }
 
 @media (max-width: 315px) {
@@ -377,6 +385,9 @@ a.disabled {
     width:20px;
   }
 
+  .chat-users-wrapper {
+    display: none;
+  }
 }
 
 .ProjDescCard{
