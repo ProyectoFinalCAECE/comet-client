@@ -3,7 +3,7 @@
     <div class="row channel-explore-header" sticky offset="60">
       <div class="col-lg-10" style="float:left;">
         <h2><strong>{{vm.channel.name}}</strong><span class="badge badge-success badge-channel-type" ng-show="{{ vm.channel.type === 'P' }}">
-          Privado
+          canal privado
         </span></h2>
         <h4 class="ProjDesc">{{vm.channel.description}}</h4>
         <ol class="breadcrumb2">
@@ -14,12 +14,12 @@
       </div>
       <div class="col-lg-2 ButtonAdminList" ng-show="!vm.isDirect">
         <ul>
-          <li class="dropdown">
+          <li class="admin-item dropdown">
             <a ng-class="vm.isMember ? '' : 'disabled'" ng-click="vm.showMembers = !vm.showMembers">
               <i class="fa fa-group"></i>
             </a>
           </li>
-          <li class="dropdown">
+          <li class="admin-item dropdown">
             <a ng-class="vm.isMember && !vm.isClosed ? 'dropdown-toggle' : 'disabled'" data-toggle="{{vm.isMember ? 'dropdown' : ''}}">
               <i class="fa fa-cog"></i>
             </a>
@@ -38,7 +38,7 @@
               </li>
             </ul>
           </li>
-          <li>
+          <li class="admin-item">
             <a ng-hide="vm.isClosed || vm.isMember" ng-click="vm.invite()">
               <i class="fa fa-plus"></i>
             </a>
@@ -88,7 +88,7 @@
                            title="{{member.alias}}"
                            ng-src="{{member.profilePicture}}"/>
                       <div class="chat-user-name">
-                        {{member.firstName}} {{member.lastName}}
+                        {{member.alias}}
                       </div>
                     </div>
                   </li>

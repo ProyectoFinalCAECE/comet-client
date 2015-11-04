@@ -42,6 +42,10 @@ a.disabled {
   color: #ed5565;
 }
 
+.badge {
+  font-family: verdana;
+}
+
 .logo-name a {
     color: #e6e6e6;
 }
@@ -500,7 +504,7 @@ a.disabled {
    padding-right: 20px;
   }
 
-.ButtonAdminList li{
+.ButtonAdminList .admin-item {
   padding-left:20px;
   position: relative;
 }
@@ -632,7 +636,6 @@ a.disabled {
 .badge-channel-type {
   margin-left: 15px;
   vertical-align: middle;
-  font-family: verdana;
 }
 
 .messageInputText{
@@ -672,7 +675,7 @@ a.disabled {
   font-size: 12px;
   top: 70px;
   right: 0px;
-  width: 160px;
+  width: 200px;
   background-color:white;
   overflow-y: hidden;
   max-height:500px;
@@ -694,7 +697,7 @@ a.disabled {
   border-radius: 20px 0px 0px 20px;
   font-size: 16px;
   top: 70px;
-  right: 160px;
+  right: 200px;
   width: 40px;
   cursor: pointer;
 }
@@ -709,6 +712,14 @@ a.disabled {
 
 .cometProjectUsers li {
   list-style: none;
+}
+
+.cometProjectUsers .user-state {
+  margin-right: 5px;
+}
+
+.cometProjectUsers .user-state.online {
+  color:#1ab394;
 }
 
 .chat-user-name {
