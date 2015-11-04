@@ -675,3 +675,10 @@ a.disabled {
 .cometProjectUsers li {
   list-style: none;
 }
+
+.btn-primary-chat {
+    width: 100%;
+    background-color: #1ab394;
+    border-color: #1ab394;
+    color: #FFFFFF;
+}
