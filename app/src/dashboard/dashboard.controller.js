@@ -153,6 +153,11 @@
               notificationsJoinRoom();
             });
 
+            notificationService.on('online-users', function (notification) {
+              $log.log('online-users', notification);
+            });
+
+
             notificationsJoinRoom();
             notificationsSendPing();
           }
