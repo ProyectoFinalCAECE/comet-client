@@ -499,6 +499,14 @@ a.disabled {
   cursor:default;
 }
 
+.chat-discussion {
+  height: auto;
+  padding: 15px 0px 40px;
+  background-color: #FFF;
+  margin-top: 60px;
+}
+
+
 /* Piso los estilos de inspinia que ponen un msj a la izquierda y otro a derecha */
 .chat-discussion .chat-message:nth-child(2n+1) .message-avatar,
 .chat-discussion .chat-message:nth-child(2n) .message-avatar {
@@ -535,12 +543,6 @@ a.disabled {
   margin-right: 55px;
 }
 
-.chat-discussion {
-  height: auto;
-  padding: 15px 0px 40px;
-  background-color: #FFF;
-}
-
 /* contenido del mensaje */
 .chat-discussion .chat-message pre.message-text {
   border:0;
@@ -573,6 +575,23 @@ a.disabled {
   padding: 2px;
   display: inline-block;
   float: left;
+}
+
+.chat-users-wrapper {
+  top: 170px;
+  position: fixed;
+  right: 40px;
+  width: 260px;
+}
+
+.chat-users {
+  height: auto;
+  margin-left: auto;
+  margin-bottom: 10px;
+}
+
+.chat-user {
+  padding: 10px 0;
 }
 
 /*
@@ -673,16 +692,16 @@ a.disabled {
   right: 0px;
 }
 
-.chat-user {
-  padding: 0;
-}
-
 .cometProjectUsers:hover {
   overflow-y: auto;
 }
 
 .cometProjectUsers li {
   list-style: none;
+}
+
+.chat-user-name {
+  font-weight: 300;
 }
 
 .btn-primary-chat {

@@ -127,6 +127,12 @@
           */
           function activate () {
 
+            // background color
+            angular.element('html').css('background-color', '#FFF');
+            $scope.$on('$destroy', function () {
+              angular.element('html').css('background-color', '#E7EAEC');
+            });
+
             setFlags();
             loadChannelMessages();
 
@@ -338,6 +344,8 @@
           function addMessageToList(msg) {
             vm.messages.push(msg);
             vm.lastMessage = msg.date;
+
+            //angular.element(".wrapper").height(window.height() - 60);
           }
 
           /**
@@ -438,6 +446,11 @@
            * @desc opens the 'add channel member' dialog
           */
           function invite () {
+
+            if (!canInvite()) {
+              return;
+            }
+
             if (!vm.isMember) {
               showAddCurrentMemberDialog();
             }

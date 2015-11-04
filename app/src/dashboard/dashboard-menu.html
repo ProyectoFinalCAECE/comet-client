@@ -22,39 +22,39 @@
         </div>
         </li>
         <div class="scroll-content">
-        <li class="m-t" ng-show="vm.project != null">
-          <a ui-sref="dashboard.project.project-explore">
-            <span class="nav-label">:: Canales públicos</span>
-          </a>
-          <ul class="nav nav-second-level" nav-menu-active="selected-channel" notification-class="has-notification">
-            <li ng-repeat="channel in vm.publicChannels">
-              <a ng-class="{ 'has-notification': channel.hasNotification }"
-                 ui-sref="dashboard.project.channel-explore({projectId: vm.project.id, channelId:channel.id, isDirect:false})">
-                 {{channel.name}}
-              </a>
-            </li>
-            <li ng-show="vm.publicChannels.length == 0">
-              <a href="" style="cursor:default;">No hay canales públicos</a>
-            </li>
-          </ul>
-        </li>
-        <li class="m-t" ng-show="vm.project != null">
-          <a href="#">
-            <span class="nav-label">:: Canales privados</span>
-          </a>
-          <ul class="nav nav-second-level" nav-menu-active="selected-channel" notification-class="has-notification">
-            <li ng-repeat="channel in vm.privateChannels">
-              <a ng-class="{ 'has-notification': channel.hasNotification }"
-                 ui-sref="dashboard.project.channel-explore({projectId: vm.project.id, channelId:channel.id, isDirect:false})">
-                 {{channel.name}}
-              </a>
-            </li>
-            <li ng-show="vm.publicChannels.length == 0">
-              <a href="" style="cursor:default;">No hay canales privados</a>
-            </li>
-          </ul>
-        </li>
-      </div>
-    </ul>
+          <li class="m-t" ng-show="vm.project != null">
+            <a ui-sref="dashboard.project.project-explore">
+              <span class="nav-label">:: Canales públicos</span>
+            </a>
+            <ul class="nav nav-second-level" nav-menu-active="selected-channel" notification-class="has-notification">
+              <li ng-repeat="channel in vm.publicChannels">
+                <a ng-class="{ 'has-notification': channel.hasNotification }"
+                   ui-sref="dashboard.project.channel-explore({projectId: vm.project.id, channelId:channel.id, isDirect:false})">
+                   {{channel.name}}
+                </a>
+              </li>
+              <li ng-show="vm.publicChannels.length == 0">
+                <a href="" style="cursor:default;">No hay canales públicos</a>
+              </li>
+            </ul>
+          </li>
+          <li class="m-t" style="margin-bottom:30px" ng-show="vm.project != null">
+            <a href="#">
+              <span class="nav-label">:: Canales privados</span>
+            </a>
+            <ul class="nav nav-second-level" nav-menu-active="selected-channel" notification-class="has-notification">
+              <li ng-repeat="channel in vm.privateChannels">
+                <a ng-class="{ 'has-notification': channel.hasNotification }"
+                   ui-sref="dashboard.project.channel-explore({projectId: vm.project.id, channelId:channel.id, isDirect:false})">
+                   {{channel.name}}
+                </a>
+              </li>
+              <li ng-show="vm.publicChannels.length == 0">
+                <a href="" style="cursor:default;">No hay canales privados</a>
+              </li>
+            </ul>
+          </li>
+        </div>
+      </ul>
   </div>
 </nav>
