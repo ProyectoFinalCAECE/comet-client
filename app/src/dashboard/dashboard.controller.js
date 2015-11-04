@@ -334,6 +334,33 @@
             if(vm.privateNotifications){
               vm.privateNotifications = false;
             }
+
+            if (vm.membersVisible) {
+              $timeout(setHideMembersOnClick, 100);
+            }
+          }
+
+          /**
+           * @name setHideMembersOnClick
+           * @desc sets a event to hide the project members panel when
+           *       the user clicks on any part of the page
+           */
+          function setHideMembersOnClick() {
+            $(document).one('click', function(event){
+                var isClickedElementChildOfPopup =
+                        //angular.element('.cometProjectUsers')
+                        angular.element
+                               .find(event.target)
+                               .length > 0;
+
+                if (isClickedElementChildOfPopup) {
+                  return;
+                }
+
+                $scope.$apply(function(){
+                  vm.membersVisible = false;
+                });
+            });
           }
 
           /**
