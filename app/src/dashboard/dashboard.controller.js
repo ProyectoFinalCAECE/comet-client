@@ -153,8 +153,9 @@
               notificationsJoinRoom();
             });
 
-            notificationService.on('online-users', function (notification) {
-              $log.log('online-users', notification);
+            notificationService.on('online-users', function (state) {
+              $log.log('online-users', state);
+              loadUserState(state);
             });
 
 
@@ -282,6 +283,24 @@
                   if (privatechannel !== undefined) {
                     privatechannel.hasNotification = true;
                   }
+                }
+              }
+            }
+          }
+
+          /**
+           * @name loadUserState
+           * @desc updates the user state
+           */
+          function loadUserState(state) {
+            var user = findDirectChannel(state.id);
+            if (user !== undefined) {
+              if (state.type === 'add') {
+                user.isOnline = true;
+              }
+              else {
+                if (state.type === 'remove') {
+                  user.isOnline = false;
                 }
               }
             }
