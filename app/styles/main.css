@@ -710,8 +710,15 @@ a.disabled {
   overflow-y: auto;
 }
 
+.cometProjectUsers ul {
+  margin-bottom: 0;
+}
+
 .cometProjectUsers li {
   list-style: none;
+}
+.cometProjectUsers .chat-avatar {
+  margin-left: 5px;
 }
 
 .cometProjectUsers .user-state {
