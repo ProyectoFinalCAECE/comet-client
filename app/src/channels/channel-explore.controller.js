@@ -128,9 +128,9 @@
           function activate () {
 
             // background color
-            angular.element('html').css('background-color', '#FFF');
+            angular.element('body, html').css('background-color', '#FFF');
             $scope.$on('$destroy', function () {
-              angular.element('html').css('background-color', '#E7EAEC');
+              angular.element('body, html').css('background-color', '#E7EAEC');
             });
 
             setFlags();
