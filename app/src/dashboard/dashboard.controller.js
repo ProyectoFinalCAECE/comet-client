@@ -387,6 +387,7 @@
            * @desc logout the user and redirects to home page
            */
           function logout () {
+            notificationsLeaveRoom(vm.project);
             accountService.logout();
             $state.go('home');
           }
