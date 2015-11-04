@@ -57,9 +57,6 @@
               <div ng-class="vm.showMembers ? 'col-md-9' : 'col-md-12'">
                 <!--<div class="chat-discussion" lr-infinite-scroll="vm.loadOlderMessages">-->
                 <div class="chat-discussion">
-                  <div ng-show="vm.noMoreMessages" class="jumbotron text-center">
-                      <p>No hay mensajes para este canal</p>
-                  </div>
                   <div ng-show="!vm.noMoreMessages" class="text-center">
                     <a ng-click="vm.loadOlderMessages()" name="btnLoadMore" class="btn btn-xl btn-primary-chat">Recuperar mas Mensajes</a>
                   </div>
