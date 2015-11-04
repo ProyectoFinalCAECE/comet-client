@@ -58,7 +58,7 @@
                 <!--<div class="chat-discussion" lr-infinite-scroll="vm.loadOlderMessages">-->
                 <div class="chat-discussion">
                   <div ng-show="!vm.noMoreMessages" class="text-center">
-                    <a ng-click="vm.loadOlderMessages()" name="btnLoadMore" class="btn btn-xl btn-primary-chat">Recuperar mas Mensajes</a>
+                    <a ng-click="vm.loadOlderMessages()" name="btnLoadMore" class="btn btn-xl">Recuperar más mensajes</a>
                   </div>
                   <div class="chat-message"
                     ng-class="vm.getMessageClass(message)" ng-repeat="message in vm.messages" ng-init="msgMember = vm.getMember(message.user)">
