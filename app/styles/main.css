@@ -82,7 +82,7 @@ a.disabled {
 .skin-2 #side-menu > li > a,
 .skin-2 #side-menu .nav > li > a  {
     color: #EDF6FF;
-    font-weight: normal;
+    font-weight: 100;
     padding-top: 10px;
 }
 
@@ -90,8 +90,17 @@ a.disabled {
   padding-left: 20px;
 }
 
+.nav-label {
+  margin-top: 10px;
+  font-weight: normal;
+}
+
 .nav-second-level li:last-child {
     margin-bottom: 0;
+}
+
+.nav-second-level li a {
+  padding-left: 45px;
 }
 
 /*Dashboard Fijo*/

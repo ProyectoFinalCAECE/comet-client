@@ -22,9 +22,9 @@
         </div>
         </li>
         <div class="scroll-content">
-        <li ng-show="vm.project != null">
+        <li class="m-t" ng-show="vm.project != null">
           <a ui-sref="dashboard.project.project-explore">
-            <span class="nav-label">Canales públicos</span>
+            <span class="nav-label">:: Canales públicos</span>
           </a>
           <ul class="nav nav-second-level" nav-menu-active="selected-channel" notification-class="has-notification">
             <li ng-repeat="channel in vm.publicChannels">
@@ -35,9 +35,9 @@
             </li>
           </ul>
         </li>
-        <li ng-show="vm.project != null">
+        <li class="m-t" ng-show="vm.project != null">
           <a href="#">
-            <span class="nav-label">Canales privados</span>
+            <span class="nav-label">:: Canales privados</span>
           </a>
           <ul class="nav nav-second-level" nav-menu-active="selected-channel" notification-class="has-notification">
             <li ng-repeat="channel in vm.privateChannels">
