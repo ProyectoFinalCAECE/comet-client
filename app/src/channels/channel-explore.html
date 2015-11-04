@@ -55,9 +55,13 @@
           <div class="ibox-content">
             <div class="row">
               <div ng-class="vm.showMembers ? 'col-md-9' : 'col-md-12'">
-                <div class="chat-discussion" lr-infinite-scroll="vm.loadOlderMessages">
+                <!--<div class="chat-discussion" lr-infinite-scroll="vm.loadOlderMessages">-->
+                <div class="chat-discussion">
                   <div ng-show="vm.noMoreMessages" class="jumbotron text-center">
                       <p>No hay mensajes para este canal</p>
+                  </div>
+                  <div ng-show="!vm.noMoreMessages" class="text-center">
+                    <a ng-click="vm.loadOlderMessages()" name="btnLoadMore" class="btn btn-xl btn-primary-chat">Recuperar mas Mensajes</a>
                   </div>
                   <div class="chat-message"
                     ng-class="vm.getMessageClass(message)" ng-repeat="message in vm.messages" ng-init="msgMember = vm.getMember(message.user)">

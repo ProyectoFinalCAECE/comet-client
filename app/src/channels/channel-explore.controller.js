@@ -164,7 +164,7 @@
 
             chatService.on('message', function (data) {
               $log.log('chat message received', data);
-              processMessageReceived(data);
+              processMessageReceived(data, addMessageToList);
               scrollToLast();
             });
 
@@ -215,7 +215,8 @@
                 vm.noMoreMessages = true;
               }else{
                 response.data.messages.forEach(function(entry) {
-                    processMessageReceived(entry);
+                    processMessageReceived(entry, addMessageToListUnshift);
+                    scrollToLast();
                 });
               }
             });
@@ -225,7 +226,7 @@
            * @name processMessageReceived
            * @desc process a message received on the channel
           */
-          function processMessageReceived (data) {
+          function processMessageReceived (data, addMessageToListFunction) {
 
             // data validation
             if (!data || !data.message) {
@@ -239,7 +240,7 @@
             msgPayload.date = convertUTCDateToLocalDate(new Date(msgPayload.date));
 
             // add message to message list
-            addMessageToList(msgPayload);
+            addMessageToListFunction(msgPayload);
 
             lastMsgId = msgPayload.id;
           }
@@ -338,6 +339,15 @@
             vm.messages.push(msg);
             vm.lastMessage = msg.date;
           }
+
+          /**
+           * @name addMessageToListUnshift
+           * @desc adds the message to the top of the list so it can be viewed on the page
+          */
+          function addMessageToListUnshift(msg) {
+            vm.messages.unshift(msg);
+          }
+
 
           /**
            * @name getMember
