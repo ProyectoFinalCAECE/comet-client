@@ -33,6 +33,9 @@
                  {{channel.name}}
               </a>
             </li>
+            <li ng-show="vm.publicChannels.length == 0">
+              <a href="" style="cursor:default;">No hay canales públicos</a>
+            </li>
           </ul>
         </li>
         <li class="m-t" ng-show="vm.project != null">
@@ -45,6 +48,9 @@
                  ui-sref="dashboard.project.channel-explore({projectId: vm.project.id, channelId:channel.id, isDirect:false})">
                  {{channel.name}}
               </a>
+            </li>
+            <li ng-show="vm.publicChannels.length == 0">
+              <a href="" style="cursor:default;">No hay canales privados</a>
             </li>
           </ul>
         </li>
