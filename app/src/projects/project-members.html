@@ -2,7 +2,7 @@
 	<div class="cometProjectUsersIcon"
        ng-class="{ 'minimized': !vm.membersVisible }"
        ng-click="vm.showMembers()">
-		<i class="fa fa-user"></i>
+		<i class="fa fa-user" ng-class="{ 'fa-spin': vm.privateNotifications }"></i>
 	</div>
 	<div class="skin-setttings"
        ng-show="vm.membersVisible">

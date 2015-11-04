@@ -44,6 +44,7 @@
           vm.availableMembers = null;
 
           vm.membersVisible = false;
+          vm.privateNotifications = false;
           vm.showMembers = showMembers;
 
           vm.logout = logout;
@@ -268,6 +269,7 @@
                 var userChannel = findDirectChannel(notification.id);
                 if (userChannel !== undefined) {
                   userChannel.hasNotification = true;
+                  vm.privateNotifications = true;
                 }
               } else {
                 if (notification.type === 'private-channel') {
@@ -323,6 +325,10 @@
            */
           function showMembers() {
             vm.membersVisible = !vm.membersVisible;
+
+            if(vm.privateNotifications){
+              vm.privateNotifications = false;
+            }
           }
 
           /**
