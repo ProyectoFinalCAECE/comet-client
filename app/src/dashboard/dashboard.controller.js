@@ -216,6 +216,10 @@
            */
           function notificationsLeaveRoom(project) {
 
+            if (project === null) {
+              return;
+            }
+
             notificationService.emit('leave-room', {
               room: getProjectRoomId(project)
             });
