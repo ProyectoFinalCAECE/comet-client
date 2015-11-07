@@ -10,6 +10,10 @@ html {
     cursor: pointer;
 }
 
+[ng\:cloak], [ng-cloak], .ng-cloak {
+  display: none !important;
+}
+
 /*ngImgCrop*/
 .cropArea {
     background: #E4E4E4;
