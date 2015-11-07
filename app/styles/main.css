@@ -685,6 +685,10 @@ a.disabled {
   padding: 0;
 }
 
+.skin-setttings:hover {
+  overflow-y: auto;
+}
+
 .skin-setttings .title {
   cursor: pointer;
 }
@@ -704,10 +708,6 @@ a.disabled {
 
 .cometProjectUsersIcon.minimized {
   right: 0px;
-}
-
-.cometProjectUsers:hover {
-  overflow-y: auto;
 }
 
 .cometProjectUsers ul {
