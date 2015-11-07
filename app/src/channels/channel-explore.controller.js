@@ -128,12 +128,6 @@
           */
           function activate () {
 
-            // background color
-            angular.element('body, html').css('background-color', '#FFF');
-            $scope.$on('$destroy', function () {
-              angular.element('body, html').css('background-color', '#E7EAEC');
-            });
-
             setFlags();
             loadChannelMessages();
 
