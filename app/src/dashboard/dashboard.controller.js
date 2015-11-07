@@ -41,7 +41,7 @@
 
           vm.publicChannels = null;
           vm.privateChannels = null;
-          vm.availableMembers = null;
+          vm.availableMembers = [];
 
           vm.membersVisible = false;
           vm.privateNotifications = false;
@@ -120,9 +120,20 @@
             });
 
             // members for direct chat
+            /*
             vm.availableMembers = lodash.filter(vm.project.members, function(m) {
               return (m.id !== vm.user.id);
             });
+            */
+
+
+          for (var i=0;i<project.members.length;i++){
+            var member = project.members[i];
+              if (member.id !== vm.user.id){
+                member.isOnline = false;
+                vm.availableMembers.push(member);
+              }
+            }
           }
 
           /**
