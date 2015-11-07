@@ -216,10 +216,13 @@
           */
           function loadChannelMessages() {
             var limit = 5;
+            console.log('loadChannelMessages', nextRequestOffset);
             channelService.getMessages(vm.project.id, vm.channel.id, nextRequestOffset, limit, vm.isDirect).then(function (response) {
-              nextRequestOffset = response.data.next_offset;
               if(response.data.messages.length === 0){
-                vm.emptyChannel = true;
+                // for the first load
+                if (nextRequestOffset === 0) {
+                    vm.emptyChannel = true;
+                }
                 vm.noMoreMessages = true;
               }
               else {
@@ -228,6 +231,7 @@
                     scrollToLast();
                 });
               }
+              nextRequestOffset = response.data.next_offset;
             });
           }
 

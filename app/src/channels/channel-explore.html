@@ -55,11 +55,16 @@
           <div class="ibox-content">
             <div class="row">
               <div ng-class="vm.showMembers ? 'col-md-9' : 'col-md-12'">
-                <!--<div class="chat-discussion" lr-infinite-scroll="vm.loadOlderMessages">-->
                 <div class="chat-discussion">
+                  <!-- load channel history -->
                   <div ng-cloak="" ng-hide="vm.noMoreMessages || vm.emptyChannel" class="text-center">
                     <a ng-click="vm.loadOlderMessages()" name="btnLoadMore" class="btn btn-xl">Recuperar más mensajes</a>
                   </div>
+                  <!-- no more channel history left -->
+                  <div ng-cloak ng-show="vm.noMoreMessages && !vm.emptyChannel" style="font-style:italic" class="text-muted text-center">
+                    Has llegado al inicio del canal
+                  </div>
+                  <!-- messages -->
                   <div class="chat-message"
                        ng-class="vm.getMessageClass(message)"
                        ng-repeat="message in vm.messages"
@@ -76,6 +81,7 @@
                       </span>
                     </div>
                   </div>
+                  <!-- empty channel -->
                   <div ng-cloak ng-show="vm.emptyChannel" class="jumbotron text-center">
                       <p>No hay mensajes en este canal</p>
                   </div>
