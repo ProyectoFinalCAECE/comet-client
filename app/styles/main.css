@@ -57,6 +57,21 @@ a.disabled {
 }
 
 /* Top Navigation   */
+.cometTitle {
+    width: 40%;
+    margin-left: 36%;
+    text-align: center;
+    margin-top: 10px;
+}
+.cometTitle ul {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+}
+.cometTitle li {
+    float: left;
+}
+
 .dropdown-messages.cometNotifications{
 	width:390px;
 }
