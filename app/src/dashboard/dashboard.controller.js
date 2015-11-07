@@ -47,6 +47,9 @@
           vm.privateNotifications = false;
           vm.showMembers = showMembers;
 
+          vm.setActiveChannel = setActiveChannel;
+          vm.activeChannel = null;
+          vm.activeDirectChannel = null;
           vm.logout = logout;
 
           activate();
@@ -281,26 +284,53 @@
             // public and private channels
             if (notification.type === 'channel') {
               var channel = findChannel(notification.id);
-              if (channel !== undefined) {
+              if (channel !== undefined &&
+                  !isActiveChannel(notification.id)) {
                 channel.hasNotification = true;
               }
             }
             else {
               if (notification.type === 'direct') {
                 var userChannel = findDirectChannel(notification.id);
-                if (userChannel !== undefined) {
+                if (userChannel !== undefined &&
+                    !isActiveDirectChannel(notification.id)) {
                   userChannel.hasNotification = true;
                   vm.privateNotifications = true;
                 }
               } else {
                 if (notification.type === 'private-channel') {
                   var privatechannel = findChannel(notification.id);
-                  if (privatechannel !== undefined) {
+                  if (privatechannel !== undefined &&
+                      !isActiveChannel(notification.id)) {
                     privatechannel.hasNotification = true;
                   }
                 }
               }
             }
+          }
+
+          /**
+           * @name isActiveChannel
+           * @desc returns if the active channel is the same as the
+           *       channel with the id parameter
+          */
+          function isActiveChannel(id) {
+            if (vm.activeChannel === null) {
+              return false;
+            }
+            return (vm.activeChannel.id === id);
+          }
+
+          /**
+           * @name isActiveDirectChannel
+           * @desc returns if the active direct channel is the same
+           *       as the channel with the id parameter
+          */
+          function isActiveDirectChannel(id) {
+            if (vm.activeDirectChannel === null) {
+              return false;
+            }
+            return (vm.activeDirectChannel.id === id);
           }
 
           /**
@@ -322,6 +352,26 @@
           }
 
           /**
+           * @name setActiveChannel
+           * @desc updates the channel notification status
+           */
+          function setActiveChannel(data) {
+            var channel = null;
+            if (data.type !== 'D') {
+              channel = findChannel(data.id);
+              vm.activeChannel = channel;
+            }
+            else {
+              // direct channel
+              channel = findDirectChannel(data.id);
+              vm.activeDirectChannel = channel;
+            }
+            if (channel !== undefined) {
+              channel.hasNotification = false;
+            }
+          }
+
+          /**
            * @name findChannel
            * @desc returns a channel searching by id
            */
@@ -335,7 +385,7 @@
           }
 
           /**
-           * @name findChannel
+           * @name findDirectChannel
            * @desc returns a direct channel searching by id
            */
           function findDirectChannel(userId) {

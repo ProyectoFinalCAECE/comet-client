@@ -26,10 +26,12 @@
             <a ui-sref="dashboard.project.project-explore">
               <span class="nav-label">:: Canales públicos</span>
             </a>
-            <ul class="nav nav-second-level" nav-menu-active="selected-channel" notification-class="has-notification">
+            <ul class="nav nav-second-level" callback="vm.setActiveChannel" nav-menu-active="selected-channel" notification-class="has-notification">
               <li ng-repeat="channel in vm.publicChannels">
                 <a ng-class="{ 'has-notification': channel.hasNotification }"
-                   ui-sref="dashboard.project.channel-explore({projectId: vm.project.id, channelId:channel.id, isDirect:false})">
+                   ui-sref="dashboard.project.channel-explore({projectId: vm.project.id, channelId:channel.id, isDirect:false})"
+                   data-type="S"
+                   data-id="{{channel.id}}">
                    {{channel.name}}
                    <i ng-show="channel.hasNotification" class="fa fa-circle" style="float: right; padding-top: 5px;font-size: 10px;"></i>
                 </a>
@@ -43,10 +45,12 @@
             <a>
               <span class="nav-label" style="cursor:default;">:: Canales privados</span>
             </a>
-            <ul class="nav nav-second-level" nav-menu-active="selected-channel" notification-class="has-notification">
+            <ul class="nav nav-second-level" callback="vm.setActiveChannel" nav-menu-active="selected-channel" notification-class="has-notification">
               <li ng-repeat="channel in vm.privateChannels">
                 <a ng-class="{ 'has-notification': channel.hasNotification }"
-                   ui-sref="dashboard.project.channel-explore({projectId: vm.project.id, channelId:channel.id, isDirect:false})">
+                   ui-sref="dashboard.project.channel-explore({projectId: vm.project.id, channelId:channel.id, isDirect:false})"
+                   data-type="P"
+                   data-id="{{channel.id}}">
                    {{channel.name}}
                    <i ng-show="channel.hasNotification" class="fa fa-circle" style="float: right; padding-top: 5px;font-size: 10px;"></i>
                 </a>

@@ -8,16 +8,20 @@
        ng-show="vm.membersVisible">
     <div class="cometProjectUsers">
       <div class="title" ng-click="vm.showMembers()">Miembros</div>
-			<ul nav-menu-active="selected-channel" notification-class="has-notification">
-	      <li ng-repeat="member in vm.availableMembers | orderBy:['-isOnline','alias']"  ng-class="{ 'selected-channel':member.isActive}">
+			<ul callback="vm.setActiveChannel" nav-menu-active="selected-channel" notification-class="has-notification">
+	      <li ng-repeat="member in vm.availableMembers | orderBy:['-isOnline','-alias']"  ng-class="{ 'selected-channel':member.isActive}">
 	        <div class="chat-user">
-	          <a ui-sref="dashboard.project.channel-explore({projectId: vm.project.id, channelId:member.id, isDirect:true})">
+	          <a data-type="D"
+							 data-id="{{member.id}}"
+							 ui-sref="dashboard.project.channel-explore({projectId: vm.project.id, channelId:member.id, isDirect:true})"
 	            <img alt="image" class="chat-avatar" title="{{member.alias}}" ng-src="{{member.profilePicture}}" />
 	          </a>
 	          <div class="chat-user-name">
 							<i class="user-state fa fa-circle"
 								 ng-class="{ 'online': member.isOnline }"></i>
-	            <a ui-sref="dashboard.project.channel-explore({projectId: vm.project.id, channelId:member.id, isDirect:true})"
+	            <a data-type="D"
+								 data-id="{{member.id}}"
+								 ui-sref="dashboard.project.channel-explore({projectId: vm.project.id, channelId:member.id, isDirect:true})"
 								 ng-class="{ 'has-notification': member.hasNotification }">
 	              {{member.alias}}
 	            </a>

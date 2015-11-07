@@ -691,7 +691,6 @@
           * @desc calls method to retrieve older messages
           */
           function loadOlderMessages(){
-            console.log("into loadOlderMessages");
             if(!vm.noMoreMessages){
               loadChannelMessages();
             }

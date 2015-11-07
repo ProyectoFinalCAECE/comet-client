@@ -10,29 +10,46 @@
   .module('cometApp')
   .directive('navMenuActive', navMenuActive);
 
+  navMenuActive.$inject = ['$parse'];
+
   function navMenuActive () {
+    return {
+      restrict: 'A',
+       scope: {
+           method:'&callback'
+       },
+       link: function(scope, element, attrs) {
 
-    return function(scope, element, attrs) {
+          var activeClass = attrs.navMenuActive || 'active',
+              notificationClass = attrs.notificationClass || 'has-notification',
+              setActiveCallback = scope.method();
 
-      var activeClass = attrs.navMenuActive || 'active',
-          notificationClass = attrs.notificationClass || 'has-notification';
+          scope.$on('$stateChangeSuccess', function(event, toState) {
 
-      scope.$on('$stateChangeSuccess', function(event, toState) {
+            var links = element.find('a');
+            links.parent('li').removeClass(activeClass);
 
-        var links = element.find('a');
-        links.parent('li').removeClass(activeClass);
+            for (var i = links.length - 1; i >= 0; i--) {
+              var link = angular.element(links[i]);
+              var url = link.attr('href');
 
-        for (var i = links.length - 1; i >= 0; i--) {
-          var link = angular.element(links[i]);
-          var url = link.attr('href');
-          if (url === toState.ncyBreadcrumbLink) {
-            link.parent('li').addClass(activeClass);
-            link.removeClass(notificationClass);
-            break;
-          }
-        }
-      });
+              if (url === toState.ncyBreadcrumbLink) {
+                var type = link.data('type'),
+                    id = link.data('id');
 
-    };
+                link.parent('li').addClass(activeClass);
+                link.removeClass(notificationClass);
+
+                setActiveCallback({
+                  type: type,
+                  id: id
+                });
+
+                break;
+              }
+            }
+          });
+       }
+     };
   }
 })();
