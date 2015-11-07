@@ -64,6 +64,7 @@ a.disabled {
     margin-top: 10px;
 }
 .cometTitle ul {
+    list-style: none;
     display: inline-block;
     margin: 0;
     padding: 0;
