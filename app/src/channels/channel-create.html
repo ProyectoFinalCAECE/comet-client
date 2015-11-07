@@ -9,7 +9,7 @@
     <div class="col-sm-8 crearProyecto-sm-8">
       <div style="margin-left:-15px">
          </br>
-         <p>@MichaText</p>
+         <p>Crea un canal de comunicación, público para que todos lo vean o privado para que solo lo vea quien decidas.</p>
       </div>
       <form name="vm.frmCreate" ng-submit="vm.create()" class="form-horizontal m-t" role="form" novalidate="">
         <!-- Nombre -->
@@ -39,13 +39,15 @@
           <div class="col-sm-1">
             <input type="checkbox" ng-model="vm.isPrivate" class="">
           </div>
-          <div class="col-sm-6" style="margin-left:-40px">
-             <p>@MichaText - Un canal privado es....</p>
-          </div>
+
 
         </div>
         <!-- Invitar -->
         <div class="form-group cometInput">
+          <div>
+             </br>
+             <p>Selecciona los miembros del proyecto que formaran parte del canal.</p>
+          </div>
           <label class="col-sm-2 control-label">Participantes</label>
           <div class="col-sm-10">
             <ui-select multiple ng-model="vm.invites" theme="bootstrap">
@@ -57,10 +59,7 @@
                 </small>
               </ui-select-choices>
             </ui-select>
-            <div>
-               </br>
-               <p>@MichaText</p>
-            </div>
+
           </div>
         </div>
         <!-- Submit -->
