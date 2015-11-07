@@ -9,7 +9,7 @@
     <div class="cometProjectUsers">
       <div class="title" ng-click="vm.showMembers()">Miembros</div>
 			<ul nav-menu-active="selected-channel" notification-class="has-notification">
-	      <li ng-repeat="member in vm.availableMembers"  ng-class="{ 'selected-channel':member.isActive}">
+	      <li ng-repeat="member in vm.availableMembers | orderBy:['-isOnline','-alias']:true"  ng-class="{ 'selected-channel':member.isActive}">
 	        <div class="chat-user">
 	          <a ui-sref="dashboard.project.channel-explore({projectId: vm.project.id, channelId:member.id, isDirect:true})">
 	            <img alt="image" class="chat-avatar" title="{{member.alias}}" ng-src="{{member.profilePicture}}" />
