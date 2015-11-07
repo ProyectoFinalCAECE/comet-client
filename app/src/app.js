@@ -56,7 +56,7 @@
           membersPerProject: 50,
           membersPerProjectPerStep: 10
         })
-        .run(function($rootScope, $state, helpersService){
+        .run(function($rootScope, $state, $stateParams, helpersService){
           $rootScope.helpers = helpersService;
           // required for the default child state trick to work
           $rootScope.$on('$stateChangeStart', function(evt, to, params) {
@@ -65,33 +65,8 @@
               $state.go(to.redirectTo, params);
             }
           });
-        }).directive('fileModel', ['$parse', function ($parse) {
-            return {
-                restrict: 'A',
-                link: function(scope, element, attrs) {
-                    var model = $parse(attrs.fileModel);
-                    var modelSetter = model.assign;
-
-                    element.bind('change', function(){
-                        scope.$apply(function(){
-                            modelSetter(scope, element[0].files[0]);
-                        });
-                    });
-                }
-            };
-          }]).directive("ngFileSelect",function(){
-
-            return {
-              link: function($scope,el){
-
-                el.bind("change", function(e){
-
-                  $scope.file = (e.srcElement || e.target).files[0];
-                  $scope.getFile();
-                });
-
-              }
-
-            };
-          });
+          // bind $state to rootScope to allow access from views
+          $rootScope.$state = $state;
+          $rootScope.$stateParams = $stateParams;
+        });
 })();

@@ -1,6 +1,4 @@
-html {
-  background-color: #E7EAEC;
-}
+
 
 /* Para Angular Bootstrap */
 .nav,
@@ -68,6 +66,7 @@ a.disabled {
     margin-top: 10px;
 }
 .cometTitle ul {
+    list-style: none;
     display: inline-block;
     margin: 0;
     padding: 0;
@@ -83,6 +82,11 @@ a.disabled {
 /* Wrapper del dashboard - color de fondo azul */
 #wrapper {
     background-color: #213A53!important;
+}
+
+/* las views internas del dashboard llevan un gris de fondo */
+body[state^="dashboard."] {
+  background-color: #E7EAEC;
 }
 
 .skin-2 .navbar-static-side {
@@ -650,7 +654,6 @@ a.disabled {
 }
 
 /* Explorar canal */
-
 .badge-channel-type {
   margin-left: 15px;
   vertical-align: middle;
