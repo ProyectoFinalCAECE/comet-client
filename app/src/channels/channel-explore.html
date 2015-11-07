@@ -2,10 +2,10 @@
   <div class="col-lg-9 ExplorarCanal">
     <div class="row channel-explore-header" sticky offset="60">
       <div class="col-lg-10" style="float:left;">
-        <h2><strong>{{vm.channel.name}}</strong><span class="badge badge-success badge-channel-type" ng-show="{{ vm.channel.type === 'P' }}">
+        <h2><strong>{{::vm.channel.name}}</strong><span class="badge badge-success badge-channel-type" ng-show="{{ vm.channel.type === 'P' }}">
           canal privado
         </span></h2>
-        <h4 class="ProjDesc">{{vm.channel.description}}</h4>
+        <h4 class="ProjDesc">{{::vm.channel.description}}</h4>
         <ol class="breadcrumb2">
           <li>
             <div ncy-breadcrumb></div>
@@ -50,16 +50,21 @@
       <div class="col-lg-12">
         <div class="ibox chat-view">
           <div class="ibox-title">
-            <small ng-show="vm.lastMessage != null" class="pull-right text-muted">Ultimo mensaje: {{vm.formatMessageDate(vm.lastMessage)}}</small>
+
           </div>
           <div class="ibox-content">
             <div class="row">
               <div ng-class="vm.showMembers ? 'col-md-9' : 'col-md-12'">
-                <!--<div class="chat-discussion" lr-infinite-scroll="vm.loadOlderMessages">-->
                 <div class="chat-discussion">
-                  <div ng-show="!vm.noMoreMessages" class="text-center">
+                  <!-- load channel history -->
+                  <div ng-cloak="" ng-hide="vm.noMoreMessages || vm.emptyChannel" class="text-center">
                     <a ng-click="vm.loadOlderMessages()" name="btnLoadMore" class="btn btn-xl">Recuperar más mensajes</a>
                   </div>
+                  <!-- no more channel history left -->
+                  <div ng-cloak ng-show="vm.noMoreMessages && !vm.emptyChannel" style="font-style:italic" class="text-muted text-center">
+                    Has llegado al inicio del canal
+                  </div>
+                  <!-- messages -->
                   <div class="chat-message"
                        ng-class="vm.getMessageClass(message)"
                        ng-repeat="message in vm.messages"
@@ -76,6 +81,10 @@
                       </span>
                     </div>
                   </div>
+                  <!-- empty channel -->
+                  <div ng-cloak ng-show="vm.emptyChannel" class="jumbotron text-center">
+                      <p>No hay mensajes en este canal</p>
+                  </div>
                 </div>
               </div>
               <div class="col-md-3 chat-users-wrapper" ng-show="vm.showMembers">
@@ -86,9 +95,9 @@
                       <img alt="image"
                            class="chat-avatar"
                            title="{{member.alias}}"
-                           ng-src="{{member.profilePicture}}"/>
+                           ng-src="{{::member.profilePicture}}"/>
                       <div class="chat-user-name">
-                        {{member.alias}}
+                        {{::member.alias}}
                       </div>
                     </div>
                   </li>
@@ -110,12 +119,12 @@
                                 ng-click="vm.displayEmoji()">
                           <i class="fa fa-smile-o"></i>
                         </button>
-                        <div class="emoji-container" ng-show="vm.showEmoji">
+                        <div class="emoji-container" ng-if="vm.showEmoji">
                           <ul>
                             <li ng-repeat="emoji in vm.emojiList"
                                 ng-click="vm.setEmoji(emoji)"
                                 class="emoji">
-                              <a><i class="emoticon emoticon-{{emoji}}" title=":{{emoji}}:"></i></a>
+                              <a><i class="emoticon emoticon-{{::emoji}}" title=":{{::emoji}}:"></i></a>
                             </li>
                           </ul>
                         </div>

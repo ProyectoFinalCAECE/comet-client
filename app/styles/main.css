@@ -10,6 +10,10 @@ html {
     cursor: pointer;
 }
 
+[ng\:cloak], [ng-cloak], .ng-cloak {
+  display: none !important;
+}
+
 /*ngImgCrop*/
 .cropArea {
     background: #E4E4E4;
@@ -57,6 +61,21 @@ a.disabled {
 }
 
 /* Top Navigation   */
+.cometTitle {
+    width: 40%;
+    margin-left: 36%;
+    text-align: center;
+    margin-top: 10px;
+}
+.cometTitle ul {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+}
+.cometTitle li {
+    float: left;
+}
+
 .dropdown-messages.cometNotifications{
 	width:390px;
 }
@@ -401,9 +420,8 @@ a.disabled {
 }
 
 .ProjDesc{
-    width: 900px;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    width: 880px;
+    word-wrap: break-word;
 }
 
 .skin-2 .nav-tabs > li > a{
@@ -685,10 +703,6 @@ a.disabled {
   padding: 0;
 }
 
-.skin-setttings:hover {
-  overflow-y: auto;
-}
-
 .skin-setttings .title {
   cursor: pointer;
 }
@@ -708,6 +722,10 @@ a.disabled {
 
 .cometProjectUsersIcon.minimized {
   right: 0px;
+}
+
+.cometProjectUsers:hover {
+  overflow-y: auto;
 }
 
 .cometProjectUsers ul {
