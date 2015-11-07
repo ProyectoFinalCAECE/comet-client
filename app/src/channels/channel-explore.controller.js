@@ -69,6 +69,7 @@
           vm.sendUserMessage = sendUserMessage;
           vm.loadOlderMessages = loadOlderMessages;
           var nextRequestOffset = 0;
+          vm.emptyChannel = false;
           vm.noMoreMessages = false;
           // update info
           vm.edit = edit;
@@ -215,16 +216,22 @@
           */
           function loadChannelMessages() {
             var limit = 5;
+            console.log('loadChannelMessages', nextRequestOffset);
             channelService.getMessages(vm.project.id, vm.channel.id, nextRequestOffset, limit, vm.isDirect).then(function (response) {
-              nextRequestOffset = response.data.next_offset;
               if(response.data.messages.length === 0){
+                // for the first load
+                if (nextRequestOffset === 0) {
+                    vm.emptyChannel = true;
+                }
                 vm.noMoreMessages = true;
-              }else{
+              }
+              else {
                 response.data.messages.forEach(function(entry) {
                     processMessageReceived(entry, addMessageToListUnshift);
                     scrollToLast();
                 });
               }
+              nextRequestOffset = response.data.next_offset;
             });
           }
 
@@ -344,8 +351,7 @@
           function addMessageToList(msg) {
             vm.messages.push(msg);
             vm.lastMessage = msg.date;
-
-            //angular.element(".wrapper").height(window.height() - 60);
+            vm.emptyChannel = false;
           }
 
           /**

@@ -10,6 +10,10 @@ html {
     cursor: pointer;
 }
 
+[ng\:cloak], [ng-cloak], .ng-cloak {
+  display: none !important;
+}
+
 /*ngImgCrop*/
 .cropArea {
     background: #E4E4E4;
@@ -417,9 +421,8 @@ a.disabled {
 }
 
 .ProjDesc{
-    width: 900px;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    width: 880px;
+    word-wrap: break-word;
 }
 
 .skin-2 .nav-tabs > li > a{
