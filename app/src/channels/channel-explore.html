@@ -50,14 +50,14 @@
       <div class="col-lg-12">
         <div class="ibox chat-view">
           <div class="ibox-title">
-            <small ng-show="vm.lastMessage != null" class="pull-right text-muted">Ultimo mensaje: {{vm.formatMessageDate(vm.lastMessage)}}</small>
+
           </div>
           <div class="ibox-content">
             <div class="row">
               <div ng-class="vm.showMembers ? 'col-md-9' : 'col-md-12'">
                 <!--<div class="chat-discussion" lr-infinite-scroll="vm.loadOlderMessages">-->
                 <div class="chat-discussion">
-                  <div ng-show="!vm.noMoreMessages" class="text-center">
+                  <div ng-cloak="" ng-hide="vm.noMoreMessages || vm.emptyChannel" class="text-center">
                     <a ng-click="vm.loadOlderMessages()" name="btnLoadMore" class="btn btn-xl">Recuperar más mensajes</a>
                   </div>
                   <div class="chat-message"
@@ -75,6 +75,9 @@
                       </ng-embed>
                       </span>
                     </div>
+                  </div>
+                  <div ng-cloak ng-show="vm.emptyChannel" class="jumbotron text-center">
+                      <p>No hay mensajes en este canal</p>
                   </div>
                 </div>
               </div>
