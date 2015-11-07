@@ -70,7 +70,7 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr ng-repeat="member in vm.project.members | filter:vm.filterQuery">
+                        <tr dir-paginate="member in vm.project.members  | itemsPerPage: 5 | filter:vm.filterQuery">
                             <td>
                               <img alt="image" class="img-circle" title="{{member.alias}}" ng-src="{{member.profilePicture}}" height="30" width="30" />
                             </td>
@@ -88,6 +88,7 @@
                         </tr>
                       </tbody>
                   </table>
+                  <dir-pagination-controls/>
                 </div>
                 <!-- Invitar -->
                 <div class="crearProyectoSubmit">
