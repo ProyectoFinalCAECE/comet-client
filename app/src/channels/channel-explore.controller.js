@@ -97,7 +97,7 @@
               linkTarget: '_blank',
               basicVideo: false,
               code: {
-                  highlight: true,
+                  highlight: false,
                   lineNumbers: true
               },
               gdevAuth: 'AIzaSyAQONTdSSaKwqB1X8i6dHgn9r_PtusDhq0',

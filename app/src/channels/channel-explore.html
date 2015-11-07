@@ -2,10 +2,10 @@
   <div class="col-lg-9 ExplorarCanal">
     <div class="row channel-explore-header" sticky offset="60">
       <div class="col-lg-10" style="float:left;">
-        <h2><strong>{{vm.channel.name}}</strong><span class="badge badge-success badge-channel-type" ng-show="{{ vm.channel.type === 'P' }}">
+        <h2><strong>{{::vm.channel.name}}</strong><span class="badge badge-success badge-channel-type" ng-show="{{ vm.channel.type === 'P' }}">
           canal privado
         </span></h2>
-        <h4 class="ProjDesc">{{vm.channel.description}}</h4>
+        <h4 class="ProjDesc">{{::vm.channel.description}}</h4>
         <ol class="breadcrumb2">
           <li>
             <div ncy-breadcrumb></div>
@@ -86,9 +86,9 @@
                       <img alt="image"
                            class="chat-avatar"
                            title="{{member.alias}}"
-                           ng-src="{{member.profilePicture}}"/>
+                           ng-src="{{::member.profilePicture}}"/>
                       <div class="chat-user-name">
-                        {{member.alias}}
+                        {{::member.alias}}
                       </div>
                     </div>
                   </li>
@@ -110,12 +110,12 @@
                                 ng-click="vm.displayEmoji()">
                           <i class="fa fa-smile-o"></i>
                         </button>
-                        <div class="emoji-container" ng-show="vm.showEmoji">
+                        <div class="emoji-container" ng-if="vm.showEmoji">
                           <ul>
                             <li ng-repeat="emoji in vm.emojiList"
                                 ng-click="vm.setEmoji(emoji)"
                                 class="emoji">
-                              <a><i class="emoticon emoticon-{{emoji}}" title=":{{emoji}}:"></i></a>
+                              <a><i class="emoticon emoticon-{{::emoji}}" title=":{{::emoji}}:"></i></a>
                             </li>
                           </ul>
                         </div>
