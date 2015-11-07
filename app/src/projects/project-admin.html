@@ -94,7 +94,7 @@
                 <div class="crearProyectoSubmit">
                   <label class="control-label">Personas a invitar</label>
                   <div>
-                     <p>@MichaText</p>
+                     <p>Ingresa las direcciones de correo electrónico de las personas que quieras invitar al proyecto.</p>
                   </div>
                   <div ng-repeat="invite in vm.invites" class="m-b" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'address_' + ($index + 1))}">
                       <div class="input-group invitarEmails">
@@ -128,7 +128,7 @@
               </tab-heading>
               <div>
                  </br>
-                 <p>@MichaText</p>
+                 <p>Activa las integraciones que quieres funcionando en tu proyecto.</p>
               </div>
             </tab>
             <tab select="vm.onTabSelected(4)">
@@ -137,7 +137,7 @@
               </tab-heading>
               <div>
                  </br>
-                 <p>@MichaText</p>
+                 <p>Cierra tu proyecto, no podrás crear nuevo contenido, la información existente seguirá disponible para ser vista pero no podrá ser modificada.</p>
               </div>
               <div class="cerrar">
                 <form class="form-horizontal m-t" role="form" ng-submit="vm.closeProject()">
