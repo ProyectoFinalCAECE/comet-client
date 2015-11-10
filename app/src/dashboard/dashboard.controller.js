@@ -18,6 +18,7 @@
                                        'dashboardServiceModel',
                                        'accountService',
                                        'channelService',
+                                       'desktopNotificationService',
                                        'notificationService',
                                        'user'];
 
@@ -31,6 +32,7 @@
                                       dashboardServiceModel,
                                       accountService,
                                       channelService,
+                                      desktopNotificationService,
                                       notificationService,
                                       user) {
 
@@ -122,22 +124,14 @@
               });
             });
 
-            // members for direct chat
-            /*
-            vm.availableMembers = lodash.filter(vm.project.members, function(m) {
-              return (m.id !== vm.user.id);
-            });
-            */
-
-
-          for (var i=0;i<project.members.length;i++){
-            var member = project.members[i];
-              if (member.id !== vm.user.id){
-                member.isOnline = false;
-                vm.availableMembers.push(member);
+            for (var i=0;i<project.members.length;i++){
+              var member = project.members[i];
+                if (member.id !== vm.user.id){
+                  member.isOnline = false;
+                  vm.availableMembers.push(member);
+                }
               }
             }
-          }
 
           /**
            * @name initializeNotifications
@@ -148,6 +142,8 @@
             if (vm.project === null) {
               return;
             }
+
+            desktopNotificationService.init();
 
             // the server sends the channel with updates after a page load or a reconnect
             notificationService.on('channels-updates', function (data) {
@@ -171,7 +167,6 @@
               $log.log('online-users', state);
               loadUserState(state);
             });
-
 
             notificationsJoinRoom();
             notificationsSendPing();
@@ -281,12 +276,19 @@
            */
           function loadNotification(notification) {
 
+            var notifTitle = vm.project.name,
+                notifBody = '',
+                notifUrl = '',
+                showDesktopNotif = false;
+
             // public and private channels
             if (notification.type === 'channel') {
               var channel = findChannel(notification.id);
               if (channel !== undefined &&
                   !isActiveChannel(notification.id)) {
                 channel.hasNotification = true;
+                showDesktopNotif = true;
+                notifBody = 'Nuevo mensaje en "' + channel.name + '"';
               }
             }
             else {
@@ -296,6 +298,8 @@
                     !isActiveDirectChannel(notification.id)) {
                   userChannel.hasNotification = true;
                   vm.privateNotifications = true;
+                  showDesktopNotif = true;
+                  notifBody = 'Nuevo mensaje de "' + userChannel.alias + '"';
                 }
               } else {
                 if (notification.type === 'private-channel') {
@@ -303,8 +307,23 @@
                   if (privatechannel !== undefined &&
                       !isActiveChannel(notification.id)) {
                     privatechannel.hasNotification = true;
+                    showDesktopNotif = true;
+                    notifBody = 'Nuevo mensaje en "' + privatechannel.name + '"';
                   }
                 }
+              }
+            }
+
+            if (showDesktopNotif) {
+
+              notifUrl = $state.href('dashboard.project.channel-explore', {
+                channelId: notification.id,
+                isDirect: vm.privateNotifications
+              }, { absolute: true });
+
+              if (!isActiveChannel(notification.id) ||
+                  !isActiveDirectChannel(notification.id)) {
+                desktopNotificationService.show(notifTitle, notifBody, notifUrl);
               }
             }
           }
@@ -357,6 +376,9 @@
            */
           function setActiveChannel(data) {
             var channel = null;
+            vm.activeChannel = null;
+            vm.activeDirectChannel = null;
+
             if (data.type !== 'D') {
               channel = findChannel(data.id);
               vm.activeChannel = channel;
