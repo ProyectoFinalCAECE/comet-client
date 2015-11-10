@@ -43,7 +43,7 @@
       })
       .state('dashboard.project', {
         abstract: true,
-        url: '/projects/:id',
+        url: '/projects/{id:int}',
         resolve: {
           project: ['$stateParams', '$state', 'projectService', 'dashboardServiceModel',
           function ($stateParams, $state, projectService, dashboardServiceModel) {
