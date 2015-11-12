@@ -19,7 +19,8 @@
                                            'dialogService',
                                            'channelService',
                                            'user',
-                                           'project'];
+                                           'project',
+                                           'notificationService'];
 
         function ChannelCreateController ($log,
                                           $rootScope,
@@ -31,7 +32,8 @@
                                           dialogService,
                                           channelService,
                                           user,
-                                          project) {
+                                          project,
+                                          notificationService) {
 
           var vm = this;
           vm.channel = {};
@@ -86,6 +88,12 @@
             channelService.create(vm.project.id, vm.channel)
               .error(channelCreateError)
               .then(channelCreated);
+
+            notificationService.emit('system', {
+              projectId: vm.project.id,
+              userId: user.id,
+              content: 'user ' + user.id + 'created a new channel!'
+            });            
           }
 
           /**
