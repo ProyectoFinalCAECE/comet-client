@@ -168,6 +168,10 @@
               loadUserState(state);
             });
 
+            notificationService.on('system', function (state) {
+              $log.log('system', state);
+            });
+
             notificationsJoinRoom();
             notificationsSendPing();
           }
