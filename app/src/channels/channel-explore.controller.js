@@ -404,7 +404,13 @@
            * @desc returns the message timestamp in a readable format
           */
           function formatMessageDate (msgDate) {
-            return moment(msgDate).calendar();
+            return moment(msgDate).calendar(null, {
+              //lastWeek : '[el] dddd [a las] LT',
+              lastDay : '[ayer] LT',
+              lastWeek : 'dddd L LT',
+              sameDay : 'LT',
+              sameElse : 'LT'
+            });
           }
 
           /**
