@@ -329,7 +329,21 @@
                   !isActiveDirectChannel(notification.id)) {
                 desktopNotificationService.show(notifTitle, notifBody, notifUrl);
               }
+
+              // sound
+              playNotificationSound();
             }
+          }
+
+          /**
+           * @name playNotificationSound
+           * @desc notifies the user through sound
+          */
+          function playNotificationSound () {
+            try {
+              document.getElementById('notification-sound').play();
+            }
+            catch (e) {}
           }
 
           /**
