@@ -409,7 +409,7 @@
               lastDay : '[ayer] LT',
               lastWeek : 'dddd L LT',
               sameDay : 'LT',
-              sameElse : 'LT'
+              sameElse : 'dddd L LT'
             });
           }
 
