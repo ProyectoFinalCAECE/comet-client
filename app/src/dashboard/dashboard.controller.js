@@ -54,6 +54,8 @@
           vm.activeDirectChannel = null;
           vm.logout = logout;
 
+          var pingTimer;
+
           activate();
 
           /**
@@ -193,7 +195,7 @@
               userId: vm.user.id
             });
 
-            $timeout(notificationsSendPing, 10 * 1000);
+            pingTimer = $timeout(notificationsSendPing, 10 * 1000);
           }
 
           /**
@@ -240,6 +242,8 @@
             notificationService.emit('leave-room', {
               room: getDirectRoomId(user)
             });
+
+            $timeout.cancel(pingTimer);
           }
 
           /**
