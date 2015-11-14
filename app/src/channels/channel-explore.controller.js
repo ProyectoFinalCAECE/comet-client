@@ -243,31 +243,14 @@
 
             var msgPayload = data.message;
 
+            console.log("msgPayload.date is: ", msgPayload.date);
             // convert server date to local date
-            msgPayload.date = convertUTCDateToLocalDate(new Date(msgPayload.date));
+            msgPayload.date = new Date(msgPayload.date);
 
             // add message to message list
             addMessageToListFunction(msgPayload);
 
             lastMsgId = msgPayload.id;
-          }
-
-          /**
-           * @name convertUTCDateToLocalDate
-           * @desc converts a UTC date to local datetime
-           *       http://stackoverflow.com/questions/6525538/convert-utc-date-time-to-local-date-time-using-javascript
-          */
-          function convertUTCDateToLocalDate(date) {
-
-            var newDate = new Date(date.getTime() +
-                          date.getTimezoneOffset() * 60 * 1000);
-
-            var offset = date.getTimezoneOffset() / 60;
-            var hours = date.getHours();
-
-            newDate.setHours(hours - offset);
-
-            return newDate;
           }
 
           /**
