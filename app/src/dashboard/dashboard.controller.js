@@ -126,6 +126,7 @@
               });
             });
 
+            vm.availableMembers = [];
             for (var i=0;i<project.members.length;i++){
               var member = project.members[i];
                 if (member.id !== vm.user.id){
@@ -140,10 +141,6 @@
            * @desc initializes the notifications socket
            */
           function initializeNotifications() {
-
-            if (vm.project === null) {
-              return;
-            }
 
             desktopNotificationService.init();
 
@@ -217,12 +214,6 @@
               userId: vm.user.id
             });
 
-            // direct channels notifications
-            notificationService.emit('join-room', {
-              room: getDirectRoomId(),
-              projectId: vm.project.id,
-              userId: vm.user.id
-            });
           }
 
           /**
@@ -230,6 +221,8 @@
            * @desc leave a project notifications room
            */
           function notificationsLeaveRoom(project) {
+
+            $timeout.cancel(pingTimer);
 
             if (project === null) {
               return;
@@ -239,11 +232,6 @@
               room: getProjectRoomId(project)
             });
 
-            notificationService.emit('leave-room', {
-              room: getDirectRoomId(user)
-            });
-
-            $timeout.cancel(pingTimer);
           }
 
           /**
@@ -284,10 +272,10 @@
            */
           function loadNotification(notification) {
 
-            var notifTitle = vm.project.name,
-                notifBody = '',
-                notifUrl = '',
-                showDesktopNotif = false;
+            var notifTitle = vm.project !== null ? vm.project.name : 'comet',
+              notifBody = '',
+              notifUrl = '',
+              showDesktopNotif = false;
 
             // public and private channels
             if (notification.type === 'channel') {
@@ -303,7 +291,8 @@
               if (notification.type === 'direct') {
                 var userChannel = findDirectChannel(notification.id);
                 if (userChannel !== undefined &&
-                    !isActiveDirectChannel(notification.id)) {
+                    !isActiveDirectChannel(notification.id) &&
+                    isActiveProject(notification.projectId)) {
                   userChannel.hasNotification = true;
                   vm.privateNotifications = true;
                   showDesktopNotif = true;
@@ -313,7 +302,8 @@
                 if (notification.type === 'private-channel') {
                   var privatechannel = findChannel(notification.id);
                   if (privatechannel !== undefined &&
-                      !isActiveChannel(notification.id)) {
+                      !isActiveChannel(notification.id) &&
+                      isActiveProject(notification.projectId)) {
                     privatechannel.hasNotification = true;
                     showDesktopNotif = true;
                     notifBody = 'Nuevo mensaje en "' + privatechannel.name + '"';
@@ -360,6 +350,18 @@
               return false;
             }
             return (vm.activeChannel.id === id);
+          }
+
+          /**
+          * @name isActiveProject
+          * @desc returns if the active project is the same as the
+          *       project with the id parameter
+         */
+          function isActiveProject(id){
+            if (vm.project === null) {
+              return false;
+            }
+            return (vm.project.id === id);
           }
 
           /**
@@ -442,14 +444,6 @@
            */
           function getProjectRoomId(project) {
             return 'Project_' + project.id;
-          }
-
-          /**
-           * @name getDirectRoomId
-           * @desc returns the room id for the direct messages notifications socket
-           */
-          function getDirectRoomId() {
-            return 'SELF_' + user.id;
           }
 
           /**
