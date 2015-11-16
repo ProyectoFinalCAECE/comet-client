@@ -43,12 +43,22 @@
           ALERT: 1,
           CONFIRM: 2
         })
-        // global message types
-        .constant("messageType", {
+        // message types
+        .constant('messageType', {
           TEXT: '1',
           FILE: '2',
           INTEGRATION: '3',
           AUTO: '4'
+        })
+        // system notification types
+        .constant('systemNotificationType', {
+          CHANNEL_CREATE: 1,
+          CHANNEL_CLOSE: 2,
+          CHANNEL_JOIN: 3,
+          PROJECT_CLOSE: 4,
+          PROJECT_JOIN: 5,
+          CHANNEL_EDIT: 6,
+          PROJECT_EDIT: 7
         })
         // global constraints
         .constant('constraints', {

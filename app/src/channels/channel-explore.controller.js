@@ -210,7 +210,7 @@
           */
           function loadChannelMessages() {
             var limit = 5;
-            console.log('loadChannelMessages', nextRequestOffset);
+
             channelService.getMessages(vm.project.id, vm.channel.id, nextRequestOffset, limit, vm.isDirect).then(function (response) {
               if(response.data.messages.length === 0){
                 // for the first load
@@ -243,7 +243,6 @@
 
             var msgPayload = data.message;
 
-            console.log("msgPayload.date is: ", msgPayload.date);
             // convert server date to local date
             msgPayload.date = new Date(msgPayload.date);
 
@@ -299,7 +298,6 @@
             lastMsgId++;
 
             var msgType = (type === undefined ? messageType.TEXT : type);
-            $log.log('buildMessageObject', type);
 
             return {
               id: lastMsgId,
@@ -388,7 +386,6 @@
           */
           function formatMessageDate (msgDate) {
             return moment(msgDate).calendar(null, {
-              //lastWeek : '[el] dddd [a las] LT',
               lastDay : '[ayer] LT',
               lastWeek : 'dddd L LT',
               sameDay : 'LT',

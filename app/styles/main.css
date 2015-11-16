@@ -76,8 +76,20 @@ a.disabled {
 }
 
 .dropdown-messages.cometNotifications{
-	width:390px;
+	width:300px;
 }
+
+.dropdown-messages.cometNotifications li{
+	margin-right: 0 !important;
+}
+
+.dropdown-messages.cometNotifications .media-body{
+	width:auto;
+  padding: 0;
+  margin: 0;
+}
+
+
 
 /* Wrapper del dashboard - color de fondo azul */
 #wrapper {

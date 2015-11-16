@@ -11,61 +11,26 @@
       </ul>
     </div>
     <ul class="nav navbar-top-links navbar-right">
-      <!--
-      <li class="dropdown">
+      <li ng-if="vm.systemNotifications.length > 0" class="dropdown">
         <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-          <i class="fa fa-bell"></i>  <span class="label label-warning">16</span>
+          <i class="fa fa-bell"></i>  <span class="label label-warning">{{vm.systemNotifications.length}}</span>
         </a>
         <ul class="dropdown-menu dropdown-messages cometNotifications">
-          <li>
-            <div class="dropdown-messages-box">
-              <a href="profile.html" class="pull-left">
-                <img alt="image" class="img-circle" src="../../images/vendor/a7.jpg">
-              </a>
-              <div class="media-body">
-                <small class="pull-right">Hace 21hs</small>
-                <strong>Mariano Quevedo abrio un canal</strong><br>
-                <small class="text-muted">Hace 3 dias - 05/08/2015 17:32 pm </small>
+          <li ng-repeat="notif in vm.systemNotifications">
+            <a href="{{notif.link}}">
+              <div class="dropdown-messages-box">
+                <div class="media-body">
+                  <div>
+                    <span style="text-style=italic">{{::notif.projectName}}</span>
+                    <small class="text-muted" style="float: right;">{{::notif.formattedDate}}</small>
+                  </div>
+                  <strong>{{::notif.text}}</strong>
+                </div>
               </div>
-            </div>
-          </li>
-          <li class="divider"></li>
-          <li>
-            <div class="dropdown-messages-box">
-              <a href="profile.html" class="pull-left">
-                <img alt="image" class="img-circle" src="../../images/vendor/a4.jpg">
-              </a>
-              <div class="media-body ">
-                <small class="pull-right text-navy">Hace 5hs</small>
-                <strong>Juan Saucedo</strong> started following <strong>Alan Rossi</strong>. <br>
-                <small class="text-muted">Ayer - 07/08/2015 13:21 pm </small>
-              </div>
-            </div>
-          </li>
-          <li class="divider"></li>
-          <li>
-            <div class="dropdown-messages-box">
-              <a href="profile.html" class="pull-left">
-                <img alt="image" class="img-circle" src="../../images/vendor/profile.jpg">
-              </a>
-              <div class="media-body ">
-                <small class="pull-right">Hace 23hs</small>
-                <strong>Matias Villoria compartio un archivo contigo.</strong><br>
-                <small class="text-muted">Hace 2 dias - 06/08/2015 9:30 am - </small>
-              </div>
-            </div>
-          </li>
-          <li class="divider"></li>
-          <li>
-            <div class="text-center link-block">
-              <a href="mailbox.html">
-                <i class="fa fa-envelope"></i> <strong>Leer todos los mensajes</strong>
-              </a>
-            </div>
+            </a>
           </li>
         </ul>
       </li>
-    -->
       <li>
         <a ng-click="vm.logout()"><i class="fa fa-sign-out"></i> Salir</a>
       </li>

@@ -15,6 +15,8 @@
                                        '$timeout',
                                        'ngToast',
                                        'lodash',
+                                       'moment',
+                                       'systemNotificationType',
                                        'dashboardServiceModel',
                                        'accountService',
                                        'channelService',
@@ -29,6 +31,8 @@
                                       $timeout,
                                       ngToast,
                                       lodash,
+                                      moment,
+                                      systemNotificationType,
                                       dashboardServiceModel,
                                       accountService,
                                       channelService,
@@ -48,6 +52,8 @@
           vm.membersVisible = false;
           vm.privateNotifications = false;
           vm.showMembers = showMembers;
+
+          vm.systemNotifications = [];
 
           vm.setActiveChannel = setActiveChannel;
           vm.activeChannel = null;
@@ -77,7 +83,7 @@
 
             // listen to project updates
             $scope.$on('currentProjectUpdated', function(event, args) {
-
+              $log.log('currentProjectUpdated', args);
               var previousProject = args.previous;
               if (previousProject !== null) {
                 // leave the previous project room
@@ -167,8 +173,9 @@
               loadUserState(state);
             });
 
-            notificationService.on('system', function (state) {
-              $log.log('system', state);
+            notificationService.on('system', function (notification) {
+              $log.log('system', notification);
+              loadSystemNotification(notification.data);
             });
 
             notificationsJoinRoom();
@@ -231,7 +238,6 @@
             notificationService.emit('leave-room', {
               room: getProjectRoomId(project)
             });
-
           }
 
           /**
@@ -338,6 +344,117 @@
               document.getElementById('notification-sound').play();
             }
             catch (e) {}
+          }
+
+          /**
+           * @name loadSystemNotification
+           * @desc Loads the notification in the users notification menu
+          */
+          function loadSystemNotification (sysNotif) {
+            //   CHANNEL_CREATE: 1,
+            //   CHANNEL_CLOSE: 2,
+            //   CHANNEL_JOIN: 3,
+            //   PROJECT_CLOSE: 5,
+            //   CHANNEL_EDIT: 6,
+            //   PROJECT_EDIT: 7
+
+            // filter notifications created by this user
+            if (sysNotif.userId === user.id) {
+              return;
+            }
+
+            switch (sysNotif.type) {
+              case systemNotificationType.CHANNEL_CREATE:
+              {
+                sysNotif.text = sysNotif.alias + ' ha creado el canal: ' + sysNotif.channelName;
+                sysNotif.link = $state.href('dashboard.project.channel-explore', {
+                                  channelId: sysNotif.channelId
+                                }, {
+                                  absolute: true
+                                });
+                break;
+              }
+              case systemNotificationType.CHANNEL_CLOSE:
+              {
+                sysNotif.text = sysNotif.alias + ' ha cerrado el canal: ' + sysNotif.channelName;
+                sysNotif.link = $state.href('dashboard.project.channel-explore', {
+                                  channelId: sysNotif.channelId
+                                }, {
+                                  absolute: true
+                                });
+                break;
+              }
+              case systemNotificationType.CHANNEL_JOIN:
+              {
+                sysNotif.text = sysNotif.alias + ' te ha subscripto al canal: ' + sysNotif.channelName;
+                sysNotif.link = $state.href('dashboard.project.channel-explore', {
+                                  channelId: sysNotif.channelId
+                                }, {
+                                  absolute: true
+                                });
+                break;
+              }
+              case systemNotificationType.CHANNEL_EDIT:
+              {
+                sysNotif.text = sysNotif.alias + ' ha editado el canal: ' + sysNotif.channelName;
+                sysNotif.link = $state.href('dashboard.project.channel-explore', {
+                                  channelId: sysNotif.channelId
+                                }, {
+                                  absolute: true
+                                });
+                break;
+              }
+              case systemNotificationType.PROJECT_CLOSE:
+              {
+                sysNotif.text = sysNotif.alias + ' ha cerrado el proyecto ';
+                sysNotif.link = $state.href('dashboard.project', {
+                                  id: sysNotif.projectId
+                                }, {
+                                  absolute: true
+                                });
+                break;
+              }
+              case systemNotificationType.PROJECT_JOIN:
+              {
+                sysNotif.text = sysNotif.alias + ' se ha unido al proyecto ';
+                sysNotif.link = $state.href('dashboard.project', {
+                                  id: sysNotif.projectId
+                                }, {
+                                  absolute: true
+                                });
+                break;
+              }
+              case systemNotificationType.PROJECT_EDIT:
+              {
+                sysNotif.text = sysNotif.alias + ' ha editado el proyecto ';
+                sysNotif.link = $state.href('dashboard.project', {
+                                  id: sysNotif.projectId
+                                }, {
+                                  absolute: true
+                                });
+
+                break;
+              }
+              default:
+                $log.log('tipo de notificacion desconocido', sysNotif);
+                return;
+            }
+
+            sysNotif.formattedDate = formatNotificationDate(sysNotif.date);
+            vm.systemNotifications.push(sysNotif);
+          }
+
+          /**
+           * @name formatNotificationDate
+           * @desc returns the formatted notification date
+          */
+          function formatNotificationDate(notifDate) {
+            return moment(notifDate).calendar(null, {
+              lastDay : '[ayer] LT',
+              lastWeek : 'dddd L LT',
+              sameDay : 'LT',
+              sameElse : 'dddd L LT'
+            });
           }
 
           /**
@@ -453,7 +570,7 @@
           function showMembers() {
             vm.membersVisible = !vm.membersVisible;
 
-            if(vm.privateNotifications){
+            if (vm.privateNotifications) {
               vm.privateNotifications = false;
             }
 
