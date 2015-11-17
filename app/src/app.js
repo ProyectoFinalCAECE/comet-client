@@ -33,6 +33,8 @@
         .constant('lodash', window._)
         // momentJS support
         .constant('moment', window.moment)
+        // Dropbox chooser
+        .constant('dropboxChooser', window.Dropbox)
         // global forms configuration
         .constant('formsConfig', {
           'passwordLabel': 'Debe tener entre 6 y 40 caracteres ' +
@@ -45,10 +47,11 @@
         })
         // message types
         .constant('messageType', {
-          TEXT: '1',
-          FILE: '2',
-          INTEGRATION: '3',
-          AUTO: '4'
+          TEXT: 1,
+          FILE: 2,
+          INTEGRATION: 3,
+          AUTO: 4,
+          INTEGRATION_DROPBOX: 5
         })
         // system notification types
         .constant('systemNotificationType', {

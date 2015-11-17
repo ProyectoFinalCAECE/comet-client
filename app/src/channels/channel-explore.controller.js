@@ -19,6 +19,7 @@
                                            'lodash',
                                            'moment',
                                            'ngToast',
+                                           'dropboxChooser',
                                            'messageType',
                                            'dialogService',
                                            'dashboardServiceModel',
@@ -40,6 +41,7 @@
                                           lodash,
                                           moment,
                                           ngToast,
+                                          dropboxChooser,
                                           messageType,
                                           dialogService,
                                           dashboardServiceModel,
@@ -71,6 +73,8 @@
           var nextRequestOffset = 0;
           vm.emptyChannel = false;
           vm.noMoreMessages = false;
+          // files
+          vm.addDropboxFile = addDropboxFile;
           // update info
           vm.edit = edit;
           // invite / delete members
@@ -86,7 +90,6 @@
           //delete channel
           vm.imSureDelete = false;
           vm.deleteChannel = deleteChannel;
-
           // emoji
           vm.showEmoji = false;
           vm.displayEmoji = displayEmoji;
@@ -269,9 +272,18 @@
            * @desc sends a message to the channel
           */
           function sendMessage(messageText, authorId, type) {
-
             var msgPayload = buildMessageObject(messageText, authorId, type);
+            sendMessageWithPayload(msgPayload);
+          }
 
+          /**
+           * @name sendMessagePayload
+           * @desc sends the message with the payload parameter
+          */
+          function sendMessageWithPayload(msgPayload) {
+
+            $log.log('sendMessageWithPayload', msgPayload);
+            
             // send the data to the server
             chatService.emit('message', {
               room: getChannelRoomId(),
@@ -468,6 +480,24 @@
             }
             vm.showEmoji = false;
             angular.element('#message-input').focus();
+          }
+
+          /**
+           * @name addDropboxFile
+           * @desc open the dropbox chooser
+          */
+          function addDropboxFile() {
+            dropboxChooser.choose({
+              // Required. Called when a user selects an item in the Chooser.
+              success: function(files) {
+                  $log.log(files[0]);
+                  var dropbox = files[0],
+                      msgPayload = buildMessageObject(dropbox.name, user.id, messageType.INTEGRATION_DROPBOX);
+
+                  msgPayload.dropbox = dropbox;
+                  sendMessageWithPayload(msgPayload);
+              }
+            });
           }
 
           /**

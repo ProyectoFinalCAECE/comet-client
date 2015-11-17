@@ -73,11 +73,33 @@
                     <div class="message">
                       <span id="msg_{{::message.id}}" class="message-author"><b>{{::msgMember.alias}}</b></span>
                       <span class="message-date">{{::vm.formatMessageDate(message.date) }}</span>
-                      <span class="message-content">
+                      <!-- Text messsage -->
+                      <span class="message-content" ng-if="message.type !== 5">
                         <ng-embed embed-data="message.text"
                         embed-options="vm.options"
                         embed-template-url="/src/components/ngEmbed.template.html">
                       </ng-embed>
+                      </span>
+                      <!-- Dropbox -->
+                      <span class="message-content clearfix" ng-if="message.type === 5">
+                        <div class="message-dropbox-wrapper clearfix">
+                          <a href="{{message.dropbox.link}}" target="_blank">
+                          <div class="message-dropbox-inside">
+                            <div class="col-left">
+                              <img ng-if="!message.dropbox.thumbnailLink" ng-src="{{message.dropbox.icon}}"/>
+                              <img ng-if="message.dropbox.thumbnailLink" ng-src="{{message.dropbox.thumbnailLink}}"/>
+                            </div>
+                            <div class="col-right">
+                              <p class="message-dropbox-name">
+                                {{message.dropbox.name}}
+                              </p>
+                              <p class="message-dropbox-legend">
+                                Archivo compartido a través de Dropbox
+                              </p>
+                            </div>
+                          </div>
+                          </a>
+                        </div>
                       </span>
                     </div>
                   </div>
@@ -129,6 +151,16 @@
                           </ul>
                         </div>
                       </div>
+                      <div class="input-group-btn">
+                        <button ng-disabled="vm.isClosed"
+                                style="height:35px;"
+                                tabindex="-1"
+                                class="btn btn-white"
+                                type="button"
+                                ng-click="vm.addDropboxFile()">
+                          <i class="fa fa-file-o"></i>
+                        </button>
+                      </div>
                       <textarea id="message-input"
                                 name="message"
                                 ng-enter="vm.sendUserMessage()"
@@ -138,7 +170,7 @@
                                 class="form-control col-lg-10"
                                 style="resize: none;"
                                 placeholder="Ingrese el mensaje">
-                    </textarea>
+                              </textarea>
                               </div>
                            </div>
                         </div>

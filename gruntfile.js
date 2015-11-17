@@ -454,9 +454,16 @@ module.exports = function (grunt) {
     'htmlmin'
   ]);
 
+  grunt.registerTask('dev', [
+    'clean:dist',
+    'wiredep',
+    'concurrent:dist',
+    'copy:dist',
+  ]);
+
   grunt.registerTask('default', [
     'newer:jshint',
     // 'test',
-    'build'
+    'dev'
   ]);
 };

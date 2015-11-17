@@ -12,6 +12,21 @@
   display: none !important;
 }
 
+/*clearfix*/
+.clearfix:after {
+    clear: both;
+    content: ".";
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+.clearfix {
+    display: inline-block;
+}
+.clearfix {
+    display: block;
+}
+
 /*ngImgCrop*/
 .cropArea {
     background: #E4E4E4;
@@ -99,6 +114,10 @@ a.disabled {
 /* las views internas del dashboard llevan un gris de fondo */
 body[state^="dashboard."] {
   background-color: #E7EAEC;
+}
+
+body[state="dashboard.project.channel-explore"] {
+  background-color: #FFF !important;
 }
 
 .skin-2 .navbar-static-side {
@@ -603,6 +622,49 @@ body[state^="dashboard."] {
 
 /* mensajes autogenerados */
 .chat-discussion .chat-message.auto pre.message-text {
+  font-style: italic;
+}
+
+/* mensajes de dropbox */
+.message-dropbox-wrapper {
+  width: 350px;
+  margin-top: 5px;
+}
+
+/* alineacion a la derecha para mensajes propios de dropbox */
+.chat-discussion .chat-message.mine .message-dropbox-wrapper {
+  float:right;
+}
+
+.message-dropbox-inside {
+  background-color: #FFF;
+  border-radius: 5px;
+  padding: 10px;
+  clear: both;
+  min-height: 70px;
+}
+
+.message-dropbox-inside img {
+  width: 50px;
+  height: 50px;
+}
+
+.message-dropbox-inside .col-left {
+  float:left;
+}
+
+.message-dropbox-inside .col-right {
+  float:right;
+}
+
+.message-dropbox-inside .message-dropbox-name {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.message-dropbox-inside .message-dropbox-legend {
+  font-weight: normal;
+  font-size: 11px;
   font-style: italic;
 }
 
