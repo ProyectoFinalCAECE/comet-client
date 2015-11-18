@@ -640,7 +640,6 @@ body[state="dashboard.project.channel-explore"] {
   background-color: #FFF;
   border-radius: 5px;
   padding: 10px;
-  clear: both;
   min-height: 70px;
 }
 
@@ -651,10 +650,12 @@ body[state="dashboard.project.channel-explore"] {
 
 .message-dropbox-inside .col-left {
   float:left;
+  width: 10%;
 }
 
 .message-dropbox-inside .col-right {
   float:right;
+  width: 80%;
 }
 
 .message-dropbox-inside .message-dropbox-name {
