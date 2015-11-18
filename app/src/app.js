@@ -51,7 +51,10 @@
           FILE: 2,
           INTEGRATION: 3,
           AUTO: 4,
-          INTEGRATION_DROPBOX: 5
+          INTEGRATION_DROPBOX: 5,
+          INTEGRATION_GITHUB: 6,
+          INTEGRATION_TRELLO: 7,
+          INTEGRATION_PINGDOM: 8
         })
         // system notification types
         .constant('systemNotificationType', {
