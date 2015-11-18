@@ -286,9 +286,6 @@
            * @desc sends the message with the payload parameter
           */
           function sendMessageWithPayload(msgPayload) {
-
-            $log.log('sendMessageWithPayload', msgPayload);
-
             // send the data to the server
             chatService.emit('message', {
               room: getChannelRoomId(),
