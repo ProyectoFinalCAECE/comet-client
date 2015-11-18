@@ -249,6 +249,11 @@
             // convert server date to local date
             msgPayload.date = new Date(msgPayload.date);
 
+            // integration types
+            if (msgPayload.type === messageType.INTEGRATION_DROPBOX) {
+              msgPayload.dropbox = JSON.parse(msgPayload.text);
+            }
+
             // add message to message list
             addMessageToListFunction(msgPayload);
 
@@ -283,7 +288,7 @@
           function sendMessageWithPayload(msgPayload) {
 
             $log.log('sendMessageWithPayload', msgPayload);
-            
+
             // send the data to the server
             chatService.emit('message', {
               room: getChannelRoomId(),
@@ -490,9 +495,8 @@
             dropboxChooser.choose({
               // Required. Called when a user selects an item in the Chooser.
               success: function(files) {
-                  $log.log(files[0]);
                   var dropbox = files[0],
-                      msgPayload = buildMessageObject(dropbox.name, user.id, messageType.INTEGRATION_DROPBOX);
+                      msgPayload = buildMessageObject(JSON.stringify(dropbox), user.id, messageType.INTEGRATION_DROPBOX);
 
                   msgPayload.dropbox = dropbox;
                   sendMessageWithPayload(msgPayload);
@@ -661,7 +665,6 @@
            * @desc calls the endpoint to close the channel
           */
           function closeChannel() {
-            $log.log('close', vm.channel.id);
             var msg = '¿Esta seguro que desea cerrar el canal?';
             var dlg = dialogService.showModalConfirm('Administrar proyecto', msg);
             dlg.result.then(function () {
