@@ -707,6 +707,11 @@ body[state="dashboard.project.channel-explore"] {
   padding: 2px;
   display: inline-block;
   float: left;
+  font-size:17px;
+}
+
+.chatActions a{
+  color: #333;
 }
 
 .chat-users-wrapper {
