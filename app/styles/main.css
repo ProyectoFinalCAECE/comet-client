@@ -860,3 +860,24 @@ body[state="dashboard.project.channel-explore"] {
     border-color: #1ab394;
     color: #FFFFFF;
 }
+
+/* Integraciones */
+.integrations-status, .integrations-buttons{
+  vertical-align: middle!important;
+}
+
+.integrations-status span{
+  font-size: 16px;
+}
+
+.integrations-icon {
+    text-align: right;
+    font-size: 38px;
+    display: block;
+    color: #e8e9ea;
+    padding-top: 0!important;
+}
+
+.integrations-buttons{
+  text-align: right;
+}
