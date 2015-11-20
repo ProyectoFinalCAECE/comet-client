@@ -53,7 +53,7 @@
                 <tbody>
                   <tr style="cursor: pointer;"
                       dir-paginate="channel in vm.channels | itemsPerPage: 5 | filter: vm.filterQuery | orderBy:['-state', '-createdAt']"
-                      ui-sref="dashboard.project.channel-explore({projectId: vm.project.id, channelId:channel.id})">
+                      ui-sref="dashboard.project.channel-explore({projectId: vm.project.id, channelId:channel.id, isDirect:false})">
                       <td class="columnaCanal">
                         <b>{{channel.name}}</b>
                       </td>

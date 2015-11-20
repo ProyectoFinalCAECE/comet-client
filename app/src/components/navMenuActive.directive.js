@@ -21,10 +21,9 @@
        link: function(scope, element, attrs) {
 
           var activeClass = attrs.navMenuActive || 'active',
-              notificationClass = attrs.notificationClass || 'has-notification',
-              setActiveCallback = scope.method();
+              notificationClass = attrs.notificationClass || 'has-notification';
 
-          scope.$on('$stateChangeSuccess', function(event, toState) {
+          scope.$on('channelActivated', function (event, args) {
 
             var links = element.find('a');
             links.parent('li').removeClass(activeClass);
@@ -32,19 +31,9 @@
             for (var i = links.length - 1; i >= 0; i--) {
               var link = angular.element(links[i]);
               var url = link.attr('href');
-
-              if (url === toState.ncyBreadcrumbLink) {
-                var type = link.data('type'),
-                    id = link.data('id');
-
+              if (url === args.url) {
                 link.parent('li').addClass(activeClass);
                 link.removeClass(notificationClass);
-
-                setActiveCallback({
-                  type: type,
-                  id: id
-                });
-
                 break;
               }
             }

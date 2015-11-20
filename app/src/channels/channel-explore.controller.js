@@ -138,12 +138,6 @@
             setFlags();
             loadChannelMessages();
 
-            // set active channel
-            $rootScope.$broadcast('channelActivated', {
-              type: (vm.isDirect ? 'direct' : 'channel'),
-              id: vm.channel.id
-            });
-
             // listen to channel updates
             $scope.$on('channelUpdated', function(event, args) {
               if (vm.isDirect) {

@@ -8,7 +8,7 @@
        ng-show="vm.membersVisible">
     <div class="cometProjectUsers">
       <div class="title" ng-click="vm.showMembers()">Miembros</div>
-			<ul callback="vm.setActiveChannel" nav-menu-active="selected-channel" notification-class="has-notification">
+			<ul nav-menu-active="selected-channel" notification-class="has-notification">
 	      <li ng-repeat="member in vm.availableMembers | orderBy:['-isOnline','-alias']"  ng-class="{ 'selected-channel':member.isActive}">
 	        <div class="chat-user">
 	          <a data-type="D"

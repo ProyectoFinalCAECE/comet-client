@@ -9,9 +9,12 @@
            .controller('DashboardController', DashboardController);
 
         DashboardController.$inject = ['$log',
+                                       '$q',
+                                       '$rootScope',
                                        '$scope',
                                        '$state',
                                        '$stateParams',
+                                       '$location',
                                        '$timeout',
                                        'ngToast',
                                        'lodash',
@@ -25,9 +28,12 @@
                                        'user'];
 
         function DashboardController ($log,
+                                      $q,
+                                      $rootScope,
                                       $scope,
                                       $state,
                                       $stateParams,
+                                      $location,
                                       $timeout,
                                       ngToast,
                                       lodash,
@@ -60,7 +66,8 @@
           vm.activeDirectChannel = null;
           vm.logout = logout;
 
-          var pingTimer;
+          var pingTimer = null,
+              urlonLoad = null;   // used to save the
 
           activate();
 
@@ -77,9 +84,6 @@
                 dismissButton: true
               });
             }
-
-            // project channels
-            loadChannels(vm.project);
 
             // listen to project updates
             $scope.$on('currentProjectUpdated', function(event, args) {
@@ -105,6 +109,30 @@
               loadChannels(vm.project);
             });
 
+            // project channels
+            loadChannels(vm.project);
+
+            // channel-explore active channel logic
+            $scope.$on('$stateChangeSuccess', function() {
+              if ($state.current.name === 'dashboard.project.channel-explore')
+              {
+                // new state url
+                var currentUrl = '#' + $location.url().split('#')[0];
+                urlonLoad = currentUrl;
+                // search channel by url
+                var channel = lodash.find(vm.availableMembers, 'channelUrl', currentUrl);
+                if (channel === undefined) {
+                  channel = lodash.find(vm.privateChannels, 'channelUrl', currentUrl);
+                }
+                if (channel === undefined) {
+                  channel = lodash.find(vm.publicChannels, 'channelUrl', currentUrl);
+                }
+                if (channel !== undefined) {
+                  setActiveChannel(channel);
+                }
+              }
+            });
+
             // notifications
             initializeNotifications();
           }
@@ -115,32 +143,69 @@
            */
           function loadChannels (project) {
 
+            var defer = $q.defer();
+
             if (project === null ) {
-              return;
+              defer.resolve();
             }
+            else {
+              channelService.getAll(project.id).then(function (response) {
+                var channels = response.data;
 
-            channelService.getAll(project.id).then(function (response) {
-              var channels = response.data;
+                vm.privateChannels = lodash.filter(channels, function(c) {
+                  c.channelUrl = $state.href('dashboard.project.channel-explore', {
+                    channelId: c.id,
+                    isDirect: false
+                  });
 
-              vm.privateChannels = lodash.filter(channels, function(c) {
-                return c.type === 'P' && c.state !== 'C';
+                  if (c.channelUrl === urlonLoad) {
+                    setActiveChannel(c);
+                    urlonLoad = null;
+                  }
+
+                  return c.type === 'P' && c.state !== 'C';
+                });
+
+                vm.publicChannels = lodash.filter(channels, function(c) {
+                  var isMember = (lodash.find(c.members, 'id', vm.user.id) !== undefined);
+                  c.channelUrl = $state.href('dashboard.project.channel-explore', {
+                    channelId: c.id,
+                    isDirect: false
+                  });
+
+                  if (c.channelUrl === urlonLoad) {
+                    setActiveChannel(c);
+                    urlonLoad = null;
+                  }
+
+                  return c.type === 'S' && c.state !== 'C' && isMember;
+                });
               });
 
-              vm.publicChannels = lodash.filter(channels, function(c) {
-                var isMember = (lodash.find(c.members, 'id', vm.user.id) !== undefined);
-                return c.type === 'S' && c.state !== 'C' && isMember;
-              });
-            });
-
-            vm.availableMembers = [];
-            for (var i=0;i<project.members.length;i++){
-              var member = project.members[i];
+              vm.availableMembers = [];
+              for (var i = 0; i < project.members.length; i++){
+                var member = project.members[i];
                 if (member.id !== vm.user.id){
                   member.isOnline = false;
+                  member.channelUrl = $state.href('dashboard.project.channel-explore', {
+                    channelId: member.id,
+                    isDirect: true
+                  });
+
+                  if (member.channelUrl === urlonLoad) {
+                    setActiveChannel(member);
+                    urlonLoad = null;
+                  }
+
                   vm.availableMembers.push(member);
                 }
               }
+
+              defer.resolve();
             }
+
+            return defer.promise;
+          }
 
           /**
            * @name initializeNotifications
@@ -515,23 +580,25 @@
            * @name setActiveChannel
            * @desc updates the channel notification status
            */
-          function setActiveChannel(data) {
-            var channel = null;
+          function setActiveChannel(channel) {
+
             vm.activeChannel = null;
             vm.activeDirectChannel = null;
 
-            if (data.type !== 'D') {
-              channel = findChannel(data.id);
-              vm.activeChannel = channel;
-            }
-            else {
-              // direct channel
-              channel = findDirectChannel(data.id);
+            if (channel.isDirect) {
               vm.activeDirectChannel = channel;
             }
-            if (channel !== undefined) {
-              channel.hasNotification = false;
+            else {
+              vm.activeChannel = channel;
             }
+
+            channel.hasNotification = false;
+
+            // notify channel activation
+            $rootScope.$broadcast('channelActivated', {
+              type: (channel.isDirect ? 'direct' : 'channel'),
+              url: channel.channelUrl
+            });
           }
 
           /**

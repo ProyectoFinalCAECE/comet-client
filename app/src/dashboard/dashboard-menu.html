@@ -26,8 +26,8 @@
             <a ui-sref="dashboard.project.project-explore">
               <span class="nav-label">:: Canales públicos</span>
             </a>
-            <ul class="nav nav-second-level" callback="vm.setActiveChannel" nav-menu-active="selected-channel" notification-class="has-notification">
-              <li ng-repeat="channel in vm.publicChannels">
+            <ul class="nav nav-second-level" nav-menu-active="selected-channel" notification-class="has-notification">
+              <li ng-repeat="channel in vm.publicChannels" ng-class="{'selected-channel': channel.id == vm.activeChannel.id}">
                 <a ng-class="{ 'has-notification': channel.hasNotification }"
                    ui-sref="dashboard.project.channel-explore({projectId: vm.project.id, channelId:channel.id, isDirect:false})"
                    data-type="S"
