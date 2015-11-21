@@ -112,13 +112,22 @@
         label: 'Crear proyecto'
       }
     })
-    .state('dashboard.project-admin', {
+    .state('dashboard.project.project-admin', {
       url: '/projects/admin/:id',
-      templateUrl: '/src/projects/project-admin.html',
-      controller: 'ProjectAdminController',
-      controllerAs: 'vm',
       ncyBreadcrumb: {
         label: 'Administrar proyecto'
+      },
+      views:{
+        '@dashboard': {
+          templateUrl: '/src/projects/project-admin.html',
+          controller: 'ProjectAdminController',
+          controllerAs: 'vm',
+        },
+        'integrations@dashboard.project.project-admin': {
+          templateUrl: '/src/integrations/integration-list.html',
+          controller: 'IntegrationListController',
+          controllerAs: 'vmi'
+        }
       },
       resolve: {
         project: ['projectService','$stateParams', function(projectService, $stateParams) {

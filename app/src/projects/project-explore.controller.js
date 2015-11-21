@@ -46,7 +46,7 @@
 
           function gotoEditProject() {
             if (project.isOwner === true) {
-              $state.go('dashboard.project-admin',  { id: project.id });
+              $state.go('dashboard.project.project-admin',  { id: project.id });
             } else {
               var message = "No puedes editar este proyecto, no eres el dueño.";
               dialogService.showModalAlert('Editar proyecto', message);
