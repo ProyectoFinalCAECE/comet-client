@@ -257,6 +257,18 @@ body[state="dashboard.project.channel-explore"] {
   width: 300px;
 }
 
+.modificarProyecto {
+  margin-top: 70px;
+}
+
+.fixed-header {
+  z-index: 100;
+  border-top: 0;
+  padding: 0px 10px 20px 10px;
+  background-color:#e7eaec;
+  border-bottom: 1px solid #e7eaec !important;
+}
+
 #loginbox {
     border-style: none solid none;
 }
@@ -448,6 +460,14 @@ body[state="dashboard.project.channel-explore"] {
   }
 }
 
+.ProjectCards {
+  margin-top: 90px;
+}
+
+.ClosedProjects {
+  margin-top:100px;
+}
+
 .ProjDescCard{
     white-space: nowrap;
     overflow: hidden;
@@ -529,6 +549,14 @@ body[state="dashboard.project.channel-explore"] {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.ClosedChannels {
+  margin-top: 100px;
+}
+
+.OpenChannels {
+  margin-top:100px;
 }
 
 .cometProjects:hover{

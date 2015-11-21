@@ -1,5 +1,6 @@
-<div class="row wrapper border-bottom white-bg page-heading" data-view="project-list">
-  <div class="col-lg-9">
+<div class="wrapper border-bottom" data-view="project-list">
+  <div class="row fixed-header" sticky offset="60">
+    <div class="col-lg-9">
       <h2>
         <i class="fa fa-home"></i>
         Proyectos
@@ -13,41 +14,42 @@
           <a style="float: right; margin-top: 15px; margin-right: 20px;" ui-sref="dashboard.project-closed-list">Ver proyectos cerrados</a>
         </li>
       </ol>
-  </div>
-</div>
-<div class="wrapper wrapper-content animated fadeInRight">
-  <div class="row">
-    <!-- No tiene proyectos -->
-    <div ng-show="vm.isEmpty" class="jumbotron text-center">
-        <p>No encontramos proyectos en los que participes <i class="fa fa-frown-o"></i></p>
-        <p>
-          <a ng-click="vm.gotoCreateProject()" class="btn btn-xl btn-primary">Crear proyecto</a>
-        </p>
     </div>
-    <!-- listado de proyectos -->
-    <div ng-hide="vm.isEmpty" ng-repeat="project in vm.projects | filter:vm.filterQuery | orderBy:createdAt" class="col-lg-4 proyecto-lg-4">
-      <div class="contact-box cometProjects">
-        <a ui-sref="dashboard.project.project-explore({id:project.id})">
-          <div class="col-sm-8 proyecto-sm-8">
-            <div>
-              <span class="rolProyecto badge badge-warning" ng-show="project.isOwner">
-                Dueño
-              </span>
+  </div>
+  <div class="wrapper wrapper-content animated fadeInRight ProjectCards">
+    <div class="row">
+      <!-- No tiene proyectos -->
+      <div ng-show="vm.isEmpty" class="jumbotron text-center">
+          <p>No encontramos proyectos en los que participes <i class="fa fa-frown-o"></i></p>
+          <p>
+            <a ng-click="vm.gotoCreateProject()" class="btn btn-xl btn-primary">Crear proyecto</a>
+          </p>
+      </div>
+      <!-- listado de proyectos -->
+      <div ng-hide="vm.isEmpty" ng-repeat="project in vm.projects | filter:vm.filterQuery | orderBy:createdAt" class="col-lg-4 proyecto-lg-4">
+        <div class="contact-box cometProjects">
+          <a ui-sref="dashboard.project.project-explore({id:project.id})">
+            <div class="col-sm-8 proyecto-sm-8">
+              <div>
+                <span class="rolProyecto badge badge-warning" ng-show="project.isOwner">
+                  Dueño
+                </span>
+              </div>
+              <h3><strong>{{project.name}}</strong></h3>
+              <p class="ProjDescCard">{{project.description}}</p>
+              <ul class="miembrosProyecto">
+                <li ng-repeat="member in filtered = (project.members | limitTo:6)">
+                  <img alt="image" class="img-circle" title="{{member.alias}}" ng-src="{{member.profilePicture}}" />
+                </li>
+                <li ng-show="vm.hiddenMembersCount(project.members, filtered) > 0"><p>+{{vm.hiddenMembersCount(project.members, filtered)}}</p></li>
+              </ul>
+              <p class="text-muted text-right">
+                Creado el {{project.createdAt | date}}
+              </p>
             </div>
-            <h3><strong>{{project.name}}</strong></h3>
-            <p class="ProjDescCard">{{project.description}}</p>
-            <ul class="miembrosProyecto">
-              <li ng-repeat="member in filtered = (project.members | limitTo:6)">
-                <img alt="image" class="img-circle" title="{{member.alias}}" ng-src="{{member.profilePicture}}" />
-              </li>
-              <li ng-show="vm.hiddenMembersCount(project.members, filtered) > 0"><p>+{{vm.hiddenMembersCount(project.members, filtered)}}</p></li>
-            </ul>
-            <p class="text-muted text-right">
-              Creado el {{project.createdAt | date}}
-            </p>
-          </div>
-          <div class="clearfix"></div>
-        </a>
+            <div class="clearfix"></div>
+          </a>
+        </div>
       </div>
     </div>
   </div>

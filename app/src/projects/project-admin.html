@@ -1,221 +1,223 @@
-<div class="row wrapper border-bottom white-bg page-heading" data-view="project-admin">
-  <div class="col-lg-9">
+<div class="wrapper border-bottom" data-view="project-admin">
+  <div class="row fixed-header" sticky offset="60">
+    <div class="col-lg-9">
       <h2>
         <i class="fa fa-list-alt"></i>
         Administrar proyecto <strong>{{ vm.project.name }}</strong>
       </h2>
       <div ncy-breadcrumb></div>
-  </div>
+    </div>
 </div>
-<div class="row">
-  <div class="col-lg-12">
-    <div class="wrapper wrapper-content modificarProyecto animated fadeIn">
-      <div class="ibox">
-        <div class="ibox-title">
-          <h5>Administrar proyecto</h5>
-        </div>
-        <div class="ibox-content">
-          <tabset>
-            <tab select="vm.onTabSelected(1)">
-              <tab-heading>
-                Modificar datos
-              </tab-heading>
-              <div class="datos">
-                <form name="vm.frmUpdate" ng-submit="vm.update()" class="form-horizontal m-t" role="form" novalidate="">
-                  <div class="form-group cometInput" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'name') }">
-                    <label class="col-sm-2 control-label">Nombre</label>
-                    <div class="col-sm-10">
-                      <input type="text" name="firstName" ng-model="vm.project.name" class="form-control" placeholder="Nombre" required="">
-                      <div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'name')" class="control-label" role="alert">
-                        <div class="text-left">{{ vm.validationErrors['name'] }}</div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="wrapper wrapper-content modificarProyecto animated fadeIn">
+        <div class="ibox">
+          <div class="ibox-title">
+            <h5>Administrar proyecto</h5>
+          </div>
+          <div class="ibox-content">
+            <tabset>
+              <tab select="vm.onTabSelected(1)">
+                <tab-heading>
+                  Modificar datos
+                </tab-heading>
+                <div class="datos">
+                  <form name="vm.frmUpdate" ng-submit="vm.update()" class="form-horizontal m-t" role="form" novalidate="">
+                    <div class="form-group cometInput" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'name') }">
+                      <label class="col-sm-2 control-label">Nombre</label>
+                      <div class="col-sm-10">
+                        <input type="text" name="firstName" ng-model="vm.project.name" class="form-control" placeholder="Nombre" required="">
+                        <div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'name')" class="control-label" role="alert">
+                          <div class="text-left">{{ vm.validationErrors['name'] }}</div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <!-- Descripcion -->
-                  <div class="form-group cometInput" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'description') }">
-                    <label class="col-sm-2 control-label">Descripción</label>
-                    <div class="col-sm-10">
-                      <textarea cols="25" rows="7" ng-model="vm.project.description" class="form-control" placeholder="Breve descripcion del proyecto"></textarea>
-                      <div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'description')" class="control-label" role="alert">
-                        <div class="text-left">{{ vm.validationErrors['description'] }}</div>
-                        <div class="text-left">{{ vm.validationErrors['all'] }}</div>
+                    <!-- Descripcion -->
+                    <div class="form-group cometInput" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'description') }">
+                      <label class="col-sm-2 control-label">Descripción</label>
+                      <div class="col-sm-10">
+                        <textarea cols="25" rows="7" ng-model="vm.project.description" class="form-control" placeholder="Breve descripcion del proyecto"></textarea>
+                        <div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'description')" class="control-label" role="alert">
+                          <div class="text-left">{{ vm.validationErrors['description'] }}</div>
+                          <div class="text-left">{{ vm.validationErrors['all'] }}</div>
+                        </div>
                       </div>
                     </div>
+                    <!-- submit -->
+                    <div class="form-group">
+                      <div class="col-sm-8 col-sm-offset-2">
+                        <button class="btn btn-w-m btn-primary" type="submit">Guardar</button>
+                        <a class="btn btn-link" ui-sref="dashboard.project-list">Cancelar</a>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </tab>
+              <tab select="vm.onTabSelected(2)">
+                <tab-heading>
+                  Participantes
+                </tab-heading>
+                <div class="m-t">
+                  <div>
+                    <input ng-model="vm.filterQuery" type="text" placeholder="Filtrar..." class="filter form-control">
                   </div>
-                  <!-- submit -->
-                  <div class="form-group">
-                    <div class="col-sm-8 col-sm-offset-2">
-                      <button class="btn btn-w-m btn-primary" type="submit">Guardar</button>
+                  <div class="m-t table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                          <tr>
+                              <th></th>
+                              <th>Nombre</th>
+                              <th>Alias</th>
+                              <th>Correo</th>
+                              <th>Fecha de Alta</th>
+                              <th class="text-center">Acciones</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr dir-paginate="member in vm.project.members  | itemsPerPage: 5 | filter:vm.filterQuery">
+                              <td>
+                                <img alt="image" class="img-circle" title="{{member.alias}}" ng-src="{{member.profilePicture}}" height="30" width="30" />
+                              </td>
+                              <td>{{member.firstName + ' ' + member.lastName}}</td>
+                              <td>{{member.alias}}</td>
+                              <td>{{member.email}}</td>
+                              <td>{{member.createdAt | date}}</td>
+                              <td class="text-center">
+                                  <i  ng-if="!vm.isCurrentUser(member)"
+                                      ng-click="vm.deleteMember(member)"
+                                      class="fa fa-trash-o text-navy"
+                                      style="font-size: 20px;cursor:pointer">
+                                  </i>
+                              </td>
+                          </tr>
+                        </tbody>
+                    </table>
+                    <dir-pagination-controls/>
+                  </div>
+                  <!-- Invitar -->
+                  <div class="crearProyectoSubmit">
+                    <label class="control-label">Personas a invitar</label>
+                    <div>
+                       <p>Ingresa las direcciones de correo electrónico de las personas que quieras invitar al proyecto.</p>
+                    </div>
+                    <div ng-repeat="invite in vm.invites" class="m-b" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'address_' + ($index + 1))}">
+                        <div class="input-group invitarEmails">
+                            <input type="text" name="email" ng-model="invite.address" class="form-control" placeholder="Dirección de correo"/>
+                            <span class="input-group-btn">
+                              <button ng-click="vm.removeInvite(invite)" type="button" class="btn btn-danger">Borrar</button>
+                            </span>
+                        </div>
+                        <div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'address_' + ($index + 1))" class="control-label" role="alert">
+                          <div>{{ vm.validationErrors['address_' + ($index + 1)] }}</div>
+                        </div>
+                    </div>
+                    <p>
+                      <button type="button" class="btn btn-success btn-xs m-t" name="button" ng-disabled="vm.invitesLimitReached" ng-click="vm.addInvite()">Agregar invitación</button>
+                    </p>
+                    <p class="text-muted" ng-show="vm.invitesLimitReached">
+                      Puedes ingresar un máximo de {{vm.membersPerProjectPerStep}} personas en esta instancia. <br>
+                      Si deseas invitar mas personas puedes hacerlo desde la vista "Administrar proyecto"
+                    </p>
+                    <!-- Submit -->
+                    <div class="form-group">
+                      <button class="btn btn-w-m btn-primary" type="button" ng-click="vm.inviteMembers()">Invitar participantes</button>
                       <a class="btn btn-link" ui-sref="dashboard.project-list">Cancelar</a>
                     </div>
                   </div>
-                </form>
-              </div>
-            </tab>
-            <tab select="vm.onTabSelected(2)">
-              <tab-heading>
-                Participantes
-              </tab-heading>
-              <div class="m-t">
-                <div>
-                  <input ng-model="vm.filterQuery" type="text" placeholder="Filtrar..." class="filter form-control">
                 </div>
-                <div class="m-t table-responsive">
-                  <table class="table table-striped">
-                      <thead>
-                        <tr>
-                            <th></th>
-                            <th>Nombre</th>
-                            <th>Alias</th>
-                            <th>Correo</th>
-                            <th>Fecha de Alta</th>
-                            <th class="text-center">Acciones</th>
-                        </tr>
-                      </thead>
+              </tab>
+              <tab select="vm.onTabSelected(3)">
+                <tab-heading>
+                  Integraciones
+                </tab-heading>
+                <div>
+                   </br>
+                   <p>Activa las integraciones que quieres funcionando en tu proyecto.</p>
+
+                   <table class="table table-hover" style="margin-top:30px;">
                       <tbody>
-                        <tr dir-paginate="member in vm.project.members  | itemsPerPage: 5 | filter:vm.filterQuery">
-                            <td>
-                              <img alt="image" class="img-circle" title="{{member.alias}}" ng-src="{{member.profilePicture}}" height="30" width="30" />
-                            </td>
-                            <td>{{member.firstName + ' ' + member.lastName}}</td>
-                            <td>{{member.alias}}</td>
-                            <td>{{member.email}}</td>
-                            <td>{{member.createdAt | date}}</td>
-                            <td class="text-center">
-                                <i  ng-if="!vm.isCurrentUser(member)"
-                                    ng-click="vm.deleteMember(member)"
-                                    class="fa fa-trash-o text-navy"
-                                    style="font-size: 20px;cursor:pointer">
-                                </i>
-                            </td>
+                        <tr>
+                          <td class="integrations-status">
+                            <span class="label label-primary">Activo</span>
+                          </td>
+                          <td class="integrations-icon">
+                            <i class="fa fa-dropbox"> </i>
+                          </td>
+                          <td class="project-title">
+                            <a href="#">DropBox</a>
+                            <br/>
+                            <p>Almacenamiento y sincronizacion de archivos en la nube</p>
+                          </td>
+                          <td class="integrations-buttons">
+                            <a href="#" class="btn btn-white btn-sm"><i class="fa fa-folder"></i> Ver </a>
+                            <a href="#" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Editar </a>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="integrations-status">
+                            <span class="label label-default">Desactivado</span>
+                          </td>
+                          <td class="integrations-icon">
+                            <i class="fa fa-github"> </i>
+                          </td>
+                          <td class="project-title">
+                            <a href="#">GitHub</a>
+                            <br/>
+                            <p>Gestión de código...</p>
+                          </td>
+                          <td class="integrations-buttons">
+                            <a href="#" class="btn btn-white btn-sm"><i class="fa fa-folder"></i> Ver </a>
+                            <a href="#" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Editar </a>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="integrations-status">
+                            <span class="label label-primary">Activado</span>
+                          </td>
+                          <td class="integrations-icon">
+                            <i class="fa fa-trello"> </i>
+                          </td>
+                          <td class="project-title">
+                            <a href="#">Trello</a>
+                            <br/>
+                            <p>Listas para gestionar tareas </p>
+                          </td>
+                          <td class="integrations-buttons">
+                            <a href="#" class="btn btn-white btn-sm"><i class="fa fa-folder"></i> Ver </a>
+                            <a href="#" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Editar </a>
+                          </td>
                         </tr>
                       </tbody>
-                  </table>
-                  <dir-pagination-controls/>
+                    </table>
                 </div>
-                <!-- Invitar -->
-                <div class="crearProyectoSubmit">
-                  <label class="control-label">Personas a invitar</label>
-                  <div>
-                     <p>Ingresa las direcciones de correo electrónico de las personas que quieras invitar al proyecto.</p>
-                  </div>
-                  <div ng-repeat="invite in vm.invites" class="m-b" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'address_' + ($index + 1))}">
-                      <div class="input-group invitarEmails">
-                          <input type="text" name="email" ng-model="invite.address" class="form-control" placeholder="Dirección de correo"/>
-                          <span class="input-group-btn">
-                            <button ng-click="vm.removeInvite(invite)" type="button" class="btn btn-danger">Borrar</button>
-                          </span>
-                      </div>
-                      <div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'address_' + ($index + 1))" class="control-label" role="alert">
-                        <div>{{ vm.validationErrors['address_' + ($index + 1)] }}</div>
-                      </div>
-                  </div>
-                  <p>
-                    <button type="button" class="btn btn-success btn-xs m-t" name="button" ng-disabled="vm.invitesLimitReached" ng-click="vm.addInvite()">Agregar invitación</button>
-                  </p>
-                  <p class="text-muted" ng-show="vm.invitesLimitReached">
-                    Puedes ingresar un máximo de {{vm.membersPerProjectPerStep}} personas en esta instancia. <br>
-                    Si deseas invitar mas personas puedes hacerlo desde la vista "Administrar proyecto"
-                  </p>
-                  <!-- Submit -->
-                  <div class="form-group">
-                    <button class="btn btn-w-m btn-primary" type="button" ng-click="vm.inviteMembers()">Invitar participantes</button>
-                    <a class="btn btn-link" ui-sref="dashboard.project-list">Cancelar</a>
-                  </div>
+              </tab>
+              <tab select="vm.onTabSelected(4)">
+                <tab-heading>
+                  Cerrar proyecto
+                </tab-heading>
+                <div>
+                   </br>
+                   <p>Cierra tu proyecto, no podrás crear nuevo contenido, la información existente seguirá disponible para ser vista pero no podrá ser modificada.</p>
                 </div>
-              </div>
-            </tab>
-            <tab select="vm.onTabSelected(3)">
-              <tab-heading>
-                Integraciones
-              </tab-heading>
-              <div>
-                 </br>
-                 <p>Activa las integraciones que quieres funcionando en tu proyecto.</p>
-
-                 <table class="table table-hover" style="margin-top:30px;">
-                    <tbody>
-                      <tr>
-                        <td class="integrations-status">
-                          <span class="label label-primary">Activo</span>
-                        </td>
-                        <td class="integrations-icon">
-                          <i class="fa fa-dropbox"> </i>
-                        </td>
-                        <td class="project-title">
-                          <a href="#">DropBox</a>
-                          <br/>
-                          <p>Almacenamiento y sincronizacion de archivos en la nube</p>
-                        </td>
-                        <td class="integrations-buttons">
-                          <a href="#" class="btn btn-white btn-sm"><i class="fa fa-folder"></i> Ver </a>
-                          <a href="#" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Editar </a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="integrations-status">
-                          <span class="label label-default">Desactivado</span>
-                        </td>
-                        <td class="integrations-icon">
-                          <i class="fa fa-github"> </i>
-                        </td>
-                        <td class="project-title">
-                          <a href="#">GitHub</a>
-                          <br/>
-                          <p>Gestión de código...</p>
-                        </td>
-                        <td class="integrations-buttons">
-                          <a href="#" class="btn btn-white btn-sm"><i class="fa fa-folder"></i> Ver </a>
-                          <a href="#" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Editar </a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="integrations-status">
-                          <span class="label label-primary">Activado</span>
-                        </td>
-                        <td class="integrations-icon">
-                          <i class="fa fa-trello"> </i>
-                        </td>
-                        <td class="project-title">
-                          <a href="#">Trello</a>
-                          <br/>
-                          <p>Listas para gestionar tareas </p>
-                        </td>
-                        <td class="integrations-buttons">
-                          <a href="#" class="btn btn-white btn-sm"><i class="fa fa-folder"></i> Ver </a>
-                          <a href="#" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Editar </a>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-              </div>
-            </tab>
-            <tab select="vm.onTabSelected(4)">
-              <tab-heading>
-                Cerrar proyecto
-              </tab-heading>
-              <div>
-                 </br>
-                 <p>Cierra tu proyecto, no podrás crear nuevo contenido, la información existente seguirá disponible para ser vista pero no podrá ser modificada.</p>
-              </div>
-              <div class="cerrar">
-                <form class="form-horizontal m-t" role="form" ng-submit="vm.closeProject()">
-                  <div class="form-group">
-                    <label class="col-sm-6 control-label">¿Estás seguro de cerrar el proyecto?</label>
-                    <div class="col-sm-6 checkbox i-checks">
-                      <input type="checkbox" ng-model="vm.imSure" style="margin-left:10px;"><i></i>
+                <div class="cerrar">
+                  <form class="form-horizontal m-t" role="form" ng-submit="vm.closeProject()">
+                    <div class="form-group">
+                      <label class="col-sm-6 control-label">¿Estás seguro de cerrar el proyecto?</label>
+                      <div class="col-sm-6 checkbox i-checks">
+                        <input type="checkbox" ng-model="vm.imSure" style="margin-left:10px;"><i></i>
+                      </div>
                     </div>
-                  </div>
-                  <div class="form-group m-t">
-                    <div class="col-sm-8 col-sm-offset-4">
-                      <button type="submit" ng-disabled="vm.imSure == false" class="btn btn-primary">Cerrar proyecto</button>
-                      <a class="btn btn-link" ui-sref="dashboard.project-list">Cancelar</a>
+                    <div class="form-group m-t">
+                      <div class="col-sm-8 col-sm-offset-4">
+                        <button type="submit" ng-disabled="vm.imSure == false" class="btn btn-primary">Cerrar proyecto</button>
+                        <a class="btn btn-link" ui-sref="dashboard.project-list">Cancelar</a>
+                      </div>
                     </div>
-                  </div>
-                </form>
-              </div>
-            </tab>
-          </tabset>
+                  </form>
+                </div>
+              </tab>
+            </tabset>
+          </div>
         </div>
       </div>
     </div>
