@@ -17,7 +17,7 @@
           </div>
           <div class="ibox-content">
             <tabset>
-              <tab select="vm.onTabSelected(1)">
+              <tab select="vm.onTabSelected(1)" active="vm.tabsState['tab1']">>
                 <tab-heading>
                   Modificar datos
                 </tab-heading>
@@ -53,7 +53,7 @@
                   </form>
                 </div>
               </tab>
-              <tab select="vm.onTabSelected(2)">
+              <tab select="vm.onTabSelected(2)" active="vm.tabsState['tab2']">
                 <tab-heading>
                   Participantes
                 </tab-heading>
@@ -126,14 +126,14 @@
                   </div>
                 </div>
               </tab>
-              <tab select="vm.onTabSelected(3)">
+              <tab select="vm.onTabSelected(3)" active="vm.tabsState['tab3']">
                 <tab-heading>
                   Integraciones
                 </tab-heading>
                 <div ui-view="integrations">
                 </div>
               </tab>
-              <tab select="vm.onTabSelected(4)">
+              <tab select="vm.onTabSelected(4)" active="vm.tabsState['tab4']">
                 <tab-heading>
                   Cerrar proyecto
                 </tab-heading>

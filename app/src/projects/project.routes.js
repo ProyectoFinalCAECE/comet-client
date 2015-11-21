@@ -113,7 +113,7 @@
       }
     })
     .state('dashboard.project.project-admin', {
-      url: '/projects/admin/:id',
+      url: '/projects/admin/?id&tab',
       ncyBreadcrumb: {
         label: 'Administrar proyecto'
       },
@@ -133,6 +133,9 @@
         project: ['projectService','$stateParams', function(projectService, $stateParams) {
           return projectService.getById($stateParams.id)
           .then(function(data) { return data.data; });
+        }],
+        tab: ['$stateParams', function($stateParams) {
+          return $stateParams.tab;
         }]
       },
       onEnter: ['$state', 'project', function ($state, project) {

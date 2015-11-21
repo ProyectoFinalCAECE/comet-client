@@ -17,7 +17,8 @@
                                           'dialogService',
                                           'projectService',
                                           'user',
-                                          'project'];
+                                          'project',
+                                          'tab'];
 
         function ProjectAdminController ( $log,
                                           $rootScope,
@@ -27,7 +28,8 @@
                                           dialogService,
                                           projectService,
                                           user,
-                                          project) {
+                                          project,
+                                          tab) {
 
           var vm = this;
           vm.project = project;
@@ -35,6 +37,9 @@
           vm.invites = [];
           vm.invitesLimitReached = false;
           vm.membersPerProjectPerStep = constraints.membersPerProjectPerStep;
+
+          // tabs
+          vm.tabsState = {};
           vm.onTabSelected = onTabSelected;
 
           // update info
@@ -58,7 +63,10 @@
            * @desc controller activation logic
           */
           function activate () {
-
+            if (!angular.isUndefined(tab)) {
+              //vm.defaultTab = tab;
+              vm.tabsState['tab' + tab] = true;
+            }
           }
 
           /**

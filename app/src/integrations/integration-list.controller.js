@@ -11,21 +11,14 @@
 
         IntegrationListController.$inject = ['$rootScope',
                                          '$state',
-                                         'lodash',
-                                         'filterFilter',
-                                         'userService',
-                                         'dialogService',
-                                         'channels'];
+                                         'lodash'];
 
         function IntegrationListController ($rootScope,
                                             $state,
-                                            lodash,
-                                            filterFilter,
-                                            userService,
-                                            dialogService,
-                                            channels) {
+                                            lodash) {
 
           var vm = this;
+          vm.integrations = [];
 
           activate();
 
