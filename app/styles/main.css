@@ -257,6 +257,18 @@ body[state="dashboard.project.channel-explore"] {
   width: 300px;
 }
 
+.modificarProyecto {
+  margin-top: 70px;
+}
+
+.project-admin-header {
+  z-index: 100;
+  border-top: 0;
+  padding: 0px 10px 20px 10px;
+  background-color:#e7eaec;
+  border-bottom: 1px solid #e7eaec !important;
+}
+
 #loginbox {
     border-style: none solid none;
 }
