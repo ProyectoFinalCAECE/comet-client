@@ -2,9 +2,12 @@
   <div class="col-lg-9 ExplorarCanal">
     <div class="row channel-explore-header" sticky offset="60">
       <div class="col-lg-10" style="float:left;">
-        <h2><strong>{{vm.channel.name}}</strong><span class="badge badge-success badge-channel-type" ng-show="{{ vm.channel.type === 'P' }}">
+        <h2>
+          <i class="fa fa-comments"></i>
+          <strong>{{vm.channel.name}}</strong><span class="badge badge-success badge-channel-type" ng-show="{{ vm.channel.type === 'P' }}">
           canal privado
-        </span></h2>
+          </span>
+        </h2>
         <h4 class="ProjDesc">{{vm.channel.description}}</h4>
         <ol class="breadcrumb2">
           <li>
@@ -165,7 +168,7 @@
                         <div class="chatActions-container" ng-if="vm.showChatActions">
                           <ul>
                             <li class="chatActions">
-                              <img ng-src="{{message.dropbox.icon}}"/><a ng-click="vm.addDropboxFile()">DropBox</a>
+                              <i class="fa fa-dropbox"></i><a ng-click="vm.addDropboxFile()"> DropBox</a>
                             </li>
                           </ul>
                         </div>
