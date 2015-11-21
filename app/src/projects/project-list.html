@@ -1,16 +1,19 @@
 <div class="wrapper border-bottom" data-view="project-list">
   <div class="row fixed-header" sticky offset="60">
     <div class="col-lg-9">
-        <h2>Proyectos</h2>
-        <ol class="breadcrumb2">
-          <li>
-            <input ng-model="vm.filterQuery" type="text" placeholder="Filtrar..." class="form-control" name="top-search">
-          </li>
-          <li>
-            <button ng-click="vm.gotoCreateProject()" type="button" name="btnCrearProyecto" class="btn btn-primary" style="float:right">Crear Proyecto</button>
-            <a style="float: right; margin-top: 15px; margin-right: 20px;" ui-sref="dashboard.project-closed-list">Ver proyectos cerrados</a>
-          </li>
-        </ol>
+      <h2>
+        <i class="fa fa-home"></i>
+        Proyectos
+      </h2>
+      <ol class="breadcrumb2">
+        <li>
+          <input ng-model="vm.filterQuery" type="text" placeholder="Filtrar..." class="form-control" name="top-search">
+        </li>
+        <li>
+          <button ng-click="vm.gotoCreateProject()" type="button" name="btnCrearProyecto" class="btn btn-primary" style="float:right">Crear Proyecto</button>
+          <a style="float: right; margin-top: 15px; margin-right: 20px;" ui-sref="dashboard.project-closed-list">Ver proyectos cerrados</a>
+        </li>
+      </ol>
     </div>
   </div>
   <div class="wrapper wrapper-content animated fadeInRight ProjectCards">
