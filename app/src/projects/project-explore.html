@@ -1,15 +1,17 @@
-<div class="row wrapper border-bottom white-bg page-heading">
-  <div class="col-lg-9">
-    <h2><strong>{{vm.project.name}}</strong></h2>
-    <button ng-show="vm.project.isOwner" ng-disabled="vm.isClosed" ng-click="vm.gotoEditProject()" type="button" name="btnAdmProyecto" class="btn btn-primary" style="float:right; margin-right:30px">Administrar</button>
-    <h4 class="ProjDesc">{{vm.project.description}}</h4>
-    <ol class="breadcrumb2">
-      <li>
-        <div ncy-breadcrumb></div>
-      </li>
-    </ol>
-  </div>
+<div class="row wrapper border-bottom">
+  <div class="row fixed-header" sticky offset="60">
+    <div class="col-lg-9">
+      <h2><strong>{{vm.project.name}}</strong></h2>
+      <button ng-show="vm.project.isOwner" ng-disabled="vm.isClosed" ng-click="vm.gotoEditProject()" type="button" name="btnAdmProyecto" class="btn btn-primary" style="float:right; margin-right:30px">Administrar</button>
+      <h4 class="ProjDesc">{{vm.project.description}}</h4>
+      <ol class="breadcrumb2">
+        <li>
+          <div ncy-breadcrumb></div>
+        </li>
+      </ol>
+    </div>
 </div>
-<div ui-view="channels">
+  <div style="margin-top:100px" ui-view="channels">
 
+  </div>
 </div>
