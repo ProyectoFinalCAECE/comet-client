@@ -63,21 +63,14 @@
                       </td>
                       <td class="columnaIntegraciones">
                         <ul>
-                        <!--
-                          <li>
-                            <img alt="image" class="img-circle" src="../../images/integraciones/googledrive.jpg" />
-                          </li>
-                          <li>
-                            <img alt="image" class="img-circle" src="../../images/integraciones/dropbox.png" />
-                          </li>
-                        -->
-                          <li>
-                            <!-- img alt="image" class="img-circle" src="../../images/integraciones/github.png" -->
+                          <li ng-repeat="integration in vmi.integrations">
+                            <div class="chat-integration">
+                               <i class="fa fa-{{integration.name.toLowerCase().replace('pingdom', 'pinterest') }}"> </i>
+                            </div>
                           </li>
                         </ul>
                       </td>
                       <td class="columnaFecha">{{channel.createdAt | date}}</td>
-                  <!--    <td class="columnaFecha">{{channel.createdAt | date}}</td>  -->
                   </tr>
                 </tbody>
               </table>
