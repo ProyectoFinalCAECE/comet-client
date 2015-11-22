@@ -137,6 +137,9 @@
           */
           function activate () {
 
+            // focus con message text
+            angular.element('#message-input').focus();
+
             setFlags();
             loadChannelMessages();
 
