@@ -2,12 +2,9 @@
   <div class="col-lg-9 ExplorarCanal">
     <div class="row channel-explore-header" sticky offset="60">
       <div class="col-lg-10" style="float:left;">
-        <h2>
-          <i class="fa fa-comments"></i>
-          <strong>{{vm.channel.name}}</strong><span class="badge badge-success badge-channel-type" ng-show="{{ vm.channel.type === 'P' }}">
+        <h2><strong>{{vm.channel.name}}</strong><span class="badge badge-success badge-channel-type" ng-show="{{ vm.channel.type === 'P' }}">
           canal privado
-          </span>
-        </h2>
+        </span></h2>
         <h4 class="ProjDesc">{{vm.channel.description}}</h4>
         <ol class="breadcrumb2">
           <li>
@@ -18,7 +15,12 @@
       <div class="col-lg-2 ButtonAdminList" ng-show="!vm.isDirect">
         <ul>
           <li class="admin-item dropdown">
-            <a ng-class="vm.isMember ? '' : 'disabled'" ng-click="vm.showMembers = !vm.showMembers">
+            <a ng-class="vm.isMember ? '' : 'disabled'" ng-click="vm.showIntegrations = !vm.showIntegrations; vm.showMembers = false">
+              <i class="fa fa-link"></i>
+            </a>
+          </li>
+          <li class="admin-item dropdown">
+            <a ng-class="vm.isMember ? '' : 'disabled'" ng-click="vm.showMembers = !vm.showMembers;  vm.showIntegrations = false">
               <i class="fa fa-group"></i>
             </a>
           </li>
@@ -57,7 +59,7 @@
           </div>
           <div class="ibox-content">
             <div class="row">
-              <div ng-class="vm.showMembers ? 'col-md-9' : 'col-md-12'">
+              <div ng-class="vm.showMembers || vm.showIntegrations ? 'col-md-9' : 'col-md-12'">
                 <div class="chat-discussion">
                   <!-- load channel history -->
                   <div ng-cloak="" ng-hide="vm.noMoreMessages || vm.emptyChannel" class="text-center">
@@ -131,6 +133,19 @@
                   <p><i class="fa fa-plus" style="padding:0 10px 0 0"></i>Agregar participante</p>
                 </a>
               </div>
+              <div class="col-md-3 chat-integrations-wrapper" ng-show="vm.showIntegrations">
+                <h3 class="text-center">Integraciones</h3>
+                <div class="chat-integrations">
+                  <li ng-repeat="integration in vmi.integrations">
+                    <div class="chat-integration">
+                       <i class="fa fa-{{integration.name.toLowerCase().replace('pingdom', 'pinterest') }}"> </i>
+                      <div class="chat-integration-name">
+                        <a href="#">{{integration.name}}</a>
+                      </div>
+                    </div>
+                  </li>
+                </div>
+              </div>
               <div class="messageInputText">
                 <div class="col-lg-12" style="padding-left:0;">
                   <div class="chat-message-form">
@@ -156,6 +171,8 @@
                         </div>
                       </div>
                       <!-- Acciones -->
+
+
                       <div class="input-group-btn">
                         <button ng-disabled="vm.isClosed"
                                 style="height:35px;"
@@ -168,11 +185,46 @@
                         <div class="chatActions-container" ng-if="vm.showChatActions">
                           <ul>
                             <li class="chatActions">
-                              <i class="fa fa-dropbox"></i><a ng-click="vm.addDropboxFile()"> DropBox</a>
+                              <img ng-src="{{message.dropbox.icon}}"/><a ng-click="vm.addDropboxFile()">DropBox</a>
+                            </li>
+                            <li class="chatActions">
+                              <img ng-src="{{message.dropbox.icon}}"/><a ng-click="vm.addDropboxFile()">DropBox</a>
                             </li>
                           </ul>
                         </div>
                       </div>
+
+<!--
+
+                      <div class="input-group-btn">
+                        <button ng-disabled="vm.isClosed"
+                                style="height:35px;"
+                                tabindex="-1"
+                                class="btn btn-white"
+                                type="button"
+                                data-toggle="{{vm.isMember ? 'dropdown' : ''}}"
+                                ng-click="">
+                          <i class="fa fa-plus"></i>
+                        </button>
+                        <div class="dropup">
+                          <ul class="dropdown-menu dropdown-user dropdown up">
+                            <li>
+                                link1
+                            </li>
+                            <li>
+                                link2
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+-->
+
+
+
+
+
+
+
                       <!-- DropBox -->
                       <!--
 

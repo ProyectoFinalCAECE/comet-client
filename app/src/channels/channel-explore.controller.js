@@ -79,6 +79,8 @@
           vm.edit = edit;
           // invite / delete members
           vm.showMembers = false;
+          vm.showIntegrations = false;
+
           vm.invite = invite;
           vm.canInvite = canInvite;
           vm.deleteMember = deleteMember;

@@ -742,6 +742,7 @@ body[state="dashboard.project.channel-explore"] {
   color: #333;
 }
 
+/*Members Sidebar*/
 .chat-users-wrapper {
   top: 170px;
   position: fixed;
@@ -758,6 +759,28 @@ body[state="dashboard.project.channel-explore"] {
 .chat-user {
   padding: 10px 0;
 }
+
+
+/*Integration Sidebar*/
+.chat-integrations-wrapper {
+  top: 170px;
+  position: fixed;
+  right: 40px;
+  width: 260px;
+}
+
+.chat-integrations {
+  height: auto;
+  margin-left: auto;
+  margin-bottom: 10px;
+}
+
+.chat-integration {
+  padding: 10px 0;
+}
+
+
+
 
 /*
   Dialogo Invitar Participantes
@@ -878,7 +901,7 @@ body[state="dashboard.project.channel-explore"] {
   color:#1ab394;
 }
 
-.chat-user-name {
+.chat-user-name, .chat-integration-name {
   font-weight: 300;
 }
 
