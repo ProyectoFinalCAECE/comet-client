@@ -134,6 +134,10 @@
           return projectService.getById($stateParams.id)
           .then(function(data) { return data.data; });
         }],
+        integrations: ['integrationService','$stateParams', function(integrationService, $stateParams) {
+          return integrationService.getAll($stateParams.id)
+          .then(function(data) { return data.data.integrations; });
+        }],
         tab: ['$stateParams', function($stateParams) {
           return $stateParams.tab;
         }]

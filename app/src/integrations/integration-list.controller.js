@@ -9,16 +9,20 @@
     angular.module('cometApp')
            .controller('IntegrationListController', IntegrationListController);
 
-        IntegrationListController.$inject = ['$rootScope',
-                                         '$state',
-                                         'lodash'];
+        IntegrationListController.$inject = ['$log',
+                                             '$rootScope',
+                                             '$state',
+                                             'lodash',
+                                             'integrations'];
 
-        function IntegrationListController ($rootScope,
+        function IntegrationListController ($log,
+                                            $rootScope,
                                             $state,
-                                            lodash) {
+                                            lodash,
+                                            integrations) {
 
           var vm = this;
-          vm.integrations = [];
+          vm.integrations = integrations;
 
           activate();
 
@@ -27,7 +31,7 @@
            * @desc controller activation logic
            */
           function activate () {
-
+            $log.log('integrations', integrations);
           }
         }
 })();
