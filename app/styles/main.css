@@ -718,29 +718,8 @@ body[state="dashboard.project.channel-explore"] {
 }
 
 /* Chat Actions   */
-.chatActions-container {
-    height: 300px;
-    width: 270px;
-    overflow: auto;
-    position: absolute;
-    top: -305px;
-    border-radius: 8px;
-    border: 1px solid #CCC;
-    padding: 5px;
-    background-color: #f7f7f7;
-}
+.
 
-.chatActions-container li.chatActions {
-  width: 36px;
-  padding: 2px;
-  display: inline-block;
-  float: left;
-  font-size:17px;
-}
-
-.chatActions a{
-  color: #333;
-}
 
 /*Members Sidebar*/
 .chat-users-wrapper {

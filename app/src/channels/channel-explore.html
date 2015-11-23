@@ -173,73 +173,27 @@
                       <!-- Acciones -->
 
 
-                      <div class="input-group-btn">
+                    <div class="input-group-btn dropup">
+                      <li class="admin-item dropdown">
                         <button ng-disabled="vm.isClosed"
                                 style="height:35px;"
                                 tabindex="-1"
                                 class="btn btn-white"
                                 type="button"
-                                ng-click="vm.displayChatActions()">
+                                data-toggle="{{vm.isMember ? 'dropdown' : ''}}">
                           <i class="fa fa-plus"></i>
                         </button>
-                        <div class="chatActions-container" ng-if="vm.showChatActions">
-                          <ul>
-                            <li class="chatActions">
-                              <img ng-src="{{message.dropbox.icon}}"/><a ng-click="vm.addDropboxFile()">DropBox</a>
-                            </li>
-                            <li class="chatActions">
-                              <img ng-src="{{message.dropbox.icon}}"/><a ng-click="vm.addDropboxFile()">DropBox</a>
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
+                        <ul class="dropdown-menu">
+                          <li>
+                            <img ng-src="{{message.dropbox.icon}}"/><a ng-click="vm.addDropboxFile()">Subir Archivo</a>
+                          </li>
+                          <li>
+                            <img ng-src="{{message.dropbox.icon}}"/><a ng-click="vm.addDropboxFile()">DropBox</a>
+                          </li>
+                        </ul>
+                      </li>
+                    </div>
 
-<!--
-
-                      <div class="input-group-btn">
-                        <button ng-disabled="vm.isClosed"
-                                style="height:35px;"
-                                tabindex="-1"
-                                class="btn btn-white"
-                                type="button"
-                                data-toggle="{{vm.isMember ? 'dropdown' : ''}}"
-                                ng-click="">
-                          <i class="fa fa-plus"></i>
-                        </button>
-                        <div class="dropup">
-                          <ul class="dropdown-menu dropdown-user dropdown up">
-                            <li>
-                                link1
-                            </li>
-                            <li>
-                                link2
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
--->
-
-
-
-
-
-
-
-                      <!-- DropBox -->
-                      <!--
-
-                      //Lo elimino ya que formaria parte de la lista de Acciones
-                      <div class="input-group-btn">
-                        <button ng-disabled="vm.isClosed"
-                                style="height:35px;"
-                                tabindex="-1"
-                                class="btn btn-white"
-                                type="button"
-                                ng-click="vm.addDropboxFile()">
-                          <i class="fa fa-file-o"></i>
-                        </button>
-                      </div>
-                    -->
                       <textarea id="message-input"
                                 name="message"
                                 ng-enter="vm.sendUserMessage()"
