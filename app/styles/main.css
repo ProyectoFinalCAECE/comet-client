@@ -911,3 +911,11 @@ body[state="dashboard.project.channel-explore"] {
 .integrations-buttons{
   text-align: right;
 }
+
+/* Configurar integraciones */
+
+.form-bordered {
+  border: 1px solid gray;
+  padding: 5px 5px 5px 5px;
+  box-shadow: 1px 1px 1px 1px #D8D8D8;
+}
