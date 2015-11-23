@@ -15,7 +15,14 @@
          <p>{{integration.description}}</p>
        </td>
        <td class="integrations-buttons">
-         <a href="#" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Agregar </a>
+         <a class="btn btn-white btn-sm"
+            ui-sref="dashboard.project.integration({projectIntegrationId:integration.projectIntegrationId,
+                                                    integrationId: integration.integrationId,
+                                                    isUpdate: false
+                                                   })">
+           <i class="fa fa-pencil"></i>
+           Agregar
+         </a>
        </td>
      </tr>
    </tbody>

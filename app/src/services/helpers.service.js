@@ -10,7 +10,8 @@
 
         return {
             loadServerErrors:loadServerErrors,
-            fieldIsNotValid: fieldIsNotValid
+            fieldIsNotValid: fieldIsNotValid,
+            randomString:randomString
         };
 
         function fieldIsNotValid(model, fieldName) {
@@ -36,6 +37,19 @@
             });
           }
           return validationErrors;
+        }
+
+        /**
+         * @name randomString
+         * @desc generates a random alphanumeric string 
+         */
+        function randomString(length) {
+          var s = '';
+          while(s.length < length && length > 0){
+              var r = Math.random();
+              s+= (r < 0.1 ? Math.floor(r * 100) : String.fromCharCode(Math.floor(r * 26) + (r > 0.5 ? 97:65)));
+          }
+          return s;
         }
     }
 })();

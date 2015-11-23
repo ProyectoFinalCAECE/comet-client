@@ -1,18 +1,36 @@
 <div data-view="integration-create">
   <div class="row wrapper border-bottom white-bg page-heading">
 	  <div class="col-lg-9">
-		    <h2>Crear/Modificar Integracion</h2>
+		    <h2>Configurar integración</h2>
         <div ncy-breadcrumb></div>
 	  </div>
   </div>
   <div class="row m-l">
     <div class="col-sm-8 crearProyecto-sm-8">
+      <!-- Comun para todas las integraciones -->
       <div style="margin-left:-15px">
          </br>
-         <p>Sarasa integracion</p>
+         <p style="font-size:48px;" class="fa fa-{{vm.name.toLowerCase().replace('pingdom', 'pinterest') }}"> </p>
+         <p>{{vm.name}}</p>
+         <p>{{vm.description}}</p>
       </div>
       <form name="vm.frmCreate" ng-submit="vm.post()" class="form-horizontal m-t" role="form" novalidate="">
-
+          <div class="">
+            <input type="text" name="hookUrl" ng-model="vm.hookUrl" class="form-control" disabled="">
+            <button type="button" class="button button-default" name="button" ng-click="vm.generateHookUrl()">Regenerar</button>
+          </div>
+          <div class="">
+            <select ng-options="channel as channel.name group by channel.typeDescription for channel in vm.channels track by channel.id"
+                    ng-model="vm.selectedChannel">
+            </select>
+          </div>
+          <div class="">
+            <input type="text" name="postName" ng-model="vm.postName" class="form-control" placeholder="Nombre de usuario">
+            <div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'name')" class="control-label" role="alert">
+              <div>{{ vm.validationErrors['postName'] }}</div>
+            </div>
+          </div>
+          <button type="submit" name="button">Guardar</button>
       </form>
     </div>
   </div>
