@@ -173,22 +173,23 @@
                       <!-- Acciones -->
 
 
-                    <div class="input-group-btn dropup">
+                    <div class="input-group-btn dropup chatActions">
                       <li class="admin-item dropdown">
                         <button ng-disabled="vm.isClosed"
                                 style="height:35px;"
                                 tabindex="-1"
                                 class="btn btn-white"
                                 type="button"
-                                data-toggle="{{vm.isMember ? 'dropdown' : ''}}">
+                                data-toggle="{{vm.isMember ? 'dropdown' : ''}}"
+                                ng-click="vm.showEmoji = false">
                           <i class="fa fa-plus"></i>
                         </button>
                         <ul class="dropdown-menu">
                           <li>
-                            <img ng-src="{{message.dropbox.icon}}"/><a ng-click="vm.addDropboxFile()">Subir Archivo</a>
+                            <i class="fa fa-file"></i><a ngf-select ng-model="vm.sourceImage" accept="image/*">Subir un archivo</a><!--Agregar funcionalidad -->
                           </li>
                           <li>
-                            <img ng-src="{{message.dropbox.icon}}"/><a ng-click="vm.addDropboxFile()">DropBox</a>
+                            <i class="fa fa-dropbox"></i><a ng-click="vm.addDropboxFile()">DropBox</a>
                           </li>
                         </ul>
                       </li>

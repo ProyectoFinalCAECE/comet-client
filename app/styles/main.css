@@ -718,8 +718,19 @@ body[state="dashboard.project.channel-explore"] {
 }
 
 /* Chat Actions   */
-.
+.chatActions {
 
+}
+
+.chatActions ul{
+  margin-bottom:25px!important;
+  padding-left:120px!important;
+  position:absolute;
+}
+
+.chatActions li {
+
+}
 
 /*Members Sidebar*/
 .chat-users-wrapper {
