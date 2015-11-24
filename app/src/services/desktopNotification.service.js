@@ -6,7 +6,9 @@
         .module('cometApp')
         .factory('desktopNotificationService', desktopNotificationService);
 
-    function desktopNotificationService () {
+    desktopNotificationService.$inject = ['$window'];
+
+    function desktopNotificationService ($window) {
 
       return {
           init: init,
@@ -54,7 +56,7 @@
 
           // open the source url on click
           notification.onclick = function () {
-            window.open(url);
+            $window.location.href = url;
           };
         }
       }

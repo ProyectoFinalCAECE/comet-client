@@ -114,6 +114,7 @@
 
             // channel-explore active channel logic
             $scope.$on('$stateChangeSuccess', function() {
+              //$log.log('$stateChangeSuccess', $state.current.name);
               if ($state.current.name === 'dashboard.project.channel-explore')
               {
                 // new state url
@@ -127,6 +128,7 @@
                 if (channel === undefined) {
                   channel = lodash.find(vm.publicChannels, 'channelUrl', currentUrl);
                 }
+                //$log.log('$stateChangeSuccess channel', channel);
                 if (channel !== undefined) {
                   setActiveChannel(channel);
                 }
