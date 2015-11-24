@@ -15,6 +15,7 @@
                                            '$state',
                                            '$modal',
                                            '$location',
+                                           '$timeout',
                                            '$anchorScroll',
                                            'lodash',
                                            'moment',
@@ -37,6 +38,7 @@
                                           $state,
                                           $modal,
                                           $location,
+                                          $timeout,
                                           $anchorScroll,
                                           lodash,
                                           moment,
@@ -75,12 +77,12 @@
           vm.noMoreMessages = false;
           // files
           vm.addDropboxFile = addDropboxFile;
+          vm.displayFileMenu = displayFileMenu;
           // update info
           vm.edit = edit;
           // invite / delete members
           vm.showMembers = false;
           vm.showIntegrations = false;
-
           vm.invite = invite;
           vm.canInvite = canInvite;
           vm.deleteMember = deleteMember;
@@ -465,8 +467,31 @@
            * @desc open/close the emoji dialog
           */
           function displayEmoji () {
-            vm.showEmoji = !vm.showEmoji;
-            vm.showChatActions = false; // Close the ChatActions container
+            vm.showEmoji = true;
+            if (vm.showEmoji) {
+              $timeout(function () {
+                $(document).one('click', documentClick);
+              }, 50);
+            }
+          }
+
+          /**
+           * @name displayFileMenu
+           * @desc open/close the file dialog
+          */
+          function displayFileMenu () {
+            vm.showEmoji = false;
+            $(document).off('click', documentClick);
+          }
+
+          /**
+           * @name documentClick
+           * @desc closes the emoji dialog en document click
+          */
+          function documentClick() {
+            $scope.$apply(function(){
+              vm.showEmoji = false;
+            });
           }
 
           /**
@@ -482,15 +507,6 @@
             }
             vm.showEmoji = false;
             angular.element('#message-input').focus();
-          }
-
-          /**
-           * @name displayChatActions
-           * @desc open/close the chatActions dialog
-          */
-          function displayChatActions () {
-            vm.showChatActions = !vm.showChatActions;
-            vm.showEmoji = false; //Close the emoji contianer
           }
 
           /**

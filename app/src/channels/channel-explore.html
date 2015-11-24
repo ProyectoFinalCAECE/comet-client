@@ -170,9 +170,6 @@
                           </ul>
                         </div>
                       </div>
-                      <!-- Acciones -->
-
-
                     <div class="input-group-btn dropup chatActions">
                       <li class="admin-item dropdown">
                         <button ng-disabled="vm.isClosed"
@@ -180,16 +177,16 @@
                                 tabindex="-1"
                                 class="btn btn-white"
                                 type="button"
-                                data-toggle="{{vm.isMember ? 'dropdown' : ''}}"
-                                ng-click="vm.showEmoji = false">
+                                data-toggle="{{!vm.isClosed ? 'dropdown' : ''}}"
+                                ng-click="vm.displayFileMenu()">
                           <i class="fa fa-plus"></i>
                         </button>
                         <ul class="dropdown-menu">
+                          <!-- <li>
+                            <a ngf-select ng-model="vm.sourceImage" accept="image/*"><i class="fa fa-file"></i> Subir un archivo</a>
+                          </li> -->
                           <li>
-                            <a ngf-select ng-model="vm.sourceImage" accept="image/*"><i class="fa fa-file"></i> Subir un archivo</a><!--Agregar funcionalidad -->
-                          </li>
-                          <li>
-                            <a ng-click="vm.addDropboxFile()"><i class="fa fa-dropbox"></i> DropBox</a>
+                            <a ng-click="vm.addDropboxFile()"><i class="fa fa-dropbox"></i> Dropbox</a>
                           </li>
                         </ul>
                       </li>
