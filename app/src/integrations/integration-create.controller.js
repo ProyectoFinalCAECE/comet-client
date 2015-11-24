@@ -21,7 +21,7 @@
                                                'user',
                                                'project',
                                                'channels',
-                                               'isUpdate',
+                                               'channelId',
                                                'projectIntegration'];
 
         function IntegrationCreateController ($log,
@@ -36,32 +36,50 @@
                                               user,
                                               project,
                                               channels,
-                                              isUpdate,
+                                              channelId,
                                               projectIntegration) {
 
           var vm = this;
-          vm.name = projectIntegration.name;
+          vm.integrationName = projectIntegration.name;
           vm.description = projectIntegration.description;
           vm.channels = null;
           vm.validationErrors = null;
           vm.hookUrl = null;
+          vm.selectedChannel = null;
+          vm.name = projectIntegration.name;
 
           vm.generateHookUrl = generateHookUrl;
           vm.post = post;
 
-          var token = null;
+          var token = null,
+              isUpdate = (channelId > 0),
+              configuration = null;
 
           activate();
 
           function activate () {
-            $log.log('projectIntegration', projectIntegration);
+            $log.log('projectIntegration', projectIntegration, channelId);
+
+            if (isUpdate) {
+              // get the desired configuration by channelId (TODO: must be an explicit configurationId)
+              configuration = lodash.find(projectIntegration.configurations, 'ChannelId', channelId);
+              $log.log('configuration', configuration);
+              vm.name = configuration.name;
+            }
+
             generateHookUrl();
             loadChannels();
           }
 
           function loadChannels() {
+            vm.selectedChannel = channels[0];
             for (var i = 0; i < channels.length; i++) {
-              channels[i].typeDescription = (channels[i].type === 'S' ? 'Canales públicos' : 'Canales privados');
+              var channel = channels[i];
+              channel.typeDescription = (channel.type === 'S' ? 'Canales públicos' : 'Canales privados');
+              $log.log(channel, channelId);
+              if (channelId === channel.id) {
+                vm.selectedChannel = channel;
+              }
             }
             vm.channels = channels;
             $log.log('channels', channels);
@@ -85,19 +103,30 @@
            * @desc create/edit the integration config
           */
           function post() {
-            if (!isUpdate) {
+            if (isUpdate) {
+              // update configuration
+              var updateData = {
+                channelId: channelId,
+                name: vm.name,
+                token: token,
+                newChannelId: vm.selectedChannel.id
+              };
+              console.log('post - edicion', updateData);
+              integrationService.update(project.id, projectIntegration.projectIntegrationId, updateData)
+                .error(integrationConfigError)
+                .then(integrationConfigCreated);
+            }
+            else {
+              // create
               var data = {
                 channelId: vm.selectedChannel.id,
-                name: vm.postName,
+                name: vm.name,
                 token: token
               };
               console.log('post - alta', data);
               integrationService.create(project.id, projectIntegration.projectIntegrationId, data)
                 .error(integrationConfigError)
                 .then(integrationConfigCreated);
-            }
-            else {
-              console.log('post - edit');
             }
           }
 

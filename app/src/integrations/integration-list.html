@@ -24,7 +24,7 @@
       <a class="btn btn-white btn-sm"
          ui-sref="dashboard.project.integration({projectIntegrationId:integration.projectIntegrationId,
                                                  integrationId: integration.integrationId,
-                                                 isUpdate: false
+                                                 channelId: 0
                                                 })">
         <i class="fa fa-pencil"></i>
         Agregar
@@ -37,7 +37,7 @@
        class="clearfix">
     <div style="float:left">
       <p>
-        Canal destino: {{configuration.ChannelId}}
+        Canal destino: {{vmi.getChannelName(configuration.ChannelId)}}
       </p>
       <p>
         Con el nombre {{configuration.name}}
@@ -50,7 +50,7 @@
       <a class="btn btn-white btn-sm"
          ui-sref="dashboard.project.integration({projectIntegrationId:integration.projectIntegrationId,
                                               integrationId: integration.integrationId,
-                                              isUpdate: true
+                                              channelId: configuration.ChannelId
                                              })">
         <i class="fa fa-pencil"></i>
         Editar

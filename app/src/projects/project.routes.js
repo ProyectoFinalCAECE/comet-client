@@ -134,6 +134,11 @@
           return projectService.getById($stateParams.id)
           .then(function(data) { return data.data; });
         }],
+        channels: ['channelService', 'project', function (channelService, project) {
+          return channelService.getAll(project.id).then(function (response) {
+            return response.data;
+          });
+        }],
         integrations: ['integrationService','$stateParams', function(integrationService, $stateParams) {
           return integrationService.getAll($stateParams.id)
           .then(function(data) { return data.data.integrations; });

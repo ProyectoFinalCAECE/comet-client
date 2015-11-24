@@ -64,8 +64,8 @@
          * @name update
          * @desc update integracion config
          */
-        function update (projectId, projectIntegrationConfig) {
-          var url = getBaseUrl(projectId);
+        function update (projectId, projectIntegrationId, projectIntegrationConfig) {
+          var url = getBaseUrl(projectId) + projectIntegrationId;
           return $http.put(url, projectIntegrationConfig, authService.getJwtHeader());
         }
 

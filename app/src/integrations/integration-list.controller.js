@@ -13,16 +13,19 @@
                                              '$rootScope',
                                              '$state',
                                              'lodash',
+                                             'channels',
                                              'integrations'];
 
         function IntegrationListController ($log,
                                             $rootScope,
                                             $state,
                                             lodash,
+                                            channels,
                                             integrations) {
 
           var vm = this;
           vm.integrations = integrations;
+          vm.getChannelName = getChannelName;
 
           activate();
 
@@ -31,7 +34,18 @@
            * @desc controller activation logic
            */
           function activate () {
-            $log.log('integrations', integrations);
+
+          }
+
+          /**
+           * @name getChannelName
+           * @desc return the channel name searching by id
+           */
+          function getChannelName(id) {
+            var channel = lodash.find(channels, 'id', id);
+            if (channel !== undefined) {
+              return channel.name;
+            }
           }
         }
 })();

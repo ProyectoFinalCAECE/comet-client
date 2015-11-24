@@ -10,7 +10,7 @@
   function config ($stateProvider) {
     $stateProvider
       .state('dashboard.project.integration', {
-        url: '/integrations/?projectIntegrationId&integrationId&isUpdate',
+        url: '/integrations/?projectIntegrationId&integrationId&channelId',
         ncyBreadcrumb: {
           label: 'Configurar integración',
           parent: 'dashboard.project.project-admin'
@@ -34,8 +34,13 @@
               return response.data;
             });
           }],
-          isUpdate: ['$stateParams', function ($stateParams) {
-            return $stateParams.isUpdate === 'true';
+          channelId: ['$stateParams', function ($stateParams) {
+            if ($stateParams.channelId) {
+              return parseInt($stateParams.channelId, 10);
+            }
+            else {
+              return 0;
+            }
           }]
         }
       });
