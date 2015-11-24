@@ -1,6 +1,64 @@
 <p class="m-t">Activa las integraciones que quieres funcionando en tu proyecto.</p>
 
-<table class="table table-hover" style="margin-top:30px;">
+<!-- <li ng-repeat-start="page in [1,2,3,4,5,6]">
+        <a href="#">{{page}}</a>
+      </li>
+      <li ng-repeat-end="" class="divider"></li> -->
+
+<div class="clearfix" style="width:80%; margin:auto; padding:15px; border-bottom:1px solid #e7eaec;">
+  <div class="clearfix" ng-repeat-start="integration in vmi.integrations">
+    <div class="integrations-icon" style="float:left;color:#676a6c">
+      <i class="fa fa-{{integration.name.toLowerCase().replace('pingdom', 'pinterest') }}"> </i>
+    </div>
+    <div style="float:left; margin-left: 10px;">
+      <p style="font-weight:bold; color:#676a6c">{{integration.name}}</p>
+      <p>{{integration.description}}</p>
+    </div>
+    <div style="float:right; margin-left: 10px;">
+      <a class="btn btn-white btn-sm"
+         ng-if="integration.configurations.length > 0"
+         ng-click="integration.visible = !integration.visible ">
+        <i class="fa fa-arrow-{{integration.visible ? 'up' : 'down'}}"></i>
+        {{integration.configurations.length}} configurada/s
+      </a>
+      <a class="btn btn-white btn-sm"
+         ui-sref="dashboard.project.integration({projectIntegrationId:integration.projectIntegrationId,
+                                                 integrationId: integration.integrationId,
+                                                 isUpdate: false
+                                                })">
+        <i class="fa fa-pencil"></i>
+        Agregar
+      </a>
+    </div>
+  </div>
+  <div ng-show="integration.visible"
+       ng-repeat="configuration in integration.configurations"
+       ng-repeat-end=""
+       class="clearfix">
+    <div style="float:left">
+      <p>
+        Canal destino: {{configuration.ChannelId}}
+      </p>
+      <p>
+        Con el nombre {{configuration.name}}
+      </p>
+      <p>
+        Creada el {{configuration.createdAt | date}}
+      </p>
+    </div>
+    <div style="float:right; margin-left: 10px;">
+      <a class="btn btn-white btn-sm"
+         ui-sref="dashboard.project.integration({projectIntegrationId:integration.projectIntegrationId,
+                                              integrationId: integration.integrationId,
+                                              isUpdate: true
+                                             })">
+        <i class="fa fa-pencil"></i>
+        Editar
+      </a>
+    </div>
+  </div>
+</div>
+<!-- <table class="table table-hover" style="margin-top:30px;">
    <tbody>
      <tr ng-repeat="integration in vmi.integrations">
        <td class="integrations-status">
@@ -26,4 +84,4 @@
        </td>
      </tr>
    </tbody>
- </table>
+ </table> -->

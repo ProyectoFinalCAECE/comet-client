@@ -10,7 +10,7 @@
   function config ($stateProvider) {
     $stateProvider
       .state('dashboard.project.integration', {
-        url: '/integrations/?projectIntegrationId&integrationId',
+        url: '/integrations/?projectIntegrationId&integrationId&isUpdate',
         ncyBreadcrumb: {
           label: 'Configurar integración',
           parent: 'dashboard.project.project-admin'
