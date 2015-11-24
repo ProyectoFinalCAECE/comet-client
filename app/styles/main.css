@@ -724,12 +724,16 @@ body[state="dashboard.project.channel-explore"] {
 
 .chatActions ul{
   margin-bottom:25px!important;
-  padding-left:120px!important;
   position:absolute;
 }
 
-.chatActions li {
+.chatActions a i {
+  padding-right:15px;
+  margin-left:-15px;
+}
 
+.ibox .open > .dropdown-menu{
+  right: auto!important;
 }
 
 /*Members Sidebar*/
