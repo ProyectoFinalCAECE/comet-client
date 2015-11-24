@@ -40,6 +40,7 @@
                                               projectIntegration) {
 
           var vm = this;
+          vm.integrationId = projectIntegration.integrationId;
           vm.integrationName = projectIntegration.name;
           vm.description = projectIntegration.description;
           vm.channels = null;
