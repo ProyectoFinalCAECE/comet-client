@@ -718,10 +718,6 @@ body[state="dashboard.project.channel-explore"] {
 }
 
 /* Chat Actions   */
-.chatActions {
-
-}
-
 .chatActions ul{
   margin-bottom:25px!important;
   position:absolute;
@@ -730,6 +726,7 @@ body[state="dashboard.project.channel-explore"] {
 .chatActions a i {
   padding-right:15px;
   margin-left:-15px;
+  font-size:15px!important;
 }
 
 .ibox .open > .dropdown-menu{
