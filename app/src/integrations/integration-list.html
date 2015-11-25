@@ -6,13 +6,13 @@
       <li ng-repeat-end="" class="divider"></li> -->
 
 <div class="clearfix" style="width:80%; margin:auto; padding:15px; border-bottom:1px solid #e7eaec;">
-  <div class="clearfix" ng-repeat-start="integration in vmi.integrations">
+  <div class="integration-header clearfix" ng-repeat-start="integration in vmi.integrations">
     <div class="integrations-icon" style="float:left;color:#676a6c">
       <i class="fa fa-{{integration.name.toLowerCase().replace('pingdom', 'pinterest') }}"> </i>
     </div>
     <div style="float:left; margin-left: 10px;">
-      <p style="font-weight:bold; color:#676a6c">{{integration.name}}</p>
-      <p>{{integration.description}}</p>
+      <p class="name">{{integration.name}}</p>
+      <p class="description">{{integration.description}}</p>
     </div>
     <div style="float:right; margin-left: 10px;">
       <a class="btn btn-white btn-sm"
@@ -21,7 +21,7 @@
         <i class="fa fa-arrow-{{integration.visible ? 'up' : 'down'}}"></i>
         {{integration.configurations.length}} configurada/s
       </a>
-      <a class="btn btn-white btn-sm"
+      <a class="btn btn-primary  btn-sm"
          ui-sref="dashboard.project.integration({projectIntegrationId:integration.projectIntegrationId,
                                                  integrationId: integration.integrationId,
                                                  channelId: 0
@@ -34,20 +34,20 @@
   <div ng-show="integration.visible"
        ng-repeat="configuration in integration.configurations"
        ng-repeat-end=""
-       class="clearfix">
+       class="integration-detail clearfix">
     <div style="float:left">
-      <p>
-        Canal destino: {{vmi.getChannelName(configuration.ChannelId)}}
+      <p class="channel">
+        Canal destino: <b>{{vmi.getChannelName(configuration.ChannelId)}}</b>
       </p>
-      <p>
-        Con el nombre {{configuration.name}}
+      <p class="name">
+        Con el nombre <b>{{configuration.name}}</b>
       </p>
-      <p>
+      <p class="date">
         Creada el {{configuration.createdAt | date}}
       </p>
     </div>
     <div style="float:right; margin-left: 10px;">
-      <a class="btn btn-white btn-sm"
+      <a class="btn btn-primary btn-outline btn-sm"
          ui-sref="dashboard.project.integration({projectIntegrationId:integration.projectIntegrationId,
                                               integrationId: integration.integrationId,
                                               channelId: configuration.ChannelId
