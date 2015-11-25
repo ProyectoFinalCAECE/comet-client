@@ -1,4 +1,4 @@
-<form name="vm.frmCreate" ng-submit="vm.post()" class="form-horizontal m-t form-bordered" role="form" novalidate="">
+<form name="vm.frmCreate" ng-submit="vm.post()" class="form-horizontal m-t" role="form" novalidate="">
   <div class="text-center">
     <h4>Instrucciones para configurar la integración en GitHub</h4>
     <!--    <button class="btn buttonRight">Ocultar</button>  -->
@@ -23,9 +23,11 @@
   <div class="form-group">
     <label class="col-sm-2 control-label">Paso 3</label>
     <div class="col-sm-10">
-      <p>Ingresa el webhook generado abajo como "Payload URL".</p>
-      <p>Especifica el tipo de contenido como "application/json" y "todos los eventos"</p>
-      <p>Selecciona el boton "Add webhook" para terminar.</p>
+      <p>En "Payload URL" ingresa:</p>
+      <p><code>{{vm.hookUrl}}</code></p>
+      <p>Especifica el tipo de contenido como <b>"application/json"</b></p>
+      <p>A elegir que eventos enviar selecciona <b>"Send me everything"</b></p>
+      <p>Selecciona el boton <b>"Add webhook"</b> para terminar.</p>
       <img src="../../images/integraciones/Git_payload.png">
     </div>
   </div>
@@ -34,19 +36,19 @@
   <div class="form-group">
     <label class="col-sm-4 control-label">
       Webhook </br>
-      <span class="text-muted">Esta es la URL a ingresar en GitHub como "Payload URL"</span>
+      <span class="text-muted" style="font-weight:normal;">Esta es la URL a ingresar en GitHub como "Payload URL"</span>
     </label>
     <div class="input-group col-sm-8">
-      <input type="text" name="hookUrl" ng-model="vm.hookUrl" class="form-control" disabled="">
-      <span class="input-group-btn">
-        <button type="button" class="btn btn-default" name="button" ng-click="vm.generateHookUrl()">Regenerar</button>
-      </span>
+      <input type="text" name="hookUrl" ng-model="vm.hookUrl" class="form-control hookUrl" disabled="">
+      <div class="text-right">
+          <button type="button" class="btn btn-info btn-xs" name="button" ng-click="vm.generateHookUrl()">Regenerar</button>
+      </div>
     </div>
   </div>
   <div class="form-group">
     <label class="col-sm-4 control-label">
       Canal </br>
-      <span class="text-muted">Elegi el canal en el que apareceran las notificaciones</span>
+      <span class="text-muted" style="font-weight:normal;">Elegi el canal en el que apareceran las notificaciones</span>
     </label>
     <div class="col-sm-8">
       <select ng-options="channel as channel.name group by channel.typeDescription for channel in vm.channels track by channel.id"
@@ -57,7 +59,7 @@
   <div class="form-group">
     <label class="col-sm-4 control-label">
       Nombre </br>
-      <span class="text-muted">Elegi el nombre con el que la integracion va a agregar mensajes</span>
+      <span class="text-muted" style="font-weight:normal;">Elegi el nombre con el que la integracion va a agregar mensajes</span>
     </label>
     <div class="col-sm-8">
       <input type="text" name="name" ng-model="vm.name" class="form-control" placeholder="Nombre de usuario">

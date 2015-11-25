@@ -953,9 +953,8 @@ body[state="dashboard.project.channel-explore"] {
 }
 
 /* Configurar integraciones */
-
-.form-bordered {
-  border: 1px solid gray;
-  padding: 5px 15px 5px 5px;
-  box-shadow: 1px 1px 1px 1px #D8D8D8;
+input.hookUrl {
+  border:0;
+  font-size:12px;
+  font-family: monospace;
 }
