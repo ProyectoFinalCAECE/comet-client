@@ -165,8 +165,16 @@
                             <p class="repository">
                               {{github.repository}}
                             </p>
-                            <p>
+                            <p ng-if="github.action === 'opened'">
                                 Nuevo "issue" creado por <span class="user">{{github.user}}</span>
+                                <a href="{{github.issue_url}}" target="_blank">{{github.issue_number}} - {{github.issue}}</a>
+                            </p>
+                            <p ng-if="github.action === 'closed'">
+                                <span class="user">{{github.user}}</span> cerró el "issue"
+                                <a href="{{github.issue_url}}" target="_blank">{{github.issue_number}} - {{github.issue}}</a>
+                            </p>
+                            <p ng-if="github.action === 'reopened'">
+                                <span class="user">{{github.user}}</span> reabrió el "issue"
                                 <a href="{{github.issue_url}}" target="_blank">{{github.issue_number}} - {{github.issue}}</a>
                             </p>
                           </div>
