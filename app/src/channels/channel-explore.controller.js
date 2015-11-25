@@ -251,8 +251,16 @@
             msgPayload.date = new Date(msgPayload.date);
 
             // integration types
-            if (msgPayload.type === messageType.INTEGRATION_DROPBOX) {
-              msgPayload.dropbox = JSON.parse(msgPayload.text);
+            switch (msgPayload.type) {
+              case messageType.INTEGRATION_DROPBOX:
+                msgPayload.dropbox = JSON.parse(msgPayload.text);
+                break;
+              case messageType.INTEGRATION_GITHUB:
+                msgPayload.github = JSON.parse(msgPayload.text);
+                break;
+              case messageType.INTEGRATION_TRELLO:
+                msgPayload.trello = JSON.parse(msgPayload.text);
+                break;
             }
 
             // add message to message list
@@ -357,8 +365,36 @@
            * @name getMember
            * @desc returns a member object by id
           */
-          function getMember(memberId) {
-            return lodash.find(vm.project.members, 'id', memberId);
+          function getMember(message) {
+
+            switch (message.type) {
+              case messageType.INTEGRATION_DROPBOX: {
+                return {
+                  alias: 'GitHub',
+                  profilePicture: '../images/integraciones/dropbox.png'
+                };
+              }
+              case messageType.INTEGRATION_GITHUB: {
+                return {
+                  alias: 'GitHub',
+                  profilePicture: '../images/integraciones/dropbox.png'
+                };
+              }
+              case messageType.INTEGRATION_TRELLO: {
+                return {
+                  alias: 'Trello',
+                  profilePicture: '../images/integraciones/dropbox.png'
+                };
+              }
+              case messageType.INTEGRATION_PINGDOM: {
+                return {
+                  alias: 'Pingdom',
+                  profilePicture: '../images/integraciones/dropbox.png'
+                };
+              }
+              default:
+                lodash.find(vm.project.members, 'id', message.user);
+            }
           }
 
           /**

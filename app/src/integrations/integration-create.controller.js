@@ -142,7 +142,7 @@
           dlg.result.finally(function () {
             $state.go('dashboard.project.project-admin', {
               projectId: project.id,
-              tab:3
+              tab: 3
             });
           });
         }

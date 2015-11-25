@@ -697,6 +697,34 @@ body[state="dashboard.project.channel-explore"] {
   font-style: italic;
 }
 
+/* Github */
+
+/* mensajes de dropbox */
+.message-github-wrapper {
+  width: 97%;
+  margin-top: 5px;
+  background-color: #FFF;
+  border-radius: 5px;
+  padding: 10px;
+  min-height: 70px;
+}
+
+.message-github-wrapper .repository {
+  font-weight: bold;
+}
+
+.message-github-wrapper .commit {
+    margin-left: 20px;
+}
+
+.message-github-wrapper .user {
+    font-style: italic;
+}
+
+.message-github-wrapper .commits-title {
+  font-size: 14px;
+}
+
 /* Emojis */
 .emoji-container {
     height: 300px;
