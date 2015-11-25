@@ -1,4 +1,4 @@
-<form name="vm.frmCreate" ng-submit="vm.post()" class="form-horizontal m-t" role="form" novalidate="">
+<form name="vm.frmCreate" ng-submit="vm.postGitHub()" class="form-horizontal m-t" role="form" novalidate="">
   <div class="text-center">
     <h4>Instrucciones para configurar la integración en GitHub</h4>
     <!--    <button class="btn buttonRight">Ocultar</button>  -->
@@ -36,7 +36,7 @@
   <div class="form-group">
     <label class="col-sm-4 control-label">
       Webhook </br>
-      <span class="text-muted" style="font-weight:normal;">Esta es la URL a ingresar en GitHub como "Payload URL"</span>
+      <span class="text-muted label-detail">Esta es la URL a ingresar en GitHub como "Payload URL"</span>
     </label>
     <div class="input-group col-sm-8">
       <input type="text" name="hookUrl" ng-model="vm.hookUrl" class="form-control hookUrl" disabled="">
@@ -48,7 +48,7 @@
   <div class="form-group">
     <label class="col-sm-4 control-label">
       Canal </br>
-      <span class="text-muted" style="font-weight:normal;">Elegi el canal en el que apareceran las notificaciones</span>
+      <span class="text-muted label-detail">Elegi el canal en el que apareceran las notificaciones</span>
     </label>
     <div class="col-sm-8">
       <select ng-options="channel as channel.name group by channel.typeDescription for channel in vm.channels track by channel.id"
@@ -59,7 +59,7 @@
   <div class="form-group">
     <label class="col-sm-4 control-label">
       Nombre </br>
-      <span class="text-muted" style="font-weight:normal;">Elegi el nombre con el que la integracion va a agregar mensajes</span>
+      <span class="text-muted label-detail">Elegi el nombre con el que la integracion va a agregar mensajes</span>
     </label>
     <div class="col-sm-8">
       <input type="text" name="name" ng-model="vm.name" class="form-control" placeholder="Nombre de usuario">

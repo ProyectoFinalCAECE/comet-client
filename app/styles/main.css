@@ -60,7 +60,11 @@ a.disabled {
 }
 
 .badge {
-  font-family: verdana;
+  font-family: Verdana !important;
+}
+
+.label {
+  font-family: Verdana !important;
 }
 
 .logo-name a {
@@ -953,8 +957,12 @@ body[state="dashboard.project.channel-explore"] {
 }
 
 /* Configurar integraciones */
-input.hookUrl {
+#view-integration-create input.hookUrl {
   border:0;
   font-size:12px;
   font-family: monospace;
+}
+
+#view-integration-create .label-detail {
+  font-weight: normal;
 }

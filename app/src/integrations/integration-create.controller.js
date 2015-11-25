@@ -53,6 +53,8 @@
           vm.name = projectIntegration.name;
           vm.generateHookUrl = generateHookUrl;
           vm.post = post;
+          // Github
+          vm.postGitHub = postGitHub;
           // trello
           vm.trelloAuth = trelloAuth;
           vm.trelloLogged = false;
@@ -122,6 +124,11 @@
            * @name post
            * @desc create/edit the integration config
           */
+          function postGitHub() {
+            post().error(integrationConfigError)
+                  .then(integrationConfigCreated);
+          }
+
           function post() {
             if (isUpdate) {
               // update configuration
@@ -132,9 +139,7 @@
                 newChannelId: vm.selectedChannel.id
               };
               console.log('post - edicion', updateData);
-              integrationService.update(project.id, projectIntegration.projectIntegrationId, updateData)
-                .error(integrationConfigError)
-                .then(integrationConfigCreated);
+              return integrationService.update(project.id, projectIntegration.projectIntegrationId, updateData);
             }
             else {
               // create
@@ -144,9 +149,7 @@
                 token: token
               };
               console.log('post - alta', data);
-              integrationService.create(project.id, projectIntegration.projectIntegrationId, data)
-                .error(integrationConfigError)
-                .then(integrationConfigCreated);
+              return integrationService.create(project.id, projectIntegration.projectIntegrationId, data);
             }
           }
 
@@ -183,14 +186,19 @@
          * @desc create/edit the integration config
         */
         function postTrello() {
-          integrationService.configureTrelloWebhook(TrelloApi.Token(), vm.hookUrl, trelloAppKey, vm.selectedBoard.id)
-              .error(function (e) {
-                console.log("trello - error: ", e);
-              })
-              .then(function(result){
-                console.log("trello - response: ", result);
-                post();
-              });
+          if (!vm.trelloLogged) {
+            ngToast.danger('Debes autenticarte en Trello para poder configurar esta integración.');
+          }
+          $log.log('postTrello', vm.hookUrl, vm.selectedBoard);
+          post()
+            .error(integrationConfigError)
+            .then(function () {
+              integrationService.configureTrelloWebhook(TrelloApi.Token(), vm.hookUrl, trelloAppKey, vm.selectedBoard.id)
+                  .error(function () {
+                    ngToast.danger('Ocurrió un error en la comunicación con Trello.');
+                  })
+                  .then(integrationConfigCreated);
+            });
         }
 
         function loadBoards(){
