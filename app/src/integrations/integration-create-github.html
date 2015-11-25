@@ -1,14 +1,14 @@
 <form name="vm.frmCreate" ng-submit="vm.post()" class="form-horizontal m-t form-bordered" role="form" novalidate="">
   <div class="text-center">
     <h4>Instrucciones para configurar la integracion en GitHub</h4>
-    <button class="btn buttonRight">Ocultar</button>
+<!--    <button class="btn buttonRight">Ocultar</button>  -->
   </div>
   <hr style="border-color:#A4A4A4"></hr>
   <div class="form-group">
     <label class="col-sm-2 control-label">Paso 1</label>
     <div class="col-sm-10">
       <p>En tu cuenta GitHub, ve al repositorio que te gustaria monitorear y selecciona "settings".</p></br>
-      <img src="../../images/404.png">
+      <img src="../../images/integraciones/Git_settings.png">
     </div>
   </div>
   <hr style="border-color:#A4A4A4"></hr>
@@ -16,7 +16,7 @@
     <label class="col-sm-2 control-label">Paso 2</label>
     <div class="col-sm-10">
       <p>Hace click en "Webhooks &amp; services" y luego en el boton "Add webhook"</p></br>
-      <img src="../../images/404.png">
+      <img src="../../images/integraciones/Git_webhook.png">
     </div>
   </div>
   <hr style="border-color:#A4A4A4"></hr>
@@ -26,10 +26,11 @@
       <p>Ingresa el webhook generado abajo como "Payload URL".</p>
       <p>Especifica el tipo de contenido como "application/json" y "todos los eventos"</p>
       <p>Selecciona el boton "Add webhook" para terminar.</p>
-      <img src="../../images/404.png">
+      <img src="../../images/integraciones/Git_payload.png">
     </div>
   </div>
   </br>
+  <hr style="border-color:#A4A4A4"></hr>
   <div class="form-group">
     <label class="col-sm-4 control-label">
       Webhook </br>
