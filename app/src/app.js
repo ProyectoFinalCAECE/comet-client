@@ -27,7 +27,8 @@
             'ui.bootstrap.showErrors',
             'ui.router',
             'ui.select',
-            'sticky'
+            'sticky',
+            'trello'
         ])
         .run(function($rootScope, $state, $stateParams, helpersService){
           $rootScope.helpers = helpersService;
@@ -41,5 +42,14 @@
           // bind $state to rootScope to allow access from views
           $rootScope.$state = $state;
           $rootScope.$stateParams = $stateParams;
-        });
+        }).config(['TrelloApiProvider', function(TrelloApiProvider) {
+          //  Configure the Provider
+            TrelloApiProvider.init({
+                key: '5196979cb1b5bb0191e54bc94881b5df',
+                secret: '3edf69c9dd0489eb62dce6b016e209ca2932d9f8fb0b5f6a26288124fc00041a',
+                scopes: {read: true, account: true},
+                AppName: 'Comet Trello',
+                expiration: "never"
+            });
+        }]);
 })();
