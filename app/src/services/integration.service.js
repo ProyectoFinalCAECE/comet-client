@@ -17,7 +17,8 @@
             create: create,
             update: update,
             getAll: getAll,
-            getProjectIntegrationById: getProjectIntegrationById
+            getProjectIntegrationById: getProjectIntegrationById,
+            configureTrelloWebhook: configureTrelloWebhook
         };
 
         /**
@@ -77,5 +78,14 @@
           return parentUrl + projectId + resourceUrl;
         }
 
+        /**
+        * @name configureTrelloWebhook
+        * @desc configure a webhook at trello
+        */
+        function configureTrelloWebhook(token, callbackUrl, appKey, boardId){
+          var url = "https://api.trello.com/1/tokens/"+ token +"/webhooks/?key=" + appKey;
+          var payload = {'description': "Trello webhook", callbackURL: callbackUrl, idModel: boardId};
+          return $http.post(url, payload);
+        }
     }
 })();

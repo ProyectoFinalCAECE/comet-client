@@ -22,7 +22,8 @@
                                                'project',
                                                'channels',
                                                'channelId',
-                                               'projectIntegration'];
+                                               'projectIntegration',
+                                               'TrelloApi'];
 
         function IntegrationCreateController ($log,
                                               $rootScope,
@@ -37,7 +38,8 @@
                                               project,
                                               channels,
                                               channelId,
-                                              projectIntegration) {
+                                              projectIntegration,
+                                              TrelloApi) {
 
           var vm = this;
           vm.integrationId = projectIntegration.integrationId;
@@ -47,11 +49,19 @@
           vm.validationErrors = null;
           vm.hookUrl = null;
           vm.selectedChannel = null;
+          vm.selectedBoard = null;
           vm.name = projectIntegration.name;
+          vm.trelloAuth = trelloAuth;
+          vm.trelloLogged = false;
+        //  vm.getMe = getMe;
+        //  vm.getBoards = getBoards;
+          vm.boardsIds = [];
+          vm.boards = [];
 
           vm.generateHookUrl = generateHookUrl;
           vm.post = post;
-
+          vm.postTrello = postTrello;
+          var appKey = "5196979cb1b5bb0191e54bc94881b5df";
           var token = null,
               isUpdate = (channelId > 0),
               configuration = null;
@@ -70,6 +80,7 @@
 
             generateHookUrl();
             loadChannels();
+            alreadyLogged();
           }
 
           function loadChannels() {
@@ -158,5 +169,88 @@
               ngToast.danger('Ocurrió un error al consultar al servidor.');
             }
         }
+
+        /**
+         * @name post
+         * @desc create/edit the integration config
+        */
+        function postTrello() {
+          if (isUpdate) {
+            // update configuration
+            var updateData = {
+              channelId: channelId,
+              name: vm.name,
+              token: token,
+              newChannelId: vm.selectedChannel.id
+            };
+            console.log('post - edicion', updateData);
+            integrationService.update(project.id, projectIntegration.projectIntegrationId, updateData)
+              .error(integrationConfigError)
+              .then(integrationConfigCreated);
+          }
+          else {
+            // create
+            var data = {
+              channelId: vm.selectedChannel.id,
+              name: vm.name,
+              token: token
+            };
+            console.log('post - alta', data);
+            integrationService.create(project.id, projectIntegration.projectIntegrationId, data)
+              .error(integrationConfigError)
+              .then(function(){
+                  integrationService.configureTrelloWebhook(TrelloApi.Token(), vm.hookUrl, appKey, vm.selectedBoard.id).then(function(result){
+                    console.log("trello response is: ", result);
+                    integrationConfigCreated();
+                  });
+              });
+          }
+        }
+
+        function loadBoards(){
+          vm.trelloLogged = true;
+          //Look for user information
+          TrelloApi.Rest('GET', 'members/me').then(function(res){
+            //store boards ids
+            vm.boardsIds = res.idBoards;
+            for(var x in vm.boardsIds){
+              TrelloApi.boards(vm.boardsIds[x], {}).then(function(res) {
+                vm.boards.push({id:res.id, name: res.name});
+                vm.selectedBoard = vm.boards[0];
+              });
+            }
+          });
+        }
+
+        function trelloAuth(){
+          TrelloApi.Authenticate().then(function(){
+            loadBoards();
+          });
+        }
+
+        function alreadyLogged(){
+          TrelloApi.Authenticate().then(function(){
+            loadBoards();
+          });
+        }
+
+      /*  function getMe(){
+          TrelloApi.Rest('GET', 'members/me').then(function(res){
+            //vm.boards = res.idBoards;
+            alert(JSON.stringify(vm.boards));
+            $log.log('vm.boards', vm.boards);
+          }, function(err){
+            alert(err);
+          });
+        }
+
+        function getBoards(){
+          TrelloApi.boards(vm.boards[0], {}).then(function(res) {
+            alert(JSON.stringify(res));
+            console.log(JSON.stringify(res));
+          }, function(err) {
+            alert(err);
+          });
+        }*/
       }
 })();
