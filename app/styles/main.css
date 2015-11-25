@@ -703,7 +703,6 @@ body[state="dashboard.project.channel-explore"] {
 
 /* Github */
 
-/* mensajes de dropbox */
 .message-github-wrapper {
   width: 97%;
   margin-top: 5px;
@@ -727,6 +726,34 @@ body[state="dashboard.project.channel-explore"] {
 
 .message-github-wrapper .commits-title {
   font-size: 14px;
+}
+
+/* Trello */
+
+.message-trello-wrapper {
+  width: 97%;
+  margin-top: 5px;
+  background-color: #FFF;
+  border-radius: 5px;
+  padding: 10px;
+  min-height: 70px;
+}
+
+.message-trello-wrapper .board {
+  font-weight: bold;
+}
+
+.message-trello-wrapper .card {
+  font-weight: bold;
+}
+
+.message-trello-wrapper .comment {
+  font-style: italic;
+  margin-left: 20px;
+}
+
+.message-trello-wrapper .user {
+    font-style: italic;
 }
 
 /* Emojis */

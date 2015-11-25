@@ -146,6 +146,7 @@
             setFlags();
 
             loadIntegrationConfig().then(function () {
+                $log.log('vm.integrationsConfigured', vm.integrationsConfigured);
                 loadChannelMessages();
                 initializeSocket();
             });
@@ -391,18 +392,52 @@
           */
           function getMember(message) {
 
-            var config = lodash.find(vm.integrationsConfigured, 'id', message.integrationId);
+            var integrationId = getIntegrationIdFromMessageType(message.type);
 
             switch (message.type) {
               case messageType.INTEGRATION_GITHUB:
               case messageType.INTEGRATION_TRELLO:
-              case messageType.INTEGRATION_PINGDOM:
+              case messageType.INTEGRATION_PINGDOM: {
+                var config = getIntegrationConfig(message.integrationId, integrationId);
                 return {
                   alias: config.name,
                   profilePicture: getIntegrationImage(config.integrationId)
                 };
+              }
               default:
                 return lodash.find(vm.project.members, 'id', message.user);
+            }
+          }
+
+          /**
+           * @name getIntegrationIdFromMessageType
+           * @desc returns the integrationId of a message type
+          */
+          function getIntegrationIdFromMessageType(type) {
+            switch (type) {
+              case messageType.INTEGRATION_GITHUB:
+                return 1;
+              case messageType.INTEGRATION_TRELLO:
+                return 2;
+              case messageType.INTEGRATION_PINGDOM:
+                return 3;
+            }
+          }
+
+          /**
+           * @name getIntegrationConfig
+           * @desc returns the configured integration
+          */
+          function getIntegrationConfig(integrationConfigId, integrationId) {
+
+            $log.log('getIntegrationConfig', integrationConfigId, integrationId);
+
+            for (var i = 0; i < vm.integrationsConfigured.length; i++) {
+              var c = vm.integrationsConfigured[i];
+              $log.log('getIntegrationConfig', c);
+              if (c.id === integrationConfigId && c.integrationId === integrationId){
+                return c;
+              }
             }
           }
 
@@ -410,11 +445,7 @@
            * @name getIntegrationImage
            * @desc returns the integration image to show on the user avatar
           */
-
           function getIntegrationImage(integrationId) {
-
-            $log.log('getIntegrationImage', integrationId);
-
             switch (integrationId) {
               // Github
               case 1:
