@@ -2,9 +2,13 @@
   <div class="col-lg-9 ExplorarCanal">
     <div class="row channel-explore-header" sticky offset="60">
       <div class="col-lg-10" style="float:left;">
-        <h2><strong>{{vm.channel.name}}</strong><span class="badge badge-success badge-channel-type" ng-show="{{ vm.channel.type === 'P' }}">
-          canal privado
-        </span></h2>
+        <h2>
+          <i class="fa fa-comments"></i>
+          <strong>{{vm.channel.name}}</strong>
+          <span class="badge badge-success badge-channel-type" ng-show="{{ vm.channel.type === 'P' }}">
+            canal privado
+          </span>
+        </h2>
         <h4 class="ProjDesc">{{vm.channel.description}}</h4>
         <ol class="breadcrumb2">
           <li>
