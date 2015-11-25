@@ -96,6 +96,9 @@
           //delete channel
           vm.imSureDelete = false;
           vm.deleteChannel = deleteChannel;
+          // integrations
+          vm.integrationsConfigured = [];
+          vm.getIntegrationImage = getIntegrationImage;
           // emoji
           vm.showEmoji = false;
           vm.displayEmoji = displayEmoji;
@@ -127,8 +130,7 @@
           };
 
           // current message Id counter
-          var lastMsgId = 0,
-              configurations = [];
+          var lastMsgId = 0;
 
           activate();
 
@@ -158,6 +160,10 @@
             });
           }
 
+          /**
+           * @name loadIntegrationConfig
+           * @desc loads the integration configuration for the channel
+          */
           function loadIntegrationConfig() {
             return integrationService.getAll(project.id).then(function (response) {
               var integrations = response.data.integrations;
@@ -165,7 +171,9 @@
                 var integ = integrations[i];
                 var config = lodash.find(integ.configurations, 'ChannelId', channel.id);
                 if (angular.isDefined(config)) {
-                  configurations.push(config);
+                  config.integrationId = integ.integrationId;
+                  config.integrationName = integ.name;
+                  vm.integrationsConfigured.push(config);
                 }
               }
             });
@@ -377,37 +385,47 @@
             vm.messages.unshift(msg);
           }
 
-
           /**
            * @name getMember
            * @desc returns a member object by id
           */
           function getMember(message) {
 
-            var config = lodash.find(configurations, 'id', message.integrationId);
+            var config = lodash.find(vm.integrationsConfigured, 'id', message.integrationId);
 
             switch (message.type) {
-              case messageType.INTEGRATION_GITHUB: {
+              case messageType.INTEGRATION_GITHUB:
+              case messageType.INTEGRATION_TRELLO:
+              case messageType.INTEGRATION_PINGDOM:
                 return {
                   alias: config.name,
-                  profilePicture: '../images/integraciones/dropbox.png'
+                  profilePicture: getIntegrationImage(config.integrationId)
                 };
-              }
-              case messageType.INTEGRATION_TRELLO: {
-                return {
-                  alias: config.name,
-                  profilePicture: '../images/integraciones/dropbox.png'
-                };
-              }
-              case messageType.INTEGRATION_PINGDOM: {
-                return {
-                  alias: config.name,
-                  profilePicture: '../images/integraciones/dropbox.png'
-                };
-              }
               default:
-                lodash.find(vm.project.members, 'id', message.user);
+                return lodash.find(vm.project.members, 'id', message.user);
             }
+          }
+
+          /**
+           * @name getIntegrationImage
+           * @desc returns the integration image to show on the user avatar
+          */
+
+          function getIntegrationImage(integrationId) {
+
+            $log.log('getIntegrationImage', integrationId);
+
+            switch (integrationId) {
+              // Github
+              case 1:
+                return '../images/integraciones/github.png';
+              // Trello
+              case 2:
+                return '../images/integraciones/trello.png';
+              // Pingdom
+              case 3:
+                return '../images/integraciones/pingdom.png';
+              }
           }
 
           /**

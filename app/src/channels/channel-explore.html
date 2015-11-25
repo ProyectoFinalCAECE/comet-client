@@ -207,17 +207,23 @@
                 </a>
               </div>
               <div class="col-md-3 chat-integrations-wrapper" ng-show="vm.showIntegrations">
-                <h3 class="text-center">Integraciones</h3>
+                <h3 class="text-center">Integraciones configuradas</h3>
                 <div class="chat-integrations">
-                  <li ng-repeat="integration in vmi.integrations">
-                    <div class="chat-integration">
-                       <i class="fa fa-{{integration.name.toLowerCase().replace('pingdom', 'pinterest') }}"> </i>
-                      <div class="chat-integration-name">
-                        <a href="#">{{integration.name}}</a>
+                  <li ng-repeat="integration in vm.integrationsConfigured">
+                    <div class="chat-user">
+                      <img alt="image"
+                           class="chat-avatar"
+                           title="{{integration.integrationName}}"
+                           ng-src="{{::vm.getIntegrationImage(integration.integrationId)}}"/>
+                      <div class="chat-user-name">
+                        {{::integration.integrationName}}
                       </div>
                     </div>
                   </li>
                 </div>
+                <a ng-if="!vm.isClosed" ui-sref="dashboard.project.project-admin({id:vm.project.id , tab:3})">
+                  <p><i class="fa fa-plus" style="padding:0 10px 0 0"></i>Configurar integraciones</p>
+                </a>
               </div>
               <div class="messageInputText">
                 <div class="col-lg-12" style="padding-left:0;">
