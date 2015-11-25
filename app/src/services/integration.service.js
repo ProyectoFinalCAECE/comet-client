@@ -84,8 +84,19 @@
         */
         function configureTrelloWebhook(token, callbackUrl, appKey, boardId){
           var url = "https://api.trello.com/1/tokens/"+ token +"/webhooks/?key=" + appKey;
-          var payload = {'description': "Trello webhook", callbackURL: callbackUrl, idModel: boardId};
-          return $http.post(url, payload);
+          return $http({
+              method: 'POST',
+              url: url,
+              headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+              transformRequest: function(obj) {
+                  var str = [];
+                  for(var p in obj){
+                    str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                  }
+                  return str.join("&");
+              },
+              data: {'description': "Trello webhook", callbackURL: callbackUrl, idModel: boardId}
+          });
         }
     }
 })();
