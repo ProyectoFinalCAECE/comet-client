@@ -25,6 +25,7 @@
                                            'dialogService',
                                            'dashboardServiceModel',
                                            'authService',
+                                           'integrationService',
                                            'chatService',
                                            'channelService',
                                            'user',
@@ -48,6 +49,7 @@
                                           dialogService,
                                           dashboardServiceModel,
                                           authService,
+                                          integrationService,
                                           chatService,
                                           channelService,
                                           user,
@@ -125,7 +127,8 @@
           };
 
           // current message Id counter
-          var lastMsgId = 0;
+          var lastMsgId = 0,
+              configurations = [];
 
           activate();
 
@@ -139,19 +142,33 @@
             angular.element('#message-input').focus();
 
             setFlags();
-            loadChannelMessages();
+
+            loadIntegrationConfig().then(function () {
+                loadChannelMessages();
+                initializeSocket();
+            });
 
             // listen to channel updates
             $scope.$on('channelUpdated', function(event, args) {
               if (vm.isDirect) {
                 return;
               }
-
               vm.channel = args.channel;
               setFlags();
             });
+          }
 
-            initializeSocket();
+          function loadIntegrationConfig() {
+            return integrationService.getAll(project.id).then(function (response) {
+              var integrations = response.data.integrations;
+              for (var i = 0; i < integrations.length; i++) {
+                var integ = integrations[i];
+                var config = lodash.find(integ.configurations, 'ChannelId', channel.id);
+                if (angular.isDefined(config)) {
+                  configurations.push(config);
+                }
+              }
+            });
           }
 
           /**
@@ -367,28 +384,24 @@
           */
           function getMember(message) {
 
+            var config = lodash.find(configurations, 'id', message.integrationId);
+
             switch (message.type) {
-              case messageType.INTEGRATION_DROPBOX: {
-                return {
-                  alias: 'GitHub',
-                  profilePicture: '../images/integraciones/dropbox.png'
-                };
-              }
               case messageType.INTEGRATION_GITHUB: {
                 return {
-                  alias: 'GitHub',
+                  alias: config.name,
                   profilePicture: '../images/integraciones/dropbox.png'
                 };
               }
               case messageType.INTEGRATION_TRELLO: {
                 return {
-                  alias: 'Trello',
+                  alias: config.name,
                   profilePicture: '../images/integraciones/dropbox.png'
                 };
               }
               case messageType.INTEGRATION_PINGDOM: {
                 return {
-                  alias: 'Pingdom',
+                  alias: config.name,
                   profilePicture: '../images/integraciones/dropbox.png'
                 };
               }
