@@ -146,7 +146,6 @@
             setFlags();
 
             loadIntegrationConfig().then(function () {
-                $log.log('vm.integrationsConfigured', vm.integrationsConfigured);
                 loadChannelMessages();
                 initializeSocket();
             });
@@ -430,11 +429,8 @@
           */
           function getIntegrationConfig(integrationConfigId, integrationId) {
 
-            $log.log('getIntegrationConfig', integrationConfigId, integrationId);
-
             for (var i = 0; i < vm.integrationsConfigured.length; i++) {
               var c = vm.integrationsConfigured[i];
-              $log.log('getIntegrationConfig', c);
               if (c.id === integrationConfigId && c.integrationId === integrationId){
                 return c;
               }
