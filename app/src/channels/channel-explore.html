@@ -73,13 +73,13 @@
                   <div class="chat-message"
                        ng-class="vm.getMessageClass(message)"
                        ng-repeat="message in vm.messages"
-                       ng-init="msgMember = vm.getMember(message.user)">
+                       ng-init="msgMember = vm.getMember(message)">
                     <img class="message-avatar" ng-src="{{::msgMember.profilePicture}}" alt="" >
                     <div class="message">
                       <span id="msg_{{::message.id}}" class="message-author"><b>{{::msgMember.alias}}</b></span>
                       <span class="message-date">{{::vm.formatMessageDate(message.date) }}</span>
                       <!-- Text messsage -->
-                      <span class="message-content" ng-if="message.type !== 5">
+                      <span class="message-content" ng-if="message.type == 1">
                         <ng-embed embed-data="message.text"
                                   embed-options="vm.options"
                                   embed-template-url="/src/components/ngEmbed.template.html">
@@ -104,6 +104,79 @@
                             </div>
                           </div>
                           </a>
+                        </div>
+                      </span>
+                      <!-- Github -->
+                      <span class="message-content clearfix" ng-if="message.type === 6">
+                        <div class="message-github-wrapper clearfix"
+                             ng-init="github = message.github"
+                             ng-switch on="github.type">
+                          <!-- Push -->
+                          <div ng-switch-when="push">
+                            <p class="repository">
+                              {{github.repository}}
+                            </p>
+                            <p class="commits-title">
+                              {{github.commits.length}} nuevo/s "commits" de <span class="user">{{github.user}}</span>:
+                            </p>
+                            <p class="commit" ng-repeat="commit in github.commits">
+                              <a href="{{commit.url}}" target="_blank">{{commit.id.substr(commit.id.length - 4)}}</a>
+                              {{commit.message}}
+                            </p>
+                          </div>
+                          <!-- commit comment -->
+                          <div ng-switch-when="commit_comment">
+                            <p class="repository">
+                              {{github.repository}}
+                            </p>
+                            <p>
+                                Nuevo comentario de <span class="user">{{github.user}}</span> en el "commit"
+                                <a href="{{github.url}}" target="_blank">{{github.commit_id.substr(github.commit_id.length - 4)}}</a>
+                            </p>
+                            <p style="font-style:italic">{{github.comment}}</p>
+                          </div>
+                          <!-- Issue comment -->
+                          <div ng-switch-when="issue_comment">
+                            <p class="repository">
+                              {{github.repository}}
+                            </p>
+                            <p>
+                                Nuevo comentario de <span class="user">{{github.user}}</span> en el "issue"
+                                <a href="{{message.github.issue_url}}" target="_blank">{{github.issue_number}} - {{github.issue}}</a>
+                            </p>
+                            <p style="font-style:italic">{{github.comment}}</p>
+                          </div>
+                          <!-- pull_request -->
+                          <div ng-switch-when="pull_request">
+                            <p class="repository">
+                              {{github.repository}}
+                            </p>
+                            <p>
+                                Nuevo "pull_request" de <span class="user">{{github.user}}</span>
+                                <a href="{{github.url}}" target="_blank">{{github.title}}</a>
+                            </p>
+                          </div>
+                          <!-- issues -->
+                          <div ng-switch-when="issues">
+                            <p class="repository">
+                              {{github.repository}}
+                            </p>
+                            <p>
+                                Nuevo "issue" creado por <span class="user">{{github.user}}</span>
+                                <a href="{{github.issue_url}}" target="_blank">{{github.issue_number}} - {{github.issue}}</a>
+                            </p>
+                          </div>
+                        </div>
+                      </span>
+                      <!-- Trello -->
+                      <span class="message-content clearfix" ng-if="message.type === 7">
+                        <div class="message-trello-wrapper clearfix">
+                          <p>
+                            Trello
+                          </p>
+                          <p>
+                            {{message | json}}
+                          </p>
                         </div>
                       </span>
                     </div>
