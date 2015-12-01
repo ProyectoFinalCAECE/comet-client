@@ -63,10 +63,11 @@
                       </td>
                       <td class="columnaIntegraciones">
                         <ul>
-                          <li ng-repeat="integration in vmi.integrations">
-                            <div class="chat-integration">
-                               <i class="fa fa-{{integration.name.toLowerCase().replace('pingdom', 'pinterest') }}"> </i>
-                            </div>
+                          <li ng-repeat="integration in channel.integrations">
+                            <img alt="image"
+                                 class="chat-avatar"
+                                 title="{{integration.name}}"
+                                 ng-src="{{::helpers.getIntegrationImage(integration.integrationId)}}"/>
                           </li>
                         </ul>
                       </td>

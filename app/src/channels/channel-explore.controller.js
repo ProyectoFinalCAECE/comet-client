@@ -98,7 +98,6 @@
           vm.deleteChannel = deleteChannel;
           // integrations
           vm.integrationsConfigured = [];
-          vm.getIntegrationImage = getIntegrationImage;
           // emoji
           vm.showEmoji = false;
           vm.displayEmoji = displayEmoji;
@@ -400,7 +399,7 @@
                 var config = getIntegrationConfig(message.integrationId, integrationId);
                 return {
                   alias: config.name,
-                  profilePicture: getIntegrationImage(config.integrationId)
+                  profilePicture: $rootScope.helpers.getIntegrationImage(config.integrationId)
                 };
               }
               default:
@@ -435,24 +434,6 @@
                 return c;
               }
             }
-          }
-
-          /**
-           * @name getIntegrationImage
-           * @desc returns the integration image to show on the user avatar
-          */
-          function getIntegrationImage(integrationId) {
-            switch (integrationId) {
-              // Github
-              case 1:
-                return '../images/integraciones/github.png';
-              // Trello
-              case 2:
-                return '../images/integraciones/trello.png';
-              // Pingdom
-              case 3:
-                return '../images/integraciones/pingdom.png';
-              }
           }
 
           /**
