@@ -222,8 +222,8 @@ body[state="dashboard.project.channel-explore"] {
 
 .skin-2 .navbar-default .nav > li > a:hover,
 .skin-2 .navbar-default .nav > li > a:focus {
-  background: #213A53;
-  color: #EDF6FF;
+  background: inherit;
+  color: inherit;
 }
 
 /* para marcar canal con notificacion en menu */
