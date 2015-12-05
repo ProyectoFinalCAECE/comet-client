@@ -11,9 +11,14 @@
         return {
             loadServerErrors:loadServerErrors,
             fieldIsNotValid: fieldIsNotValid,
-            randomString:randomString
+            randomString:randomString,
+            getIntegrationImage: getIntegrationImage
         };
 
+        /**
+         * @name fieldIsNotValid
+         * @desc reads the error array searching by fieldName
+         */
         function fieldIsNotValid(model, fieldName) {
           if (model === null) {
             return false;
@@ -41,7 +46,7 @@
 
         /**
          * @name randomString
-         * @desc generates a random alphanumeric string 
+         * @desc generates a random alphanumeric string
          */
         function randomString(length) {
           var s = '';
@@ -50,6 +55,23 @@
               s+= (r < 0.1 ? Math.floor(r * 100) : String.fromCharCode(Math.floor(r * 26) + (r > 0.5 ? 97:65)));
           }
           return s;
+        }
+        /**
+         * @name getIntegrationImage
+         * @desc returns the logo image of a integration
+        */
+        function getIntegrationImage(integrationId) {
+          switch (integrationId) {
+            // Github
+            case 1:
+              return '../images/integraciones/github.png';
+            // Trello
+            case 2:
+              return '../images/integraciones/trello.png';
+            // Pingdom
+            case 3:
+              return '../images/integraciones/pingdom.png';
+            }
         }
     }
 })();

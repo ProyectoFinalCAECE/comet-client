@@ -51,17 +51,20 @@
           vm.selectedChannel = null;
           vm.selectedBoard = null;
           vm.name = projectIntegration.name;
+          vm.generateHookUrl = generateHookUrl;
+          vm.post = post;
+          // Github
+          vm.postGitHub = postGitHub;
+          // trello
           vm.trelloAuth = trelloAuth;
           vm.trelloLogged = false;
         //  vm.getMe = getMe;
         //  vm.getBoards = getBoards;
           vm.boardsIds = [];
           vm.boards = [];
-
-          vm.generateHookUrl = generateHookUrl;
-          vm.post = post;
           vm.postTrello = postTrello;
-          var appKey = "5196979cb1b5bb0191e54bc94881b5df";
+          var trelloAppKey = "5196979cb1b5bb0191e54bc94881b5df";
+
           var token = null,
               isUpdate = (channelId > 0),
               configuration = null;
@@ -78,11 +81,19 @@
               vm.name = configuration.name;
             }
 
+            // trello
+            if (projectIntegration.integrationId === 2) {
+              alreadyLogged();
+            }
+
             generateHookUrl();
             loadChannels();
-            alreadyLogged();
           }
 
+          /**
+           * @name loadChannels
+           * @desc loads the project channels
+          */
           function loadChannels() {
             vm.selectedChannel = channels[0];
             for (var i = 0; i < channels.length; i++) {
@@ -94,7 +105,6 @@
               }
             }
             vm.channels = channels;
-            $log.log('channels', channels);
           }
 
           /**
@@ -114,6 +124,11 @@
            * @name post
            * @desc create/edit the integration config
           */
+          function postGitHub() {
+            post().error(integrationConfigError)
+                  .then(integrationConfigCreated);
+          }
+
           function post() {
             if (isUpdate) {
               // update configuration
@@ -124,9 +139,7 @@
                 newChannelId: vm.selectedChannel.id
               };
               console.log('post - edicion', updateData);
-              integrationService.update(project.id, projectIntegration.projectIntegrationId, updateData)
-                .error(integrationConfigError)
-                .then(integrationConfigCreated);
+              return integrationService.update(project.id, projectIntegration.projectIntegrationId, updateData);
             }
             else {
               // create
@@ -136,9 +149,7 @@
                 token: token
               };
               console.log('post - alta', data);
-              integrationService.create(project.id, projectIntegration.projectIntegrationId, data)
-                .error(integrationConfigError)
-                .then(integrationConfigCreated);
+              return integrationService.create(project.id, projectIntegration.projectIntegrationId, data);
             }
           }
 
@@ -175,36 +186,19 @@
          * @desc create/edit the integration config
         */
         function postTrello() {
-          if (isUpdate) {
-            // update configuration
-            var updateData = {
-              channelId: channelId,
-              name: vm.name,
-              token: token,
-              newChannelId: vm.selectedChannel.id
-            };
-            console.log('post - edicion', updateData);
-            integrationService.update(project.id, projectIntegration.projectIntegrationId, updateData)
-              .error(integrationConfigError)
-              .then(integrationConfigCreated);
+          if (!vm.trelloLogged) {
+            ngToast.danger('Debes autenticarte en Trello para poder configurar esta integración.');
           }
-          else {
-            // create
-            var data = {
-              channelId: vm.selectedChannel.id,
-              name: vm.name,
-              token: token
-            };
-            console.log('post - alta', data);
-            integrationService.create(project.id, projectIntegration.projectIntegrationId, data)
-              .error(integrationConfigError)
-              .then(function(){
-                  integrationService.configureTrelloWebhook(TrelloApi.Token(), vm.hookUrl, appKey, vm.selectedBoard.id).then(function(result){
-                    console.log("trello response is: ", result);
-                    integrationConfigCreated();
-                  });
-              });
-          }
+          $log.log('postTrello', vm.hookUrl, vm.selectedBoard);
+          post()
+            .error(integrationConfigError)
+            .then(function () {
+              integrationService.configureTrelloWebhook(TrelloApi.Token(), vm.hookUrl, trelloAppKey, vm.selectedBoard.id)
+                  .error(function () {
+                    ngToast.danger('Ocurrió un error en la comunicación con Trello.');
+                  })
+                  .then(integrationConfigCreated);
+            });
         }
 
         function loadBoards(){
@@ -213,7 +207,7 @@
           TrelloApi.Rest('GET', 'members/me').then(function(res){
             //store boards ids
             vm.boardsIds = res.idBoards;
-            for(var x in vm.boardsIds){
+            for (var x in vm.boardsIds) {
               TrelloApi.boards(vm.boardsIds[x], {}).then(function(res) {
                 vm.boards.push({id:res.id, name: res.name});
                 vm.selectedBoard = vm.boards[0];

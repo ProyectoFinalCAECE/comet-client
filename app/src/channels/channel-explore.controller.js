@@ -25,6 +25,7 @@
                                            'dialogService',
                                            'dashboardServiceModel',
                                            'authService',
+                                           'integrationService',
                                            'chatService',
                                            'channelService',
                                            'user',
@@ -48,6 +49,7 @@
                                           dialogService,
                                           dashboardServiceModel,
                                           authService,
+                                          integrationService,
                                           chatService,
                                           channelService,
                                           user,
@@ -94,6 +96,8 @@
           //delete channel
           vm.imSureDelete = false;
           vm.deleteChannel = deleteChannel;
+          // integrations
+          vm.integrationsConfigured = [];
           // emoji
           vm.showEmoji = false;
           vm.displayEmoji = displayEmoji;
@@ -139,19 +143,39 @@
             angular.element('#message-input').focus();
 
             setFlags();
-            loadChannelMessages();
+
+            loadIntegrationConfig().then(function () {
+                loadChannelMessages();
+                initializeSocket();
+            });
 
             // listen to channel updates
             $scope.$on('channelUpdated', function(event, args) {
               if (vm.isDirect) {
                 return;
               }
-
               vm.channel = args.channel;
               setFlags();
             });
+          }
 
-            initializeSocket();
+          /**
+           * @name loadIntegrationConfig
+           * @desc loads the integration configuration for the channel
+          */
+          function loadIntegrationConfig() {
+            return integrationService.getAll(project.id).then(function (response) {
+              var integrations = response.data.integrations;
+              for (var i = 0; i < integrations.length; i++) {
+                var integ = integrations[i];
+                var config = lodash.find(integ.configurations, 'ChannelId', channel.id);
+                if (angular.isDefined(config)) {
+                  config.integrationId = integ.integrationId;
+                  config.integrationName = integ.name;
+                  vm.integrationsConfigured.push(config);
+                }
+              }
+            });
           }
 
           /**
@@ -360,40 +384,55 @@
             vm.messages.unshift(msg);
           }
 
-
           /**
            * @name getMember
            * @desc returns a member object by id
           */
           function getMember(message) {
 
+            var integrationId = getIntegrationIdFromMessageType(message.type);
+
             switch (message.type) {
-              case messageType.INTEGRATION_DROPBOX: {
-                return {
-                  alias: 'GitHub',
-                  profilePicture: '../images/integraciones/dropbox.png'
-                };
-              }
-              case messageType.INTEGRATION_GITHUB: {
-                return {
-                  alias: 'GitHub',
-                  profilePicture: '../images/integraciones/dropbox.png'
-                };
-              }
-              case messageType.INTEGRATION_TRELLO: {
-                return {
-                  alias: 'Trello',
-                  profilePicture: '../images/integraciones/dropbox.png'
-                };
-              }
+              case messageType.INTEGRATION_GITHUB:
+              case messageType.INTEGRATION_TRELLO:
               case messageType.INTEGRATION_PINGDOM: {
+                var config = getIntegrationConfig(message.integrationId, integrationId);
                 return {
-                  alias: 'Pingdom',
-                  profilePicture: '../images/integraciones/dropbox.png'
+                  alias: config.name,
+                  profilePicture: $rootScope.helpers.getIntegrationImage(config.integrationId)
                 };
               }
               default:
-                lodash.find(vm.project.members, 'id', message.user);
+                return lodash.find(vm.project.members, 'id', message.user);
+            }
+          }
+
+          /**
+           * @name getIntegrationIdFromMessageType
+           * @desc returns the integrationId of a message type
+          */
+          function getIntegrationIdFromMessageType(type) {
+            switch (type) {
+              case messageType.INTEGRATION_GITHUB:
+                return 1;
+              case messageType.INTEGRATION_TRELLO:
+                return 2;
+              case messageType.INTEGRATION_PINGDOM:
+                return 3;
+            }
+          }
+
+          /**
+           * @name getIntegrationConfig
+           * @desc returns the configured integration
+          */
+          function getIntegrationConfig(integrationConfigId, integrationId) {
+
+            for (var i = 0; i < vm.integrationsConfigured.length; i++) {
+              var c = vm.integrationsConfigured[i];
+              if (c.id === integrationConfigId && c.integrationId === integrationId){
+                return c;
+              }
             }
           }
 

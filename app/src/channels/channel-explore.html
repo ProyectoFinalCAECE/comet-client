@@ -2,9 +2,13 @@
   <div class="col-lg-9 ExplorarCanal">
     <div class="row channel-explore-header" sticky offset="60">
       <div class="col-lg-10" style="float:left;">
-        <h2><strong>{{vm.channel.name}}</strong><span class="badge badge-success badge-channel-type" ng-show="{{ vm.channel.type === 'P' }}">
-          canal privado
-        </span></h2>
+        <h2>
+          <i class="fa fa-comments"></i>
+          <strong>{{vm.channel.name}}</strong>
+          <span class="badge badge-success badge-channel-type" ng-show="{{ vm.channel.type === 'P' }}">
+            canal privado
+          </span>
+        </h2>
         <h4 class="ProjDesc">{{vm.channel.description}}</h4>
         <ol class="breadcrumb2">
           <li>
@@ -161,8 +165,16 @@
                             <p class="repository">
                               {{github.repository}}
                             </p>
-                            <p>
+                            <p ng-if="github.action === 'opened'">
                                 Nuevo "issue" creado por <span class="user">{{github.user}}</span>
+                                <a href="{{github.issue_url}}" target="_blank">{{github.issue_number}} - {{github.issue}}</a>
+                            </p>
+                            <p ng-if="github.action === 'closed'">
+                                <span class="user">{{github.user}}</span> cerró el "issue"
+                                <a href="{{github.issue_url}}" target="_blank">{{github.issue_number}} - {{github.issue}}</a>
+                            </p>
+                            <p ng-if="github.action === 'reopened'">
+                                <span class="user">{{github.user}}</span> reabrió el "issue"
                                 <a href="{{github.issue_url}}" target="_blank">{{github.issue_number}} - {{github.issue}}</a>
                             </p>
                           </div>
@@ -170,13 +182,54 @@
                       </span>
                       <!-- Trello -->
                       <span class="message-content clearfix" ng-if="message.type === 7">
-                        <div class="message-trello-wrapper clearfix">
-                          <p>
-                            Trello
-                          </p>
-                          <p>
-                            {{message | json}}
-                          </p>
+                        <div class="message-trello-wrapper clearfix"
+                             ng-init="trello = message.trello"
+                             ng-switch on="trello.type">
+                          <!-- UpdateCard -->
+                          <div ng-switch-when="updateCard">
+                            <p class="board">
+                              Tablero: <a href="http://trello.com/b/{{trello.data.board.id}}" target="_blank">{{::trello.board}}</a>
+                            </p>
+                            <p>
+                                <span class="user">{{trello.user}}</span> actualizó la tarjeta
+                                <a href="http://trello.com/c/{{trello.data.card.id}}" target="_blank">{{::trello.data.card.name}}</a>
+                                <span class="card" ng-if="!trello.card.name">{{::trello.card}}</span>
+                            </p>
+                          </div>
+                          <!-- createCard -->
+                          <div ng-switch-when="createCard">
+                            <p class="board">
+                              Tablero: <a href="http://trello.com/b/{{trello.data.board.id}}" target="_blank">{{::trello.board}}</a>
+                            </p>
+                            <p>
+                                <span class="user">{{trello.user}}</span> creó la tarjeta
+                                <a href="http://trello.com/c/{{trello.data.card.id}}" target="_blank">{{::trello.data.card.name}}</a>
+                                <span class="card" ng-if="!trello.card.name">{{::trello.card}}</span>
+                            </p>
+                          </div>
+                          <!-- commentCard -->
+                          <div ng-switch-when="commentCard">
+                            <p class="board">
+                              Tablero: <a href="http://trello.com/b/{{trello.data.board.id}}" target="_blank">{{::trello.board}}</a>
+                            </p>
+                            <p>
+                                <span class="user">{{trello.user}}</span> comentó en la tarjeta
+                                <span class="card">{{::trello.card}}</span>
+                                <p class="comment">
+                                  {{::trello.text}}
+                                </p>
+                            </p>
+                          </div>
+                          <!-- addMemberToCard -->
+                          <div ng-switch-when="addMemberToCard">
+                            <p class="board">
+                              Tablero: <a href="http://trello.com/b/{{trello.data.board.id}}" target="_blank">{{::trello.board}}</a>
+                            </p>
+                            <p>
+                                <span class="user">{{trello.user}}</span> agregó un nuevo miembro en la tarjeta
+                                <span class="card">{{::trello.card}}</span>
+                            </p>
+                          </div>
                         </div>
                       </span>
                     </div>
@@ -207,17 +260,23 @@
                 </a>
               </div>
               <div class="col-md-3 chat-integrations-wrapper" ng-show="vm.showIntegrations">
-                <h3 class="text-center">Integraciones</h3>
+                <h3 class="text-center">Integraciones configuradas</h3>
                 <div class="chat-integrations">
-                  <li ng-repeat="integration in vmi.integrations">
-                    <div class="chat-integration">
-                       <i class="fa fa-{{integration.name.toLowerCase().replace('pingdom', 'pinterest') }}"> </i>
-                      <div class="chat-integration-name">
-                        <a href="#">{{integration.name}}</a>
+                  <li ng-repeat="integration in vm.integrationsConfigured">
+                    <div class="chat-user">
+                      <img alt="image"
+                           class="chat-avatar"
+                           title="{{integration.integrationName}}"
+                           ng-src="{{::helpers.getIntegrationImage(integration.integrationId)}}"/>
+                      <div class="chat-user-name">
+                        {{::integration.integrationName}}
                       </div>
                     </div>
                   </li>
                 </div>
+                <a ng-if="!vm.isClosed" ui-sref="dashboard.project.project-admin({id:vm.project.id , tab:3})">
+                  <p><i class="fa fa-plus" style="padding:0 10px 0 0"></i>Configurar integraciones</p>
+                </a>
               </div>
               <div class="messageInputText">
                 <div class="col-lg-12" style="padding-left:0;">

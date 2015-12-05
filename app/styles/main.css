@@ -60,7 +60,11 @@ a.disabled {
 }
 
 .badge {
-  font-family: verdana;
+  font-family: Verdana !important;
+}
+
+.label {
+  font-family: Verdana !important;
 }
 
 .logo-name a {
@@ -218,8 +222,8 @@ body[state="dashboard.project.channel-explore"] {
 
 .skin-2 .navbar-default .nav > li > a:hover,
 .skin-2 .navbar-default .nav > li > a:focus {
-  background: #213A53;
-  color: #EDF6FF;
+  background: inherit;
+  color: inherit;
 }
 
 /* para marcar canal con notificacion en menu */
@@ -699,7 +703,6 @@ body[state="dashboard.project.channel-explore"] {
 
 /* Github */
 
-/* mensajes de dropbox */
 .message-github-wrapper {
   width: 97%;
   margin-top: 5px;
@@ -723,6 +726,34 @@ body[state="dashboard.project.channel-explore"] {
 
 .message-github-wrapper .commits-title {
   font-size: 14px;
+}
+
+/* Trello */
+
+.message-trello-wrapper {
+  width: 97%;
+  margin-top: 5px;
+  background-color: #FFF;
+  border-radius: 5px;
+  padding: 10px;
+  min-height: 70px;
+}
+
+.message-trello-wrapper .board {
+  font-weight: bold;
+}
+
+.message-trello-wrapper .card {
+  font-weight: bold;
+}
+
+.message-trello-wrapper .comment {
+  font-style: italic;
+  margin-left: 20px;
+}
+
+.message-trello-wrapper .user {
+    font-style: italic;
 }
 
 /* Emojis */
@@ -932,6 +963,41 @@ body[state="dashboard.project.channel-explore"] {
 }
 
 /* Integraciones */
+.integration-list-caption {
+  margin-top: 20px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.integration-header {
+    padding:20px;
+}
+
+.integration-header .name {
+  font-size: 16px;
+  font-weight:bold;
+  color:#676a6c;
+}
+
+.integration-detail {
+  margin-left: 70px;
+  padding: 10px;
+  width: 85%;
+  border-top: 1px solid #CCC;
+}
+
+.integration-detail .channel {
+
+}
+
+.integration-detail .name {
+
+}
+
+.integration-detail .date {
+  font-style: italic;
+}
+
 .integrations-status, .integrations-buttons{
   vertical-align: middle!important;
 }
@@ -953,9 +1019,12 @@ body[state="dashboard.project.channel-explore"] {
 }
 
 /* Configurar integraciones */
+#view-integration-create input.hookUrl {
+  border:0;
+  font-size:12px;
+  font-family: monospace;
+}
 
-.form-bordered {
-  border: 1px solid gray;
-  padding: 5px 15px 5px 5px;
-  box-shadow: 1px 1px 1px 1px #D8D8D8;
+#view-integration-create .label-detail {
+  font-weight: normal;
 }
