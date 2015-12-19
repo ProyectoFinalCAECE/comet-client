@@ -29,7 +29,9 @@
            * @desc controller startup logic
            */
           function activate() {
-            confirm();
+            if ($state.current.name !== 'dashboard.profile') {
+              confirm();
+            }
           }
 
           /**
