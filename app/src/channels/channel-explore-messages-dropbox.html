@@ -1,0 +1,20 @@
+<span class="message-content clearfix" ng-if="message.type === 5">
+  <div class="message-dropbox-wrapper clearfix">
+    <a href="{{message.dropbox.link}}" target="_blank">
+    <div class="message-dropbox-inside clearfix">
+      <div class="col-left">
+        <img ng-if="!message.dropbox.thumbnailLink" ng-src="{{message.dropbox.icon}}"/>
+        <img ng-if="message.dropbox.thumbnailLink" ng-src="{{message.dropbox.thumbnailLink}}"/>
+      </div>
+      <div class="col-right">
+        <p class="message-dropbox-name">
+          {{message.dropbox.name}}
+        </p>
+        <p class="message-dropbox-legend">
+          Archivo compartido a través de Dropbox
+        </p>
+      </div>
+    </div>
+    </a>
+  </div>
+</span>

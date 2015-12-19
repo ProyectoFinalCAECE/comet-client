@@ -399,7 +399,7 @@
                 var config = getIntegrationConfig(message.integrationId, integrationId);
                 return {
                   alias: config.name,
-                  profilePicture: $rootScope.helpers.getIntegrationImage(config.integrationId)
+                  profilePicture: $rootScope.helpers.getIntegrationImage(integrationId)
                 };
               }
               default:
@@ -444,6 +444,10 @@
             return (message.user === user.id);
           }
 
+          /**
+           * @name getMessageClass
+           * @desc returns the css class to use in the message container div
+          */
           function getMessageClass(message) {
             var cssClass = '';
             // messages from the current logged in user
