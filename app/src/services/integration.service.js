@@ -16,6 +16,7 @@
         return {
             create: create,
             update: update,
+            remove: remove,
             getAll: getAll,
             getProjectIntegrationById: getProjectIntegrationById,
             configureTrelloWebhook: configureTrelloWebhook
@@ -63,11 +64,33 @@
 
         /**
          * @name update
-         * @desc update integracion config
+         * @desc update integration config
          */
         function update (projectId, projectIntegrationId, projectIntegrationConfig) {
           var url = getBaseUrl(projectId) + projectIntegrationId;
           return $http.put(url, projectIntegrationConfig, authService.getJwtHeader());
+        }
+
+        /**
+         * @name delete
+         * @desc delete integration config
+         */
+        function remove (projectId, projectIntegrationId, channelId) {
+          var url = getBaseUrl(projectId) + projectIntegrationId,
+              deleteData = {
+                channelId: channelId,
+              };
+
+          var req = {
+            method: "DELETE",
+            url: url,
+            data: deleteData,
+            headers: {"Content-Type":"application/json;charset=utf-8",
+                      "Authorization":"Bearer "+ authService.getToken()}
+          };
+
+          return $http(req);
+          //return $http.delete(url, deleteData, authService.getJwtHeader());
         }
 
         /**
