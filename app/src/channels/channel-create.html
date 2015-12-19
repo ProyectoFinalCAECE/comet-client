@@ -50,7 +50,7 @@
           </div>
           <label class="col-sm-2 control-label">Participantes</label>
           <div class="col-sm-10">
-            <ui-select multiple ng-model="vm.invites" theme="bootstrap">
+            <ui-select  class="MemberList" multiple ng-model="vm.invites" theme="bootstrap">
               <ui-select-match placeholder="Buscar usuarios...">{{$item.alias}}</ui-select-match>
               <ui-select-choices repeat="member in vm.availableMembers | props: {firstName: $select.search, lastName: $select.search}">
                 <div ng-bind-html="member.alias | highlight: $select.search"></div>

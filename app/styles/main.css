@@ -277,6 +277,11 @@ body[state="dashboard.project.channel-explore"] {
     border-style: none solid none;
 }
 
+.MemberList {
+  position: fixed;
+  z-index: 10;
+}
+
 
 /* Estilos para la vista de proyectos y canales*/
 .col-lg-9 {
