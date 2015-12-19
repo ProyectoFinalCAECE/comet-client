@@ -1,7 +1,9 @@
 <p class="integration-list-caption">Comet permite que integres tu proyecto con servicios externos y así aumentar la productividad del equipo.</p>
 <p class="integration-list-caption">En esta vista puedes editar las integraciones ya configuradas o crear nuevas.</p>
 <div class="m-t clearfix" style="width:80%; margin:auto; padding:15px;">
-  <div class="integration-header clearfix" ng-repeat-start="integration in vmi.integrations">
+  <div class="integration-header clearfix"
+       ng-repeat-start="integration in vmi.integrations"
+       ng-init="activeConfigurations = vmi.getActiveConfigurations(integration.configurations)">
     <div class="integrations-icon" style="float:left;color:#676a6c">
       <i class="fa fa-{{integration.name.toLowerCase().replace('pingdom', 'codiepie') }}"> </i>
     </div>
@@ -11,10 +13,10 @@
     </div>
     <div style="float:right; margin-left: 10px;">
       <a class="btn btn-white btn-sm"
-         ng-if="integration.configurations.length > 0"
+         ng-if="activeConfigurations.length > 0"
          ng-click="integration.visible = !integration.visible ">
         <i class="fa fa-arrow-{{integration.visible ? 'up' : 'down'}}"></i>
-        {{integration.configurations.length}} configurada/s
+        {{activeConfigurations.length}} configurada/s
       </a>
       <a class="btn btn-primary  btn-sm"
          ui-sref="dashboard.project.integration({projectIntegrationId:integration.projectIntegrationId,
@@ -27,7 +29,7 @@
     </div>
   </div>
   <div ng-show="integration.visible"
-       ng-repeat="configuration in integration.configurations"
+       ng-repeat="configuration in activeConfigurations"
        ng-repeat-end=""
        class="integration-detail clearfix">
     <div style="float:left">
@@ -43,7 +45,7 @@
     </div>
     <div style="float:right; margin-left: 10px;">
       <a class="btn btn-danger btn-outline btn-sm"
-         ng-click="vmi.deleteConfiguredIntegration(integration, configuration)">
+         ng-click="vmi.deleteConfiguredIntegration(activeConfigurations, integration, configuration)">
         <i class="fa fa-trash"></i>
         Eliminar
       </a>

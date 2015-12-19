@@ -79,9 +79,6 @@
                        ng-repeat="message in vm.messages"
                        ng-init="msgMember = vm.getMember(message)">
                     <img class="message-avatar" ng-src="{{::msgMember.profilePicture}}" alt="" >
-                    <p>
-                      {{msgMember|json}}
-                    </p>
                     <div class="message">
                       <span id="msg_{{::message.id}}" class="message-author"><b>{{::msgMember.alias}}</b></span>
                       <span class="message-date">{{::vm.formatMessageDate(message.date) }}</span>
@@ -130,7 +127,7 @@
               <div class="col-md-3 chat-integrations-wrapper" ng-show="vm.showIntegrations">
                 <h3 class="text-center">Integraciones configuradas</h3>
                 <div class="chat-integrations">
-                  <li ng-repeat="integration in vm.integrationsConfigured">
+                  <li ng-repeat="integration in vm.integrationsConfigured | filter: {active: true}">
                     <div class="chat-user">
                       <img alt="image"
                            class="chat-avatar"

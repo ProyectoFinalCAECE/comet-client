@@ -430,7 +430,8 @@
 
             for (var i = 0; i < vm.integrationsConfigured.length; i++) {
               var c = vm.integrationsConfigured[i];
-              if (c.id === integrationConfigId && c.integrationId === integrationId){
+              if (c.id === integrationConfigId &&
+                  c.integrationId === integrationId ){
                 return c;
               }
             }

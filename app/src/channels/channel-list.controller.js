@@ -34,8 +34,6 @@
           vmc.isEmpty = true;
           vmc.gotoCreateChannel = gotoCreateChannel;
 
-          var configuredIntegrations = [];
-
           activate();
 
           /**
@@ -84,7 +82,8 @@
                 integ = integrations[i];
                 configTotal = (integ.configurations ? integ.configurations.length : 0);
                 for (var j = 0; j < configTotal; j++) {
-                   config = integ.configurations[j];
+                  config = integ.configurations[j];
+                  if (config.active) {
                    var channel = lodash.find(vmc.channels, 'id', config.ChannelId);
                    if (channel) {
                      channel.integrations.push({
@@ -92,6 +91,7 @@
                        integrationId: integ.integrationId
                      });
                    }
+                  }
                 }
               }
             });

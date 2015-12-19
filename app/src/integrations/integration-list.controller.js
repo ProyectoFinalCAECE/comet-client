@@ -34,6 +34,7 @@
           var vm = this;
           vm.integrations = integrations;
           vm.getChannelName = getChannelName;
+          vm.getActiveConfigurations = getActiveConfigurations;
           vm.deleteConfiguredIntegration = deleteConfiguredIntegration;
 
           activate();
@@ -43,7 +44,6 @@
            * @desc controller activation logic
            */
           function activate () {
-
           }
 
           /**
@@ -58,10 +58,24 @@
           }
 
           /**
+           * @name getActiveConfigurations
+           * @desc return the configurations with active state
+           */
+          function getActiveConfigurations(configurations) {
+            var activeConfigs = lodash.filter(configurations, 'active', true);
+            if (activeConfigs) {
+              return activeConfigs;
+            }
+            else {
+              return [];
+            }
+          }
+
+          /**
            * @name deleteConfiguredIntegration
            * @desc deletes the selected integration configuration
            */
-          function deleteConfiguredIntegration (integration, configuration) {
+          function deleteConfiguredIntegration (activeConfigurations, integration, configuration) {
             var msg = '¿ Está seguro que desea eliminar esta integración configurada ?',
                 dlg = dialogService.showModalConfirm('Eliminar integración', msg);
 
@@ -70,8 +84,7 @@
                 .remove(project.id, integration.projectIntegrationId, configuration.ChannelId)
                 .then(function () {
                   ngToast.success('Configuración eliminada.');
-                  console.log(integration, configuration);
-                  lodash.remove(integration.configurations, function(c) {
+                  lodash.remove(activeConfigurations, function(c) {
                     return (c.ChannelId === configuration.ChannelId);
                   });
                 },
