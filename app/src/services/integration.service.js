@@ -18,7 +18,8 @@
             update: update,
             getAll: getAll,
             getProjectIntegrationById: getProjectIntegrationById,
-            configureTrelloWebhook: configureTrelloWebhook
+            configureTrelloWebhook: configureTrelloWebhook,
+            statusCakeLogin: statusCakeLogin
         };
 
         /**
@@ -98,5 +99,34 @@
             data: {'description': "Trello webhook", callbackURL: callbackUrl, idModel: boardId}
         });
       }
+
+
+      /*headers: {'Content-Type': 'application/x-www-form-urlencoded',
+                'API': APIKey,
+                'Username': username}*/
+
+      /**
+      * @name statusCakeLogin
+      * @desc auth on StatusCake
+      */
+      function statusCakeLogin(username, APIKey){
+        var url = "https://www.statuscake.com/API/Auth/";
+        return $http({
+          method: 'POST',
+          url: url,
+          headers: {'Content-Type': 'application/x-www-form-urlencoded',
+                    'Access-Control-Allow-Origin':'*',
+                    'API': APIKey,
+                    'Username': username},
+          transformRequest: function(obj){
+            var str = [];
+            for(var p in obj){
+              str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+            }
+            return str.join("&");
+          },
+          data: {'API': APIKey, 'Username': username}
+      });
+    }
     }
 })();
