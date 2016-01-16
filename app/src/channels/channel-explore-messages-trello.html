@@ -2,36 +2,51 @@
   <div class="message-trello-wrapper clearfix"
        ng-init="trello = message.trello"
        ng-switch on="trello.type">
-    <!-- UpdateCard -->
-    <div ng-switch-when="updateCard">
-      <p class="board">
-        Tablero: <a href="http://trello.com/b/{{trello.data.board.id}}" target="_blank">{{::trello.board}}</a>
-      </p>
-      <p>
-          <span class="user">{{trello.user}}</span> actualizó la tarjeta
-          <a href="http://trello.com/c/{{trello.data.card.id}}" target="_blank">{{::trello.data.card.name}}</a>
-          <span class="card" ng-if="!trello.card.name">{{::trello.card}}</span>
-      </p>
-    </div>
     <!-- createCard -->
     <div ng-switch-when="createCard">
       <p class="board">
-        Tablero: <a href="http://trello.com/b/{{trello.data.board.id}}" target="_blank">{{::trello.board}}</a>
+        Tablero: <a href="http://trello.com/b/{{trello.board.id}}" target="_blank">{{::trello.board.name}}</a>
       </p>
       <p>
-          <span class="user">{{trello.user}}</span> creó la tarjeta
-          <a href="http://trello.com/c/{{trello.data.card.id}}" target="_blank">{{::trello.data.card.name}}</a>
-          <span class="card" ng-if="!trello.card.name">{{::trello.card}}</span>
+          <span class="user">{{::trello.user}}</span> creó la tarjeta
+          <a href="http://trello.com/c/{{trello.card.id}}" target="_blank"><b>{{::trello.card.name}}</b></a>
+      </p>
+    </div>
+    <!-- UpdateCard -->
+    <div ng-switch-when="updateCard">
+      <p class="board">
+        Tablero: <a href="http://trello.com/b/{{trello.board.id}}" target="_blank">{{::trello.board.name}}</a>
+      </p>
+      <p ng-hide="trello.card.closed">
+          <span class="user">{{::trello.user}}</span> actualizó la tarjeta
+          <a href="http://trello.com/c/{{trello.card.id}}" target="_blank"><b>{{::trello.card.name}}</b></a>
+      </p>
+      <p ng-if="trello.card.closed">
+        <span class="user">{{::trello.user}}</span> archivó la tarjeta
+        <a href="http://trello.com/c/{{trello.card.id}}" target="_blank"><b>{{::trello.card.name}}</b></a>
       </p>
     </div>
     <!-- commentCard -->
     <div ng-switch-when="commentCard">
       <p class="board">
-        Tablero: <a href="http://trello.com/b/{{trello.data.board.id}}" target="_blank">{{::trello.board}}</a>
+        Tablero: <a href="http://trello.com/b/{{trello.board.id}}" target="_blank">{{::trello.board.name}}</a>
       </p>
       <p>
-          <span class="user">{{trello.user}}</span> comentó en la tarjeta
-          <span class="card">{{::trello.card}}</span>
+          <span class="user">{{::trello.user}}</span> comentó en la tarjeta
+          <a href="http://trello.com/c/{{trello.card.id}}" target="_blank"><b>{{::trello.card.name}}</b></a>
+          <p class="comment">
+            {{::trello.text}}
+          </p>
+      </p>
+    </div>
+    <!-- deleteCard -->
+    <div ng-switch-when="deleteCard">
+      <p class="board">
+        Tablero: <a href="http://trello.com/b/{{trello.board.id}}" target="_blank">{{::trello.board.name}}</a>
+      </p>
+      <p>
+          <span class="user">{{::trello.user}}</span> comentó en la tarjeta
+          <a href="http://trello.com/c/{{trello.card.id}}" target="_blank"><b>{{::trello.card.name}}</b></a>
           <p class="comment">
             {{::trello.text}}
           </p>
@@ -40,11 +55,31 @@
     <!-- addMemberToCard -->
     <div ng-switch-when="addMemberToCard">
       <p class="board">
-        Tablero: <a href="http://trello.com/b/{{trello.data.board.id}}" target="_blank">{{::trello.board}}</a>
+        Tablero: <a href="http://trello.com/b/{{trello.board.id}}" target="_blank">{{::trello.board.name}}</a>
       </p>
       <p>
-          <span class="user">{{trello.user}}</span> agregó un nuevo miembro en la tarjeta
-          <span class="card">{{::trello.card}}</span>
+          <span class="user">{{::trello.user}}</span> agregó a <b>{{::trello.member.fullName}}</b> en la tarjeta
+          <a href="http://trello.com/c/{{trello.card.id}}" target="_blank"><b>{{::trello.card.name}}</b></a>
+      </p>
+    </div>
+    <!-- createList -->
+    <div ng-switch-when="createList">
+      <p class="board">
+        Tablero: <a href="http://trello.com/b/{{trello.board.id}}" target="_blank">{{::trello.board.name}}</a>
+      </p>
+      <p>
+          <span class="user">{{trello.user}}</span> creó la lista:
+          <a href="http://trello.com/c/{{trello.list.id}}" target="_blank"><b>{{::trello.list.name}}</b></a>
+      </p>
+    </div>
+    <!-- updateList -->
+    <div ng-switch-when="updateList">
+      <p class="board">
+        Tablero: <a href="http://trello.com/b/{{trello.board.id}}" target="_blank">{{::trello.board.name}}</a>
+      </p>
+      <p>
+          <span class="user">{{::trello.user}}</span> creó la lista:
+          <a href="http://trello.com/c/{{trello.list.id}}" target="_blank">{{::trello.list.name}}</a>
       </p>
     </div>
   </div>
