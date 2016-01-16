@@ -9,15 +9,15 @@
 
   function config ($stateProvider) {
     $stateProvider
-      .state('dashboard.project.search-results', {
-        url: '/search-results?criterio',
+      .state('dashboard.project.video-index', {
+        url: '/video-index',
         ncyBreadcrumb: {
-          label: 'Resultados de la búsqueda'
+          label: 'Videos'
         },
         views:{
           '@dashboard': {
-            templateUrl: '/src/search/search-results.html',
-            controller: 'SearchResultsController',
+            templateUrl: '/src/video/video-index.html',
+            controller: 'VideoIndexController',
             controllerAs: 'vm'
           }
         }

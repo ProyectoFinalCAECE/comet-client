@@ -2,7 +2,7 @@
   <div class="row fixed-header" sticky offset="60">
     <div class="col-lg-9">
       <h2><i class="fa fa-search"></i> Resultados de la búsqueda</h2>
-      <h3>#### resultados encontrados para: <span class="text-navy">{{vm.criterioBusqueda}}</span></h3>
+      <h3>#### resultados encontrados para: <span class="text-navy">“####”</span></h3>
       <ol class="breadcrumb2">
         <li>
           <div ncy-breadcrumb></div>
@@ -20,7 +20,7 @@
             <div class="col-lg-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-content">
-                        <div class="resultadosBuscador">
+                        <div class="resultadosBuscador" dir-paginate="itemsPerPage: 5">
                             <div class="search-result">
                                 <h3><a href="#">Titulo</a></h3>
                                 <a href="#" class="search-link">https://link‎</a>
@@ -54,7 +54,7 @@
                             </div>
                           </div>
                         <div class="hr-line-dashed"></div>
-                        <!-- <dir-pagination-controls/> -->
+                        <dir-pagination-controls/>
                     </div>
                 </div>
             </div>

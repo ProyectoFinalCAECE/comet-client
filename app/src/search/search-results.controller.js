@@ -11,23 +11,16 @@
 
         SearchResultsController.$inject = ['$rootScope',
                                            '$state',
-                                           '$timeout',
-                                           'ngToast',
-                                           'constraints',
-                                           'dialogService',
-                                           'projectService',
-                                           'userService'];
+                                           '$stateParams',
+                                           'ngToast'];
 
         function SearchResultsController ($rootScope,
                                           $state,
-                                          $timeout,
-                                          ngToast,
-                                          constraints,
-                                          dialogService,
-                                          projectService,
-                                          userService) {
+                                          $stateParams,
+                                          ngToast) {
 
           var vm = this;
+          vm.criterioBusqueda = $stateParams.criterio;
 
           activate();
 
@@ -36,7 +29,8 @@
            * @desc controller activation logic
           */
           function activate () {
-
+            // aca habrìa que llamar al server para hacer la busqueda
+            // mientras mostrar un gif de loading
           }
         }
 })();
