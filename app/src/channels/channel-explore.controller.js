@@ -630,7 +630,7 @@
                   $rootScope.$broadcast('channelsUpdated');
                   ngToast.success('Canal agregado.');
                   // sends an auto generated message
-                  sendMessage(user.fullName + ' se ha unido al canal.',
+                  sendMessage('Se ha unido al canal.',
                               user.id,
                               messageType.AUTO);
                 });
