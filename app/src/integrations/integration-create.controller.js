@@ -83,7 +83,20 @@
               // get the desired configuration by channelId (TODO: must be an explicit configurationId)
               configuration = lodash.find(projectIntegration.configurations, 'ChannelId', channelId);
               $log.log('configuration', configuration);
-              vm.name = configuration.name;
+
+              switch (projectIntegration.integrationId) {
+                case 3:
+                  vm.statusCakeUsername = configuration.cakeUser;
+                  vm.statusCakeAPIKey = configuration.cakeToken;
+                  vm.statusCakeIntegrationName = configuration.name;
+                  vm.statusCakeHookUrl = $location.protocol() + '://' +
+                                 $location.host() + ':' +
+                                 $location.port() + '/hooks/' + configuration.token +
+                                 '/?integrationId=' + projectIntegration.integrationId;
+                  break;
+                default:
+                  vm.name = configuration.name;
+              }
             }
 
             // trello
