@@ -55,15 +55,20 @@
           vm.post = post;
           // Github
           vm.postGitHub = postGitHub;
-          // trello
+          // Trello
           vm.trelloAuth = trelloAuth;
           vm.trelloLogged = false;
-        //  vm.getMe = getMe;
-        //  vm.getBoards = getBoards;
           vm.boardsIds = [];
           vm.boards = [];
           vm.postTrello = postTrello;
           var trelloAppKey = "5196979cb1b5bb0191e54bc94881b5df";
+
+          // StatusCake
+          vm.postStatusCake = postStatusCake;
+          vm.statusCakeUsername = null;
+          vm.statusCakeAPIKey = null;
+          vm.statusCakeIntegrationName = null;
+          vm.statusCakeHookUrl = null;
 
           var token = null,
               isUpdate = (channelId > 0),
@@ -121,6 +126,19 @@
           }
 
           /**
+           * @name generateHookUrlForStatusCake
+           * @desc return the webhook URL for statusCake.
+           *       Example: http://localhost:4000/hooks/KIJTUG/?integrationId=2
+          */
+          function generateHookUrlForStatusCake () {
+            var combined = $location.protocol() + '://' +
+                           $location.host() + ':' +
+                           $location.port();
+            token = $rootScope.helpers.randomString(50);
+            vm.statusCakeHookUrl = combined + '/hooks/' + token + '/?integrationId=' + projectIntegration.integrationId;
+          }
+
+          /**
            * @name post
            * @desc create/edit the integration config
           */
@@ -166,6 +184,19 @@
               projectId: project.id,
               tab: 3
             });
+          });
+        }
+
+        /**
+         * @name integrationConfigCreatedNoRedirect
+         * @desc shows a dialog indicating a successful operation but don't redirect user
+        */
+        function integrationConfigCreatedNoRedirect () {
+          // show dialog to the user
+          var msg = 'Integración configurada exitósamente.';
+          var dlg = dialogService.showModalAlert('Configurar integración', msg);
+          dlg.result.finally(function () {
+
           });
         }
 
@@ -222,29 +253,41 @@
           });
         }
 
+        /**
+         * @name post
+         * @desc create/edit the integration config
+        */
+        function postStatusCake(){
+          if (!vm.statusCakeUsername ||
+            !vm.statusCakeAPIKey ||
+            !vm.statusCakeIntegrationName) {
+            ngToast.danger('Debes ingresar todos los parámetros del formulario para poder configurar esta integración.');
+          } else {
+            generateHookUrlForStatusCake();
+
+            var data = {
+              cakeUser: vm.statusCakeUsername,
+              cakeToken: vm.statusCakeAPIKey,
+              hookUrl: vm.statusCakeHookUrl,
+              channelId: vm.selectedChannel.id,
+              name: vm.name,
+              token: token
+            };
+
+            integrationService.congifureStatusCake(project.id, projectIntegration.projectIntegrationId, data)
+                .error(function (error) {
+                  ngToast.danger('Ocurrió un error intentando configurar StatusCake: ' + error);
+                })
+                .then(function () {
+                  integrationConfigCreatedNoRedirect();
+                });
+          }
+        }
+
         function alreadyLogged(){
           TrelloApi.Authenticate().then(function(){
             loadBoards();
           });
         }
-
-      /*  function getMe(){
-          TrelloApi.Rest('GET', 'members/me').then(function(res){
-            //vm.boards = res.idBoards;
-            alert(JSON.stringify(vm.boards));
-            $log.log('vm.boards', vm.boards);
-          }, function(err){
-            alert(err);
-          });
-        }
-
-        function getBoards(){
-          TrelloApi.boards(vm.boards[0], {}).then(function(res) {
-            alert(JSON.stringify(res));
-            console.log(JSON.stringify(res));
-          }, function(err) {
-            alert(err);
-          });
-        }*/
       }
 })();

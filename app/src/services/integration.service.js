@@ -11,7 +11,10 @@
     function integrationService ($log, $http, lodash, authService) {
 
         var parentUrl = '/projects/',
-            resourceUrl = '/integrations/';
+            resourceUrl = '/integrations/',
+            statuscakeCustomUrl = 'statuscake/auth/';
+
+
 
         return {
             create: create,
@@ -19,7 +22,8 @@
             remove: remove,
             getAll: getAll,
             getProjectIntegrationById: getProjectIntegrationById,
-            configureTrelloWebhook: configureTrelloWebhook
+            configureTrelloWebhook: configureTrelloWebhook,
+            congifureStatusCake: congifureStatusCake
         };
 
         /**
@@ -95,10 +99,18 @@
 
         /**
          * @name getbaseUrl
-         * @desc return the base url for the channels resource
+         * @desc return the base url for the integrations resource
          */
         function getBaseUrl(projectId) {
           return parentUrl + projectId + resourceUrl;
+        }
+
+        /**
+         * @name getbaseUrlForStatusCake
+         * @desc return the base url for the integrations resource customized for statuscake
+         */
+        function getbaseUrlForStatusCake(projectId) {
+          return parentUrl + projectId + resourceUrl + statuscakeCustomUrl;
         }
 
         /**
@@ -120,6 +132,15 @@
             },
             data: {'description': "Trello webhook", callbackURL: callbackUrl, idModel: boardId}
         });
+      }
+
+      /**
+      * @name congifureStatusCake
+      * @desc send a request to the server to auth on StatusCake and configure the integration.
+      */
+      function congifureStatusCake(projectId, projectIntegrationId, projectIntegrationConfig){
+        var url = getbaseUrlForStatusCake(projectId) + projectIntegrationId;
+        return $http.post(url, projectIntegrationConfig, authService.getJwtHeader());
       }
     }
 })();
