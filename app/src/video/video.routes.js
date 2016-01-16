@@ -12,7 +12,7 @@
       .state('dashboard.project.video-index', {
         url: '/video-index',
         ncyBreadcrumb: {
-          label: 'Videos'
+          label: 'Videoconferencia'
         },
         views:{
           '@dashboard': {
