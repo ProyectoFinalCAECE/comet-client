@@ -270,7 +270,7 @@
               cakeToken: vm.statusCakeAPIKey,
               hookUrl: vm.statusCakeHookUrl,
               channelId: vm.selectedChannel.id,
-              name: vm.name,
+              name: vm.statusCakeIntegrationName,
               token: token
             };
 
