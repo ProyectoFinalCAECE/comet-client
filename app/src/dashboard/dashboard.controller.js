@@ -220,6 +220,16 @@
             vm.textoBusqueda = '';
           }
 
+          /*eliminar*/
+          function video (criterio) {
+            console.log('video', criterio);
+
+            $state.go('dashboard.project.video-index', { criterio: criterio });
+
+            vm.textoBusqueda = '';
+          }
+
+
           /**
            * @name initializeNotifications
            * @desc initializes the notifications socket
