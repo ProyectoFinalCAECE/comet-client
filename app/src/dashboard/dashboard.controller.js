@@ -66,6 +66,9 @@
           vm.activeDirectChannel = null;
           vm.logout = logout;
 
+          vm.buscar = buscar;
+          vm.textoBusqueda = '';
+
           var pingTimer = null,
               urlonLoad = null;   // used to save the
 
@@ -207,6 +210,14 @@
             }
 
             return defer.promise;
+          }
+
+          function buscar (criterio) {
+            console.log('buscar', criterio);
+
+            $state.go('dashboard.project.search-results', { criterio: criterio });
+
+            vm.textoBusqueda = '';
           }
 
           /**

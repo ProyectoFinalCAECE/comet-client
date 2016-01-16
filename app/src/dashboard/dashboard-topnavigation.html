@@ -1,13 +1,13 @@
 <div class="row border-bottom">
   <nav class="navbar navbar-static-top dash-top-fixed" role="navigation" style="margin-bottom: 0">
     <div class="navbar-header search-header">
-            <i class="fa fa-search"></i>
-            <form role="search" class="navbar-form-custom" action="search_results.html">
-                <div class="form-group">
-                    <input type="text" placeholder="Buscar..." class="form-control" name="top-search" id="top-search">
-                </div>
-            </form>
-        </div>
+      <i ng-style="{'visibility': vm.project !== null ? 'visible':'hidden'}" class="fa fa-search"></i>
+      <form ng-submit="vm.buscar(vm.textoBusqueda)" ng-style="{'visibility': vm.project !== null ? 'visible':'hidden'}" role="search" class="navbar-form-custom">
+          <div class="form-group">
+              <input type="text" ng-model="vm.textoBusqueda" placeholder="Buscar..." class="form-control" maxlength="50">
+          </div>
+      </form>
+    </div>
     <div class="navbar-header cometTitle">
       <ul>
         <li style="padding-right:10px">
@@ -21,7 +21,8 @@
     <ul class="nav navbar-top-links navbar-right">
       <li ng-if="vm.systemNotifications.length > 0" class="dropdown">
         <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-          <i class="fa fa-bell"></i>  <span class="label label-warning">{{vm.systemNotifications.length}}</span>
+          <i class="fa fa-bell"></i>
+          <span class="label label-warning">{{vm.systemNotifications.length}}</span>
         </a>
         <ul class="dropdown-menu dropdown-messages cometNotifications">
           <li ng-repeat="notif in vm.systemNotifications">

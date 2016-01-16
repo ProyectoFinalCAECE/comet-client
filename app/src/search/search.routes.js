@@ -10,7 +10,7 @@
   function config ($stateProvider) {
     $stateProvider
       .state('dashboard.project.search-results', {
-        url: '/search-results',
+        url: '/search-results?criterio',
         ncyBreadcrumb: {
           label: 'Resultados de la búsqueda'
         },
