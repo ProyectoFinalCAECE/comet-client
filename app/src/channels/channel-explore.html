@@ -19,7 +19,7 @@
       <div class="col-lg-2 ButtonAdminList" ng-show="!vm.isDirect">
         <ul>
           <li class="admin-item dropdown">
-            <a ng-class="vm.isMember ? '' : 'disabled'" ng-click="vm.showIntegrations = !vm.showIntegrations; vm.showMembers = false">
+            <a ng-class="vm.project.isOwner ? '' : 'disabled'" ng-click="vm.showIntegrations = !vm.showIntegrations; vm.showMembers = false">
               <i class="fa fa-link"></i>
             </a>
           </li>
