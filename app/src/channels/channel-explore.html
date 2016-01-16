@@ -83,7 +83,7 @@
                       <span id="msg_{{::message.id}}" class="message-author"><b>{{::msgMember.alias}}</b></span>
                       <span class="message-date">{{::vm.formatMessageDate(message.date) }}</span>
                       <!-- Text messsage -->
-                      <span class="message-content" ng-if="message.type == 1">
+                      <span class="message-content" ng-if="message.type == 1 || message.type == 4">
                         <ng-embed embed-data="message.text"
                                   embed-options="vm.options"
                                   embed-template-url="/src/components/ngEmbed.template.html">
