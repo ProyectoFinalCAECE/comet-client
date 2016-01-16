@@ -1040,3 +1040,33 @@ body[state="dashboard.project.channel-explore"] {
 #view-integration-create .label-detail {
   font-weight: normal;
 }
+
+/* Resultados Buscador */
+
+.search-result-member {
+  margin-top: 20px;
+}
+
+.search-result-member img {
+  height: 36px;
+  margin-right: 5px;
+}
+
+.search-result-member p {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.search-result-message {
+  margin-top: 20px;
+}
+
+.search-result-message img {
+  height: 36px;
+  margin-right: 5px;
+}
+
+.search-result-message p {
+  font-size: 14px;
+  margin-left: 30px;
+}
