@@ -11,7 +11,10 @@
     function integrationService ($log, $http, lodash, authService) {
 
         var parentUrl = '/projects/',
-            resourceUrl = '/integrations/';
+            resourceUrl = '/integrations/',
+            statuscakeCustomUrl = 'statuscake/auth/';
+
+
 
         return {
             create: create,
@@ -19,7 +22,7 @@
             getAll: getAll,
             getProjectIntegrationById: getProjectIntegrationById,
             configureTrelloWebhook: configureTrelloWebhook,
-            statusCakeLogin: statusCakeLogin
+            congifureStatusCake: congifureStatusCake
         };
 
         /**
@@ -73,10 +76,18 @@
 
         /**
          * @name getbaseUrl
-         * @desc return the base url for the channels resource
+         * @desc return the base url for the integrations resource
          */
         function getBaseUrl(projectId) {
           return parentUrl + projectId + resourceUrl;
+        }
+
+        /**
+         * @name getbaseUrlForStatusCake
+         * @desc return the base url for the integrations resource customized for statuscake
+         */
+        function getbaseUrlForStatusCake(projectId) {
+          return parentUrl + projectId + resourceUrl + statuscakeCustomUrl;
         }
 
         /**
@@ -100,33 +111,13 @@
         });
       }
 
-
-      /*headers: {'Content-Type': 'application/x-www-form-urlencoded',
-                'API': APIKey,
-                'Username': username}*/
-
       /**
-      * @name statusCakeLogin
-      * @desc auth on StatusCake
+      * @name congifureStatusCake
+      * @desc send a request to the server to auth on StatusCake and configure the integration.
       */
-      function statusCakeLogin(username, APIKey){
-        var url = "https://www.statuscake.com/API/Auth/";
-        return $http({
-          method: 'POST',
-          url: url,
-          headers: {'Content-Type': 'application/x-www-form-urlencoded',
-                    'Access-Control-Allow-Origin':'*',
-                    'API': APIKey,
-                    'Username': username},
-          transformRequest: function(obj){
-            var str = [];
-            for(var p in obj){
-              str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-            }
-            return str.join("&");
-          },
-          data: {'API': APIKey, 'Username': username}
-      });
-    }
+      function congifureStatusCake(projectId, projectIntegrationId, projectIntegrationConfig){
+        var url = getbaseUrlForStatusCake(projectId) + projectIntegrationId;
+        return $http.post(url, projectIntegrationConfig, authService.getJwtHeader());
+      }
     }
 })();

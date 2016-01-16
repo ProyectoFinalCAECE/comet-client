@@ -67,7 +67,7 @@
           vm.postStatusCake = postStatusCake;
           vm.statusCakeUsername = null;
           vm.statusCakeAPIKey = null;
-          vm.statusCakeIntegrationName = 'StatusCake';
+          vm.statusCakeIntegrationName = null;
           vm.statusCakeHookUrl = null;
 
           var token = null,
@@ -263,18 +263,23 @@
             !vm.statusCakeIntegrationName) {
             ngToast.danger('Debes ingresar todos los parámetros del formulario para poder configurar esta integración.');
           } else {
-            integrationService.statusCakeLogin(vm.statusCakeUsername, vm.statusCakeAPIKey)
+            generateHookUrlForStatusCake();
+
+            var data = {
+              cakeUser: vm.statusCakeUsername,
+              cakeToken: vm.statusCakeAPIKey,
+              hookUrl: vm.statusCakeHookUrl,
+              channelId: vm.selectedChannel.id,
+              name: vm.name,
+              token: token
+            };
+
+            integrationService.congifureStatusCake(project.id, projectIntegration.projectIntegrationId, data)
                 .error(function (error) {
-                  ngToast.danger('Ocurrió un error intentando autenticar con StatusCake: ' + error);
+                  ngToast.danger('Ocurrió un error intentando configurar StatusCake: ' + error);
                 })
                 .then(function () {
-                  $log.log('postStatusCake', vm.hookUrl, vm.selectedBoard);
-                  post()
-                    .error(integrationConfigError)
-                    .then(function(){
-                        generateHookUrlForStatusCake();
-                        integrationConfigCreatedNoRedirect();
-                    });
+                  integrationConfigCreatedNoRedirect();
                 });
           }
         }
