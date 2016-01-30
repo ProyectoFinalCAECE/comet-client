@@ -65,8 +65,8 @@
                 autoRequestMedia: true,
                 debug: false,
                 detectSpeakingEvents: true,
-                autoAdjustMic: false,
-                url: 'http://localhost:8888'
+                autoAdjustMic: false
+                //url: 'http://localhost:8888' //TODO: implementar con el server de comet
             });
 
             // when it's ready, join if we got a room from the URL
