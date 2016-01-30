@@ -8,74 +8,37 @@
                 </li>
             </ol>
         </div>
-
-
-
-        
     </div>
 
     <div class="wrapper wrapper-content  animated fadeInRight">
+        <!-- Local -->
         <div class="row">
-            <div class="col-lg-6">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>Usuario 1</h5>
-                        <div class="ibox-tools">
-                            <a class="collapse-link">
-                                <i class="fa fa-chevron-up"></i>
-                            </a>
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                <i class="fa fa-wrench"></i>
-                            </a>
-                            <ul class="dropdown-menu dropdown-user">
-                                <li><a href="#">Config option 1</a>
-                                </li>
-                                <li><a href="#">Config option 2</a>
-                                </li>
-                            </ul>
-                            <a class="close-link">
-                                <i class="fa fa-times"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="ibox-content">
-                        <div class="videoConference" style="height:400px">
-                            <iframe width="99%" height="99%" src="https://www.youtube.com/embed/Z4_RWH3crjg" frameborder="0" allowfullscreen></iframe>
-                        </div>
-                    </div>
+          <div class="col-lg-offset-3 col-lg-6">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Usuario Local</h5>
+                </div>
+                <div class="ibox-content">
+                  <div id="peer-main" class="videoConference">
+                  </div>
                 </div>
             </div>
-            <div class="col-lg-6">
-                <div class="ibox float-e-margins no-drop">
-                    <div class="ibox-title">
-                        <h5>Usuario 2</h5>
-                        <div class="ibox-tools">
-                            <a class="collapse-link">
-                                <i class="fa fa-chevron-up"></i>
-                            </a>
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                <i class="fa fa-wrench"></i>
-                            </a>
-                            <ul class="dropdown-menu dropdown-user">
-                                <li><a href="#">Config option 1</a>
-                                </li>
-                                <li><a href="#">Config option 2</a>
-                                </li>
-                            </ul>
-                            <a class="close-link">
-                                <i class="fa fa-times"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="ibox-content">
-                        <div class="videoConference" style="height:400px">
-                            <iframe width="99%" height="99%" src="https://www.youtube.com/embed/Z4_RWH3crjg" frameborder="0"></iframe>
-                        </div>
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
+        <!-- Remotos -->
         <div class="row">
+          <div class="col-lg-3" ng-repeat="peer in vm.peers" id="{{peer.domId}}">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>{{::peer.name}}</h5>
+                </div>
+                <div class="ibox-content">
+                  <video ng-src="{{::peer.source}}"/>
+                </div>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="row">
             <div class="col-lg-4">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
@@ -100,7 +63,7 @@
                     </div>
                     <div class="ibox-content">
                         <div class="videoConference" style="height:250">
-                            <iframe width="99%" height="99%" src="https://www.youtube.com/embed/Z4_RWH3crjg" frameborder="0"></iframe>
+
                         </div>
                     </div>
                 </div>
@@ -129,10 +92,10 @@
                     </div>
                     <div class="ibox-content">
                         <div class="videoConference" style="height:250">
-                            <iframe width="99%" height="99%" src="https://www.youtube.com/embed/Z4_RWH3crjg" frameborder="0"></iframe>
+
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
