@@ -69,8 +69,13 @@
           vm.buscar = buscar;
           vm.textoBusqueda = '';
 
+          vm.showMenu = true;
+          vm.showMembersList = true;
+          vm.showSearch = true;
+          vm.showLogout = true;
+
           var pingTimer = null,
-              urlonLoad = null;   // used to save the
+              urlonLoad = null;
 
           activate();
 
@@ -123,6 +128,7 @@
                 // new state url
                 var currentUrl = '#' + $location.url().split('#')[0];
                 urlonLoad = currentUrl;
+
                 // search channel by url
                 var channel = lodash.find(vm.availableMembers, 'channelUrl', currentUrl);
                 if (channel === undefined) {
@@ -135,6 +141,20 @@
                 if (channel !== undefined) {
                   setActiveChannel(channel);
                 }
+              }
+
+              // videoconference view settings
+              if ($state.current.name === 'dashboard.project.video-index') {
+                vm.showMenu = false;
+                vm.showMembersList = false;
+                vm.showSearch = false;
+                vm.showLogout = false;
+              }
+              else {
+                vm.showMenu = true;
+                vm.showMembersList = true;
+                vm.showSearch = true;
+                vm.showLogout = true;
               }
             });
 

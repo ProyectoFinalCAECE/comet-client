@@ -15,7 +15,8 @@
                                          '$state',
                                          '$stateParams',
                                          'ngToast',
-                                         'constraints'];
+                                         'constraints',
+                                         'lodash'];
 
         function VideoIndexController ($log,
                                       $rootScope,
@@ -23,7 +24,8 @@
                                       $state,
                                       $stateParams,
                                       ngToast,
-                                      constraints) {
+                                      constraints,
+                                      lodash) {
 
           var vm = this,
               room = $stateParams.room,
@@ -109,11 +111,37 @@
 
                 var newPeer = {
                   id: peer.id,
+                  name: 'peer_' + peer.id,
                   domId: webrtc.getDomId(peer),
                   source: $sce.trustAsResourceUrl(video.src)
                 };
 
                 $log.info('new peer', newPeer);
+
+                if (peer && peer.pc) {
+                  peer.pc.on('iceConnectionStateChange', function (e) {
+                    $log.info('iceConnectionStateChange', newPeer, peer);
+                    switch (peer.pc.iceConnectionState) {
+                      case 'checking':
+                          newPeer.state = 'Conectando..';
+                          break;
+                      case 'connected':
+                      case 'completed': // on caller side
+                          //$(vol).show();
+                          newPeer.state = 'Conexión establecida';
+                          break;
+                      case 'disconnected':
+                          newPeer.state = 'Desconectado.';
+                          break;
+                      case 'failed':
+                          newPeer.state = 'Error de conexión.';
+                          break;
+                      case 'closed':
+                          newPeer.state = 'Conexión cerrada.';
+                          break;
+                      }
+                  });
+                }
 
                 vm.peers.push(newPeer);
 
@@ -176,6 +204,13 @@
             // a peer was removed
             webrtc.on('videoRemoved', function (video, peer) {
                 $log.info('webrtc::video removed ', peer);
+
+                lodash.remove(vm.peers, function (p) {
+                  if (p.id === peer.id) {
+                    return true;
+                  }
+                  return false;
+                });
                 // var remotes = document.getElementById('remotes');
                 // var el = document.getElementById(peer ? 'container_' + webrtc.getDomId(peer) : 'localScreenContainer');
                 // if (remotes && el) {

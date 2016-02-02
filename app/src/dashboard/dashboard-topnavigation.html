@@ -1,8 +1,8 @@
 <div class="row border-bottom">
   <nav class="navbar navbar-static-top dash-top-fixed" role="navigation" style="margin-bottom: 0">
     <div class="navbar-header search-header">
-      <i ng-style="{'visibility': vm.project !== null ? 'visible':'hidden'}" class="fa fa-search"></i>
-      <form ng-submit="vm.buscar(vm.textoBusqueda)" ng-style="{'visibility': vm.project !== null ? 'visible':'hidden'}" role="search" class="navbar-form-custom">
+      <i ng-style="{'visibility': (vm.project !== null && vm.showSearch) ? 'visible':'hidden'}" class="fa fa-search"></i>
+      <form ng-submit="vm.buscar(vm.textoBusqueda)" ng-style="{'visibility': (vm.project !== null && vm.showSearch)  ? 'visible':'hidden'}" role="search" class="navbar-form-custom">
           <div class="form-group">
               <input type="text" ng-model="vm.textoBusqueda" placeholder="Buscar..." class="form-control" maxlength="50">
           </div>
@@ -41,7 +41,7 @@
         </ul>
       </li>
       <li>
-        <a ng-click="vm.logout()"><i class="fa fa-sign-out"></i> Salir</a>
+        <a ng-if="vm.showLogout" ng-click="vm.logout()"><i class="fa fa-sign-out"></i> Salir</a>
       </li>
     </ul>
   </nav>

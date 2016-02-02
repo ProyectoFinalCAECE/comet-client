@@ -1,17 +1,18 @@
-<div id="wrapper" data-view="dashboard" class="pace-done skin-2">
+<div id="wrapper" data-view="dashboard" class="skin-2">
+
   <!-- Menu -->
-  <ng-include src=" 'src/dashboard/dashboard-menu.html' "></ng-include>
+  <div ng-if="vm.showMenu" ng-include=" 'src/dashboard/dashboard-menu.html' "></div>
 
   <!-- Contenedor -->
   <div id="page-wrapper" class="gray-bg">
 
       <!-- Barra superior -->
-      <ng-include src=" 'src/dashboard/dashboard-topnavigation.html' "></ng-include>
+      <div ng-include src=" 'src/dashboard/dashboard-topnavigation.html' "></div>
 
       <!-- Contenido -->
       <ui-view></ui-view>
-      
+
       <!-- Miembros -->
-      <ng-include src=" 'src/projects/project-members.html' "></ng-include>
+      <div ng-if="vm.showMembersList" ng-include=" 'src/projects/project-members.html' "></div>
     </div>
 </div>

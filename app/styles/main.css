@@ -1070,3 +1070,22 @@ body[state="dashboard.project.channel-explore"] {
   font-size: 14px;
   margin-left: 30px;
 }
+
+/* Videoconferencia */
+#video-index .ibox-content.video {
+  padding: 0px;
+  border: 3px solid #FFF;
+}
+#video-index .video-overlay {
+  position: absolute;
+  color: #FFF;
+  z-index: 10;
+}
+#video-index .video-overlay .user {
+  margin: 5px 0 0 5px;
+  font-weight: bold;
+}
+#video-index .video-overlay .state {
+  margin: 5px 0 0 5px;
+  color: green; /* temporal*/
+}

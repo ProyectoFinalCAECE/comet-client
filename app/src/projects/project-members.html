@@ -1,4 +1,4 @@
-<div class="theme-config-box" ng-hide="vm.project === null">
+<div class="theme-config-box" ng-if="vm.project !== null">
 	<div class="cometProjectUsersIcon"
        ng-class="{ 'minimized': !vm.membersVisible }"
        ng-click="vm.showMembers()">
