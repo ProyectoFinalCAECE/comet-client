@@ -1079,6 +1079,8 @@ body[state="dashboard.project.channel-explore"] {
 #video-index .video-overlay {
   position: absolute;
   color: #FFF;
+  width: 89%;
+  height: 85%;
   z-index: 10;
 }
 #video-index .video-overlay .user {
@@ -1088,4 +1090,29 @@ body[state="dashboard.project.channel-explore"] {
 #video-index .video-overlay .state {
   margin: 5px 0 0 5px;
   color: green; /* temporal*/
+}
+#video-index .video-overlay .buttons {
+  width: 98%;
+  text-align: center;
+  margin-top: 45%;
+}
+#video-index .video-overlay .buttons .button {
+  display: inline;
+  padding: 8px 12px;
+  background-color: grey;
+  background-color: rgba(1,1,1,0.3);
+  cursor: pointer;
+}
+#video-index .video-overlay .buttons .button:first-child {
+  border-radius: 10px 0 0 10px;
+}
+#video-index .video-overlay .buttons .button:last-child {
+  border-radius: 0 10px 10px 0;
+}
+#video-index .video-overlay .buttons .button:hover {
+  background-color: rgba(243, 238, 238, 0.3);
+}
+
+#video-index .video-overlay .buttons .button.enabled {
+  background-color: rgba(255,0,0,0.3);
 }
