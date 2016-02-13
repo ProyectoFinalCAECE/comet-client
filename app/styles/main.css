@@ -1116,3 +1116,48 @@ body[state="dashboard.project.channel-explore"] {
 #video-index .video-overlay .buttons .button.enabled {
   background-color: rgba(255,0,0,0.3);
 }
+
+body[state="dashboard.project.video-index"] #page-wrapper {
+  margin-left: 0;
+}
+
+/* Videoconferencia - Chat */
+
+#video-index .chat-discussion {
+  height: 500px;
+  margin-top: 0;
+}
+
+#video-index .chat-discussion b {
+  color:#0085FF;
+}
+
+#video-index .chat-discussion .chat-message:nth-child(2n+1) .message-avatar,
+#video-index .chat-discussion .chat-message:nth-child(2n) .message-avatar {
+  float: left;
+  margin-right: 10px;
+  margin-left: 0px;
+}
+
+#video-index .chat-discussion .chat-message:nth-child(2n+1) .message,
+#video-index .chat-discussion .chat-message:nth-child(2n) .message {
+  text-align: left;
+  margin-left: 10px;
+  margin-right: 10px;
+  border: none;
+}
+
+/* los mensajes del usuario se ven a la derecha */
+#video-index .chat-discussion .chat-message.mine .message-avatar {
+  float: right;
+  margin-right: 0px;
+}
+
+#video-index .chat-discussion .chat-message.mine .message {
+  text-align: right;
+  margin-right: 10px;
+}
+
+#video-index textarea {
+  width: 100%;
+}
