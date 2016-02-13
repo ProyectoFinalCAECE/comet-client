@@ -24,10 +24,16 @@
                           <!-- listado de miembros -->
                           <h3>Miembros del proyecto que coinciden con la búsqueda</h3>
                             <div class="search-result-member" ng-repeat="user in vm.resultUsers">
-                                <p>
-                                <img class="message-avatar" ng-src="{{::user.profilePicture}}" alt="" >
-                                <b>{{user.firstName + ' ' + user.lastName}}</b>
-                                </p>
+                              <a data-type="D"
+                  							 data-id="{{user.id}}"
+                  							 ui-sref="dashboard.project.channel-explore({projectId: vm.project.id, channelId:user.id, isDirect:true})">
+                                <img class="message-avatar" ng-src="{{::user.profilePicture}}" alt="" />
+                  	          </a>
+                              <a data-type="D"
+                								 data-id="{{user.id}}"
+                								 ui-sref="dashboard.project.channel-explore({projectId: vm.project.id, channelId:user.id, isDirect:true})">
+                	              <b>{{user.firstName + ' ' + user.lastName}}</b>
+                              </a>
                             </div>
                             <!-- listado de mensajes en canales -->
                             <hr style="border-color:gray"></hr>
@@ -35,7 +41,7 @@
                             <h4>Canales Comunes</h4>
                             <div class="search-result-message" ng-repeat="channel in vm.messagesInProjectCommonChannels"
                                 ng-init="channelObject = vm.getChannelById(channel.id)">
-                                <h3><a href="#">{{channelObject.name}}</a></h3>
+                                <h3>{{channelObject.name}}</h3>
                                 <div ng-repeat="message in channel.messages"
                                     ng-init="msgAuthor = vm.getMember(message.user)">
                                     <br />
@@ -56,7 +62,7 @@
                             <h4>Canales Directos</h4>
                             <div class="search-result-message" ng-repeat="directChannel in vm.messagesInProjectDirectChannels"
                                 ng-init="channelObject = vm.getChannelById(directChannel.id)">
-                                <h3><a href="#">{{channelObject.name}}</a></h3>
+                                <h3>{{channelObject.name}}</h3>
                                 <div ng-repeat="message in directChannel.messages"
                                     ng-init="msgAuthor = vm.getMember(message.OriginUserId)">
                                     <br />

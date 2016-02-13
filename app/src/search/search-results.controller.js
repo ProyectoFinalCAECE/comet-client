@@ -36,6 +36,7 @@
           vm.isEmpty = true;
           vm.cantidadResultados = 0;
           vm.projectId = $stateParams.id;
+          vm.channelId = $stateParams.channelId;
           vm.validationErrors = null;
           vm.resultUsers = [];
           vm.messagesInProjectDirectChannels = [];
@@ -79,25 +80,37 @@
            * @desc controller activation logic
           */
           function activate () {
-            // aca habrìa que llamar al server para hacer la busqueda
             // mientras mostrar un gif de loading
 
-            console.log('vm.criterioBusqueda is: ', vm.criterioBusqueda);
-            console.log('$stateParams is: ', $stateParams);
             searchService.searchUserInProject(vm.projectId, vm.criterioBusqueda).error(searchError)
             .then(function (users_search_result) {
-              console.log('users_search_result are: ', users_search_result);
               vm.resultUsers = users_search_result.data.users;
+              if(vm.channelId){
+                //buscar solamente en el canal provisto
+                searchService.searchMessageInChannel(vm.projectId, vm.channelId, vm.criterioBusqueda, vm.limit, vm.last_id).error(searchError).then(
+                  function (project_search_result) {
+                    if(project_search_result.data.project.channels.direct){
+                      vm.messagesInProjectDirectChannels = project_search_result.data.project.channels.direct;
+                    }
 
-              searchService.searchMessageInProject(vm.projectId, vm.criterioBusqueda, vm.limit, vm.last_id).error(searchError).then(
-                function (project_search_result) {
-                  console.log('messages_in_project are: ', project_search_result);
-                  vm.messagesInProjectDirectChannels = project_search_result.data.project.channels.direct;
-                  vm.messagesInProjectCommonChannels = project_search_result.data.project.channels.common;
+                    if(project_search_result.data.project.channels.common){
+                      vm.messagesInProjectCommonChannels = project_search_result.data.project.channels.common;
+                    }
 
-                  // SETEAR LAST ID, PARA SIGUIENTE BUSQUEDA (VER MAS)
-                }
-              ).then(searchResult);
+                    // SETEAR LAST ID, PARA SIGUIENTE BUSQUEDA (VER MAS)
+                  }
+                ).then(searchResult);
+              } else {
+                //Buscar en todos los canales comunes del proyecto, y en los directos a los que pertenece el usuario.
+                searchService.searchMessageInProject(vm.projectId, vm.criterioBusqueda, vm.limit, vm.last_id).error(searchError).then(
+                  function (project_search_result) {
+                    vm.messagesInProjectDirectChannels = project_search_result.data.project.channels.direct;
+                    vm.messagesInProjectCommonChannels = project_search_result.data.project.channels.common;
+
+                    // SETEAR LAST ID, PARA SIGUIENTE BUSQUEDA (VER MAS)
+                  }
+                ).then(searchResult);
+              }
             });
           }
 
@@ -106,33 +119,17 @@
            * @desc shows search operation result
           */
           function searchResult () {
-            console.log('exito');
             if(vm.resultUsers.length !== 0 ||
                 vm.messagesInProjectDirectChannels.length !== 0 ||
                 vm.messagesInProjectCommonChannels.length !== 0 ||
                   vm.messagesInChannel.length !== 0){
                     vm.isEmpty = false;
 
-                    console.log('vm.resultUsers.length is: ', vm.resultUsers.length);
-                    console.log('vm.messagesInProjectDirectChannels.length is: ', vm.messagesInProjectDirectChannels.length);
-                    console.log('vm.messagesInProjectCommonChannels.length is: ', vm.messagesInProjectCommonChannels.length);
-                    console.log('vm.messagesInChannel.length is: ', vm.messagesInChannel.length);
-
                     vm.cantidadResultados = vm.resultUsers.length +
                                             vm.messagesInProjectDirectChannels.length +
                                             vm.messagesInProjectCommonChannels.length +
                                             vm.messagesInChannel.length;
-
-                    console.log('vm.cantidadResultados is: ', vm.cantidadResultados);
             }
-            /*var msg = 'Integración configurada exitósamente.';
-            var dlg = dialogService.showModalAlert('Configurar integración', msg);
-            dlg.result.finally(function () {
-              $state.go('dashboard.project.project-admin', {
-                projectId: project.id,
-                tab: 3
-              });
-            });*/
           }
 
           /**
@@ -151,16 +148,9 @@
            * @desc returns a channel object by id
           */
           function getChannelById(channelId){
-            console.log('getChannelById is: ', getChannelById);
-            console.log('channelId is: ', channelId);
             if(isNaN(channelId)){
               //Direct Channel
               var user_ids = channelId.split("_");
-
-              console.log('user_ids is: ', user_ids);
-
-              console.log('user_ids[1]: ', user_ids[1]);
-              console.log('user_ids[2]: ', user_ids[2]);
 
               var user_1 = lodash.find(vm.project.members, 'id', parseInt(user_ids[1]));
               var user_2 = lodash.find(vm.project.members, 'id', parseInt(user_ids[2]));
