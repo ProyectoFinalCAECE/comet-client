@@ -234,8 +234,14 @@
 
           function buscar (criterio) {
             console.log('buscar', criterio);
+            
+            var channelId = null;
 
-            $state.go('dashboard.project.search-results', { criterio: criterio });
+            if(vm.activeChannel !== null){
+              channelId = vm.activeChannel.id;
+            }
+
+            $state.go('dashboard.project.search-results', { criterio: criterio, channelId: channelId });
 
             vm.textoBusqueda = '';
           }
