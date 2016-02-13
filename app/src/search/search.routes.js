@@ -20,6 +20,15 @@
             controller: 'SearchResultsController',
             controllerAs: 'vm'
           }
+        },
+        resolve: {
+          channels: ['channelService', '$stateParams', 'authService', '$state', function (channelService, $stateParams, authService, $state) {
+            return channelService.getAll($stateParams.id).error(function() {
+              $state.go('dashboard');
+            }).then(function (response) {
+              return response.data;
+            });
+          }]
         }
     });
   }

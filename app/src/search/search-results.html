@@ -2,7 +2,7 @@
   <div class="row fixed-header" sticky offset="60">
     <div class="col-lg-9">
       <h2><i class="fa fa-search"></i> Resultados de la búsqueda</h2>
-      <h3>#### resultados encontrados para: <span class="text-navy">{{vm.criterioBusqueda}}</span></h3>
+      <h3>{{vm.cantidadResultados}} resultados encontrados para: <span class="text-navy">{{vm.criterioBusqueda}}</span></h3>
       <ol class="breadcrumb2">
         <li>
           <div ncy-breadcrumb></div>
@@ -13,7 +13,7 @@
     <div class="row">
         <!-- No hay resultados -->
         <div ng-show="vm.isEmpty" class="jumbotron text-center">
-            <p>No hay resultados para esta búsqueda<i class="fa fa-frown-o"></i></p>
+            <p>No hay resultados para esta búsqueda <i class="fa fa-frown-o"></i></p>
         </div>
         <!-- listado de resultados -->
         <div class="row" ng-hide="vm.isEmpty">
@@ -23,27 +23,55 @@
                         <div class="resultadosBuscador">
                           <!-- listado de miembros -->
                           <h3>Miembros del proyecto que coinciden con la búsqueda</h3>
-                            <div class="search-result-member">
+                            <div class="search-result-member" ng-repeat="user in vm.resultUsers">
                                 <p>
-                                    <img src="../images/integraciones/github.png">Juan Perez
+                                <img class="message-avatar" ng-src="{{::user.profilePicture}}" alt="" >
+                                <b>{{user.firstName + ' ' + user.lastName}}</b>
                                 </p>
                             </div>
+                            <!-- listado de mensajes en canales -->
                             <hr style="border-color:gray"></hr>
                             <h3>Mensajes del proyecto que contengan los términos de búsqueda</h3>
-                            <div class="search-result-message">
-                                <h3><a href="#">Canal 1</a></h3>
-                                <p>
-                                    <img src="../images/integraciones/github.png">
-                                    <b>Juan Perez:</b> Este es un mensaje en Canal 1.
-                                </p>
+                            <h4>Canales Comunes</h4>
+                            <div class="search-result-message" ng-repeat="channel in vm.messagesInProjectCommonChannels"
+                                ng-init="channelObject = vm.getChannelById(channel.id)">
+                                <h3><a href="#">{{channelObject.name}}</a></h3>
+                                <div ng-repeat="message in channel.messages"
+                                    ng-init="msgAuthor = vm.getMember(message.user)">
+                                    <br />
+                                    <div class="message">
+                                      <img class="message-avatar" ng-src="{{::msgAuthor.profilePicture}}" alt="" >
+                                      <span id="msg_{{::message.id}}" class="message-author"><b>{{msgAuthor.firstName + ' ' + msgAuthor.lastName}}</b></span>
+                                      <span class="message-date">{{::vm.formatMessageDate(message.date) }}</span>
+                                      <!-- Text messsage -->
+                                        <ng-embed embed-data="message.text"
+                                                  embed-options="vm.options"
+                                                  embed-template-url="/src/components/ngEmbed.template.html">
+                                        </ng-embed>
+                                      </span>
+                                    </div>
+                                </div>
                             </div>
                             <div class="hr-line-dashed"></div>
-                            <div class="search-result-message">
-                                <h3><a href="#">General</a></h3>
-                                <p>
-                                    <img src="../images/integraciones/trello.png">
-                                    <b>Carlos Sanchez:</b> Otro mensaje pero en el canal General.
-                                </p>
+                            <h4>Canales Directos</h4>
+                            <div class="search-result-message" ng-repeat="directChannel in vm.messagesInProjectDirectChannels"
+                                ng-init="channelObject = vm.getChannelById(directChannel.id)">
+                                <h3><a href="#">{{channelObject.name}}</a></h3>
+                                <div ng-repeat="message in directChannel.messages"
+                                    ng-init="msgAuthor = vm.getMember(message.OriginUserId)">
+                                    <br />
+                                    <div class="message">
+                                      <img class="message-avatar" ng-src="{{::msgAuthor.profilePicture}}" alt="" >
+                                      <span id="msg_{{::message.id}}" class="message-author"><b>{{msgAuthor.firstName + ' ' + msgAuthor.lastName}}</b></span>
+                                      <span class="message-date">{{::vm.formatMessageDate(message.sentDateTimeUTC) }}</span>
+                                      <!-- Text messsage -->
+                                        <ng-embed embed-data="message.content"
+                                                  embed-options="vm.options"
+                                                  embed-template-url="/src/components/ngEmbed.template.html">
+                                        </ng-embed>
+                                      </span>
+                                    </div>
+                                </div>
                             </div>
                           </div>
                         <div class="hr-line-dashed"></div>
