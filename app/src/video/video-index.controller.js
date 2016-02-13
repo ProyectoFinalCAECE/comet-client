@@ -9,20 +9,24 @@
     angular.module('cometApp')
            .controller('VideoIndexController', VideoIndexController);
 
-        VideoIndexController.$inject = ['$log',
-                                        '$rootScope',
+        VideoIndexController.$inject = [ '$log',
+                                         '$rootScope',
+                                         '$scope',
                                          '$sce',
                                          '$state',
                                          '$stateParams',
+                                         '$window',
                                          'ngToast',
                                          'constraints',
                                          'lodash'];
 
         function VideoIndexController ($log,
                                       $rootScope,
+                                      $scope,
                                       $sce,
                                       $state,
                                       $stateParams,
+                                      $window,
                                       ngToast,
                                       constraints,
                                       lodash) {
@@ -49,14 +53,26 @@
           function activate () {
             $log.log('video controller - activate', 'room:' + room);
             initializeRTC();
+
+            // $window.onbeforeunload = function(  ) {
+            //   return "hola hola";
+            // };
+
+            $window.onunload = function(  ) {
+              $log.log("####### unload");
+              if (webrtc !== null) {
+                webrtc.leaveRoom();
+                webrtc.disconnect();
+              }
+            };
           }
 
           function getPeers () {
             var tempPeers = [];
             for (var i = 0; i < peers.length; i++) {
-              if (peers[i].id !== vm.centerPeer.id) {
+              //if (peers[i].id !== vm.centerPeer.id) {
                 tempPeers.push(peers[i]);
-              }
+              //}
             }
 
             return tempPeers;
@@ -95,16 +111,18 @@
             webrtc = new SimpleWebRTC({
                 // the id/element dom element that will hold "our" video
                 //localVideoEl: 'peer-main',
-                localVideoEl: '',
+                localVideoEl: 'localVideo',
                 // the id/element dom element that will hold remote videos
                 remoteVideosEl: '',
                 // immediately ask for camera access
-                autoRequestMedia: true,
+                autoRequestMedia: false,
                 debug: false,
                 detectSpeakingEvents: true,
                 autoAdjustMic: false
                 //url: 'http://localhost:8888' //TODO: implementar con el server de comet
             });
+
+            webrtc.startLocalVideo();
 
             // when it's ready, join if we got a room from the URL
             webrtc.on('readyToCall', function () {
@@ -117,12 +135,18 @@
 
               $log.log('local', stream);
 
-              var vendorURL = window.URL || window.webkitURL,
-                  localStreamUrl = vendorURL.createObjectURL(stream);
+              var videoTracks = stream.getVideoTracks();
+              console.log('how many video tracks?', videoTracks.length);
+              if (videoTracks.length) {
+                var first = videoTracks[0];
+                console.log('video track label', first.label);
+              }
+
+              var localStreamUrl = $window.URL.createObjectURL(stream);
 
               var localPeer = {
-                id: 'local',
-                name: 'peer_local',
+                id: 'localVideo',
+                name: 'localVideo',
                 domId: 'localPeer',
                 source: $sce.trustAsResourceUrl(localStreamUrl),
                 isLocal: true,
@@ -130,8 +154,11 @@
                 noVideo: false,
                 mouseIn: false
               };
-              vm.centerPeer = localPeer;
+
+              //vm.centerPeer = localPeer;
               peers.push(localPeer);
+
+              $scope.$apply();
             });
 
             // we did not get access to the camera

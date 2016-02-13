@@ -1,0 +1,52 @@
+<div id="video-index" class="wrapper wrapper-content" data-view="video-index">
+  <!-- Maximizado -->
+  <div class="row">
+    <div class="col-lg-offset-3 col-lg-6" ng-mouseover="vm.mouseIn(vm.centerPeer)" ng-mouseleave="vm.mouseOut(vm.centerPeer)">
+      <div class="ibox">
+          <div class="ibox-content video">
+            <div class="video-overlay">
+              <p class="user">{{::vm.centerPeer.name}}</p>
+              <div class="buttons" ng-show="vm.centerPeer.mouseIn">
+                <div ng-click="vm.mute(vm.centerPeer)"
+                     class="button fa fa-volume-off"
+                     ng-class="{ 'enabled' : vm.centerPeer.muted }">
+                </div>
+                <div ng-click="vm.disableVideo(vm.centerPeer)"
+                     class="button fa fa-video-camera"
+                     ng-class="{ 'enabled' : vm.centerPeer.videoDisabled }">
+                </div>
+                <div class="button fa fa-expand"></div>
+              </div>
+            </div>
+            <video id="video_{{::vm.centerPeer.id}}" ng-src="{{::vm.centerPeer.source}}"/>
+          </div>
+      </div>
+    </div>
+  </div>
+  <!-- Resto de participantes -->
+  <div class="row">
+    <div class="col-lg-3" ng-repeat="peer in vm.getPeers()" id="{{peer.domId}}" ng-mouseover="vm.mouseIn(peer)" ng-mouseleave="vm.mouseOut(peer)">
+      <div class="ibox">
+          <div class="ibox-content video">
+            <div class="video-overlay">
+              <p class="user">{{::peer.name}}</p>
+              <div class="buttons" ng-show="peer.mouseIn">
+                <div ng-click="vm.mute(peer)"
+                     class="button fa fa-volume-off"
+                     ng-class="{ 'enabled' : peer.muted }">
+                </div>
+                <div ng-click="vm.disableVideo(peer)"
+                     class="button fa fa-video-camera"
+                     ng-class="{ 'enabled' : peer.videoDisabled }">
+                </div>
+                <div ng-click="vm.maximize(peer)"
+                     class="button fa fa-expand">
+                </div>
+              </div>
+            </div>
+            <video id="video_{{::peer.id}}" ng-src="{{::peer.source}}"/>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
