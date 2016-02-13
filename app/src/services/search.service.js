@@ -13,7 +13,7 @@
       var parentUrl = '/search/projects/',
           usersResourceUrl = '/users/',
           messagesResourceUrl = '/messages/',
-          channelMessagesResourceUrl = '/channels/';
+          channelMessagesResourceUrl = 'channels/';
 
         return {
             searchUserInProject: searchUserInProject,
@@ -46,7 +46,7 @@
          * @desc searchs for messages matching provided string within provided Channel's Messages
          */
         function searchMessageInChannel (projectId, channelId, searchString, limit, last_id) {
-          $log.log('searchMessageInChannel', projectId, searchString);
+          $log.log('searchMessageInChannel', projectId, channelId, searchString);
           var url = getMessagesInChannelUrl(projectId, channelId);
           return $http.get(url + generateSearchString(searchString, limit, last_id), authService.getJwtHeader());
         }

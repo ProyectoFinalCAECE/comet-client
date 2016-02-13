@@ -36,6 +36,7 @@
           vm.isEmpty = true;
           vm.cantidadResultados = 0;
           vm.projectId = $stateParams.id;
+          vm.channelId = $stateParams.channelId;
           vm.validationErrors = null;
           vm.resultUsers = [];
           vm.messagesInProjectDirectChannels = [];
@@ -81,20 +82,35 @@
           function activate () {
             // mientras mostrar un gif de loading
 
-            console.log('vm.criterioBusqueda is: ', vm.criterioBusqueda);
-            console.log('$stateParams is: ', $stateParams);
             searchService.searchUserInProject(vm.projectId, vm.criterioBusqueda).error(searchError)
             .then(function (users_search_result) {
               vm.resultUsers = users_search_result.data.users;
+              if(vm.channelId){
+                //buscar solamente en el canal provisto
+                searchService.searchMessageInChannel(vm.projectId, vm.channelId, vm.criterioBusqueda, vm.limit, vm.last_id).error(searchError).then(
+                  function (project_search_result) {
+                    if(project_search_result.data.project.channels.direct){
+                      vm.messagesInProjectDirectChannels = project_search_result.data.project.channels.direct;
+                    }
 
-              searchService.searchMessageInProject(vm.projectId, vm.criterioBusqueda, vm.limit, vm.last_id).error(searchError).then(
-                function (project_search_result) {
-                  vm.messagesInProjectDirectChannels = project_search_result.data.project.channels.direct;
-                  vm.messagesInProjectCommonChannels = project_search_result.data.project.channels.common;
+                    if(project_search_result.data.project.channels.common){
+                      vm.messagesInProjectCommonChannels = project_search_result.data.project.channels.common;
+                    }
 
-                  // SETEAR LAST ID, PARA SIGUIENTE BUSQUEDA (VER MAS)
-                }
-              ).then(searchResult);
+                    // SETEAR LAST ID, PARA SIGUIENTE BUSQUEDA (VER MAS)
+                  }
+                ).then(searchResult);
+              } else {
+                //Buscar en todos los canales comunes del proyecto, y en los directos a los que pertenece el usuario.
+                searchService.searchMessageInProject(vm.projectId, vm.criterioBusqueda, vm.limit, vm.last_id).error(searchError).then(
+                  function (project_search_result) {
+                    vm.messagesInProjectDirectChannels = project_search_result.data.project.channels.direct;
+                    vm.messagesInProjectCommonChannels = project_search_result.data.project.channels.common;
+
+                    // SETEAR LAST ID, PARA SIGUIENTE BUSQUEDA (VER MAS)
+                  }
+                ).then(searchResult);
+              }
             });
           }
 
