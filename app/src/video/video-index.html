@@ -1,9 +1,9 @@
 <div id="video-index" class="wrapper wrapper-content" data-view="video-index">
   <div class="row">
-    <div class="col-lg-8">
+    <div class="col-lg-12">
     <!-- Maximizado -->
     <div class="row">
-      <div class="col-lg-offset-3 col-lg-6" ng-mouseover="vm.mouseIn(vm.centerPeer)" ng-mouseleave="vm.mouseOut(vm.centerPeer)">
+      <div class="col-lg-5" ng-mouseover="vm.mouseIn(vm.centerPeer)" ng-mouseleave="vm.mouseOut(vm.centerPeer)">
         <div class="ibox">
             <div class="ibox-content video">
               <div class="video-overlay">
@@ -24,57 +24,60 @@
             </div>
         </div>
       </div>
-    </div>
-    <!-- Resto de participantes -->
-    <div class="row">
-      <div class="col-lg-3" ng-repeat="peer in vm.getPeers()" id="{{peer.domId}}" ng-mouseover="vm.mouseIn(peer)" ng-mouseleave="vm.mouseOut(peer)">
-        <div class="ibox">
-            <div class="ibox-content video">
-              <div class="video-overlay">
-                <p class="user">{{::peer.name}}</p>
-                <div class="buttons" ng-show="peer.mouseIn">
-                  <div ng-click="vm.mute(peer)"
-                       class="button fa fa-volume-off"
-                       ng-class="{ 'enabled' : peer.muted }">
+      <div class="col-lg-3">
+        <!-- Resto de participantes -->
+        <div class="row" ng-repeat="peer in vm.getPeers()" id="{{peer.domId}}" ng-mouseover="vm.mouseIn(peer)" ng-mouseleave="vm.mouseOut(peer)">
+          <div>
+            <div class="ibox">
+                <div class="ibox-content video">
+                  <div class="video-overlay">
+                    <p class="user">{{::peer.name}}</p>
+                    <div class="buttons" ng-show="peer.mouseIn">
+                      <div ng-click="vm.mute(peer)"
+                           class="button fa fa-volume-off"
+                           ng-class="{ 'enabled' : peer.muted }">
+                      </div>
+                      <div ng-click="vm.disableVideo(peer)"
+                           class="button fa fa-video-camera"
+                           ng-class="{ 'enabled' : peer.videoDisabled }">
+                      </div>
+                      <div ng-click="vm.maximize(peer)"
+                           class="button fa fa-expand">
+                      </div>
+                    </div>
                   </div>
-                  <div ng-click="vm.disableVideo(peer)"
-                       class="button fa fa-video-camera"
-                       ng-class="{ 'enabled' : peer.videoDisabled }">
-                  </div>
-                  <div ng-click="vm.maximize(peer)"
-                       class="button fa fa-expand">
-                  </div>
+                  <video id="video_{{::peer.id}}" ng-src="{{::peer.source}}"/>
                 </div>
-              </div>
-              <video id="video_{{::peer.id}}" ng-src="{{::peer.source}}"/>
             </div>
+          </div>
         </div>
+      </div>
+      <!-- Chat  -->
+      <div class="col-lg-4">
+        <div class="chat-discussion">
+          <!-- messages -->
+          <div class="chat-message left">
+            <div class="message">
+            <b> Michael Smith </b>
+            <span class="message-content">
+            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+            </span>
+            </div>
+          </div>
+        </div>
+        <textarea id="message-input"
+                  name="message"
+                  ng-enter="vm.sendUserMessage()"
+                  ng-model="vm.message"
+                  ng-disabled="vm.isClosed"
+                  maxlength="500"
+                  class="form-control col-lg-10"
+                  style="resize: none;"
+                  placeholder="Ingrese el mensaje"
+                  autofocus>
+                </textarea>
       </div>
     </div>
   </div>
-  <!-- Chat  -->
-  <div class="col-lg-4">
-    <div class="chat-discussion">
-      <!-- messages -->
-      <div class="chat-message left">
-        <div class="message">
-        <b> Michael Smith </b>
-        <span class="message-content">
-				Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-        </span>
-        </div>
-      </div>
-    </div>
-    <textarea id="message-input"
-              name="message"
-              ng-enter="vm.sendUserMessage()"
-              ng-model="vm.message"
-              ng-disabled="vm.isClosed"
-              maxlength="500"
-              class="form-control col-lg-10"
-              style="resize: none;"
-              placeholder="Ingrese el mensaje"
-              autofocus>
-            </textarea>
-  </div>
+
 </div>
