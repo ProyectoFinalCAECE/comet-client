@@ -1,7 +1,22 @@
-<div id="video-index" class="wrapper wrapper-content" data-view="video-index">
+<div id="video-index" class="wrapper wrapper-content" data-view="video-index" style="padding-top:5px!important">
   <div class="row">
     <div class="col-lg-12">
     <!-- Maximizado -->
+        <div class="row" sticky offset="60">
+            <div class="col-lg-11" style="float:left;">
+                <h2><i class="fa fa-video-camera"></i> Videoconferencia</h2>
+                <ol class="breadcrumb2">
+                    <li>
+                        <div ncy-breadcrumb></div>
+                    </li>
+                </ol>
+            </div>
+            <div class="col-lg-1 ButtonAdminList" ng-show="!vm.isDirect">
+                <a ng-class="vm.isMember" ng-click="vm.showMembers = !vm.showMembers;  vm.showIntegrations = false">
+                    <i class="fa fa-comments"></i>
+                </a>
+            </div>
+        </div>
     <div class="row">
       <div class="col-lg-5" ng-mouseover="vm.mouseIn(vm.centerPeer)" ng-mouseleave="vm.mouseOut(vm.centerPeer)">
         <div class="ibox">
