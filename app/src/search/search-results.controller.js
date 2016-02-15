@@ -133,10 +133,15 @@
                   vm.messagesInChannel.length !== 0){
                     vm.isEmpty = false;
 
-                    vm.cantidadResultados = vm.resultUsers.length +
-                                            vm.messagesInProjectDirectChannels.length +
-                                            vm.messagesInProjectCommonChannels.length +
-                                            vm.messagesInChannel.length;
+                    vm.cantidadResultados = vm.resultUsers.length + vm.messagesInChannel.length;
+
+                    for(var i=0; i < vm.messagesInProjectDirectChannels.length; i++){
+                      vm.cantidadResultados += vm.messagesInProjectDirectChannels[i].messages.length;
+                    }
+
+                    for(var j=0; j < vm.messagesInProjectCommonChannels.length; j++){
+                      vm.cantidadResultados += vm.messagesInProjectCommonChannels[j].messages.length;
+                    }
             }
           }
 
