@@ -35,10 +35,10 @@
          * @name searchMessageInProject
          * @desc searchs for messages matching provided string within provided Project's Messages
          */
-        function searchMessageInProject (projectId, searchString, limit, last_id) {
-          $log.log('searchMessageInProject', projectId, searchString);
+        function searchMessageInProject (projectId, searchString, in_direct, limit, last_id) {
+          $log.log('searchMessageInProject', projectId, searchString, in_direct);
           var url = getMessagesInProjectUrl(projectId);
-          return $http.get(url + generateSearchString(searchString, limit, last_id), authService.getJwtHeader());
+          return $http.get(url + generateSearchString(searchString, in_direct, limit, last_id), authService.getJwtHeader());
         }
 
         /**
@@ -87,7 +87,7 @@
          * @name generateSearchString
          * @desc return the search querystring
          */
-        function generateSearchString(searchString, limit, last_id){
+        function generateSearchString(searchString, in_direct, limit, last_id){
           var querystring = '?q=' + searchString;
 
           if(limit){
@@ -97,6 +97,11 @@
           if(last_id){
             querystring += '&last_id=' + last_id;
           }
+
+          if(in_direct){
+            querystring += '&in_direct=' + in_direct;
+          }
+
           return querystring;
         }
     }

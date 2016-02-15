@@ -101,15 +101,23 @@
                   }
                 ).then(searchResult);
               } else {
-                //Buscar en todos los canales comunes del proyecto, y en los directos a los que pertenece el usuario.
-                searchService.searchMessageInProject(vm.projectId, vm.criterioBusqueda, vm.limit, vm.last_id).error(searchError).then(
-                  function (project_search_result) {
-                    vm.messagesInProjectDirectChannels = project_search_result.data.project.channels.direct;
-                    vm.messagesInProjectCommonChannels = project_search_result.data.project.channels.common;
+                //Buscar en todos los canales comunes del proyecto.
+                searchService.searchMessageInProject(vm.projectId, vm.criterioBusqueda, false, vm.limit, vm.last_id).error(searchError).then(
+                  function (project_common_search_result) {
+                    vm.messagesInProjectCommonChannels = project_common_search_result.data.project.channels.common;
 
                     // SETEAR LAST ID, PARA SIGUIENTE BUSQUEDA (VER MAS)
                   }
-                ).then(searchResult);
+                ).then(function(){
+                  //Buscar en todos los canales directos a los que pertenece el usuario.
+                  searchService.searchMessageInProject(vm.projectId, vm.criterioBusqueda, true, vm.limit, vm.last_id).error(searchError).then(
+                    function (project_direct_search_result) {
+                      vm.messagesInProjectDirectChannels = project_direct_search_result.data.project.channels.direct;
+
+                      // SETEAR LAST ID, PARA SIGUIENTE BUSQUEDA (VER MAS)
+                    }
+                  ).then(searchResult);
+                });
               }
             });
           }
