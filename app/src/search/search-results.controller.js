@@ -43,7 +43,8 @@
           vm.messagesInProjectCommonChannels = [];
           vm.messagesInChannel = [];
           vm.limit = $stateParams.limit;
-          vm.last_id = null;
+          vm.last_common_id = null;
+          vm.last_direct_id = null;
           vm.getMember = getMember;
           vm.getChannelById = getChannelById;
 
@@ -96,20 +97,24 @@
                     if(project_search_result.data.project.channels.common){
                       vm.messagesInProjectCommonChannels = project_search_result.data.project.channels.common;
                     }
-
-                    // SETEAR LAST ID, PARA SIGUIENTE BUSQUEDA (VER MAS)
                   }
                 ).then(searchResult);
               } else {
-                //Buscar en todos los canales comunes del proyecto, y en los directos a los que pertenece el usuario.
-                searchService.searchMessageInProject(vm.projectId, vm.criterioBusqueda, vm.limit, vm.last_id).error(searchError).then(
-                  function (project_search_result) {
-                    vm.messagesInProjectDirectChannels = project_search_result.data.project.channels.direct;
-                    vm.messagesInProjectCommonChannels = project_search_result.data.project.channels.common;
-
-                    // SETEAR LAST ID, PARA SIGUIENTE BUSQUEDA (VER MAS)
+                //Buscar en todos los canales comunes del proyecto.
+                searchService.searchMessageInProject(vm.projectId, vm.criterioBusqueda, false, vm.limit, vm.last_id).error(searchError).then(
+                  function (project_common_search_result) {
+                    vm.messagesInProjectCommonChannels = project_common_search_result.data.project.channels.common;
                   }
-                ).then(searchResult);
+                ).then(function(){
+                  //Buscar en todos los canales directos a los que pertenece el usuario.
+                  searchService.searchMessageInProject(vm.projectId, vm.criterioBusqueda, true, vm.limit, vm.last_id).error(searchError).then(
+                    function (project_direct_search_result) {
+                      vm.messagesInProjectDirectChannels = project_direct_search_result.data.project.channels.direct;
+
+                      // SETEAR LAST ID, PARA SIGUIENTE BUSQUEDA (VER MAS)
+                    }
+                  ).then(searchResult);
+                });
               }
             });
           }
@@ -125,11 +130,43 @@
                   vm.messagesInChannel.length !== 0){
                     vm.isEmpty = false;
 
-                    vm.cantidadResultados = vm.resultUsers.length +
-                                            vm.messagesInProjectDirectChannels.length +
-                                            vm.messagesInProjectCommonChannels.length +
-                                            vm.messagesInChannel.length;
+                    vm.cantidadResultados = vm.resultUsers.length + vm.messagesInChannel.length;
+
+                    for(var i=0; i < vm.messagesInProjectDirectChannels.length; i++){
+                      vm.cantidadResultados += vm.messagesInProjectDirectChannels[i].messages.length;
+                    }
+
+                    for(var j=0; j < vm.messagesInProjectCommonChannels.length; j++){
+                      vm.cantidadResultados += vm.messagesInProjectCommonChannels[j].messages.length;
+                    }
             }
+            //Saving last retrieved ids.
+            setLastDirectId();
+            setLastCommonId();
+          }
+
+          /**
+           * @name setLastDirectId
+           * @desc saves last message retrieved for direct channels search results to 'retrieve more'
+          */
+          function setLastDirectId() {
+              if(vm.messagesInProjectDirectChannels.length !== 0){
+                var last_channel = vm.messagesInProjectDirectChannels[vm.messagesInProjectDirectChannels.length -1];
+                vm.last_direct_id = last_channel.messages[last_channel.messages.length - 1].id;
+                console.log("vm.last_direct_id is: ", vm.last_direct_id);
+              }
+          }
+
+          /**
+           * @name setLastCommonId
+           * @desc saves last message retrieved for direct channels search results to 'retrieve more'
+          */
+          function setLastCommonId(){
+              if(vm.messagesInProjectCommonChannels.length !== 0){
+                var last_channel = vm.messagesInProjectCommonChannels[vm.messagesInProjectCommonChannels.length -1];
+                vm.last_common_id = last_channel.messages[last_channel.messages.length - 1].id;
+                console.log("vm.last_common_id is: ", vm.last_common_id);
+              }
           }
 
           /**
