@@ -810,6 +810,8 @@ body[state="dashboard.project.channel-explore"] {
   position: fixed;
   right: 40px;
   width: 260px;
+  height: 65%;
+  overflow-y: auto;
 }
 
 .chat-users {
@@ -913,6 +915,10 @@ body[state="dashboard.project.channel-explore"] {
   background-color:white;
   overflow-y: hidden;
   max-height:500px;
+}
+
+.skin-setttings:hover {
+  overflow-y: auto;
 }
 
 .skin-setttings ul {
