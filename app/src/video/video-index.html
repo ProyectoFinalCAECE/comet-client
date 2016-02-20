@@ -5,11 +5,6 @@
       <div class="row">
           <div class="col-lg-11" style="float:left;">
               <h2><i class="fa fa-video-camera"></i> Videoconferencia</h2>
-              <ol class="breadcrumb2">
-                  <li>
-                      <div ncy-breadcrumb></div>
-                  </li>
-              </ol>
           </div>
           <div class="col-lg-1 ButtonAdminList">
               <a ng-click="vm.showChat = !vm.showChat">
@@ -74,9 +69,9 @@
             <div class="chat-message left"
                  ng-repeat="message in vm.messages">
               <div class="message">
-                <b>{{message.author}}</b>
+                <b>{{::message.author}}</b>
                 <span class="message-content">
-                  {{message.content}}
+                  {{::message.content}}
                 </span>
                 <span class="message-date">
                   {{::vm.formatMessageDate(message.date) }}

@@ -20,6 +20,7 @@
                                          'constraints',
                                          'lodash',
                                          'moment',
+                                         'SimpleWebRTC',
                                          'dashboardServiceModel'];
 
         function VideoIndexController ($log,
@@ -33,6 +34,7 @@
                                       constraints,
                                       lodash,
                                       moment,
+                                      SimpleWebRTC,
                                       dashboardServiceModel) {
 
           var vm = this,
@@ -74,6 +76,10 @@
             };
           }
 
+          /**
+           * @name getPeers
+           * @desc returns al the connected peers
+          */
           function getPeers () {
             var tempPeers = [];
             for (var i = 0; i < peers.length; i++) {
@@ -81,10 +87,13 @@
                 tempPeers.push(peers[i]);
               //}
             }
-
             return tempPeers;
           }
 
+          /**
+           * @name mute
+           * @desc mute peer video sound
+          */
           function mute (peer) {
             $log.log("mute", peer);
             var video = angular.element('#video_' + peer.id);
@@ -97,22 +106,42 @@
             peer.muted = !peer.muted;
           }
 
+          /**
+           * @name maximize
+           * @desc disable peer video
+          */
           function disableVideo (peer) {
             peer.videoDisabled = !peer.videoDisabled;
           }
 
+          /**
+           * @name maximize
+           * @desc peer video maximize
+          */
           function maximize (peer) {
             vm.centerPeer = peer;
           }
 
+          /**
+           * @name mouseIn
+           * @desc peer video mouse in
+          */
           function mouseIn (peer) {
             peer.mouseIn = true;
           }
 
+          /**
+           * @name mouseOut
+           * @desc peer video mouse out
+          */
           function mouseOut (peer) {
             peer.mouseIn = false;
           }
 
+          /**
+           * @name initializeRTC
+           * @desc SimpleWebRTC plugin configuration
+          */
           function initializeRTC() {
             // create our webrtc connection
             webrtc = new SimpleWebRTC({
@@ -142,13 +171,10 @@
             // we got access to the camera
             webrtc.on('localStream', function (stream) {
 
-              $log.log('local', stream);
-
               var videoTracks = stream.getVideoTracks();
-              console.log('how many video tracks?', videoTracks.length);
               if (videoTracks.length) {
                 var first = videoTracks[0];
-                console.log('video track label', first.label);
+                $log.info('local video track label', first.label);
               }
 
               var localStreamUrl = $window.URL.createObjectURL(stream);
@@ -227,14 +253,16 @@
 
             // chat - message received
             webrtc.connection.on('message', function (data) {
-              //$log.info('chat received (message)', data);
               if (data.type === 'chat') {
-                console.log('chat received (message)', data.payload);
                 vm.messages.push(data.payload);
               }
             });
           }
 
+          /**
+           * @name sendMessage
+           * @desc sends a chat messsage
+          */
           function sendMessage(text) {
             var message = {
               content: text,
@@ -262,6 +290,10 @@
             });
           }
 
+          /**
+           * @name removePeer
+           * @desc removes a peer from the connected peers list
+          */
           function removePeer (peer) {
             lodash.remove(peers, function (p) {
               if (p.id === peer.id) {
