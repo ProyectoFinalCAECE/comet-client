@@ -47,6 +47,7 @@
           vm.last_direct_id = null;
           vm.getMember = getMember;
           vm.getChannelById = getChannelById;
+          vm.lookForMoreResults = lookForMoreResults;
 
           // ngEmbed options
           vm.options = {
@@ -88,7 +89,7 @@
               vm.resultUsers = users_search_result.data.users;
               if(vm.channelId){
                 //buscar solamente en el canal provisto
-                searchService.searchMessageInChannel(vm.projectId, vm.channelId, vm.criterioBusqueda, vm.limit, vm.last_id).error(searchError).then(
+                searchService.searchMessageInChannel(vm.projectId, vm.channelId, vm.criterioBusqueda, vm.limit, undefined).error(searchError).then(
                   function (project_search_result) {
                     if(project_search_result.data.project.channels.direct){
                       vm.messagesInProjectDirectChannels = project_search_result.data.project.channels.direct;
@@ -101,22 +102,74 @@
                 ).then(searchResult);
               } else {
                 //Buscar en todos los canales comunes del proyecto.
-                searchService.searchMessageInProject(vm.projectId, vm.criterioBusqueda, false, vm.limit, vm.last_id).error(searchError).then(
+                searchService.searchMessageInProject(vm.projectId, vm.criterioBusqueda, false, vm.limit, undefined).error(searchError).then(
                   function (project_common_search_result) {
+                    console.log("project_common_search_result are: ", project_common_search_result);
                     vm.messagesInProjectCommonChannels = project_common_search_result.data.project.channels.common;
                   }
                 ).then(function(){
                   //Buscar en todos los canales directos a los que pertenece el usuario.
                   searchService.searchMessageInProject(vm.projectId, vm.criterioBusqueda, true, vm.limit, vm.last_id).error(searchError).then(
                     function (project_direct_search_result) {
+                      console.log("project_direct_search_result are: ", project_direct_search_result);
                       vm.messagesInProjectDirectChannels = project_direct_search_result.data.project.channels.direct;
-
-                      // SETEAR LAST ID, PARA SIGUIENTE BUSQUEDA (VER MAS)
                     }
                   ).then(searchResult);
                 });
               }
             });
+          }
+
+          /**
+           * @name lookForMoreResults
+           * @desc sends search request starting from last retrieved id
+          */
+          function lookForMoreResults (in_direct) {
+            console.log("into lookForMoreResults. in_direct: ", in_direct);
+            if(vm.channelId){
+              //buscar solamente en el canal provisto
+
+              var last_id;
+
+              if(vm.last_direct_id !== null){
+                last_id = vm.last_direct_id;
+              }
+
+              if(vm.last_common_id !== null){
+                last_id = vm.last_common_id;
+              }
+
+              searchService.searchMessageInChannel(vm.projectId, vm.channelId, vm.criterioBusqueda, vm.limit, vm.last_id).error(searchError).then(
+                function (project_search_result) {
+                  if(project_search_result.data.project.channels.direct){
+                    vm.messagesInProjectDirectChannels.concat(project_search_result.data.project.channels.direct);
+                  }
+
+                  if(project_search_result.data.project.channels.common){
+                    vm.messagesInProjectCommonChannels.concat(project_search_result.data.project.channels.common);
+                  }
+                }
+              ).then(searchResult);
+            } else {
+
+              if(in_direct){
+                //Buscar en todos los canales directos a los que pertenece el usuario.
+                searchService.searchMessageInProject(vm.projectId, vm.criterioBusqueda, true, vm.limit, vm.last_direct_id).error(searchError).then(
+                  function (project_direct_search_result) {
+                    console.log("project_direct_search_result are: ", project_direct_search_result);
+                    appendNewResultsToExistingOnes(project_direct_search_result.data.project.channels.direct, false);
+                  }
+                ).then(searchResult);
+              } else {
+                //Buscar en todos los canales comunes del proyecto.
+                searchService.searchMessageInProject(vm.projectId, vm.criterioBusqueda, false, vm.limit, vm.last_common_id).error(searchError).then(
+                  function (project_common_search_result) {
+                    console.log("project_common_search_result are: ", project_common_search_result);
+                    appendNewResultsToExistingOnes(project_common_search_result.data.project.channels.common, true);
+                  }
+                ).then(searchResult);
+              }
+            }
           }
 
           /**
@@ -222,6 +275,36 @@
               sameElse : 'dddd L LT'
             });
           }
-        }
 
+          /**
+           * @name appendNewResultsToExistingOnes
+           * @desc appends new messsages to existent channel from previous search results, or adds new channel.
+           */
+          function appendNewResultsToExistingOnes(new_search_results, common){
+              console.log('into appendNewResultsToExistingOnes');
+              var old_results = vm.messagesInProjectDirectChannels;
+
+              if(common){
+                old_results = vm.messagesInProjectCommonChannels;
+              }
+
+              for(var j=0; j < new_search_results.length; j++){
+                var idx = arrayObjectIndexOf(old_results, new_search_results[j].id, 'id');
+                if(idx > -1){
+                  old_results[idx].messages = old_results[idx].messages.concat(new_search_results[j].messages);
+                } else {
+                  old_results = old_results.concat(new_search_results[j]);
+                }
+              }
+
+              console.log('now searc results are: ', old_results);
+          }
+
+          function arrayObjectIndexOf(myArray, searchTerm, property) {
+              for(var i = 0, len = myArray.length; i < len; i++) {
+                  if (myArray[i][property] === searchTerm) return i;
+              }
+              return -1;
+          }
+        }
 })();
