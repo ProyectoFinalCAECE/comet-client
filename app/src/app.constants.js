@@ -11,6 +11,8 @@
         .constant('lodash', window._)
         // momentJS support
         .constant('moment', window.moment)
+        // momentJS support
+        .constant('SimpleWebRTC', window.SimpleWebRTC)
         // Dropbox chooser
         .constant('dropboxChooser', window.Dropbox)
         // global forms configuration

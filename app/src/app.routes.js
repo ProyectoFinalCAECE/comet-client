@@ -20,8 +20,17 @@
             $state.go('dashboard');
           }
         }]
+      })
+      .state('video-test', {
+        url: '/test?room',
+        templateUrl: '/src/video/test.html',
+        controller: 'VideoIndexController',
+        controllerAs: 'vm'
       });
 
-    $urlRouterProvider.otherwise('/');
+      $urlRouterProvider.otherwise(function ($injector) {
+          var $state = $injector.get('$state');
+          $state.go('home');
+      });
   }
 })();
