@@ -47,6 +47,8 @@
           vm.maximize = maximize;
           vm.centerPeer = null;
 
+          vm.showChat = false;
+
           activate();
 
           /**
