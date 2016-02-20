@@ -1049,12 +1049,19 @@ body[state="dashboard.project.channel-explore"] {
 
 .search-result-member img {
   height: 36px;
+  width: 36px;
   margin-right: 5px;
 }
 
-.search-result-member p {
+.search-result-member b {
+  color: #676a6c;
   font-weight: bold;
   font-size: 14px;
+}
+
+.search-result-member b:hover {
+  color: #000;
+  cursor: pointer;
 }
 
 .search-result-message {
@@ -1063,12 +1070,18 @@ body[state="dashboard.project.channel-explore"] {
 
 .search-result-message img {
   height: 36px;
+  width: 36px;
   margin-right: 5px;
 }
 
 .search-result-message p {
   font-size: 14px;
   margin-left: 30px;
+}
+
+.search-result-message .message:hover {
+  border: 1px solid #555;
+  cursor: pointer;
 }
 
 /* Videoconferencia */
