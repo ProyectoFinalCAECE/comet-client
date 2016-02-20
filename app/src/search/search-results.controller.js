@@ -139,14 +139,18 @@
                 last_id = vm.last_common_id;
               }
 
-              searchService.searchMessageInChannel(vm.projectId, vm.channelId, vm.criterioBusqueda, vm.limit, vm.last_id).error(searchError).then(
+              searchService.searchMessageInChannel(vm.projectId, vm.channelId, vm.criterioBusqueda, vm.limit, last_id).error(searchError).then(
                 function (project_search_result) {
                   if(project_search_result.data.project.channels.direct){
-                    vm.messagesInProjectDirectChannels.concat(project_search_result.data.project.channels.direct);
+                    console.log('project_search_result.data.project.channels.direct single is: ', project_search_result.data.project.channels.direct);
+                    //vm.messagesInProjectDirectChannels.concat(project_search_result.data.project.channels.direct);
+                    appendNewResultsToExistingOnes(project_search_result.data.project.channels.direct, false);
                   }
 
                   if(project_search_result.data.project.channels.common){
-                    vm.messagesInProjectCommonChannels.concat(project_search_result.data.project.channels.common);
+                    console.log('project_search_result.data.project.channels.common single is: ', project_search_result.data.project.channels.common);
+                    //vm.messagesInProjectCommonChannels.concat(project_search_result.data.project.channels.common);
+                    appendNewResultsToExistingOnes(project_search_result.data.project.channels.common, true);
                   }
                 }
               ).then(searchResult);
