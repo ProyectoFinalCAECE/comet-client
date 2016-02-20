@@ -35,7 +35,7 @@
                   <div class="button fa fa-expand"></div>
                 </div>
               </div>
-              <video id="video_{{::vm.centerPeer.id}}" ng-src="{{::vm.centerPeer.source}}"/>
+              <video id="localVideo" />
             </div>
         </div>
       </div>
@@ -61,7 +61,7 @@
                       </div>
                     </div>
                   </div>
-                  <video id="video_{{::peer.id}}" ng-src="{{::peer.source}}"/>
+                  <video id="{{::peer.id}}" ng-src="{{::peer.source}}"/>
                 </div>
             </div>
           </div>

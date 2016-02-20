@@ -18,7 +18,8 @@
                                          '$window',
                                          'ngToast',
                                          'constraints',
-                                         'lodash'];
+                                         'lodash',
+                                         'dashboardServiceModel'];
 
         function VideoIndexController ($log,
                                       $rootScope,
@@ -29,10 +30,12 @@
                                       $window,
                                       ngToast,
                                       constraints,
-                                      lodash) {
+                                      lodash,
+                                      dashboardServiceModel) {
 
           var vm = this,
               room = $stateParams.room,
+              localNickname = dashboardServiceModel.getCurrentUser().alias,
               webrtc = null,
               peers = [];
 
@@ -114,6 +117,8 @@
                 localVideoEl: 'localVideo',
                 // the id/element dom element that will hold remote videos
                 remoteVideosEl: '',
+                // nickname
+                nick: localNickname,
                 // immediately ask for camera access
                 autoRequestMedia: false,
                 debug: false,
@@ -146,7 +151,7 @@
 
               var localPeer = {
                 id: 'localVideo',
-                name: 'localVideo',
+                name: localNickname,
                 domId: 'localPeer',
                 source: $sce.trustAsResourceUrl(localStreamUrl),
                 isLocal: true,
@@ -173,7 +178,7 @@
 
                 var newPeer = {
                   id: peer.id,
-                  name: 'peer_' + peer.id,
+                  name: peer.nick,
                   domId: webrtc.getDomId(peer),
                   source: $sce.trustAsResourceUrl(video.src),
                   muted: false,
