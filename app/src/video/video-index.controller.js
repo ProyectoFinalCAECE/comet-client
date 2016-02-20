@@ -19,6 +19,7 @@
                                          'ngToast',
                                          'constraints',
                                          'lodash',
+                                         'moment',
                                          'dashboardServiceModel'];
 
         function VideoIndexController ($log,
@@ -31,6 +32,7 @@
                                       ngToast,
                                       constraints,
                                       lodash,
+                                      moment,
                                       dashboardServiceModel) {
 
           var vm = this,
@@ -47,6 +49,11 @@
           vm.maximize = maximize;
           vm.centerPeer = null;
 
+          vm.showChat = false;
+          vm.sendMessage = sendMessage;
+          vm.formatMessageDate = formatMessageDate;
+          vm.messages = [];
+
           activate();
 
           /**
@@ -54,13 +61,10 @@
            * @desc controller activation logic
           */
           function activate () {
-            $log.log('video controller - activate', 'room:' + room);
+
             initializeRTC();
 
-            // $window.onbeforeunload = function(  ) {
-            //   return "hola hola";
-            // };
-
+            // close the connection on exit
             $window.onunload = function(  ) {
               $log.log("####### unload");
               if (webrtc !== null) {
@@ -219,6 +223,42 @@
             webrtc.on('videoRemoved', function (video, peer) {
                 $log.info('webrtc::video removed ', peer);
                 removePeer(peer);
+            });
+
+            // chat - message received
+            webrtc.connection.on('message', function (data) {
+              //$log.info('chat received (message)', data);
+              if (data.type === 'chat') {
+                console.log('chat received (message)', data.payload);
+                vm.messages.push(data.payload);
+              }
+            });
+          }
+
+          function sendMessage(text) {
+            var message = {
+              content: text,
+              author: localNickname,
+              date: new Date()
+            };
+
+            if (webrtc) {
+              webrtc.sendToAll('chat', message);
+              vm.messages.push(message);
+              vm.message = '';
+            }
+          }
+
+          /**
+           * @name formatMessageDate
+           * @desc returns the message timestamp in a readable format
+          */
+          function formatMessageDate (msgDate) {
+            return moment(msgDate).calendar(null, {
+              lastDay : '[ayer] LT',
+              lastWeek : 'dddd L LT',
+              sameDay : 'LT',
+              sameElse : 'dddd L LT'
             });
           }
 
