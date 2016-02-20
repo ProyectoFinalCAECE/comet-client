@@ -2,7 +2,7 @@
   <div class="row fixed-header" sticky offset="60">
     <div class="col-lg-9">
       <h2><i class="fa fa-search"></i> Resultados de la búsqueda</h2>
-      <h3>{{vm.cantidadResultados}} resultados encontrados para: <span class="text-navy">{{vm.criterioBusqueda}}</span></h3>
+      <h3>{{vm.cantidadResultados}} resultados retornados para: <span class="text-navy">{{vm.criterioBusqueda}}</span></h3>
       <ol class="breadcrumb2">
         <li>
           <div ncy-breadcrumb></div>
@@ -58,6 +58,12 @@
                                     </div>
                                 </div>
                             </div>
+                            <br />
+                            <div ng-show="vm.messagesInProjectCommonChannels.length > 0">
+                              <button ng-click="vm.lookForMoreResults(false)" type="button" class="btn btn-primary" style="margin:auto; display:inherit;">
+                                Buscar más resultados en Canales Comunes
+                              </button>
+                            </div>
                             <div class="hr-line-dashed" ng-hide="vm.messagesInProjectCommonChannels == 0 || vm.messagesInProjectDirectChannels == 0"></div>
                             <h4 ng-hide="vm.messagesInProjectDirectChannels == 0">Canales Directos</h4>
                             <div class="search-result-message" ng-repeat="directChannel in vm.messagesInProjectDirectChannels"
@@ -78,6 +84,12 @@
                                       </span>
                                     </div>
                                 </div>
+                            </div>
+                            <br />
+                            <div ng-show="vm.messagesInProjectDirectChannels.length > 0">
+                              <button ng-click="vm.lookForMoreResults(true)" type="button" class="btn btn-primary" style="margin:auto; display:inherit;">
+                                Buscar más resultados en Canales Directos
+                              </button>
                             </div>
                           </div>
                         <!-- <dir-pagination-controls/> -->
