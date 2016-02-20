@@ -143,6 +143,9 @@
            * @desc SimpleWebRTC plugin configuration
           */
           function initializeRTC() {
+
+            var signalingServer = 'https://' + location.hostname + ':8888';
+
             // create our webrtc connection
             webrtc = new SimpleWebRTC({
                 // the id/element dom element that will hold "our" video
@@ -156,8 +159,8 @@
                 autoRequestMedia: false,
                 debug: false,
                 detectSpeakingEvents: true,
-                autoAdjustMic: false
-                //url: 'http://localhost:8888' //TODO: implementar con el server de comet
+                autoAdjustMic: false,
+                url:  signalingServer     // comentar esta linea para usar el server en la nube
             });
 
             webrtc.startLocalVideo();
