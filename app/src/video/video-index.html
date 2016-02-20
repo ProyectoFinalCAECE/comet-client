@@ -18,9 +18,7 @@
           </div>
       </div>
       <div class="row">
-        <div ng-class="vm.showChat ? 'col-lg-5' : 'col-lg-8'"
-             ng-mouseover="vm.mouseIn(vm.centerPeer)"
-             ng-mouseleave="vm.mouseOut(vm.centerPeer)">
+        <div ng-class="vm.showChat ? 'col-lg-5' : 'col-lg-8'">
           <div class="ibox">
               <div class="ibox-content video">
                 <div class="video-overlay">
@@ -73,26 +71,29 @@
         <div class="col-lg-4" ng-show="vm.showChat">
           <div class="chat-discussion">
             <!-- messages -->
-            <div class="chat-message left">
+            <div class="chat-message left"
+                 ng-repeat="message in vm.messages">
               <div class="message">
-              <b> Michael Smith </b>
-              <span class="message-content">
-              Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-              </span>
+                <b>{{message.author}}</b>
+                <span class="message-content">
+                  {{message.content}}
+                </span>
+                <span class="message-date">
+                  {{::vm.formatMessageDate(message.date) }}
+                </span>
               </div>
             </div>
           </div>
           <textarea id="message-input"
                     name="message"
-                    ng-enter="vm.sendUserMessage()"
+                    ng-enter="vm.sendMessage(vm.message)"
                     ng-model="vm.message"
-                    ng-disabled="vm.isClosed"
-                    maxlength="500"
+                    maxlength="200"
                     class="form-control col-lg-10"
                     style="resize: none;"
                     placeholder="Ingrese el mensaje"
                     autofocus>
-                  </textarea>
+          </textarea>
         </div>
       </div>
   </div>
