@@ -46,9 +46,9 @@
          * @desc searchs for messages matching provided string within provided Channel's Messages
          */
         function searchMessageInChannel (projectId, channelId, searchString, limit, last_id) {
-          $log.log('searchMessageInChannel', projectId, channelId, searchString);
+          $log.log('searchMessageInChannel', projectId, channelId, searchString, last_id);
           var url = getMessagesInChannelUrl(projectId, channelId);
-          return $http.get(url + generateSearchString(searchString, limit, last_id), authService.getJwtHeader());
+          return $http.get(url + generateSearchString(searchString, undefined, limit, last_id), authService.getJwtHeader());
         }
 
         /**
