@@ -45,6 +45,7 @@
           vm.limit = $stateParams.limit;
           vm.last_common_id = null;
           vm.last_direct_id = null;
+          vm.searching = true;
           vm.getMember = getMember;
           vm.getChannelById = getChannelById;
           vm.lookForMoreResults = lookForMoreResults;
@@ -82,8 +83,6 @@
            * @desc controller activation logic
           */
           function activate () {
-            // mientras mostrar un gif de loading
-
             searchService.searchUserInProject(vm.projectId, vm.criterioBusqueda).error(searchError)
             .then(function (users_search_result) {
               vm.resultUsers = users_search_result.data.users;
@@ -125,6 +124,7 @@
            * @desc sends search request starting from last retrieved id
           */
           function lookForMoreResults (in_direct) {
+            vm.searching = true;
             console.log("into lookForMoreResults. in_direct: ", in_direct);
             if(vm.channelId){
               //buscar solamente en el canal provisto
@@ -181,6 +181,7 @@
            * @desc shows search operation result
           */
           function searchResult () {
+            vm.searching = false;
             if(vm.resultUsers.length !== 0 ||
                 vm.messagesInProjectDirectChannels.length !== 0 ||
                 vm.messagesInProjectCommonChannels.length !== 0 ||
@@ -231,6 +232,7 @@
            * @desc shows a dialog indicating an error on search operation
           */
           function searchError (data) {
+              vm.searching = false;
               vm.validationErrors = $rootScope.helpers.loadServerErrors(data);
               if (vm.validationErrors === null){
                 ngToast.danger('Ocurrió un error al consultar al servidor.');
