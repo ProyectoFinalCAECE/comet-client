@@ -11,91 +11,101 @@
     </div>
   </div>
     <div class="row">
-        <!-- No hay resultados -->
-        <div ng-show="vm.isEmpty" class="jumbotron text-center">
-            <p>No hay resultados para esta búsqueda <i class="fa fa-frown-o"></i></p>
+        <!-- 'searching' gif -->
+        <div ng-show="vm.searching" class="text-center">
+            <br />
+            <br />
+            <br />
+            <img src="/images/gifs/earth.gif" alt="Loading Icon">
+            <!--style="width:128px;height:256px;"-->
         </div>
-        <!-- listado de resultados -->
-        <div class="row" ng-hide="vm.isEmpty">
-            <div class="col-lg-12">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-content">
-                        <div class="resultadosBuscador">
-                          <!-- listado de miembros -->
-                          <h3 ng-hide="vm.resultUsers == 0">Miembros del proyecto que coinciden con la búsqueda</h3>
-                            <div class="search-result-member" ng-repeat="user in vm.resultUsers">
-                              <a data-type="D"
-                  							 data-id="{{user.id}}"
-                  							 ui-sref="dashboard.project.channel-explore({projectId: vm.project.id, channelId:user.id, isDirect:true})">
-                                <img class="message-avatar" ng-src="{{::user.profilePicture}}" alt="" />
-                  	          </a>
-                              <a data-type="D"
-                								 data-id="{{user.id}}"
-                								 ui-sref="dashboard.project.channel-explore({projectId: vm.project.id, channelId:user.id, isDirect:true})">
-                	              <b>{{user.firstName + ' ' + user.lastName}}</b>
-                              </a>
+        <div ng-hide="vm.searching">
+          <!-- No hay resultados -->
+          <div ng-show="vm.isEmpty" class="jumbotron text-center">
+              <p>No hay resultados para esta búsqueda <i class="fa fa-frown-o"></i></p>
+          </div>
+          <!-- listado de resultados -->
+          <div class="row" ng-hide="vm.isEmpty">
+              <div class="col-lg-12">
+                  <div class="ibox float-e-margins">
+                      <div class="ibox-content">
+                          <div class="resultadosBuscador">
+                            <!-- listado de miembros -->
+                            <h3 ng-hide="vm.resultUsers == 0">Miembros del proyecto que coinciden con la búsqueda</h3>
+                              <div class="search-result-member" ng-repeat="user in vm.resultUsers">
+                                <a data-type="D"
+                    							 data-id="{{user.id}}"
+                    							 ui-sref="dashboard.project.channel-explore({projectId: vm.project.id, channelId:user.id, isDirect:true})">
+                                  <img class="message-avatar" ng-src="{{::user.profilePicture}}" alt="" />
+                    	          </a>
+                                <a data-type="D"
+                  								 data-id="{{user.id}}"
+                  								 ui-sref="dashboard.project.channel-explore({projectId: vm.project.id, channelId:user.id, isDirect:true})">
+                  	              <b>{{user.firstName + ' ' + user.lastName}}</b>
+                                </a>
+                              </div>
+                              <!-- listado de mensajes en canales -->
+                              <hr style="border-color:gray" ng-hide="vm.resultUsers == 0 || (vm.messagesInProjectDirectChannels == 0 && vm.messagesInProjectCommonChannels == 0)"></hr>
+                              <h3 ng-hide="vm.messagesInProjectCommonChannels == 0 && vm.messagesInProjectDirectChannels == 0">Mensajes del proyecto que contengan los términos de búsqueda</h3>
+                              <h4 ng-hide="vm.messagesInProjectCommonChannels == 0">Canales Comunes</h4>
+                              <div class="search-result-message" ng-repeat="channel in vm.messagesInProjectCommonChannels"
+                                  ng-init="channelObject = vm.getChannelById(channel.id)">
+                                  <h3>{{channelObject.name}}</h3>
+                                  <div ng-repeat="message in channel.messages"
+                                      ng-init="msgAuthor = vm.getMember(message.user)">
+                                      <br />
+                                      <div class="message">
+                                        <img class="message-avatar" ng-src="{{::msgAuthor.profilePicture}}" alt="" >
+                                        <span id="msg_{{::message.id}}" class="message-author"><b>{{msgAuthor.firstName + ' ' + msgAuthor.lastName}}</b></span>
+                                        <span class="message-date">{{::vm.formatMessageDate(message.date) }}</span>
+                                        <!-- Text messsage -->
+                                          <ng-embed embed-data="message.text"
+                                                    embed-options="vm.options"
+                                                    embed-template-url="/src/components/ngEmbed.template.html">
+                                          </ng-embed>
+                                        </span>
+                                      </div>
+                                  </div>
+                              </div>
+                              <br />
+                              <div ng-show="vm.messagesInProjectCommonChannels.length > 0">
+                                <button ng-click="vm.lookForMoreResults(false)" type="button" class="btn btn-primary" style="margin:auto; display:inherit;">
+                                  Buscar más resultados en Canales Comunes
+                                </button>
+                              </div>
+                              <div class="hr-line-dashed" ng-hide="vm.messagesInProjectCommonChannels == 0 || vm.messagesInProjectDirectChannels == 0"></div>
+                              <h4 ng-hide="vm.messagesInProjectDirectChannels == 0">Canales Directos</h4>
+                              <div class="search-result-message" ng-repeat="directChannel in vm.messagesInProjectDirectChannels"
+                                  ng-init="channelObject = vm.getChannelById(directChannel.id)">
+                                  <h3>{{channelObject.name}}</h3>
+                                  <div ng-repeat="message in directChannel.messages"
+                                      ng-init="msgAuthor = vm.getMember(message.OriginUserId)">
+                                      <br />
+                                      <div class="message">
+                                        <img class="message-avatar" ng-src="{{::msgAuthor.profilePicture}}" alt="" >
+                                        <span id="msg_{{::message.id}}" class="message-author"><b>{{msgAuthor.firstName + ' ' + msgAuthor.lastName}}</b></span>
+                                        <span class="message-date">{{::vm.formatMessageDate(message.sentDateTimeUTC) }}</span>
+                                        <!-- Text messsage -->
+                                          <ng-embed embed-data="message.content"
+                                                    embed-options="vm.options"
+                                                    embed-template-url="/src/components/ngEmbed.template.html">
+                                          </ng-embed>
+                                        </span>
+                                      </div>
+                                  </div>
+                              </div>
+                              <br />
+                              <div ng-show="vm.messagesInProjectDirectChannels.length > 0">
+                                <button ng-click="vm.lookForMoreResults(true)" type="button" class="btn btn-primary" style="margin:auto; display:inherit;">
+                                  Buscar más resultados en Canales Directos
+                                </button>
+                              </div>
                             </div>
-                            <!-- listado de mensajes en canales -->
-                            <hr style="border-color:gray" ng-hide="vm.resultUsers == 0 || (vm.messagesInProjectDirectChannels == 0 && vm.messagesInProjectCommonChannels == 0)"></hr>
-                            <h3 ng-hide="vm.messagesInProjectCommonChannels == 0 && vm.messagesInProjectDirectChannels == 0">Mensajes del proyecto que contengan los términos de búsqueda</h3>
-                            <h4 ng-hide="vm.messagesInProjectCommonChannels == 0">Canales Comunes</h4>
-                            <div class="search-result-message" ng-repeat="channel in vm.messagesInProjectCommonChannels"
-                                ng-init="channelObject = vm.getChannelById(channel.id)">
-                                <h3>{{channelObject.name}}</h3>
-                                <div ng-repeat="message in channel.messages"
-                                    ng-init="msgAuthor = vm.getMember(message.user)">
-                                    <br />
-                                    <div class="message">
-                                      <img class="message-avatar" ng-src="{{::msgAuthor.profilePicture}}" alt="" >
-                                      <span id="msg_{{::message.id}}" class="message-author"><b>{{msgAuthor.firstName + ' ' + msgAuthor.lastName}}</b></span>
-                                      <span class="message-date">{{::vm.formatMessageDate(message.date) }}</span>
-                                      <!-- Text messsage -->
-                                        <ng-embed embed-data="message.text"
-                                                  embed-options="vm.options"
-                                                  embed-template-url="/src/components/ngEmbed.template.html">
-                                        </ng-embed>
-                                      </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <br />
-                            <div ng-show="vm.messagesInProjectCommonChannels.length > 0">
-                              <button ng-click="vm.lookForMoreResults(false)" type="button" class="btn btn-primary" style="margin:auto; display:inherit;">
-                                Buscar más resultados en Canales Comunes
-                              </button>
-                            </div>
-                            <div class="hr-line-dashed" ng-hide="vm.messagesInProjectCommonChannels == 0 || vm.messagesInProjectDirectChannels == 0"></div>
-                            <h4 ng-hide="vm.messagesInProjectDirectChannels == 0">Canales Directos</h4>
-                            <div class="search-result-message" ng-repeat="directChannel in vm.messagesInProjectDirectChannels"
-                                ng-init="channelObject = vm.getChannelById(directChannel.id)">
-                                <h3>{{channelObject.name}}</h3>
-                                <div ng-repeat="message in directChannel.messages"
-                                    ng-init="msgAuthor = vm.getMember(message.OriginUserId)">
-                                    <br />
-                                    <div class="message">
-                                      <img class="message-avatar" ng-src="{{::msgAuthor.profilePicture}}" alt="" >
-                                      <span id="msg_{{::message.id}}" class="message-author"><b>{{msgAuthor.firstName + ' ' + msgAuthor.lastName}}</b></span>
-                                      <span class="message-date">{{::vm.formatMessageDate(message.sentDateTimeUTC) }}</span>
-                                      <!-- Text messsage -->
-                                        <ng-embed embed-data="message.content"
-                                                  embed-options="vm.options"
-                                                  embed-template-url="/src/components/ngEmbed.template.html">
-                                        </ng-embed>
-                                      </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <br />
-                            <div ng-show="vm.messagesInProjectDirectChannels.length > 0">
-                              <button ng-click="vm.lookForMoreResults(true)" type="button" class="btn btn-primary" style="margin:auto; display:inherit;">
-                                Buscar más resultados en Canales Directos
-                              </button>
-                            </div>
-                          </div>
-                        <!-- <dir-pagination-controls/> -->
-                    </div>
-                </div>
-            </div>
+                          <!-- <dir-pagination-controls/> -->
+                      </div>
+                  </div>
+              </div>
+          </div>
         </div>
     </div>
 </div>
