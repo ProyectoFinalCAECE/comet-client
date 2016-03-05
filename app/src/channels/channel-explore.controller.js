@@ -337,6 +337,8 @@
               }
             });
 
+            $log.log('sendMessageWithPayload', msgPayload);
+
             // add the message to the view
             vm.noMoreMessages = false;
             addMessageToList(msgPayload);
@@ -626,7 +628,7 @@
               //TODO: grabar en la base y despues abrir la ventana
               $window.open(callUrl);
 
-              sendMessage('', user.id, messageType.VIDEO, callUrl);
+              sendMessage(callUrl, user.id, messageType.CALL, callUrl);
 
               showSummary();
           }
