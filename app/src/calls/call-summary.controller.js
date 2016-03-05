@@ -18,7 +18,8 @@
                                            'constraints',
                                            'user',
                                            'project',
-                                           'channel'];
+                                           'channel',
+                                           'call'];
 
         function CallSummaryController ($log,
                                           $rootScope,
@@ -29,18 +30,27 @@
                                           constraints,
                                           user,
                                           project,
-                                          channel) {
+                                          channel,
+                                          call) {
 
           var vm = this;
-          vm.channel = channel;
-          vm.project = project;
+          vm.summary = '';
+          vm.call = call;
           vm.validationErrors = null;
+          vm.saveSummary = saveSummary;
           vm.cancel = cancel;
 
           activate();
 
           function activate () {
 
+          }
+
+          function saveSummary () {
+            // callService.update(project.id, call)
+            //   .error(summarySaveError)
+            //   .then(summarySaveSuccess);
+            summarySaveSuccess();
           }
 
           /**
@@ -56,7 +66,7 @@
            * @desc shows a dialog indicating a successful operation
           */
           function summarySaveSuccess (response) {
-            $modalInstance.close(response.data);
+            $modalInstance.close(vm.summary);
           }
 
           /**

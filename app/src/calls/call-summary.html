@@ -14,12 +14,14 @@
   <div class="row">
     <form name="vm.frmSummary" class="form-horizontal m-t" role="form" novalidate="">
       <div>
-        <textarea style="width:95%; height: 350px;"></textarea>
+        <textarea ng-model="vm.summary"
+                  style="width:95%; height: 350px;"
+                  maxlength="2000"></textarea>
       </div>
     </form>
   </div>
 </div>
 <div class="modal-footer">
     <button class="btn btn-warning" type="button" ng-click="vm.cancel()">Cancelar</button>
-    <button class="btn btn-primary" type="button" ng-click="vm.invite()">Guardar</button>
+    <button class="btn btn-primary" type="button" ng-click="vm.saveSummary()">Guardar</button>
 </div>
