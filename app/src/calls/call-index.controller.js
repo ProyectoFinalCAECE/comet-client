@@ -7,9 +7,9 @@
     'use strict';
 
     angular.module('cometApp')
-           .controller('VideoIndexController', VideoIndexController);
+           .controller('CallIndexController', CallIndexController);
 
-        VideoIndexController.$inject = [ '$log',
+        CallIndexController.$inject = [ '$log',
                                          '$rootScope',
                                          '$scope',
                                          '$sce',
@@ -23,7 +23,7 @@
                                          'SimpleWebRTC',
                                          'dashboardServiceModel'];
 
-        function VideoIndexController ($log,
+        function CallIndexController ($log,
                                       $rootScope,
                                       $scope,
                                       $sce,
