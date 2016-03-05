@@ -34,7 +34,8 @@
           INTEGRATION_DROPBOX: 5,
           INTEGRATION_GITHUB: 6,
           INTEGRATION_TRELLO: 7,
-          INTEGRATION_PINGDOM: 8
+          INTEGRATION_PINGDOM: 8,
+          VIDEO: 9
         })
         // system notification types
         .constant('systemNotificationType', {

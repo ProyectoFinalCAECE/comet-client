@@ -10,7 +10,7 @@
   function config ($stateProvider) {
     $stateProvider
       .state('dashboard.project.video-index', {
-        url: '/video?room',
+        url: '/video/:room',
         ncyBreadcrumb: {
           label: 'Videoconferencia'
         },
