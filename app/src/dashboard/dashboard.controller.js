@@ -234,7 +234,7 @@
 
           function buscar (criterio) {
             console.log('buscar', criterio);
-            
+
             var channelId = null;
 
             if(vm.activeChannel !== null){
@@ -245,16 +245,6 @@
 
             vm.textoBusqueda = '';
           }
-
-          /*eliminar*/
-          function video (criterio) {
-            console.log('video', criterio);
-
-            $state.go('dashboard.project.video-index', { criterio: criterio });
-
-            vm.textoBusqueda = '';
-          }
-
 
           /**
            * @name initializeNotifications

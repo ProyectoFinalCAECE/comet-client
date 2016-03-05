@@ -16,6 +16,7 @@
                                            '$modal',
                                            '$location',
                                            '$timeout',
+                                           '$window',
                                            '$anchorScroll',
                                            'lodash',
                                            'moment',
@@ -40,6 +41,7 @@
                                           $modal,
                                           $location,
                                           $timeout,
+                                          $window,
                                           $anchorScroll,
                                           lodash,
                                           moment,
@@ -80,6 +82,9 @@
           // files
           vm.addDropboxFile = addDropboxFile;
           vm.displayFileMenu = displayFileMenu;
+          // calls
+          vm.startCall = startCall;
+
           // update info
           vm.edit = edit;
           // invite / delete members
@@ -240,6 +245,9 @@
             var limit = 5;
 
             channelService.getMessages(vm.project.id, vm.channel.id, nextRequestOffset, limit, vm.isDirect).then(function (response) {
+
+              $log.log(response);
+
               if(response.data.messages.length === 0){
                 // for the first load
                 if (nextRequestOffset === 0) {
@@ -309,13 +317,13 @@
            * @name sendMessage
            * @desc sends a message to the channel
           */
-          function sendMessage(messageText, authorId, type) {
-            var msgPayload = buildMessageObject(messageText, authorId, type);
+          function sendMessage(messageText, authorId, type, link) {
+            var msgPayload = buildMessageObject(messageText, authorId, type, link);
             sendMessageWithPayload(msgPayload);
           }
 
           /**
-           * @name sendMessagePayload
+           * @name sendMessageWithPayload
            * @desc sends the message with the payload parameter
           */
           function sendMessageWithPayload(msgPayload) {
@@ -340,7 +348,7 @@
            * @name buildMessageObject
            * @desc build the message payload object
           */
-          function buildMessageObject(messageText, authorId, type) {
+          function buildMessageObject(messageText, authorId, type, link) {
 
             lastMsgId++;
 
@@ -351,6 +359,7 @@
               text: messageText,
               user: authorId,
               type: msgType,
+              link: link,
               destinationUser: (isDirect ? vm.channel.id : 0),
               projectId: vm.project.id,
               date: new Date().getTime()  // for local use only, the server overwrites the date
@@ -604,6 +613,20 @@
                   sendMessageWithPayload(msgPayload);
               }
             });
+          }
+
+          /**
+           * @name startCall
+           * @desc opens a new call window
+          */
+          function startCall() {
+              var roomId = $rootScope.helpers.randomString(10).toUpperCase(),
+                  callUrl = $state.href('dashboard.project.video-index', { room: roomId });
+
+              //TODO: grabar en la base y despues abrir la ventana
+              //$window.open(callUrl);
+
+              sendMessage('', user.id, messageType.VIDEO, callUrl);
           }
 
           /**
