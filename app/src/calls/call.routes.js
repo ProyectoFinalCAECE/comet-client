@@ -9,15 +9,15 @@
 
   function config ($stateProvider) {
     $stateProvider
-      .state('dashboard.project.video-index', {
-        url: '/video/:room',
+      .state('dashboard.project.call-index', {
+        url: '/call/:room',
         ncyBreadcrumb: {
           label: 'Videoconferencia'
         },
         views:{
           '@dashboard': {
-            templateUrl: '/src/video/video-index.html',
-            controller: 'VideoIndexController',
+            templateUrl: '/src/calls/call-index.html',
+            controller: 'CallIndexController',
             controllerAs: 'vm'
           }
         }

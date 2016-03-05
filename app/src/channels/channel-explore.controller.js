@@ -621,12 +621,43 @@
           */
           function startCall() {
               var roomId = $rootScope.helpers.randomString(10).toUpperCase(),
-                  callUrl = $state.href('dashboard.project.video-index', { room: roomId });
+                  callUrl = $state.href('dashboard.project.call-index', { room: roomId });
 
               //TODO: grabar en la base y despues abrir la ventana
-              //$window.open(callUrl);
+              $window.open(callUrl);
 
               sendMessage('', user.id, messageType.VIDEO, callUrl);
+
+              showSummary();
+          }
+
+          /**
+           * @name showSummary
+           * @desc opens the call summary dialog
+          */
+          function showSummary() {
+            var modalInstance = $modal.open({
+              templateUrl: '/src/calls/call-summary.html',
+              controller: 'CallSummaryController',
+              controllerAs: 'vm',
+              size: 'md',
+              backdrop: 'static',
+              resolve: {
+                project: function () {
+                  return vm.project;
+                },
+                user: function () {
+                  return user;
+                },
+                channel: function () {
+                  return vm.channel;
+                }
+             }
+           });
+           modalInstance.result.then(function (summary) {
+             $log.log(summary);
+             // sends an auto generated message
+           });
           }
 
           /**
