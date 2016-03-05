@@ -31,7 +31,7 @@
                       <div class="ibox-content">
                           <div class="resultadosBuscador">
                             <!-- listado de miembros -->
-                            <h3 ng-hide="vm.resultUsers == 0">Miembros del proyecto que coinciden con la búsqueda</h3>
+                            <h3 ng-hide="vm.resultUsers == 0">Miembros del proyecto que coinciden con los términos de búsqueda</h3>
                               <div class="search-result-member" ng-repeat="user in vm.resultUsers">
                                 <a data-type="D"
                     							 data-id="{{user.id}}"
@@ -46,15 +46,15 @@
                               </div>
                               <!-- listado de mensajes en canales -->
                               <hr style="border-color:gray" ng-hide="vm.resultUsers == 0 || (vm.messagesInProjectDirectChannels == 0 && vm.messagesInProjectCommonChannels == 0)"></hr>
-                              <h3 ng-hide="vm.messagesInProjectCommonChannels == 0 && vm.messagesInProjectDirectChannels == 0">Mensajes del proyecto que contengan los términos de búsqueda</h3>
-                              <h4 ng-hide="vm.messagesInProjectCommonChannels == 0">Canales Comunes</h4>
+                              <h3 ng-hide="vm.messagesInProjectCommonChannels == 0 && vm.messagesInProjectDirectChannels == 0">Mensajes del proyecto que contienen los términos de búsqueda:</h3>
+                              <h3 ng-hide="vm.messagesInProjectCommonChannels == 0">Canales Comunes</h4>
                               <div class="search-result-message" ng-repeat="channel in vm.messagesInProjectCommonChannels"
                                   ng-init="channelObject = vm.getChannelById(channel.id)">
                                   <h3>{{channelObject.name}}</h3>
                                   <div ng-repeat="message in channel.messages"
                                       ng-init="msgAuthor = vm.getMember(message.user)">
                                       <br />
-                                      <div class="message">
+                                      <div class="messages">
                                         <img class="message-avatar" ng-src="{{::msgAuthor.profilePicture}}" alt="" >
                                         <span id="msg_{{::message.id}}" class="message-author"><b>{{msgAuthor.firstName + ' ' + msgAuthor.lastName}}</b></span>
                                         <span class="message-date">{{::vm.formatMessageDate(message.date) }}</span>
@@ -74,14 +74,14 @@
                                 </button>
                               </div>
                               <div class="hr-line-dashed" ng-hide="vm.messagesInProjectCommonChannels == 0 || vm.messagesInProjectDirectChannels == 0"></div>
-                              <h4 ng-hide="vm.messagesInProjectDirectChannels == 0">Canales Directos</h4>
+                              <h3 ng-hide="vm.messagesInProjectDirectChannels == 0">Canales Directos</h4>
                               <div class="search-result-message" ng-repeat="directChannel in vm.messagesInProjectDirectChannels"
                                   ng-init="channelObject = vm.getChannelById(directChannel.id)">
                                   <h3>{{channelObject.name}}</h3>
                                   <div ng-repeat="message in directChannel.messages"
                                       ng-init="msgAuthor = vm.getMember(message.OriginUserId)">
                                       <br />
-                                      <div class="message">
+                                      <div class="messages">
                                         <img class="message-avatar" ng-src="{{::msgAuthor.profilePicture}}" alt="" >
                                         <span id="msg_{{::message.id}}" class="message-author"><b>{{msgAuthor.firstName + ' ' + msgAuthor.lastName}}</b></span>
                                         <span class="message-date">{{::vm.formatMessageDate(message.sentDateTimeUTC) }}</span>
