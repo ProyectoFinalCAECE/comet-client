@@ -1049,6 +1049,10 @@ body[state="dashboard.project.channel-explore"] {
 
 /* Resultados Buscador */
 
+.search-results {
+  margin-top: 125px;
+}
+
 .search-result-member {
   margin-top: 10px;
 }
@@ -1157,7 +1161,7 @@ body[state="dashboard.project.channel-explore"] {
   background-color: rgba(255,0,0,0.3);
 }
 
-body[state="dashboard.project.video-index"] #page-wrapper {
+body[state="dashboard.project.call-index"] #page-wrapper {
   margin-left: 0;
 }
 

@@ -70,11 +70,11 @@
                  ng-repeat="message in vm.messages">
               <div class="message">
                 <b>{{::message.author}}</b>
-                <span class="message-content">
-                  {{::message.content}}
-                </span>
                 <span class="message-date">
                   {{::vm.formatMessageDate(message.date) }}
+                </span>
+                <span class="message-content">
+                  {{::message.content}}
                 </span>
               </div>
             </div>

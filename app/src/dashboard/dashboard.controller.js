@@ -144,7 +144,7 @@
               }
 
               // videoconference view settings
-              if ($state.current.name === 'dashboard.project.video-index') {
+              if ($state.current.name === 'dashboard.project.call-index') {
                 vm.showMenu = false;
                 vm.showMembersList = false;
                 vm.showSearch = false;
