@@ -24,7 +24,7 @@
       }
     })
     .state('dashboard.project.channel-explore', {
-      url: '/channels/:channelId?:isDirect',
+      url: '/channels/:channelId?:isDirect&:loadById&:messageId&:limit&:direction',
       ncyBreadcrumb: {
         label: '{{vm.channel.name}}',
         parent: 'dashboard.project.project-explore'
@@ -42,7 +42,7 @@
         }],
         channel: ['$stateParams', 'userService', 'channelService', 'project', 'user',
           function($stateParams, userService, channelService, project, user) {
-            if ($stateParams.isDirect === 'true') {
+            if ($stateParams.isDirect === 'true' && $stateParams.loadById === 'false') {
               var destUserId = $stateParams.channelId;
               return userService.getById(destUserId)
                     .then(function(destUser) {
@@ -55,6 +55,18 @@
                        return data.data;
                      });
             }
+          }],
+          loadById: ['$stateParams', function ($stateParams) {
+            return $stateParams.loadById;
+          }],
+          messageId: ['$stateParams', function ($stateParams) {
+            return $stateParams.messageId;
+          }],
+          limit: ['$stateParams', function ($stateParams) {
+            return $stateParams.limit;
+          }],
+          direction: ['$stateParams', function ($stateParams) {
+            return $stateParams.direction;
           }]
       }
     })

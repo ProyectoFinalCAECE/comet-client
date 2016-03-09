@@ -24,6 +24,7 @@
             deleteChannel: deleteChannel,
             deleteMember: deleteMember,
             getMessages: getMessages,
+            getMessagesById: getMessagesById
         };
 
         /**
@@ -144,6 +145,35 @@
               return $http.get(url + '/messages?isDirect=true&offset=' + offset + '&limit=' + limit, authService.getJwtHeader());
           }
           return $http.get(url + '/messages?offset=' + offset + '&limit=' + limit, authService.getJwtHeader());
+        }
+
+        /**
+         * @name getMessagesById
+         * @desc returns channel's messages by channelId and messageId
+         */
+        function getMessagesById (projectId, channelId, messageId, limit, direction) {
+
+          var url = getBaseUrl(projectId) + channelId + '/messages/';
+
+          var querystring = '?';
+
+          if(limit){
+            querystring = querystring + 'limit=' + limit;
+          }
+
+          if(direction){
+            querystring = querystring + '&direction=' + direction;
+
+            if(direction === 'forwards'){
+              messageId --;
+            }else{
+              messageId ++;
+            }
+          }
+
+          url += messageId;
+
+          return $http.get(url + querystring, authService.getJwtHeader());
         }
     }
 })();

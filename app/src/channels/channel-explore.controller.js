@@ -16,7 +16,6 @@
                                            '$modal',
                                            '$location',
                                            '$timeout',
-                                           '$window',
                                            '$anchorScroll',
                                            'lodash',
                                            'moment',
@@ -29,11 +28,14 @@
                                            'integrationService',
                                            'chatService',
                                            'channelService',
-                                           'callService',
                                            'user',
                                            'project',
                                            'channel',
-                                           'isDirect'];
+                                           'isDirect',
+                                           'loadById',
+                                           'messageId',
+                                           'limit',
+                                           'direction'];
 
         function ChannelExploreController ($log,
                                           $rootScope,
@@ -42,7 +44,6 @@
                                           $modal,
                                           $location,
                                           $timeout,
-                                          $window,
                                           $anchorScroll,
                                           lodash,
                                           moment,
@@ -55,11 +56,14 @@
                                           integrationService,
                                           chatService,
                                           channelService,
-                                          callService,
                                           user,
                                           project,
                                           channel,
-                                          isDirect) {
+                                          isDirect,
+                                          loadById,
+                                          messageId,
+                                          limit,
+                                          direction) {
 
           var vm = this;
           vm.project = project;
@@ -70,6 +74,10 @@
           vm.isMember = false;
           vm.message = null;
           vm.messages = [];
+          vm.loadById = loadById;
+          vm.messageId = messageId;
+          vm.limit = limit;
+          vm.direction = direction;
           // messages
           vm.lastMessage = null;
           vm.getMember = getMember;
@@ -84,9 +92,6 @@
           // files
           vm.addDropboxFile = addDropboxFile;
           vm.displayFileMenu = displayFileMenu;
-          // calls
-          vm.startCall = startCall;
-
           // update info
           vm.edit = edit;
           // invite / delete members
@@ -244,27 +249,44 @@
            * @desc loads the channel message history
           */
           function loadChannelMessages() {
-            var limit = 5;
 
-            channelService.getMessages(vm.project.id, vm.channel.id, nextRequestOffset, limit, vm.isDirect).then(function (response) {
-
-              $log.log(response);
-
-              if(response.data.messages.length === 0){
-                // for the first load
-                if (nextRequestOffset === 0) {
-                    vm.emptyChannel = true;
+            if(vm.loadById){
+              channelService.getMessagesById(vm.project.id, vm.channel.id, vm.messageId, vm.limit, vm.direction).then(function(response){
+                if(response.data.messages.length === 0){
+                  // for the first load
+                  if (nextRequestOffset === 0) {
+                      vm.emptyChannel = true;
+                  }
+                  vm.noMoreMessages = true;
                 }
-                vm.noMoreMessages = true;
-              }
-              else {
-                response.data.messages.forEach(function(entry) {
-                    processMessageReceived(entry, addMessageToListUnshift);
-                    scrollToLast();
-                });
-              }
-              nextRequestOffset = response.data.next_offset;
-            });
+                else {
+                  response.data.messages.forEach(function(entry) {
+                      processMessageReceived(entry, addMessageToListUnshift);
+                      scrollToLast();
+                  });
+                }
+                nextRequestOffset = response.data.next_offset;
+              });
+            } else {
+              var limit = 5;
+
+              channelService.getMessages(vm.project.id, vm.channel.id, nextRequestOffset, limit, vm.isDirect).then(function (response) {
+                if(response.data.messages.length === 0){
+                  // for the first load
+                  if (nextRequestOffset === 0) {
+                      vm.emptyChannel = true;
+                  }
+                  vm.noMoreMessages = true;
+                }
+                else {
+                  response.data.messages.forEach(function(entry) {
+                      processMessageReceived(entry, addMessageToListUnshift);
+                      scrollToLast();
+                  });
+                }
+                nextRequestOffset = response.data.next_offset;
+              });
+            }
           }
 
           /**
@@ -319,13 +341,13 @@
            * @name sendMessage
            * @desc sends a message to the channel
           */
-          function sendMessage(messageText, authorId, type, link) {
-            var msgPayload = buildMessageObject(messageText, authorId, type, link);
+          function sendMessage(messageText, authorId, type) {
+            var msgPayload = buildMessageObject(messageText, authorId, type);
             sendMessageWithPayload(msgPayload);
           }
 
           /**
-           * @name sendMessageWithPayload
+           * @name sendMessagePayload
            * @desc sends the message with the payload parameter
           */
           function sendMessageWithPayload(msgPayload) {
@@ -339,8 +361,6 @@
               }
             });
 
-            $log.log('sendMessageWithPayload', msgPayload);
-
             // add the message to the view
             vm.noMoreMessages = false;
             addMessageToList(msgPayload);
@@ -352,7 +372,7 @@
            * @name buildMessageObject
            * @desc build the message payload object
           */
-          function buildMessageObject(messageText, authorId, type, link) {
+          function buildMessageObject(messageText, authorId, type) {
 
             lastMsgId++;
 
@@ -363,7 +383,6 @@
               text: messageText,
               user: authorId,
               type: msgType,
-              link: link,
               destinationUser: (isDirect ? vm.channel.id : 0),
               projectId: vm.project.id,
               date: new Date().getTime()  // for local use only, the server overwrites the date
@@ -617,65 +636,6 @@
                   sendMessageWithPayload(msgPayload);
               }
             });
-          }
-
-          /**
-           * @name startCall
-           * @desc opens a new call window
-          */
-          function startCall() {
-              var roomId = $rootScope.helpers.randomString(10).toUpperCase(),
-                  callUrl = $state.href('dashboard.project.call-index', { room: roomId });
-
-              var newCall = {};
-              newCall.StartHour = new Date();
-              if (isDirect) {
-                newCall.UserId = vm.channel.id;
-              } else {
-                newCall.ChannelId = user.id;
-              }
-
-              //TODO: grabar en la base y despues abrir la ventana
-              // callService.create(newCall).then(function () {
-              //     $window.open(callUrl);
-              // });
-
-              $window.open(callUrl);
-              sendMessage(callUrl, user.id, messageType.CALL, callUrl);
-              showSummary(newCall);
-          }
-
-          /**
-           * @name showSummary
-           * @desc opens the call summary dialog
-          */
-          function showSummary(call) {
-            var modalInstance = $modal.open({
-              templateUrl: '/src/calls/call-summary.html',
-              controller: 'CallSummaryController',
-              controllerAs: 'vm',
-              size: 'md',
-              backdrop: 'static',
-              resolve: {
-                project: function () {
-                  return vm.project;
-                },
-                user: function () {
-                  return user;
-                },
-                channel: function () {
-                  return vm.channel;
-                },
-                call: function () {
-                  return call;
-                }
-             }
-           });
-           modalInstance.result.then(function (summary) {
-             $log.log('summary', summary);
-             // TODO: send an auto generated message
-             sendMessage(summary, user.id, messageType.AUTO);
-           });
           }
 
           /**
