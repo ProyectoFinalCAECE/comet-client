@@ -1,7 +1,6 @@
 
 
 /* Para Angular Bootstrap */
-.nav,
 .pagination,
 .carousel,
 .panel-title a {
@@ -109,6 +108,7 @@ a.disabled {
 
 .search-header{
   margin-left: 240px;
+  color: #C1C1C1;
 }
 
 .search-header > i {
