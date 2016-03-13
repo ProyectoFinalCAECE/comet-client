@@ -89,6 +89,7 @@
           var nextRequestOffset = 0;
           vm.emptyChannel = false;
           vm.noMoreMessages = false;
+          vm.noMoreMessagesForward = false;
           // files
           vm.addDropboxFile = addDropboxFile;
           vm.displayFileMenu = displayFileMenu;
@@ -257,7 +258,12 @@
                   if (nextRequestOffset === 0) {
                       vm.emptyChannel = true;
                   }
-                  vm.noMoreMessages = true;
+                  if(vm.direction === 'forwards'){
+                    vm.noMoreMessagesForward = true;
+                  }else{
+                    vm.noMoreMessages = true;
+                  }
+
                 }
                 else {
                   response.data.messages.forEach(function(entry) {
@@ -265,7 +271,6 @@
                       scrollToLast();
                   });
                 }
-                nextRequestOffset = response.data.next_offset;
               });
             } else {
               var limit = 5;
@@ -410,10 +415,23 @@
 
           /**
            * @name addMessageToListUnshift
-           * @desc adds the message to the top of the list so it can be viewed on the page
+           * @desc adds the message to the list and then reorders it so it can be viewed on the page
           */
           function addMessageToListUnshift(msg) {
-            vm.messages.unshift(msg);
+            vm.messages.push(msg);
+            vm.messages.sort(compare);
+          }
+
+          /**
+           * Compares two messages and returns the order which they should be displayed in.
+           */
+          function compare(a,b) {
+            if (a.date < b.date)
+              return -1;
+            else if (a.date > b.date)
+              return 1;
+            else
+              return 0;
           }
 
           /**
@@ -843,8 +861,18 @@
           * @name loadOlderMessages
           * @desc calls method to retrieve older messages
           */
-          function loadOlderMessages(){
+          function loadOlderMessages(direction){
             if(!vm.noMoreMessages){
+              vm.direction = direction;
+              vm.loadById = true;
+              if(direction === 'forwards'){
+                vm.messageId = vm.messages[vm.messages.length - 1].id  + 1;
+                console.log('forwards retrieve messages from: ', vm.messageId);
+              } else {
+                vm.messageId = vm.messages[0].id - 1;
+                console.log('backwards retrieve messages from: ', vm.messageId);
+              }
+
               loadChannelMessages();
             }
           }
