@@ -513,10 +513,10 @@
           */
           function formatMessageDate (msgDate) {
             return moment(msgDate).calendar(null, {
-              lastDay : '[ayer] LT',
-              lastWeek : 'dddd L LT',
-              sameDay : 'LT',
-              sameElse : 'dddd L LT'
+              lastDay : '[ayer] LTS',
+              lastWeek : 'dddd L LTS',
+              sameDay : 'LTS',
+              sameElse : 'dddd L LTS'
             });
           }
 
