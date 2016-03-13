@@ -5,10 +5,6 @@
         <i class="fa fa-list-alt"></i>
         <strong>{{vm.project.name}}</strong>
       </h2>
-      <button ui-sref="dashboard.project.search-results" type="button" class="btn btn-primary" style="float:right; margin-right:30px">
-        Buscador
-      </button>
-
       <button ng-show="vm.project.isOwner" ng-disabled="vm.isClosed" ng-click="vm.gotoEditProject()" type="button" name="btnAdmProyecto" class="btn btn-primary" style="float:right; margin-right:30px">Administrar</button>
       <h4 class="ProjDesc">{{vm.project.description}}</h4>
       <ol class="breadcrumb2">
