@@ -1116,48 +1116,113 @@ body[state="dashboard.project.channel-explore"] {
 }
 
 /* Videoconferencia */
-#video-index .ibox-content.video {
-  padding: 0px;
-  border: 3px solid #FFF;
+#video-index #remotes {
+  text-align: center;
+  margin-top: 10px;
 }
-#video-index .video-overlay {
-  position: absolute;
+
+#video-index .video-wrapper {
+  position: relative;;
+  display:inline-block;
+  margin:auto;
+  height: 100%;
+  overflow: hidden;
+  /*box-shadow: 0 0 20px 0 rgba(0,0,0,.25);*/
+  -webkit-transition: opacity .5s;
+  -moz-transition: opacity .5s;
+  -ms-transition: opacity .5s;
+  -o-transition: opacity .5s;
+  transition: opacity .5s;
+}
+
+#video-index .peers-1 .video-wrapper {
+  width:65%;
+}
+
+#video-index .peers-2 .video-wrapper {
+  width:47%;
+}
+
+#video-index .peers-3 .video-wrapper,
+#video-index .peers-4 .video-wrapper {
+  width:30%;
+}
+
+/* ajustes para cuando se abre el chat */
+#video-index .col-lg-8 .peers-3 .video-wrapper {
+  width:45%;
+}
+
+#video-index .col-lg-8 .peers-4 .video-wrapper {
+  width:45%;
+}
+
+/* tercer video */
+#video-index .peers-3 .video-wrapper:nth-child(3) {
+  display: block;
+}
+
+#video-index .peers-4 .video-wrapper:nth-child(3) {
+  margin-right: 5px;
+}
+
+#video-index .toolbar {
   color: #FFF;
-  width: 89%;
-  height: 85%;
-  z-index: 10;
+  position: absolute;
+  bottom: 25px;
+  left: 0;
+  height: 40px;
+  width: 100%;
+  z-index: 13;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: stretch;
 }
+
 #video-index .video-overlay .user {
-  margin: 5px 0 0 5px;
+  position: absolute;
+  top: 10px;
+  left: 0px;
+  z-index: 10;
   font-weight: bold;
 }
-#video-index .video-overlay .state {
-  margin: 5px 0 0 5px;
-  color: green; /* temporal*/
+
+#video-index .video-overlay .user span {
+  color: white;
+  font: bold 14px Helvetica, Sans-Serif;
+  background: rgb(0, 0, 0);
+  background: rgba(0, 0, 0, 0.6);
+  padding: 7px;
 }
-#video-index .video-overlay .buttons {
-  width: 98%;
-  text-align: center;
-  margin-top: 45%;
-}
-#video-index .video-overlay .buttons .button {
-  display: inline;
-  padding: 8px 12px;
-  background-color: grey;
-  background-color: rgba(1,1,1,0.3);
+
+#video-index .toolbar .button {
+  height: 40px;
+  width: 50px;
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
   cursor: pointer;
+  background: 0 0;
+  border: none;
+  margin: 0;
+  font-size: 20px;
+  padding: 0 4px;
 }
-#video-index .video-overlay .buttons .button:first-child {
+#video-index .toolbar .button:first-child {
   border-radius: 10px 0 0 10px;
 }
-#video-index .video-overlay .buttons .button:last-child {
+#video-index .toolbar .button:last-child {
   border-radius: 0 10px 10px 0;
 }
-#video-index .video-overlay .buttons .button:hover {
+#video-index .toolbar .button:hover {
   background-color: rgba(243, 238, 238, 0.3);
 }
 
-#video-index .video-overlay .buttons .button.enabled {
+#video-index .toolbar .button.enabled {
   background-color: rgba(255,0,0,0.3);
 }
 

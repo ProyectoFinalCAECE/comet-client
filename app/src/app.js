@@ -23,6 +23,7 @@
             'ngSanitize',
             'ngToast',
             'ngTouch',
+            'once',
             'ui.bootstrap',
             'ui.bootstrap.showErrors',
             'ui.router',
