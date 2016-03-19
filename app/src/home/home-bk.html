@@ -1,0 +1,54 @@
+<div class="container" data-view="home">
+  <nav class="navbar">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Comet</a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-top-links navbar-right">
+          <li ng-hide="vm.isLoggedIn()"><a ui-sref="user-create">Crear cuenta</a></li>
+          <li ng-hide="vm.isLoggedIn()"><a ui-sref="account-login">Iniciar sesión</a></li>
+        </ul>
+      </div>
+      <!--/.navbar-collapse -->
+    </div>
+  </nav>
+  <!-- Main jumbotron for a primary marketing message or call to action -->
+  <div class="jumbotron">
+    <div class="container">
+      <h1><img alt="image" src="../../images/comet_logo_grey.png" height="100"> Bienvenido a Comet!</h1>
+      <p>Comet es la solución a todos tus problemas de comunicación. Pruébalo ya!</p>
+      <!--p><a class="btn btn-primary btn-lg" href="#" role="button">Ver más &raquo;</a></p>-->
+    </div>
+  </div>
+  <div class="container">
+    <!-- Example row of columns -->
+    <div class="row">
+      <div class="col-md-4">
+        <h2>Efectividad en la nube</h2>
+        <p>Crea tus proyectos en Comet e invita a los integrantes en unos pocos clicks. Solo resta que acepten la invitación por correo y listo! ya pueden comenzar a colaborar. Nuestro potente Dashboard te mostrará toda la información relevante de forma sencilla y resumida, para que tengas acceso a lo que realmente te interesa.</p>
+        <!--<p><a class="btn btn-default" href="#" role="button">Ver detalles &raquo;</a></p>-->
+      </div>
+      <div class="col-md-4">
+        <h2>Canales de comunicación</h2>
+        <p>¿Deseas charlar con todo tu equipo de trabajo, enviar un recordatorio a un compañero o simplemente ver los ultimos mensajes? Basta con crear un canal distinto para cada necesidad, e invitar a quien quieras. Visibilidad y privacidad a tu alcance!</p>
+        <!--<p><a class="btn btn-default" href="#" role="button">Ver detalles &raquo;</a></p>-->
+      </div>
+      <div class="col-md-4">
+        <h2>Integraciones</h2>
+        <p>Entonces... ¿Comet es un chat? ¡Nada más lejos! A traves de las integraciones configurables Comet se convierte en tu mejor herramienta para centralizar los distintos servicios en la nube. Comparte archivos con DropBox, desarrolla colaborativamente con GitHub y mas!</p>
+        <!--<p><a class="btn btn-default" href="#" role="button">Ver detalles &raquo;</a></p>-->
+      </div>
+    </div>
+    <hr>
+    <footer>
+      <p>&copy; Equipo Comet 2015</p>
+    </footer>
+  </div>
+</div>
