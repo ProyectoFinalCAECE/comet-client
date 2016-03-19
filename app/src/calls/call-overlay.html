@@ -1,0 +1,15 @@
+<div class="video-overlay">
+  <p class="user">
+    <span>{{::peer.name}}</span>
+  </p>
+  <div class="toolbar" ng-show="peer.mouseIn">
+    <div ng-click="mute()"
+         class="button fa fa-volume-off"
+         ng-class="{ 'enabled' : peer.muted }">
+    </div>
+    <div ng-click="disableVideo()"
+         class="button fa fa-video-camera"
+         ng-class="{ 'enabled' : peer.videoDisabled }">
+    </div>
+  </div>
+</div>
