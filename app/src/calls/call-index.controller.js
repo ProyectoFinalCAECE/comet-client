@@ -16,6 +16,7 @@
                                          '$state',
                                          '$stateParams',
                                          '$window',
+                                         '$compile',
                                          'ngToast',
                                          'constraints',
                                          'lodash',
@@ -30,6 +31,7 @@
                                       $state,
                                       $stateParams,
                                       $window,
+                                      $compile,
                                       ngToast,
                                       constraints,
                                       lodash,
@@ -41,20 +43,20 @@
               room = $stateParams.room,
               localNickname = dashboardServiceModel.getCurrentUser().alias,
               webrtc = null,
-              peers = [];
+              totalPeers = 0;
 
-          vm.getPeers = getPeers;
           vm.mute = mute;
           vm.disableVideo = disableVideo;
           vm.mouseIn = mouseIn;
           vm.mouseOut = mouseOut;
-          vm.maximize = maximize;
-          vm.centerPeer = null;
 
           vm.showChat = false;
           vm.sendMessage = sendMessage;
           vm.formatMessageDate = formatMessageDate;
           vm.messages = [];
+
+          vm.peers = {};
+          var $remotes = document.getElementById('remotes');
 
           activate();
 
@@ -74,20 +76,6 @@
                 webrtc.disconnect();
               }
             };
-          }
-
-          /**
-           * @name getPeers
-           * @desc returns al the connected peers
-          */
-          function getPeers () {
-            var tempPeers = [];
-            for (var i = 0; i < peers.length; i++) {
-              //if (peers[i].id !== vm.centerPeer.id) {
-                tempPeers.push(peers[i]);
-              //}
-            }
-            return tempPeers;
           }
 
           /**
@@ -112,14 +100,6 @@
           */
           function disableVideo (peer) {
             peer.videoDisabled = !peer.videoDisabled;
-          }
-
-          /**
-           * @name maximize
-           * @desc peer video maximize
-          */
-          function maximize (peer) {
-            vm.centerPeer = peer;
           }
 
           /**
@@ -159,7 +139,7 @@
                 autoRequestMedia: false,
                 debug: false,
                 detectSpeakingEvents: true,
-                autoAdjustMic: false,
+                autoAdjustMic: true,
                 url:  signalingServer     // comentar esta linea para usar el server en la nube
             });
 
@@ -180,23 +160,24 @@
                 $log.info('local video track label', first.label);
               }
 
-              var localStreamUrl = $window.URL.createObjectURL(stream);
+              var localStreamUrl = $window.URL.createObjectURL(stream),
+                  video = document.createElement('video');
+              video.id = 'localVideo';
+              video.src = localStreamUrl;
+              video.autoplay = true;
+              video.style= 'transform: scaleX(-1);';
 
               var localPeer = {
                 id: 'localVideo',
                 name: localNickname,
                 domId: 'localPeer',
-                source: $sce.trustAsResourceUrl(localStreamUrl),
                 isLocal: true,
                 muted: false,
                 noVideo: false,
                 mouseIn: false
               };
 
-              //vm.centerPeer = localPeer;
-              peers.push(localPeer);
-
-              $scope.$apply();
+              addPeer(localPeer, video);
             });
 
             // we did not get access to the camera
@@ -213,45 +194,23 @@
                   id: peer.id,
                   name: peer.nick,
                   domId: webrtc.getDomId(peer),
-                  source: $sce.trustAsResourceUrl(video.src),
                   muted: false,
                   noVideo: false,
                   mouseIn: false
                 };
 
-                $log.info('new peer', newPeer);
-
-                if (peer && peer.pc) {
-                  peer.pc.on('iceConnectionStateChange', function () {
-                    $log.info('iceConnectionStateChange', peer);
-                    switch (peer.pc.iceConnectionState) {
-                      case 'checking':
-                          newPeer.state = 'Conectando..';
-                          break;
-                      case 'connected':
-                      case 'completed': // on caller side
-                          //$(vol).show();
-                          newPeer.state = 'Conexión establecida';
-                          break;
-                      case 'disconnected':
-                          newPeer.state = 'Desconectado.';
-                          break;
-                      case 'failed':
-                          newPeer.state = 'Error de conexión.';
-                          break;
-                      case 'closed':
-                          newPeer.state = 'Conexión cerrada.';
-                          break;
-                      }
-                  });
-                }
-                peers.push(newPeer);
+                addPeer(newPeer, video);
             });
 
             // a peer was removed
             webrtc.on('videoRemoved', function (video, peer) {
                 $log.info('webrtc::video removed ', peer);
-                removePeer(peer);
+
+                // delete the parent node
+                angular.element(peer.videoEl).parent('.video-wrapper').remove();
+
+                totalPeers--;
+                updateLayout();
             });
 
             // chat - message received
@@ -260,6 +219,43 @@
                 vm.messages.push(data.payload);
               }
             });
+          }
+
+          function addPeer(newPeer, video) {
+
+            insertVideoBlock(newPeer, video);
+            vm.peers[newPeer.id] = newPeer;
+
+            totalPeers++;
+            updateLayout();
+            $log.log('totalPeers', totalPeers);
+
+            if (totalPeers === 4) {
+              angular.element('<br />').insertBefore('.video-wrapper:nth-child(3)');
+            }
+          }
+
+          function insertVideoBlock(peer, video) {
+
+            $log.log('## insertVideoBlock', peer, video);
+
+            var containerClass = 'video-wrapper',
+                wrapper = document.createElement('div'),
+                overlay = $compile('<video-overlay peer-id="' + peer.id + '" />')($scope);
+
+            wrapper.className = containerClass;
+            wrapper.id = peer.domId;
+            wrapper.appendChild(overlay[0]);
+            wrapper.appendChild(video);
+
+            // // mouse over
+            // angular.element(wrapper).hover(function () {
+            //   peer.mouseIn = true;
+            // }, function () {
+            //   peer.mouseIn = false;
+            // });
+
+            $remotes.appendChild(wrapper);
           }
 
           /**
@@ -294,16 +290,14 @@
           }
 
           /**
-           * @name removePeer
-           * @desc removes a peer from the connected peers list
+           * @name updateLayout
+           * @desc updates the container div's
           */
-          function removePeer (peer) {
-            lodash.remove(peers, function (p) {
-              if (p.id === peer.id) {
-                return true;
-              }
-              return false;
-            });
+          function updateLayout () {
+            angular.element('#remotes')
+                   .removeClass('peers-1 peers-2 peers-3 peers-4')
+                   .addClass('peers-' + (totalPeers));
+
           }
         }
 })();
