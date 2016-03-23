@@ -62,8 +62,10 @@
           vm.systemNotifications = [];
 
           vm.setActiveChannel = setActiveChannel;
+          vm.setActiveChannelForSearch = setActiveChannelForSearch;
           vm.activeChannel = null;
           vm.activeDirectChannel = null;
+          vm.activeChannelForSearch = null;
           vm.logout = logout;
 
           vm.buscar = buscar;
@@ -122,7 +124,6 @@
 
             // channel-explore active channel logic
             $scope.$on('$stateChangeSuccess', function() {
-              //$log.log('$stateChangeSuccess', $state.current.name);
               if ($state.current.name === 'dashboard.project.channel-explore')
               {
                 // new state url
@@ -137,10 +138,14 @@
                 if (channel === undefined) {
                   channel = lodash.find(vm.publicChannels, 'channelUrl', currentUrl);
                 }
-                //$log.log('$stateChangeSuccess channel', channel);
                 if (channel !== undefined) {
                   setActiveChannel(channel);
+                  setActiveChannelForSearch(channel);
                 }
+              }
+
+              if($state.current.name !== 'dashboard.project.channel-explore' && $state.current.name !== 'dashboard.project.search-results'){
+                vm.setActiveChannelForSearch(null);
               }
 
               // videoconference view settings
@@ -180,6 +185,7 @@
                 vm.privateChannels = lodash.filter(channels, function(c) {
                   c.channelUrl = $state.href('dashboard.project.channel-explore', {
                     channelId: c.id,
+                    id: vm.project.id,
                     isDirect: false
                   });
 
@@ -195,6 +201,7 @@
                   var isMember = (lodash.find(c.members, 'id', vm.user.id) !== undefined);
                   c.channelUrl = $state.href('dashboard.project.channel-explore', {
                     channelId: c.id,
+                    id: vm.project.id,
                     isDirect: false
                   });
 
@@ -237,8 +244,8 @@
 
             var channelId = null;
 
-            if(vm.activeChannel !== null){
-              channelId = vm.activeChannel.id;
+            if(vm.activeChannelForSearch !== null){
+              channelId = vm.activeChannelForSearch.id;
             }
 
             $state.go('dashboard.project.search-results', { criterio: criterio, channelId: channelId });
@@ -638,6 +645,14 @@
               type: (channel.isDirect ? 'direct' : 'channel'),
               url: channel.channelUrl
             });
+          }
+
+          /**
+           * @name setActiveChannelForSearch
+           * @desc saves into a variable the channel over which searchs must be performed.
+           */
+          function setActiveChannelForSearch(channel) {
+            vm.activeChannelForSearch = channel;
           }
 
           /**
