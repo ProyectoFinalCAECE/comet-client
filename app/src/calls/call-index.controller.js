@@ -143,6 +143,8 @@
                 url:  signalingServer     // comentar esta linea para usar el server en la nube
             });
 
+            window.webrtc = webrtc;
+
             webrtc.startLocalVideo();
 
             // when it's ready, join if we got a room from the URL
@@ -165,6 +167,7 @@
               video.id = 'localVideo';
               video.src = localStreamUrl;
               video.autoplay = true;
+              video.volume = 0;
               video.style= 'transform: scaleX(-1);';
 
               var localPeer = {
@@ -196,7 +199,8 @@
                   domId: webrtc.getDomId(peer),
                   muted: false,
                   noVideo: false,
-                  mouseIn: false
+                  mouseIn: false,
+                  rtcPeer: peer
                 };
 
                 addPeer(newPeer, video);
@@ -244,17 +248,9 @@
                 overlay = $compile('<video-overlay peer-id="' + peer.id + '" />')($scope);
 
             wrapper.className = containerClass;
-            wrapper.id = peer.domId;
+            wrapper.id = 'wrapper_' + peer.domId;
             wrapper.appendChild(overlay[0]);
             wrapper.appendChild(video);
-
-            // // mouse over
-            // angular.element(wrapper).hover(function () {
-            //   peer.mouseIn = true;
-            // }, function () {
-            //   peer.mouseIn = false;
-            // });
-
             $remotes.appendChild(wrapper);
           }
 
