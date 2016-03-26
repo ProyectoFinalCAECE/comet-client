@@ -51,6 +51,7 @@
           vm.formatMessageDate = formatMessageDate;
           vm.messages = [];
           vm.peers = {};
+          vm.roomIsFull = false;
 
           activate();
 
@@ -64,7 +65,6 @@
 
             // close the connection on exit
             $window.onunload = function(  ) {
-              $log.log("####### unload");
               if (webrtc !== null) {
                 webrtc.leaveRoom();
                 webrtc.disconnect();
@@ -97,8 +97,10 @@
                 url:  signalingServer     // comentar esta linea para usar el server en la nube
             });
 
+            // for access in the overlay directive
             window.webrtc = webrtc;
 
+            // starts the local video camera
             webrtc.startLocalVideo();
 
             // when it's ready, join if we got a room from the URL
@@ -118,6 +120,7 @@
 
               var localStreamUrl = $window.URL.createObjectURL(stream),
                   video = document.createElement('video');
+
               video.id = 'localVideo';
               video.src = localStreamUrl;
               video.autoplay = true;
@@ -144,31 +147,26 @@
             });
 
             // a peer video has been added
-            webrtc.on('videoAdded', function (video, peer) {
-                $log.log('webrtc::video added', peer, video);
+            webrtc.on('videoAdded', function (video, rtcPeer) {
+                $log.log('webrtc::video added', rtcPeer, video);
 
                 var newPeer = {
-                  id: peer.id,
-                  name: peer.nick,
-                  domId: webrtc.getDomId(peer),
+                  id: rtcPeer.id,
+                  name: rtcPeer.nick,
+                  domId: webrtc.getDomId(rtcPeer),
                   muted: false,
                   noVideo: false,
                   mouseIn: false,
-                  rtcPeer: peer
+                  rtcPeer: rtcPeer
                 };
 
                 addPeer(newPeer, video);
             });
 
             // a peer was removed
-            webrtc.on('videoRemoved', function (video, peer) {
-                $log.info('webrtc::video removed ', peer);
-
-                // delete the parent node
-                angular.element(peer.videoEl).parent('.video-wrapper').remove();
-
-                totalPeers--;
-                updateLayout();
+            webrtc.on('videoRemoved', function (video, rtcPeer) {
+                $log.info('webrtc::video removed ', rtcPeer);
+                removePeer(rtcPeer);
             });
 
             // chat - message received
@@ -177,8 +175,20 @@
                 vm.messages.push(data.payload);
               }
             });
+
+            webrtc.on('error', function (err) {
+              $log.log('webrtc::error', err);
+              if (err === 'full') {
+                // room full - validated by the signaling server
+                vm.roomIsFull = true;
+              }
+            });
           }
 
+          /**
+           * @name addPeer
+           * @desc adds a new peer to the current peers list and updates the view
+          */
           function addPeer(newPeer, video) {
 
             insertVideoBlock(newPeer, video);
@@ -193,9 +203,12 @@
             }
           }
 
+          /**
+           * @name insertVideoBlock
+           * @desc inserts a video-wrapper div that contains the overlay
+           *       and video elements
+          */
           function insertVideoBlock(peer, video) {
-
-            $log.log('## insertVideoBlock', peer, video);
 
             var containerClass = 'video-wrapper',
                 wrapper = document.createElement('div'),
@@ -209,8 +222,30 @@
           }
 
           /**
+           * @name removePeer
+           * @desc delete the peer from the list and updates the view
+          */
+          function removePeer (rtcPeer) {
+            // delete the parent node
+            angular.element(rtcPeer.videoEl).parent('.video-wrapper').remove();
+            totalPeers--;
+            updateLayout();
+          }
+
+          /**
+           * @name updateLayout
+           * @desc updates the container div's
+          */
+          function updateLayout () {
+            angular.element('#remotes')
+                   .removeClass('peers-1 peers-2 peers-3 peers-4')
+                   .addClass('peers-' + (totalPeers));
+
+          }
+
+          /**
            * @name sendMessage
-           * @desc sends a chat messsage
+           * @desc sends a chat messsage using the rtc datachannel
           */
           function sendMessage(text) {
             var message = {
@@ -238,16 +273,5 @@
               sameElse : 'dddd L LT'
             });
           }
-
-          /**
-           * @name updateLayout
-           * @desc updates the container div's
-          */
-          function updateLayout () {
-            angular.element('#remotes')
-                   .removeClass('peers-1 peers-2 peers-3 peers-4')
-                   .addClass('peers-' + (totalPeers));
-
-          }
-        }
+      }
 })();
