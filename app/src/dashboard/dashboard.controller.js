@@ -59,6 +59,7 @@
           vm.privateNotifications = false;
           vm.showMembers = showMembers;
 
+          vm.showNotifications = true;
           vm.systemNotifications = [];
 
           vm.setActiveChannel = setActiveChannel;
@@ -153,6 +154,7 @@
               // videoconference view settings
               if ($state.current.name === 'dashboard.project.call-index') {
                 vm.showMenu = false;
+                vm.showNotifications = false;
                 vm.showMembersList = false;
                 vm.showSearch = false;
                 vm.showLogout = false;
@@ -160,6 +162,7 @@
               }
               else {
                 vm.showMenu = true;
+                vm.showNotifications = true;
                 vm.showMembersList = true;
                 vm.showSearch = true;
                 vm.showLogout = true;
@@ -392,6 +395,10 @@
            * @desc marks the channel with a (transient) notification
            */
           function loadNotification(notification) {
+
+            if (!vm.showNotifications) {
+              return;
+            }
 
             var notifTitle = vm.project !== null ? vm.project.name : 'comet',
               notifBody = '',
