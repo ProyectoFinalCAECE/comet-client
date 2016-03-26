@@ -16,6 +16,7 @@
                                            '$modal',
                                            '$location',
                                            '$timeout',
+                                           '$window',
                                            '$anchorScroll',
                                            'lodash',
                                            'moment',
@@ -26,6 +27,7 @@
                                            'dashboardServiceModel',
                                            'authService',
                                            'integrationService',
+                                           'callService',
                                            'chatService',
                                            'channelService',
                                            'user',
@@ -44,6 +46,7 @@
                                           $modal,
                                           $location,
                                           $timeout,
+                                          $window,
                                           $anchorScroll,
                                           lodash,
                                           moment,
@@ -54,6 +57,7 @@
                                           dashboardServiceModel,
                                           authService,
                                           integrationService,
+                                          callService,
                                           chatService,
                                           channelService,
                                           user,
@@ -93,6 +97,8 @@
           // files
           vm.addDropboxFile = addDropboxFile;
           vm.displayFileMenu = displayFileMenu;
+          // calls
+          vm.startCall = startCall;
           // update info
           vm.edit = edit;
           // invite / delete members
@@ -346,8 +352,8 @@
            * @name sendMessage
            * @desc sends a message to the channel
           */
-          function sendMessage(messageText, authorId, type) {
-            var msgPayload = buildMessageObject(messageText, authorId, type);
+          function sendMessage(messageText, authorId, type, link) {
+            var msgPayload = buildMessageObject(messageText, authorId, type, link);
             sendMessageWithPayload(msgPayload);
           }
 
@@ -377,7 +383,7 @@
            * @name buildMessageObject
            * @desc build the message payload object
           */
-          function buildMessageObject(messageText, authorId, type) {
+          function buildMessageObject(messageText, authorId, type, link) {
 
             lastMsgId++;
 
@@ -388,6 +394,7 @@
               text: messageText,
               user: authorId,
               type: msgType,
+              link: link,
               destinationUser: (isDirect ? vm.channel.id : 0),
               projectId: vm.project.id,
               date: new Date().getTime()  // for local use only, the server overwrites the date
@@ -875,6 +882,64 @@
 
               loadChannelMessages();
             }
+          }
+
+          /**
+          * @name startCall
+          **/
+          function startCall() {
+              var roomId = $rootScope.helpers.randomString(10).toUpperCase(),
+                  callUrl = $state.href('dashboard.project.call-index', { room: roomId });
+
+              var newCall = {};
+              newCall.StartHour = new Date();
+              if (isDirect) {
+                newCall.UserId = vm.channel.id;
+              } else {
+                newCall.ChannelId = user.id;
+              }
+
+              //TODO: grabar en la base y despues abrir la ventana
+              // callService.create(newCall).then(function () {
+              //     $window.open(callUrl);
+              // });
+
+              $window.open(callUrl);
+              sendMessage(callUrl, user.id, messageType.CALL, callUrl);
+              showSummary(newCall);
+          }
+
+          /**
+           * @name showSummary
+           * @desc opens the call summary dialog
+          */
+          function showSummary(call) {
+            var modalInstance = $modal.open({
+              templateUrl: '/src/calls/call-summary.html',
+              controller: 'CallSummaryController',
+              controllerAs: 'vm',
+              size: 'md',
+              backdrop: 'static',
+              resolve: {
+                project: function () {
+                  return vm.project;
+                },
+                user: function () {
+                  return user;
+                },
+                channel: function () {
+                  return vm.channel;
+                },
+                call: function () {
+                  return call;
+                }
+             }
+           });
+           modalInstance.result.then(function (summary) {
+             $log.log('summary', summary);
+             // TODO: send an auto generated message
+             sendMessage(summary, user.id, messageType.AUTO);
+           });
           }
       }
 })();
