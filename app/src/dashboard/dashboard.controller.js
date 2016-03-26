@@ -67,6 +67,7 @@
           vm.activeDirectChannel = null;
           vm.activeChannelForSearch = null;
           vm.logout = logout;
+          vm.close = close;
 
           vm.buscar = buscar;
           vm.textoBusqueda = '';
@@ -734,6 +735,14 @@
             notificationsLeaveRoom(vm.project);
             accountService.logout();
             $state.go('home');
+          }
+
+          /**
+           * @name close
+           * @desc closes the window
+           */
+          function close () {
+            window.close();
           }
       }
 })();

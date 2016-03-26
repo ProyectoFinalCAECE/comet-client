@@ -2,7 +2,7 @@
   <p class="user">
     <span>{{::peer.name}}</span>
   </p>
-  <div class="toolbar" ng-show="peer.mouseIn">
+  <div class="toolbar" ng-show="peer.mouseIn || peer.muted || peer.noVideo">
     <div ng-click="mute()"
          class="button fa"
          ng-class="{ 'fa-microphone' : peer.isLocal,

@@ -4,12 +4,8 @@
 
   /**
   * @desc directive to show a video chat overlay
-  * @example <video-overlay peer-Id="{ name: 'test'}" />
-  * isLocal: true,
-    muted: false,
-    noVideo: false,
-    mouseIn: false
-  */
+  * @example <video-overlay peer-Id="id" />
+  * */
   angular
       .module('cometApp')
       .directive('videoOverlay', videoOverlay);
@@ -19,7 +15,7 @@
           restrict: 'E',
           scope: {
               peerId: '@'
-            },
+          },
           templateUrl: '/src/calls/call-overlay.html',
           controller: function ( $scope ) {
 

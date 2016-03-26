@@ -43,20 +43,14 @@
               room = $stateParams.room,
               localNickname = dashboardServiceModel.getCurrentUser().alias,
               webrtc = null,
-              totalPeers = 0;
-
-          vm.mute = mute;
-          vm.disableVideo = disableVideo;
-          vm.mouseIn = mouseIn;
-          vm.mouseOut = mouseOut;
+              totalPeers = 0,
+              $remotes = document.getElementById('remotes');
 
           vm.showChat = false;
           vm.sendMessage = sendMessage;
           vm.formatMessageDate = formatMessageDate;
           vm.messages = [];
-
           vm.peers = {};
-          var $remotes = document.getElementById('remotes');
 
           activate();
 
@@ -76,46 +70,6 @@
                 webrtc.disconnect();
               }
             };
-          }
-
-          /**
-           * @name mute
-           * @desc mute peer video sound
-          */
-          function mute (peer) {
-            $log.log("mute", peer);
-            var video = angular.element('#video_' + peer.id);
-            if (peer.muted) {
-                video.prop("volume", 1);
-            }
-            else  {
-              video.prop("volume", 0);
-            }
-            peer.muted = !peer.muted;
-          }
-
-          /**
-           * @name maximize
-           * @desc disable peer video
-          */
-          function disableVideo (peer) {
-            peer.videoDisabled = !peer.videoDisabled;
-          }
-
-          /**
-           * @name mouseIn
-           * @desc peer video mouse in
-          */
-          function mouseIn (peer) {
-            peer.mouseIn = true;
-          }
-
-          /**
-           * @name mouseOut
-           * @desc peer video mouse out
-          */
-          function mouseOut (peer) {
-            peer.mouseIn = false;
           }
 
           /**
@@ -173,7 +127,7 @@
               var localPeer = {
                 id: 'localVideo',
                 name: localNickname,
-                domId: 'localPeer',
+                domId: 'localVideo',
                 isLocal: true,
                 muted: false,
                 noVideo: false,
