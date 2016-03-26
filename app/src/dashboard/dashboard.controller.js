@@ -75,6 +75,7 @@
           vm.showMembersList = true;
           vm.showSearch = true;
           vm.showLogout = true;
+          vm.showExit = false;
 
           var pingTimer = null,
               urlonLoad = null;
@@ -154,12 +155,14 @@
                 vm.showMembersList = false;
                 vm.showSearch = false;
                 vm.showLogout = false;
+                vm.showExit = true;
               }
               else {
                 vm.showMenu = true;
                 vm.showMembersList = true;
                 vm.showSearch = true;
                 vm.showLogout = true;
+                vm.showExit = false;
               }
             });
 
