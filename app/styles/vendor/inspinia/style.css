@@ -6709,10 +6709,10 @@ body.landing-page {
   width: 100%;
 }
 .landing-page .header-back.one {
-  background: url('../../../images/imagenPortada.jpg') 50% 0 no-repeat;
+  background: url('../../../images/imagenPortada2.jpg') 50% 0 no-repeat;
 }
 .landing-page .header-back.two {
-  background: url('../../../images/imagenPortada2.jpg') 50% 0 no-repeat;
+  background: url('../../../images/imagenPortada.jpg') 50% 0 no-repeat;
 }
 .landing-page .carousel {
   height: 470px;
