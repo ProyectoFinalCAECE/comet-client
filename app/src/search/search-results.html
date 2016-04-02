@@ -1,4 +1,4 @@
-<div class="wrapper wrapper-content animated fadeInRight" data-view="search-results">
+<div class="wrapper border-bottom" data-view="search-results">
   <div class="row fixed-header" sticky offset="60">
     <div class="col-lg-9">
       <h2><i class="fa fa-search"></i> Resultados de la búsqueda</h2>
@@ -10,7 +10,7 @@
       </ol>
     </div>
   </div>
-    <div class="row">
+    <div class="row search-results">
         <!-- 'searching' gif -->
         <div ng-show="vm.searching" class="text-center">
             <br />
@@ -31,7 +31,7 @@
                       <div class="ibox-content">
                           <div class="resultadosBuscador">
                             <!-- listado de miembros -->
-                            <h3 ng-hide="vm.resultUsers == 0">Miembros del proyecto que coinciden con la búsqueda</h3>
+                            <h3 ng-hide="vm.resultUsers == 0">Miembros del proyecto que coinciden con los términos búsqueda</h3>
                               <div class="search-result-member" ng-repeat="user in vm.resultUsers">
                                 <a data-type="D"
                     							 data-id="{{user.id}}"
@@ -46,7 +46,7 @@
                               </div>
                               <!-- listado de mensajes en canales -->
                               <hr style="border-color:gray" ng-hide="vm.resultUsers == 0 || (vm.messagesInProjectDirectChannels == 0 && vm.messagesInProjectCommonChannels == 0)"></hr>
-                              <h3 ng-hide="vm.messagesInProjectCommonChannels == 0 && vm.messagesInProjectDirectChannels == 0">Mensajes del proyecto que contengan los términos de búsqueda</h3>
+                              <h3 ng-hide="vm.messagesInProjectCommonChannels == 0 && vm.messagesInProjectDirectChannels == 0">Mensajes del proyecto que contienen los términos de búsqueda</h3>
                               <h4 ng-hide="vm.messagesInProjectCommonChannels == 0">Canales Comunes</h4>
                               <div class="search-result-message" ng-repeat="channel in vm.messagesInProjectCommonChannels"
                                   ng-init="channelObject = vm.getChannelById(channel.id)">

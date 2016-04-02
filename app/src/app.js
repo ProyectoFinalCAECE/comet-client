@@ -23,13 +23,13 @@
             'ngSanitize',
             'ngToast',
             'ngTouch',
-            'once',
             'ui.bootstrap',
             'ui.bootstrap.showErrors',
             'ui.router',
             'ui.select',
             'sticky',
-            'trello'
+            'trello',
+            'wysiwyg.module'
         ])
         .run(function($rootScope, $state, $stateParams, helpersService){
           $rootScope.helpers = helpersService;

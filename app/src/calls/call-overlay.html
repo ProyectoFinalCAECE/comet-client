@@ -2,14 +2,17 @@
   <p class="user">
     <span>{{::peer.name}}</span>
   </p>
-  <div class="toolbar" ng-show="peer.mouseIn">
+  <div class="toolbar" ng-show="peer.mouseIn || peer.muted || peer.noVideo">
     <div ng-click="mute()"
-         class="button fa fa-volume-off"
-         ng-class="{ 'enabled' : peer.muted }">
+         class="button fa"
+         ng-class="{ 'fa-microphone' : peer.isLocal,
+                     'fa-volume-off': !peer.isLocal,
+                     'fa-microphone-slash' : peer.isLocal && peer.muted,
+                     'enabled' : peer.muted }">
     </div>
     <div ng-click="disableVideo()"
          class="button fa fa-video-camera"
-         ng-class="{ 'enabled' : peer.videoDisabled }">
+         ng-class="{ 'enabled' : peer.noVideo }">
     </div>
   </div>
 </div>

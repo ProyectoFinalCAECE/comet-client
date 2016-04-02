@@ -59,12 +59,16 @@
           vm.privateNotifications = false;
           vm.showMembers = showMembers;
 
+          vm.showNotifications = true;
           vm.systemNotifications = [];
 
           vm.setActiveChannel = setActiveChannel;
+          vm.setActiveChannelForSearch = setActiveChannelForSearch;
           vm.activeChannel = null;
           vm.activeDirectChannel = null;
+          vm.activeChannelForSearch = null;
           vm.logout = logout;
+          vm.close = closewindow;
 
           vm.buscar = buscar;
           vm.textoBusqueda = '';
@@ -73,6 +77,7 @@
           vm.showMembersList = true;
           vm.showSearch = true;
           vm.showLogout = true;
+          vm.showExit = false;
 
           var pingTimer = null,
               urlonLoad = null;
@@ -122,7 +127,6 @@
 
             // channel-explore active channel logic
             $scope.$on('$stateChangeSuccess', function() {
-              //$log.log('$stateChangeSuccess', $state.current.name);
               if ($state.current.name === 'dashboard.project.channel-explore')
               {
                 // new state url
@@ -137,24 +141,32 @@
                 if (channel === undefined) {
                   channel = lodash.find(vm.publicChannels, 'channelUrl', currentUrl);
                 }
-                //$log.log('$stateChangeSuccess channel', channel);
                 if (channel !== undefined) {
                   setActiveChannel(channel);
+                  setActiveChannelForSearch(channel);
                 }
+              }
+
+              if($state.current.name !== 'dashboard.project.channel-explore' && $state.current.name !== 'dashboard.project.search-results'){
+                vm.setActiveChannelForSearch(null);
               }
 
               // videoconference view settings
               if ($state.current.name === 'dashboard.project.call-index') {
                 vm.showMenu = false;
+                vm.showNotifications = false;
                 vm.showMembersList = false;
                 vm.showSearch = false;
                 vm.showLogout = false;
+                vm.showExit = true;
               }
               else {
                 vm.showMenu = true;
+                vm.showNotifications = true;
                 vm.showMembersList = true;
                 vm.showSearch = true;
                 vm.showLogout = true;
+                vm.showExit = false;
               }
             });
 
@@ -180,6 +192,7 @@
                 vm.privateChannels = lodash.filter(channels, function(c) {
                   c.channelUrl = $state.href('dashboard.project.channel-explore', {
                     channelId: c.id,
+                    id: vm.project.id,
                     isDirect: false
                   });
 
@@ -195,6 +208,7 @@
                   var isMember = (lodash.find(c.members, 'id', vm.user.id) !== undefined);
                   c.channelUrl = $state.href('dashboard.project.channel-explore', {
                     channelId: c.id,
+                    id: vm.project.id,
                     isDirect: false
                   });
 
@@ -237,8 +251,8 @@
 
             var channelId = null;
 
-            if(vm.activeChannel !== null){
-              channelId = vm.activeChannel.id;
+            if(vm.activeChannelForSearch !== null){
+              channelId = vm.activeChannelForSearch.id;
             }
 
             $state.go('dashboard.project.search-results', { criterio: criterio, channelId: channelId });
@@ -381,6 +395,10 @@
            * @desc marks the channel with a (transient) notification
            */
           function loadNotification(notification) {
+
+            if (!vm.showNotifications) {
+              return;
+            }
 
             var notifTitle = vm.project !== null ? vm.project.name : 'comet',
               notifBody = '',
@@ -641,6 +659,14 @@
           }
 
           /**
+           * @name setActiveChannelForSearch
+           * @desc saves into a variable the channel over which searchs must be performed.
+           */
+          function setActiveChannelForSearch(channel) {
+            vm.activeChannelForSearch = channel;
+          }
+
+          /**
            * @name findChannel
            * @desc returns a channel searching by id
            */
@@ -716,6 +742,14 @@
             notificationsLeaveRoom(vm.project);
             accountService.logout();
             $state.go('home');
+          }
+
+          /**
+           * @name close
+           * @desc closes the window
+           */
+          function closewindow () {
+            window.close();
           }
       }
 })();

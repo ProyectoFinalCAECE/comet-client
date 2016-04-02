@@ -67,7 +67,7 @@
                 <div class="chat-discussion">
                   <!-- load channel history -->
                   <div ng-cloak="" ng-hide="vm.noMoreMessages || vm.emptyChannel" class="text-center">
-                    <a ng-click="vm.loadOlderMessages()" name="btnLoadMore" class="btn btn-xl">Recuperar más mensajes</a>
+                    <a ng-click="vm.loadOlderMessages('backwards')" name="btnLoadMore" class="btn btn-xl">Recuperar más mensajes</a>
                   </div>
                   <!-- no more channel history left -->
                   <div ng-cloak ng-show="vm.noMoreMessages && !vm.emptyChannel" style="font-style:italic" class="text-muted text-center">
@@ -104,6 +104,10 @@
                   <!-- empty channel -->
                   <div ng-cloak ng-show="vm.emptyChannel" class="jumbotron text-center">
                       <p>No hay mensajes en este canal</p>
+                  </div>
+                  <!-- load channel history (forwards) -->
+                  <div ng-cloak="" ng-hide="vm.noMoreMessagesForward || vm.emptyChannel" class="text-center">
+                    <a ng-click="vm.loadOlderMessages('forwards')" name="btnLoadMore" class="btn btn-xl">Recuperar más mensajes</a>
                   </div>
                 </div>
               </div>

@@ -24,7 +24,7 @@
       }
     })
     .state('dashboard.project.channel-explore', {
-      url: '/channels/:channelId?:isDirect&:loadById&:messageId&:limit&:direction',
+      url: '/channels/:channelId?isDirect&loadById&messageId&limit&direction',
       ncyBreadcrumb: {
         label: '{{vm.channel.name}}',
         parent: 'dashboard.project.project-explore'
@@ -42,7 +42,8 @@
         }],
         channel: ['$stateParams', 'userService', 'channelService', 'project', 'user',
           function($stateParams, userService, channelService, project, user) {
-            if ($stateParams.isDirect === 'true' && $stateParams.loadById === 'false') {
+            var loadById = ($stateParams.loadById === 'true');
+            if ($stateParams.isDirect === 'true' && (!loadById)) {
               var destUserId = $stateParams.channelId;
               return userService.getById(destUserId)
                     .then(function(destUser) {
