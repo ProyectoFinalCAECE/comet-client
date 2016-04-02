@@ -40,6 +40,18 @@
           vm.saveSummary = saveSummary;
           vm.cancel = cancel;
 
+          // textarea plugin options
+          vm.customMenu = [
+            ['bold', 'italic', 'underline'],
+            ['font'],
+            ['font-size'],
+            ['font-color'],
+            ['remove-format'],
+            ['ordered-list', 'unordered-list', 'outdent', 'indent'],
+            ['left-justify', 'center-justify', 'right-justify'],
+            ['quote']
+          ];
+
           activate();
 
           function activate () {

@@ -918,7 +918,7 @@
               templateUrl: '/src/calls/call-summary.html',
               controller: 'CallSummaryController',
               controllerAs: 'vm',
-              size: 'md',
+              size: 'lg',
               backdrop: 'static',
               resolve: {
                 project: function () {

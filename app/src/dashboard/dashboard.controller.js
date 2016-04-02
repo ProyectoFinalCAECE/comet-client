@@ -68,7 +68,7 @@
           vm.activeDirectChannel = null;
           vm.activeChannelForSearch = null;
           vm.logout = logout;
-          vm.close = close;
+          vm.close = closewindow;
 
           vm.buscar = buscar;
           vm.textoBusqueda = '';
@@ -748,7 +748,7 @@
            * @name close
            * @desc closes the window
            */
-          function close () {
+          function closewindow () {
             window.close();
           }
       }

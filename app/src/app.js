@@ -28,7 +28,8 @@
             'ui.router',
             'ui.select',
             'sticky',
-            'trello'
+            'trello',
+            'wysiwyg.module'
         ])
         .run(function($rootScope, $state, $stateParams, helpersService){
           $rootScope.helpers = helpersService;
