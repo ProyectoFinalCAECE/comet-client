@@ -768,6 +768,16 @@ body[state="dashboard.project.channel-explore"] {
     font-style: italic;
 }
 
+/* calls */
+.message-callSummary-wrapper {
+  margin-top: 5px;
+  background-color: #FFF;
+  border-radius: 5px;
+  padding: 10px;
+  min-height: 70px;
+  text-align: left;
+}
+
 /* Emojis */
 .emoji-container {
     height: 300px;
