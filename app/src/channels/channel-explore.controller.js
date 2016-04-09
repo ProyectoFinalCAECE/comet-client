@@ -99,6 +99,7 @@
           vm.displayFileMenu = displayFileMenu;
           // calls
           vm.startCall = startCall;
+          vm.callIsFinished = callIsFinished;
           // update info
           vm.edit = edit;
           // invite / delete members
@@ -433,12 +434,15 @@
            * Compares two messages and returns the order which they should be displayed in.
            */
           function compare(a,b) {
-            if (a.date < b.date)
+            if (a.date < b.date) {
               return -1;
-            else if (a.date > b.date)
+            }
+            else if (a.date > b.date) {
               return 1;
-            else
+            }
+            else {
               return 0;
+            }
           }
 
           /**
@@ -890,7 +894,7 @@
           function startCall() {
               var roomId = $rootScope.helpers.randomString(10).toUpperCase(),
                   newCall = {},
-                  channelId;
+                  channelId = getChannelRoomId();
 
               newCall.startHour = new Date();
               newCall.frontend_id = roomId;
@@ -910,10 +914,10 @@
                                       callId: response.data.id,
                                       room: roomId
                                     });
+                sendMessage(callUrl, user.id, messageType.CALL, callUrl);
                 showSummary(newCall);
-                $window.open(callUrl);
+                //$window.open(callUrl);
               });
-              //sendMessage(callUrl, user.id, messageType.CALL, callUrl);
           }
 
           /**
@@ -947,10 +951,18 @@
              var channelId = vm.channel.id;
              callService.updateSummary(vm.project.id, channelId, call).then(function (response) {
                console.log('update summary', response);
+               sendMessage(summary, user.id, messageType.CALL_SUMMARY);
              });
-             // TODO: send an auto generated message
-             //sendMessage(summary, user.id, messageType.AUTO);
            });
+          }
+
+          /**
+           * @name callIsFinished
+           * @desc calculates the amount of hours since call creation
+          */
+          function callIsFinished(startDate) {
+            var callAge = moment.duration(moment().diff(startDate)).asHours();
+            return (callAge > 6);
           }
       }
 })();

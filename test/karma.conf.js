@@ -47,6 +47,8 @@ module.exports = function(config) {
       'bower_components/ngImgCrop/compile/minified/ng-img-crop.js',
       'bower_components/ng-file-upload/ng-file-upload.js',
       'bower_components/angular-trello/dist/angular-trello.min.js',
+      'bower_components/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.js',
+      'bower_components/angular-wysiwyg/dist/angular-wysiwyg.min.js',
       'bower_components/angular-mocks/angular-mocks.js',
       'bower_components/ui-router-extras/release/ct-ui-router-extras.js',
       // endbower

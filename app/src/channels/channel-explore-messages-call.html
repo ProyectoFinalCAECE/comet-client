@@ -1,4 +1,4 @@
-<span class="message-content clearfix" ng-if="message.type === 9">
+<span class="message-content clearfix" ng-if="message.type === 9" ng-init="finishedCall = vm.callIsFinished(message.date)">
   <div class="message-video-wrapper clearfix">
     <span class="message-content">
       <div class="text-center">
@@ -7,9 +7,9 @@
         </p>
         <p>
           <a href="{{message.text}}" target="_blank">
-            <button type="button" class="btn btn-info btn-lg">
+            <button type="button" ng-disabled="finishedCall" ng-class="{ 'btn-default': finishedCall, 'btn-info': !finishedCall }" class="btn btn-lg">
               <i class="fa fa-video-camera" style="margin-right:10px;"></i>
-              Entrar
+              {{finishedCall ? 'Finalizada' : 'Entrar' }}
             </button>
           </a>
         </p>

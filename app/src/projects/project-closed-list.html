@@ -17,7 +17,7 @@
   <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
       <!-- No tiene proyectos -->
-      <div ng-show="vm.isEmpty" class="jumbotron text-center ClosedProjects">
+      <div ng-show="vm.closedProjectsEmpty" class="jumbotron text-center ClosedProjects">
           <p>No hay proyectos cerrados</p>
       </div>
       <div ng-hide="vm.closedProjectsEmpty">
@@ -41,9 +41,9 @@
                   <thead>
                     <tr>
                       <th class="columnaCanal">Nombre</th>
-                      <th class="columnaDescripcion">Descripcion</th>
+                      <th class="columnaDescripcion">Descripción</th>
                       <th class="columnaMiembros">Miembros</th>
-                      <th class="columnaFecha">Fecha Creacion</th>
+                      <th class="columnaFecha">Fecha Creación</th>
                       <th class="columnaFecha">Fecha Cierre</th>
                     </tr>
                   </thead>

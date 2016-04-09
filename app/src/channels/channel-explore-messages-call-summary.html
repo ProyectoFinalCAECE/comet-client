@@ -1,0 +1,8 @@
+<span class="message-content clearfix" ng-if="message.type === 10">
+  <div class="message-callSummary-wrapper clearfix">
+    <h4>Minuta de videollamada del {{::vm.formatMessageDate(message.date) }}</h4>
+    <div ng-bind-html="message.text | unsafe" class="message-callSummary-inside clearfix">
+    </div>
+    </a>
+  </div>
+</span>
