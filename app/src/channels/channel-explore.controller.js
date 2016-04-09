@@ -960,7 +960,7 @@
                                     });
                 sendMessage(callUrl, user.id, messageType.CALL, callUrl);
                 showSummary(newCall);
-                //$window.open(callUrl);
+                $window.open(callUrl);
               });
           }
 
