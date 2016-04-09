@@ -35,7 +35,8 @@
           INTEGRATION_GITHUB: 6,
           INTEGRATION_TRELLO: 7,
           INTEGRATION_PINGDOM: 8,
-          CALL: 9
+          CALL: 9,
+          CALL_SUMMARY: 10
         })
         // system notification types
         .constant('systemNotificationType', {
