@@ -19,7 +19,7 @@
       </div>
       <!-- Email -->
       <div class="form-group cometInput" ng-class="{ 'has-error': helpers.fieldIsNotValid(vmc.validationErrors, 'email') }">
-        <input type="email" name="email" ng-model="vmc.user.email" class="form-control" placeholder="Direccion de correo">
+        <input type="email" name="email" ng-model="vmc.user.email" class="form-control" placeholder="Dirección de correo">
         <div ng-messages="helpers.fieldIsNotValid(vmc.validationErrors, 'email')" class="control-label" role="alert">
           <div class="text-center">{{ vmc.validationErrors['email'] }}</div>
         </div>
