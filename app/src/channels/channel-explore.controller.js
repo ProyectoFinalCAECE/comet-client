@@ -99,6 +99,7 @@
           vm.displayFileMenu = displayFileMenu;
           // calls
           vm.startCall = startCall;
+          vm.callIsFinished = callIsFinished;
           // update info
           vm.edit = edit;
           // invite / delete members
@@ -953,6 +954,15 @@
                sendMessage(summary, user.id, messageType.CALL_SUMMARY);
              });
            });
+          }
+
+          /**
+           * @name callIsFinished
+           * @desc calculates the amount of hours since call creation
+          */
+          function callIsFinished(startDate) {
+            var callAge = moment.duration(moment().diff(startDate)).asHours();
+            return (callAge > 6);
           }
       }
 })();
