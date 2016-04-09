@@ -31,7 +31,7 @@
           <form name="vm.frmLogin" class="m-t" role="form" ng-submit="vm.login()" novalidate="">
             <!-- Email -->
             <div class="form-group" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'email') }">
-              <input type="text" name="email" ng-model="vm.user.email" class="form-control" placeholder="Dirección de correo" required="">
+              <input type="text" name="email" autofocus ng-model="vm.user.email" class="form-control" placeholder="Dirección de correo" required="">
               <div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'email')" class="control-label" role="alert">
                 <div class="text-center">{{ vm.validationErrors['email'] }}</div>
               </div>

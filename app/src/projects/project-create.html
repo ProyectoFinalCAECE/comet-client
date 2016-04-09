@@ -15,7 +15,7 @@
       <!-- Nombre -->
       <label class="col-sm-2 control-label">Nombre</label>
       <div class="form-group cometInput" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'name') }">
-        <input type="text" name="name" ng-model="vm.project.name" class="form-control" placeholder="Nombre del proyecto">
+        <input type="text" autofocus name="name" ng-model="vm.project.name" class="form-control" placeholder="Nombre del proyecto">
         <div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'name')" class="control-label" role="alert">
           <div>{{ vm.validationErrors['name'] }}</div>
         </div>

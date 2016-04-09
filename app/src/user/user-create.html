@@ -25,7 +25,7 @@
       <form name="vm.frmCreateUser" class="m-t" role="form" ng-submit="vm.create()" novalidate>
         <!-- Nombre -->
         <div class="form-group" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'firstName') }">
-          <input type="text" name="firstName" ng-model="vm.user.firstName" class="form-control" placeholder="Nombre">
+          <input type="text" autofocus name="firstName" ng-model="vm.user.firstName" class="form-control" placeholder="Nombre">
           <div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'firstName')" class="control-label" role="alert">
             <div class="text-center">{{ vm.validationErrors['firstName'] }}</div>
           </div>
