@@ -193,7 +193,11 @@
                   c.channelUrl = $state.href('dashboard.project.channel-explore', {
                     channelId: c.id,
                     id: vm.project.id,
-                    isDirect: false
+                    isDirect: false,
+                    loadById: undefined,
+                    direction: undefined,
+                    messageId: undefined,
+                    limit: undefined
                   });
 
                   if (c.channelUrl === urlonLoad) {
@@ -209,7 +213,11 @@
                   c.channelUrl = $state.href('dashboard.project.channel-explore', {
                     channelId: c.id,
                     id: vm.project.id,
-                    isDirect: false
+                    isDirect: false,
+                    loadById: undefined,
+                    direction: undefined,
+                    messageId: undefined,
+                    limit: undefined
                   });
 
                   if (c.channelUrl === urlonLoad) {
@@ -228,7 +236,11 @@
                   member.isOnline = false;
                   member.channelUrl = $state.href('dashboard.project.channel-explore', {
                     channelId: member.id,
-                    isDirect: true
+                    isDirect: true,
+                    loadById: undefined,
+                    direction: undefined,
+                    messageId: undefined,
+                    limit: undefined
                   });
 
                   if (member.channelUrl === urlonLoad) {
@@ -444,7 +456,11 @@
 
               notifUrl = $state.href('dashboard.project.channel-explore', {
                 channelId: notification.id,
-                isDirect: vm.privateNotifications
+                isDirect: vm.privateNotifications,
+                loadById: undefined,
+                direction: undefined,
+                messageId: undefined, 
+                limit: undefined
               }, { absolute: true });
 
               if (!isActiveChannel(notification.id) ||

@@ -24,7 +24,7 @@
       }
     })
     .state('dashboard.project.channel-explore', {
-      url: '/channels/:channelId?isDirect&loadById&messageId&limit&direction',
+      url: '/channels/:channelId?isDirect&:loadById&:messageId&:limit&:direction',
       ncyBreadcrumb: {
         label: '{{vm.channel.name}}',
         parent: 'dashboard.project.project-explore'
