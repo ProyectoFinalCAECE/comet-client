@@ -72,6 +72,7 @@
           var vm = this;
           vm.project = project;
           vm.channel = channel;
+          vm.user = user;
           vm.isClosed = false;
           vm.isDirect = isDirect;
           vm.validationErrors = null;
@@ -82,6 +83,8 @@
           vm.messageId = messageId;
           vm.limit = limit;
           vm.direction = direction;
+          vm.canDeleteMember = canDeleteMember;
+          vm.isChannelOwner = isChannelOwner;
           // messages
           vm.lastMessage = null;
           vm.getMember = getMember;
@@ -507,6 +510,15 @@
           }
 
           /**
+           * @name isChannelOwner
+           * @desc returns if the current user is the channel owner
+          */
+          function isChannelOwner () {
+            //return (vm.channel.userId == user.id);
+            return true;
+          }
+
+          /**
            * @name getMessageClass
            * @desc returns the css class to use in the message container div
           */
@@ -802,6 +814,38 @@
           }
 
           /**
+           * @name canDeleteMember
+           * @desc returns if the user can delete other channel members
+          */
+          function canDeleteMember(member) {
+
+            // only on private channels
+            if (vm.channel.type === 'S') {
+              return false;
+            }
+
+            // and if the user is member
+            if (!vm.isMember) {
+              return false;
+            }
+
+            // and if the channel is not closed
+            if (vm.isClosed || vm.isDirect) {
+              return false;
+            }
+
+            // only on other members
+            if (member.id === vm.user.id) {
+              return false;
+            }
+
+            // and if the current user is the owner of the channel
+            if (vm.isChannelOwner()) {
+              return true;
+            }
+          }
+
+          /**
            * @name deleteMember
            * @desc deletes selected members from channel
           */
@@ -816,9 +860,9 @@
                 }
               });
             }).then(function() {
-                var index = vm.project.members.indexOf(member);
-                vm.project.members.splice(index, 1);
-                sendMessage('Ha salido del canal.', member.id, messageType.AUTO);
+                var index = vm.channel.members.indexOf(member);
+                vm.channel.members.splice(index, 1);
+                sendMessage('Ha sido eliminado del canal.', member.id, messageType.AUTO);
                 ngToast.success('El participante ha sido eliminado.');
             });
           }
