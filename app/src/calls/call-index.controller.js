@@ -22,7 +22,9 @@
                                          'lodash',
                                          'moment',
                                          'SimpleWebRTC',
-                                         'dashboardServiceModel'];
+                                         'dashboardServiceModel',
+                                         'callService',
+                                         'project'];
 
         function CallIndexController ($log,
                                       $rootScope,
@@ -37,10 +39,14 @@
                                       lodash,
                                       moment,
                                       SimpleWebRTC,
-                                      dashboardServiceModel) {
+                                      dashboardServiceModel,
+                                      callService,
+                                      project) {
 
           var vm = this,
               room = $stateParams.room,
+              channelId = $stateParams.channelId,
+              callId = $stateParams.callId,
               localNickname = dashboardServiceModel.getCurrentUser().alias,
               webrtc = null,
               totalPeers = 0,
@@ -61,6 +67,7 @@
           */
           function activate () {
 
+            addCallMember();
             initializeRTC();
 
             // close the connection on exit
@@ -70,6 +77,14 @@
                 webrtc.disconnect();
               }
             };
+          }
+
+          /**
+           * @name addCallMember
+           * @desc set the current logged in user as a member
+          */
+          function addCallMember () {
+            callService.updateMembers(project.id, channelId, callId);
           }
 
           /**

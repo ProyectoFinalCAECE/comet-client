@@ -889,24 +889,31 @@
           **/
           function startCall() {
               var roomId = $rootScope.helpers.randomString(10).toUpperCase(),
-                  callUrl = $state.href('dashboard.project.call-index', { room: roomId });
+                  newCall = {},
+                  channelId;
 
-              var newCall = {};
-              newCall.StartHour = new Date();
+              newCall.startHour = new Date();
+              newCall.frontend_id = roomId;
               if (isDirect) {
-                newCall.UserId = vm.channel.id;
+                channelId = user.id;
+                newCall.userId = user.id;
               } else {
-                newCall.ChannelId = user.id;
+                channelId = vm.channel.id;
+                newCall.channelId = vm.channel.id;
               }
 
-              //TODO: grabar en la base y despues abrir la ventana
-              // callService.create(newCall).then(function () {
-              //     $window.open(callUrl);
-              // });
-
-              $window.open(callUrl);
-              sendMessage(callUrl, user.id, messageType.CALL, callUrl);
-              showSummary(newCall);
+              // save call to DB
+              callService.create(vm.project.id, channelId, newCall).then(function (response) {
+                newCall = response.data;
+                var callUrl = $state.href('dashboard.project.call-index',
+                                    { channelId: channelId,
+                                      callId: response.data.id,
+                                      room: roomId
+                                    });
+                showSummary(newCall);
+                $window.open(callUrl);
+              });
+              //sendMessage(callUrl, user.id, messageType.CALL, callUrl);
           }
 
           /**
@@ -936,9 +943,13 @@
              }
            });
            modalInstance.result.then(function (summary) {
-             $log.log('summary', summary);
+             call.summary = summary;
+             var channelId = vm.channel.id;
+             callService.updateSummary(vm.project.id, channelId, call).then(function (response) {
+               console.log('update summary', response);
+             });
              // TODO: send an auto generated message
-             sendMessage(summary, user.id, messageType.AUTO);
+             //sendMessage(summary, user.id, messageType.AUTO);
            });
           }
       }

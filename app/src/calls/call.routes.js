@@ -10,7 +10,7 @@
   function config ($stateProvider) {
     $stateProvider
       .state('dashboard.project.call-index', {
-        url: '/call/:room',
+        url: '/channels/:channelId/call/:callId/:room',
         ncyBreadcrumb: {
           label: 'Videoconferencia'
         },
