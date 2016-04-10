@@ -30,7 +30,7 @@
         <form name="vm.frmRecover" class="m-t" role="form" ng-submit="vm.recoverPasswordValidate()" novalidate="">
           <!-- Contraseña -->
           <div class="form-group" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'password') }">
-            <input type="password" name="password" class="form-control" placeholder="Contraseña"
+            <input type="password" autofocus name="password" class="form-control" placeholder="Contraseña"
                                    ng-model="vm.password"
                                    popover="{{vm.passwordPattern}}"
                                    popover-placement="bottom"
