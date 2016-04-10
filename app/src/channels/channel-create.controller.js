@@ -103,7 +103,7 @@
             var dlg = dialogService.showModalAlert('Crear canal', msg);
             dlg.result.finally(function () {
               $state.go('dashboard.project.channel-explore', {
-                projectId: vm.project.id,  channelId: createdChannel.id
+                projectId: vm.project.id,  channelId: createdChannel.id, loadById: undefined, direction: undefined, messageId: undefined, limit:undefined
               });
             });
           }

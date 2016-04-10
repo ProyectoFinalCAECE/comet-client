@@ -180,6 +180,12 @@
               vm.channel = args.channel;
               setFlags();
             });
+
+            $scope.$on("$destroy", function(){
+              vm.messageId = undefined;
+              vm.channelId = undefined;
+              vm.loadById = undefined;
+            });
           }
 
           /**
