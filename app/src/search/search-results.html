@@ -35,12 +35,12 @@
                               <div class="search-result-member" ng-repeat="user in vm.resultUsers">
                                 <a data-type="D"
                     							 data-id="{{user.id}}"
-                    							 ui-sref="dashboard.project.channel-explore({projectId: vm.project.id, channelId:user.id, isDirect:true})">
+                    							 ui-sref="dashboard.project.channel-explore({projectId: vm.project.id, channelId:user.id, isDirect:true, loadById:undefined, direction:undefined, messageId:undefined, limit:undefined})">
                                   <img class="message-avatar" ng-src="{{::user.profilePicture}}" alt="" />
                     	          </a>
                                 <a data-type="D"
                   								 data-id="{{user.id}}"
-                  								 ui-sref="dashboard.project.channel-explore({projectId: vm.project.id, channelId:user.id, isDirect:true})">
+                  								 ui-sref="dashboard.project.channel-explore({projectId: vm.project.id, channelId:user.id, isDirect:true, loadById:undefined, direction:undefined, messageId:undefined, limit:undefined})">
                   	              <b>{{user.firstName + ' ' + user.lastName + ' (' + user.alias + ')'}}</b>
                                 </a>
                               </div>
