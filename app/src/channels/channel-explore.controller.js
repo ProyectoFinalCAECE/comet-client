@@ -995,15 +995,22 @@
                   return call;
                 }
              }
-           });
-           modalInstance.result.then(function (summary) {
-             call.summary = summary;
-             var channelId = vm.channel.id;
-             callService.updateSummary(vm.project.id, channelId, call).then(function (response) {
-               console.log('update summary', response);
-               sendMessage(summary, user.id, messageType.CALL_SUMMARY);
-             });
-           });
+            });
+
+            // save call summary
+            var callSummary = '   ';
+            modalInstance.result.then(function (summary) {
+              callSummary = summary;
+            }).finally(function() {
+               // Always execute this on both error and success
+              call.summary = callSummary;
+              var channelId = vm.channel.id;
+              callService.updateSummary(vm.project.id, channelId, call).then(function () {
+                if (callSummary.trim().length > 0) {
+                  sendMessage(call.summary, user.id, messageType.CALL_SUMMARY);
+                }
+              });
+            });
           }
 
           /**
