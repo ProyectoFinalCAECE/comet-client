@@ -290,7 +290,8 @@
               });
             } else {
               var limit = 5;
-
+              vm.noMoreMessagesForward = true;
+              
               channelService.getMessages(vm.project.id, vm.channel.id, nextRequestOffset, limit, vm.isDirect).then(function (response) {
                 if(response.data.messages.length === 0){
                   // for the first load
