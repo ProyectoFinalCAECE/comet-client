@@ -173,6 +173,10 @@ body[state="dashboard.project.channel-explore"] {
   padding-left: 45px;
 }
 
+.menu-item-link {
+  width: 205px !important;
+}
+
 /*Dashboard Fijo*/
 
 

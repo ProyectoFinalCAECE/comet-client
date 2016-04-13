@@ -147,8 +147,10 @@
                 }
               }
 
-              if($state.current.name !== 'dashboard.project.channel-explore' && $state.current.name !== 'dashboard.project.search-results'){
-                vm.setActiveChannelForSearch(null);
+              if( $state.current.name !== 'dashboard.project.channel-explore' &&
+                  $state.current.name !== 'dashboard.project.search-results'){
+                setActiveChannel(null);
+                setActiveChannelForSearch(null);
               }
 
               // videoconference view settings
@@ -459,7 +461,7 @@
                 isDirect: vm.privateNotifications,
                 loadById: undefined,
                 direction: undefined,
-                messageId: undefined, 
+                messageId: undefined,
                 limit: undefined
               }, { absolute: true });
 
