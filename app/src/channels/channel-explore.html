@@ -76,7 +76,7 @@
                   <!-- messages -->
                   <!-- me invento una clase message-loop, necesaria para obtener el ultimo mensaje -->
                   <div class="message-loop">
-                    <div class="chat-message"
+                    <div class="chat-message "
                          ng-class="vm.getMessageClass(message)"
                          ng-repeat="message in vm.messages"
                          ng-init="msgMember = vm.getMember(message)">
@@ -173,7 +173,11 @@
                                 ng-click="vm.displayEmoji()">
                           <i class="fa fa-smile-o"></i>
                         </button>
-                        <div class="emoji-container" ng-if="vm.showEmoji">
+                        <div class="emoji-container fadeInDown"
+                             ng-class="vm.showEmoji ? 'animated' : ''"
+                             ng-if="vm.showEmoji || vm.emojiLoaded"
+                             ng-show="vm.showEmoji"
+                             ng-init="vm.emojiLoaded = true">
                           <ul>
                             <li ng-repeat="emoji in vm.emojiList"
                                 ng-click="vm.setEmoji(emoji)"
