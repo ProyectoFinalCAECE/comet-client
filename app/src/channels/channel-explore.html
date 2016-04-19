@@ -162,10 +162,16 @@
               <div class="messageInputText">
                 <div class="col-lg-12" style="padding-left:0;">
                   <div class="chat-message-form">
+                    <div class="">
+                      <p>
+                        {{vm.showEmoji |json}}
+                      </p>
+                    </div>
                     <div class="input-group">
                       <!-- Emoticones -->
                       <div class="input-group-btn">
-                        <button ng-disabled="vm.isClosed"
+                        <button id="btnEmoji"
+                                ng-disabled="vm.isClosed"
                                 style="height:35px;"
                                 tabindex="-1"
                                 class="btn btn-white"
