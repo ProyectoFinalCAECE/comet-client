@@ -660,6 +660,10 @@
             vm.activeChannel = null;
             vm.activeDirectChannel = null;
 
+            if (channel === null) {
+              return;
+            }
+
             if (channel.isDirect) {
               vm.activeDirectChannel = channel;
             }
@@ -735,13 +739,14 @@
            *       the user clicks on any part of the page
            */
           function setHideMembersOnClick() {
+
+            if (!vm.membersVisible) {
+              return;
+            }
+
             $(document).one('click', function(event){
                 var isClickedElementChildOfPopup =
-                        //angular.element('.cometProjectUsers')
-                        angular.element
-                               .find(event.target)
-                               .length > 0;
-
+                    angular.element('.theme-config').find(event.target).length > 0;
                 if (isClickedElementChildOfPopup) {
                   return;
                 }
