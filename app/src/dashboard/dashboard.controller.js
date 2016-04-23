@@ -71,6 +71,7 @@
           vm.close = closewindow;
 
           vm.buscar = buscar;
+          vm.placeholder = '';
           vm.textoBusqueda = '';
 
           vm.showMenu = true;
@@ -127,8 +128,12 @@
 
             // channel-explore active channel logic
             $scope.$on('$stateChangeSuccess', function() {
+              vm.placeholder = 'Buscar en proyecto';
+
+
               if ($state.current.name === 'dashboard.project.channel-explore')
               {
+                vm.placeholder = 'Buscar en canal';
                 // new state url
                 var currentUrl = '#' + $location.url().split('#')[0];
                 urlonLoad = currentUrl;
