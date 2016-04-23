@@ -1256,3 +1256,11 @@ body[state="dashboard.project.call-index"] #page-wrapper {
 #video-index textarea {
   width: 100%;
 }
+
+.cometFooter{
+  bottom: 0;
+}
+
+.cometFooter p{
+  color:#aeaeae
+}
