@@ -20,6 +20,21 @@
             controller: 'CallIndexController',
             controllerAs: 'vm'
           }
+        },
+        resolve: {
+          channel: ['$stateParams', 'channelService', 'project',
+            function($stateParams, channelService, project) {
+
+                // for calls in direct channels
+                if ($stateParams.callId === 0) {
+                  return null;
+                }
+
+                return channelService.getById(project.id, $stateParams.channelId)
+                       .then(function(data) {
+                         return data.data;
+                       });
+            }]
         }
     });
   }
