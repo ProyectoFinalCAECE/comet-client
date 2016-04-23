@@ -30,8 +30,9 @@
               </span>
             </a>
             <ul class="nav nav-second-level" nav-menu-active="selected-channel" notification-class="has-notification">
-              <li ng-repeat="channel in vm.publicChannels" ui-sref-active="selected-channel">
+              <li class="menu-item" ng-repeat="channel in vm.publicChannels" ui-sref-active="selected-channel">
                 <a ng-class="{ 'has-notification': channel.hasNotification }"
+                   class="menu-item-link"
                    ui-sref="dashboard.project.channel-explore({projectId: vm.project.id, channelId:channel.id, isDirect:false, loadById:undefined, direction:undefined, messageId:undefined, limit:undefined})"
                    data-type="S"
                    data-id="{{channel.id}}">
@@ -40,7 +41,7 @@
                 </a>
               </li>
               <li ng-show="vm.publicChannels.length == 0">
-                <a href="" style="cursor:default;">No hay canales públicos</a>
+                <a href="" style="cursor:default; color: #CCC; font-style: italic;">No hay canales públicos</a>
               </li>
             </ul>
           </li>
@@ -52,8 +53,9 @@
               </span>
             </a>
             <ul class="nav nav-second-level" nav-menu-active="selected-channel" notification-class="has-notification">
-              <li ng-repeat="channel in vm.privateChannels" ui-sref-active="selected-channel">
+              <li class="menu-item" ng-repeat="channel in vm.privateChannels" ui-sref-active="selected-channel">
                 <a ng-class="{ 'has-notification': channel.hasNotification }"
+                   class="menu-item-link"
                    ui-sref="dashboard.project.channel-explore({projectId: vm.project.id, channelId:channel.id, isDirect:false, loadById:undefined, direction:undefined, messageId:undefined, limit:undefined})"
                    data-type="P"
                    data-id="{{channel.id}}">
@@ -62,7 +64,7 @@
                 </a>
               </li>
               <li ng-show="vm.privateChannels.length == 0">
-                <a href="" style="cursor:default;">No hay canales privados</a>
+                <a href="" style="cursor:default; color: #CCC; font-style: italic;">No hay canales privados</a>
               </li>
             </ul>
           </li>

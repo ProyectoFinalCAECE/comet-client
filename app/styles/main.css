@@ -173,6 +173,10 @@ body[state="dashboard.project.channel-explore"] {
   padding-left: 45px;
 }
 
+.menu-item-link {
+  width: 205px !important;
+}
+
 /*Dashboard Fijo*/
 
 
@@ -916,44 +920,20 @@ body[state="dashboard.project.channel-explore"] {
   z-index: 700;
 }
 
-.skin-setttings {
+.theme-config {
   position: fixed;
-  font-size: 12px;
-  top: 70px;
-  right: 0px;
-  width: 200px;
+  z-index: 2000;
+}
+
+.theme-config .spin-icon {
+  box-shadow: 0 4px 2px -2px rgba(0,0,0,0.4)
+}
+
+.skin-setttings {
   background-color:white;
   overflow-y: hidden;
   max-height:500px;
-}
-
-.skin-setttings:hover {
-  overflow-y: auto;
-}
-
-.skin-setttings ul {
-  padding: 0;
-}
-
-.skin-setttings .title {
-  cursor: pointer;
-}
-
-.cometProjectUsersIcon {
-	background: #1AB394;
-	color: #FFF;
-  position: fixed;
-  padding: 7px 10px 7px 13px;
-  border-radius: 20px 0px 0px 20px;
-  font-size: 16px;
-  top: 70px;
-  right: 200px;
-  width: 40px;
-  cursor: pointer;
-}
-
-.cometProjectUsersIcon.minimized {
-  right: 0px;
+  box-shadow: 0 0 10px rgba(179, 175, 175, 0.78);
 }
 
 .cometProjectUsers:hover {
@@ -962,6 +942,7 @@ body[state="dashboard.project.channel-explore"] {
 
 .cometProjectUsers ul {
   margin-bottom: 0;
+  padding-left: 0;
 }
 
 .cometProjectUsers li {

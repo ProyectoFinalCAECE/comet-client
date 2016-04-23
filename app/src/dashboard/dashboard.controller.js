@@ -147,8 +147,10 @@
                 }
               }
 
-              if($state.current.name !== 'dashboard.project.channel-explore' && $state.current.name !== 'dashboard.project.search-results'){
-                vm.setActiveChannelForSearch(null);
+              if( $state.current.name !== 'dashboard.project.channel-explore' &&
+                  $state.current.name !== 'dashboard.project.search-results'){
+                setActiveChannel(null);
+                setActiveChannelForSearch(null);
               }
 
               // videoconference view settings
@@ -459,7 +461,7 @@
                 isDirect: vm.privateNotifications,
                 loadById: undefined,
                 direction: undefined,
-                messageId: undefined, 
+                messageId: undefined,
                 limit: undefined
               }, { absolute: true });
 
@@ -658,6 +660,10 @@
             vm.activeChannel = null;
             vm.activeDirectChannel = null;
 
+            if (channel === null) {
+              return;
+            }
+
             if (channel.isDirect) {
               vm.activeDirectChannel = channel;
             }
@@ -733,13 +739,14 @@
            *       the user clicks on any part of the page
            */
           function setHideMembersOnClick() {
+
+            if (!vm.membersVisible) {
+              return;
+            }
+
             $(document).one('click', function(event){
                 var isClickedElementChildOfPopup =
-                        //angular.element('.cometProjectUsers')
-                        angular.element
-                               .find(event.target)
-                               .length > 0;
-
+                    angular.element('.theme-config').find(event.target).length > 0;
                 if (isClickedElementChildOfPopup) {
                   return;
                 }

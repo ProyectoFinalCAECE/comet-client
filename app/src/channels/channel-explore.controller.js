@@ -290,6 +290,7 @@
               });
             } else {
               var limit = 5;
+              vm.noMoreMessagesForward = true;
 
               channelService.getMessages(vm.project.id, vm.channel.id, nextRequestOffset, limit, vm.isDirect).then(function (response) {
                 if(response.data.messages.length === 0){
@@ -626,7 +627,7 @@
            * @desc open/close the emoji dialog
           */
           function displayEmoji () {
-            vm.showEmoji = true;
+            vm.showEmoji = !vm.showEmoji;
             if (vm.showEmoji) {
               $timeout(function () {
                 $(document).one('click', documentClick);
@@ -647,10 +648,17 @@
            * @name documentClick
            * @desc closes the emoji dialog en document click
           */
-          function documentClick() {
-            $scope.$apply(function(){
-              vm.showEmoji = false;
-            });
+          function documentClick(e) {
+            $(document).off('click', documentClick);
+            if (angular.element(e.target).parent().is('#btnEmoji')) {
+              return;
+            }
+
+            if (vm.showEmoji) {
+              $scope.$apply(function(){
+                vm.showEmoji = false;
+              });
+            }
           }
 
           /**
@@ -995,15 +1003,22 @@
                   return call;
                 }
              }
-           });
-           modalInstance.result.then(function (summary) {
-             call.summary = summary;
-             var channelId = vm.channel.id;
-             callService.updateSummary(vm.project.id, channelId, call).then(function (response) {
-               console.log('update summary', response);
-               sendMessage(summary, user.id, messageType.CALL_SUMMARY);
-             });
-           });
+            });
+
+            // save call summary
+            var callSummary = '   ';
+            modalInstance.result.then(function (summary) {
+              callSummary = summary;
+            }).finally(function() {
+               // Always execute this on both error and success
+              call.summary = callSummary;
+              var channelId = vm.channel.id;
+              callService.updateSummary(vm.project.id, channelId, call).then(function () {
+                if (callSummary.trim().length > 0) {
+                  sendMessage(call.summary, user.id, messageType.CALL_SUMMARY);
+                }
+              });
+            });
           }
 
           /**
