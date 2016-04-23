@@ -46,15 +46,15 @@
     width:400px;
   }
 
-  .invitarEmails{
+  .invitarEmails {
     width:350px;
   }
 
-  .invitarEmails button{
+  .invitarEmails button {
     width:100px;
   }
 
-  .crearProyecto-sm-8 label{
+  .crearProyecto-sm-8 label {
       float:none;
   }
 
@@ -63,32 +63,40 @@
   }
 }
 
+@media (max-width: 800px) {
+
+  .ButtonAdminList .admin-item {
+    padding-left:20px;
+    position: relative;
+  }
+}
+
 @media (max-width: 768px) {
 
-  .search-header{
+  .search-header {
     margin-left: 10px;
   }
 
-  .navbar-form-custom{
+  .navbar-form-custom {
     display: inline-table;
     width: 100px;
   }
 
-  .cometTitle{
+  .cometTitle {
   margin-left: 5%;
   width: 25%;
   margin-top: 15px;
   }
 
-  .cometTitle h1{
+  .cometTitle h1 {
   font-size: 25px;
   }
 
-  .cometTitle img{
+  .cometTitle img {
   height: 25px;
   }
 
-  .navbar-right{
+  .navbar-right {
     float: right;
   }
 }
@@ -98,19 +106,19 @@
     display:none;
   }
 
-	.columnaFecha{
+	.columnaFecha {
     display:none;
 	}
 
-  .cometInput input, .cometInput textarea, .cometInput div{
+  .cometInput input, .cometInput textarea, .cometInput div {
   	width:350px;
   }
 
-  .invitarEmails{
+  .invitarEmails {
     width:300px;
   }
 
-  .invitarEmails button{
+  .invitarEmails button {
     width:100px;
   }
 
@@ -124,15 +132,15 @@
 		width: 40%;
 	}
 
-  .cometInput input, .cometInput textarea, .cometInput div{
+  .cometInput input, .cometInput textarea, .cometInput div {
   	width:160px;
   }
 
-  .invitarEmails{
+  .invitarEmails {
     width:160px;
   }
 
-  .invitarEmails button{
+  .invitarEmails button {
     width:20px;
   }
 
