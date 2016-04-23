@@ -60,6 +60,7 @@
           vm.showChat = false;
           vm.sendMessage = sendMessage;
           vm.formatMessageDate = formatMessageDate;
+          vm.getMessageClass = getMessageClass;
           vm.messages = [];
           vm.peers = {};
           vm.roomIsFull = false;
@@ -308,6 +309,26 @@
               sameDay : 'LT',
               sameElse : 'dddd L LT'
             });
+          }
+
+          /**
+           * @name messageIsFromUser
+           * @desc returns if the message author is the logged in user
+          */
+          function messageIsFromUser(message) {
+            return (message.author === localNickname);
+          }
+
+          /**
+           * @name getMessageClass
+           * @desc returns the css class to use in the message container div
+          */
+          function getMessageClass(message) {
+            var cssClass = '';
+            // messages from the current logged in user
+            cssClass += messageIsFromUser(message) ? 'mine' : '';
+
+            return cssClass;
           }
       }
 })();

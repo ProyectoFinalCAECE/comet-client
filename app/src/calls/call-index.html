@@ -31,8 +31,12 @@
         <!-- Chat -->
         <div class="col-lg-4" ng-show="vm.showChat">
           <div class="chat-discussion">
+            <div class="text-warning chat-warning">
+              Los mensajes de esta conversación son volátiles, <br/> no serán guardados en el canal.
+            </div>
             <!-- messages -->
-            <div class="chat-message left"
+            <div class="chat-message"
+                 ng-class="vm.getMessageClass(message)"
                  ng-repeat="message in vm.messages">
               <div class="message">
                 <b>{{::message.author}}</b>
