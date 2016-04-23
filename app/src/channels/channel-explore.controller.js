@@ -960,6 +960,7 @@
           function startCall() {
               var roomId = $rootScope.helpers.randomString(10).toUpperCase(),
                   newCall = {},
+                  callUrl = "",
                   channelId = getChannelRoomId();
 
               newCall.startHour = new Date();
@@ -972,18 +973,29 @@
                 newCall.channelId = vm.channel.id;
               }
 
-              // save call to DB
-              callService.create(vm.project.id, channelId, newCall).then(function (response) {
-                newCall = response.data;
-                var callUrl = $state.href('dashboard.project.call-index',
+              if (!isDirect) {
+                // save call to DB
+                callService.create(vm.project.id, channelId, newCall).then(function (response) {
+                  newCall = response.data;
+                  callUrl = $state.href('dashboard.project.call-index',
+                                      { channelId: channelId,
+                                        callId: response.data.id,
+                                        room: roomId
+                                      });
+                  sendMessage(callUrl, user.id, messageType.CALL, callUrl);
+                  $window.open(callUrl);
+                  showSummary(newCall);
+                });
+              }
+              else {
+                callUrl = $state.href('dashboard.project.call-index',
                                     { channelId: channelId,
-                                      callId: response.data.id,
+                                      callId: 0,
                                       room: roomId
                                     });
-                sendMessage(callUrl, user.id, messageType.CALL, callUrl);
-                showSummary(newCall);
                 $window.open(callUrl);
-              });
+              }
+
           }
 
           /**

@@ -25,7 +25,7 @@
         <form name="vm.frmRecover" class="m-t" role="form" ng-submit="vm.recoverPassword()" novalidate="">
           <!-- Email -->
           <div class="form-group" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'email') }">
-            <input type="email" name="email" ng-model="vm.email" class="form-control" placeholder="Dirección de correo" required="">
+            <input type="email" autofocus name="email" ng-model="vm.email" class="form-control" placeholder="Dirección de correo" required="">
             <div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'email')" class="control-label" role="alert">
               <div class="text-center">{{ vm.validationErrors['email'] }}</div>
               <div>{{ vm.validationErrors['all'] }}</div>
@@ -40,6 +40,11 @@
         <p>Por favor abre el correo y sigue el vínculo que te enviamos para recuperar tu contraseña</p>
         <p><a ui-sref="home" class="btn btn-primary">Volver</a></p>
       </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 text-center m-t-lg m-b-lg cometFooter">
+      <p><strong>© Equipo Comet 2016</strong>
     </div>
   </div>
 </div>

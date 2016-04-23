@@ -17,17 +17,26 @@
           <p class="text-center">Lo lamentamos. Esta sala se encuentra llena. <i class="fa fa-frown-o"></i></p>
           <p class="text-center">Pueden participar un máximo de 4 personas. </p>
         </div>
+
+        <div class="jumbotron" ng-show="!vm.isMember">
+          <p class="text-center">Lo lamentamos. Esta sala es privada.</p>
+        </div>
+
         <!-- layouts -->
         <div ng-class="vm.showChat ? 'col-lg-8' : 'col-lg-12'">
-          <div id="remotes" ng-show="!vm.roomIsFull">
+          <div id="remotes" ng-show="!vm.roomIsFull && vm.isMember">
           </div>
         </div>
 
         <!-- Chat -->
         <div class="col-lg-4" ng-show="vm.showChat">
           <div class="chat-discussion">
+            <div class="text-warning chat-warning">
+              Los mensajes de esta conversación son volátiles, <br/> no serán guardados en el canal.
+            </div>
             <!-- messages -->
-            <div class="chat-message left"
+            <div class="chat-message"
+                 ng-class="vm.getMessageClass(message)"
                  ng-repeat="message in vm.messages">
               <div class="message">
                 <b>{{::message.author}}</b>

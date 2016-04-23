@@ -1,6 +1,6 @@
 <div class="row border-bottom">
   <nav class="navbar navbar-static-top dash-top-fixed" role="navigation" style="margin-bottom: 0">
-    <div class="navbar-header search-header">
+    <div class="search-header">
       <i ng-style="{'visibility': (vm.project !== null && vm.showSearch) ? 'visible':'hidden'}" class="fa fa-search"></i>
       <form ng-submit="vm.buscar(vm.textoBusqueda)" ng-style="{'visibility': (vm.project !== null && vm.showSearch)  ? 'visible':'hidden'}" role="search" class="navbar-form-custom">
           <div class="form-group">
@@ -11,10 +11,10 @@
     <div class="navbar-header cometTitle">
       <ul>
         <li style="padding-right:10px">
-            <img alt="image" src="../../images/comet_logo.png" height="40"/>
+            <img alt="image" src="../../images/comet_logo.png"/>
         </li>
         <li>
-            <h1 class="font-bold" style="color:white; font-size:40px; margin:0;">Comet</h1>
+            <h1 class="font-bold">Comet</h1>
         </li>
       </ul>
     </div>

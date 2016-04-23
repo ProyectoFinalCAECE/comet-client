@@ -30,7 +30,7 @@
         <form name="vm.frmRecover" class="m-t" role="form" ng-submit="vm.recoverPasswordValidate()" novalidate="">
           <!-- Contraseña -->
           <div class="form-group" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'password') }">
-            <input type="password" name="password" class="form-control" placeholder="Contraseña"
+            <input type="password" autofocus name="password" class="form-control" placeholder="Contraseña"
                                    ng-model="vm.password"
                                    popover="{{vm.passwordPattern}}"
                                    popover-placement="bottom"
@@ -51,6 +51,11 @@
           <button type="submit" name="button" class="btn btn-primary">Cambiar contraseña</button>
         </form>
       </div>
+   </div>
+ </div>
+ <div class="row">
+   <div class="col-lg-8 col-lg-offset-2 text-center m-t-lg m-b-lg cometFooter">
+     <p><strong>© Equipo Comet 2016</strong>
    </div>
  </div>
 </div>
