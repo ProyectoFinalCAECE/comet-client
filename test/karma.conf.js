@@ -52,9 +52,18 @@ module.exports = function(config) {
       'bower_components/angular-mocks/angular-mocks.js',
       'bower_components/ui-router-extras/release/ct-ui-router-extras.js',
       // endbower
-      "app/scripts/**/*.js",
-      "test/mock/**/*.js",
-      "test/spec/**/*.js"
+      'app/scripts/vendor/simpleWebRTC-v2.js',
+      // src
+      'app/src/app.js',
+      'app/src/app.constants.js',
+      'app/src/app.routes.js',
+
+      'app/src/components/*.js',
+
+      'app/src/**/*.controller.js',
+      'app/src/**/*.service.js',
+      'app/src/**/*.serviceModel.js',
+      'app/src/**/*.spec.js'
     ],
 
     // list of files / patterns to exclude
