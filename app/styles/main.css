@@ -1268,9 +1268,16 @@ body[state="dashboard.project.call-index"] #page-wrapper {
 
 /* Videoconferencia - Chat */
 
+#video-index .chat-warning{
+  text-align:center;
+  padding: 10px;
+  background: rgba(212, 217, 220, 0.12);
+}
+
 #video-index .chat-discussion {
   height: 500px;
   margin-top: 0;
+  padding:5px;
 }
 
 #video-index .chat-discussion b {
@@ -1303,6 +1310,19 @@ body[state="dashboard.project.call-index"] #page-wrapper {
   margin-right: 10px;
 }
 
+#video-index .chat-discussion .chat-message {
+    padding-left: 5px;
+    padding-right: 5px
+}
+
 #video-index textarea {
   width: 100%;
+}
+
+.cometFooter{
+  bottom: 0;
+}
+
+.cometFooter p{
+  color:#aeaeae
 }

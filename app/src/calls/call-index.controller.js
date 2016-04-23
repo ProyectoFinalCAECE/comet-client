@@ -24,7 +24,9 @@
                                          'SimpleWebRTC',
                                          'dashboardServiceModel',
                                          'callService',
-                                         'project'];
+                                         'channelService',
+                                         'project',
+                                         'channel'];
 
         function CallIndexController ($log,
                                       $rootScope,
@@ -41,13 +43,16 @@
                                       SimpleWebRTC,
                                       dashboardServiceModel,
                                       callService,
-                                      project) {
+                                      channelService,
+                                      project,
+                                      channel) {
 
           var vm = this,
               room = $stateParams.room,
               channelId = $stateParams.channelId,
               callId = $stateParams.callId,
-              localNickname = dashboardServiceModel.getCurrentUser().alias,
+              user = dashboardServiceModel.getCurrentUser(),
+              localNickname = user.alias,
               webrtc = null,
               totalPeers = 0,
               $remotes = document.getElementById('remotes');
@@ -55,9 +60,11 @@
           vm.showChat = false;
           vm.sendMessage = sendMessage;
           vm.formatMessageDate = formatMessageDate;
+          vm.getMessageClass = getMessageClass;
           vm.messages = [];
           vm.peers = {};
           vm.roomIsFull = false;
+          vm.isMember = false;
 
           activate();
 
@@ -66,6 +73,12 @@
            * @desc controller activation logic
           */
           function activate () {
+
+            validateMember();
+
+            if (!vm.isMember) {
+              return;
+            }
 
             addCallMember();
             initializeRTC();
@@ -77,6 +90,15 @@
                 webrtc.disconnect();
               }
             };
+          }
+
+          function validateMember() {
+            console.log('channel validate', channel);
+            if (channel !== null) {
+              if (lodash.find(channel.members, 'id', user.id) !== undefined) {
+                vm.isMember = true;
+              }
+            }
           }
 
           /**
@@ -287,6 +309,26 @@
               sameDay : 'LT',
               sameElse : 'dddd L LT'
             });
+          }
+
+          /**
+           * @name messageIsFromUser
+           * @desc returns if the message author is the logged in user
+          */
+          function messageIsFromUser(message) {
+            return (message.author === localNickname);
+          }
+
+          /**
+           * @name getMessageClass
+           * @desc returns the css class to use in the message container div
+          */
+          function getMessageClass(message) {
+            var cssClass = '';
+            // messages from the current logged in user
+            cssClass += messageIsFromUser(message) ? 'mine' : '';
+
+            return cssClass;
           }
       }
 })();

@@ -25,7 +25,7 @@
         <form name="vm.frmReopen" class="m-t" role="form" ng-submit="vm.reopenAccount()" novalidate="">
           <!-- Email -->
           <div class="form-group" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'email') }">
-            <input type="email" name="email" ng-model="vm.email" class="form-control" placeholder="Dirección de correo" required="">
+            <input type="email" autofocus name="email" ng-model="vm.email" class="form-control" placeholder="Dirección de correo" required="">
             <div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'email')" class="control-label" role="alert">
               <div class="text-center">{{ vm.validationErrors['email'] }}</div>
               <div>{{ vm.validationErrors['all'] }}</div>
