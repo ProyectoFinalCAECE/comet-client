@@ -92,6 +92,16 @@ a.disabled {
     float: left;
 }
 
+.cometTitle h1 {
+    color:white;
+    font-size:40px;
+    margin:0;
+}
+
+.cometTitle img {
+  height: 40px;
+}
+
 .dropdown-messages.cometNotifications{
 	width:300px;
 }
@@ -502,6 +512,46 @@ body[state="dashboard.project.channel-explore"] {
 
 .skin-2 .nav-tabs > li > a{
     color: #676A6C;
+}
+
+@media (max-width: 940px) {
+
+.cometTitle{
+  margin-left: 0px;
+  width: 25%;
+}
+}
+
+@media (max-width: 768px) {
+
+.search-header{
+  margin-left: 10px;
+}
+
+.navbar-form-custom{
+  display: inline-table;
+  width: 100px;
+}
+
+.cometTitle{
+margin-left: 5%;
+width: 25%;
+margin-top: 15px;
+}
+
+.cometTitle h1{
+font-size: 25px;
+}
+
+.cometTitle img{
+height: 25px;
+}
+
+.navbar-right{
+  float: right;
+
+}
+
 }
 
 /*Crear Proyecto*/
