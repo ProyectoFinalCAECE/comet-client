@@ -18,6 +18,6 @@
     "it": true,
     "inject": true,
     "expect": true,
-    "spyOn": true,
+    "spyOn": true
   }
 }
