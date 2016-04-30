@@ -1,8 +1,7 @@
 <div class="theme-config" ng-if="vm.project !== null">
     <div class="theme-config-box"
-				 ng-class="{ 'show': vm.membersVisible}"
-				 ng-click="vm.showMembers()">
-        <div class="spin-icon">
+				 ng-class="{ 'show': vm.membersVisible}">
+        <div class="spin-icon" ng-click="vm.showMembers()">
 						<i class="fa fa-user" ng-class="{ 'fa-spin': vm.privateNotifications }"></i>
         </div>
         <div class="skin-setttings">
