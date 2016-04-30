@@ -151,7 +151,7 @@
          * @name getMessagesById
          * @desc returns channel's messages by channelId and messageId
          */
-        function getMessagesById (projectId, channelId, messageId, limit, direction) {
+        function getMessagesById (projectId, channelId, messageId, limit, direction, isDirect) {
 
           var url = getBaseUrl(projectId) + channelId + '/messages/';
 
@@ -159,6 +159,10 @@
 
           if(limit){
             querystring = querystring + 'limit=' + limit;
+          }
+
+          if(isDirect){
+            querystring = querystring + '&isDirect=' + true;
           }
 
           if(direction){
