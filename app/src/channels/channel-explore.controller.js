@@ -197,12 +197,14 @@
               var integrations = response.data.integrations;
               for (var i = 0; i < integrations.length; i++) {
                 var integ = integrations[i];
-                for (var j = 0; j < integ.configurations.length; j++) {
-                  var config = integ.configurations[j];
-                  if (config.ChannelId === channel.id){
-                    config.integrationId = integ.integrationId;
-                    config.integrationName = integ.name;
-                    vm.integrationsConfigured.push(config);
+                if (integ.configurations) {
+                  for (var j = 0; j < integ.configurations.length; j++) {
+                    var config = integ.configurations[j];
+                    if (config.ChannelId === channel.id){
+                      config.integrationId = integ.integrationId;
+                      config.integrationName = integ.name;
+                      vm.integrationsConfigured.push(config);
+                    }
                   }
                 }
                 // var config = lodash.find(integ.configurations, 'ChannelId', channel.id);
@@ -276,7 +278,7 @@
           function loadChannelMessages() {
 
             if(vm.loadById){
-              channelService.getMessagesById(vm.project.id, vm.channel.id, vm.messageId, vm.limit, vm.direction).then(function(response){
+              channelService.getMessagesById(vm.project.id, vm.channel.id, vm.messageId, vm.limit, vm.direction, vm.isDirect).then(function(response){
                 if(response.data.messages.length === 0){
                   // for the first load
                   if (nextRequestOffset === 0) {
@@ -346,6 +348,9 @@
                 break;
               case messageType.INTEGRATION_TRELLO:
                 msgPayload.trello = JSON.parse(msgPayload.text);
+                break;
+              case messageType.INTEGRATION_STATUSCAKE:
+                msgPayload.statusCake = JSON.parse(msgPayload.text);
                 break;
             }
 
@@ -474,7 +479,7 @@
             switch (message.type) {
               case messageType.INTEGRATION_GITHUB:
               case messageType.INTEGRATION_TRELLO:
-              case messageType.INTEGRATION_PINGDOM: {
+              case messageType.INTEGRATION_STATUSCAKE: {
                 var config = getIntegrationConfig(message.integrationId, integrationId);
                 return {
                   alias: config.name,
@@ -496,7 +501,7 @@
                 return 1;
               case messageType.INTEGRATION_TRELLO:
                 return 2;
-              case messageType.INTEGRATION_PINGDOM:
+              case messageType.INTEGRATION_STATUSCAKE:
                 return 3;
             }
           }

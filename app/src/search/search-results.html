@@ -86,7 +86,7 @@
                                       ng-init="msgAuthor = vm.getMember(message.OriginUserId)">
                                       <br />
                                       <div class="message">
-                                        <a ui-sref="dashboard.project.channel-explore({loadById: true, limit: 5, direction: 'forwards', messageId: message.id, projectId: vm.project.id, channelId: directChannel.id, isDirect:true})"
+                                        <a ui-sref="dashboard.project.channel-explore({loadById: true, limit: 5, direction: 'forwards', messageId: message.id, projectId: vm.project.id, channelId: directChannel.id, isDirect:true, destUserId: message.DestinationUserId})"
                                          data-type="D"
                                          data-id="{{directChannel.id}}">
 

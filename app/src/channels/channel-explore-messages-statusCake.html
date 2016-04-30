@@ -1,1 +1,19 @@
-
+<span class="message-content clearfix" ng-if="message.type === 8">
+  <div class="message-status-wrapper clearfix">
+    <span class="message-content">
+      <div>
+        <p>
+          El test <b>"{{message.statusCake.name}}"</b> cambió a estado:
+          <span class="status-{{message.statusCake.type.toLowerCase()}}"><b>{{message.statusCake.type}}</b></span>
+          <span style="font-style: italic;">({{message.statusCake.statusCode}})</span>
+        </p>
+        <p>
+          URL:
+          <a href="{{message.statusCake.resource}}" target="_blank">
+            {{message.statusCake.resource}}
+          </a>
+        </p>
+      </div>
+    </span>
+  </div>
+</span>

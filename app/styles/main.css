@@ -188,6 +188,19 @@ body[state="dashboard.project.channel-explore"] {
 
 /*Dashboard Fijo*/
 
+.skin-2 .nav-header {
+  padding-bottom: 15px;
+}
+
+.btnCrearCanalMenu {
+  margin: auto;
+  margin-top: 25px;
+  margin-bottom: 0;
+}
+
+.btnCrearCanalMenu.ng-hide.ng-hide-animate{
+     display: none !important;
+}
 
 .dash-side-fixed {
   position: fixed;
@@ -462,7 +475,7 @@ body[state="dashboard.project.channel-explore"] {
 }
 
 .columnaCanal{
-  width:160px;
+  /*width:160px; MQ:la dejo libre para que tenga mas lugar el nombre */
   max-width: 160px;
   white-space: nowrap;
   overflow: hidden;
@@ -692,10 +705,23 @@ body[state="dashboard.project.channel-explore"] {
   text-align: left;
 }
 
+/* status cake */
+.message-status-wrapper {
+  margin-top: 10px;
+}
+
+.message-status-wrapper .status-down {
+  color: red;
+}
+
+.message-status-wrapper .status-up {
+  color: green;
+}
+
 /* Emojis */
 .emoji-container {
     height: 300px;
-    width: 270px;
+    width: 265px;
     overflow: auto;
     position: absolute;
     top: -305px;
