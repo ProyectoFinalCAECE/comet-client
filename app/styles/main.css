@@ -453,7 +453,7 @@ body[state="dashboard.project.channel-explore"] {
 }
 
 .columnaCanal{
-  width:160px;
+  /*width:160px; MQ:la dejo libre para que tenga mas lugar el nombre */
   max-width: 160px;
   white-space: nowrap;
   overflow: hidden;
