@@ -401,8 +401,17 @@ body[state="dashboard.project.channel-explore"] {
 }
 
 .ProjDesc{
-    width: 25%;
     word-wrap: break-word;
+}
+
+.channel-explore-header .col-lg-10 {
+  width: 80%;
+}
+
+.channel-explore-header .col-lg-2 {
+  width: 20%;
+  padding-right: 0;
+  padding-left: 5px;
 }
 
 /*Crear Proyecto*/
@@ -723,10 +732,11 @@ body[state="dashboard.project.channel-explore"] {
 .chat-users-wrapper {
   top: 170px;
   position: fixed;
-  right: 40px;
-  width: 260px;
+  right: 0;
+  width: 25%;
   height: 65%;
   overflow-y: auto;
+  background-color: white;
 }
 
 .chat-users {
@@ -744,8 +754,9 @@ body[state="dashboard.project.channel-explore"] {
 .chat-integrations-wrapper {
   top: 170px;
   position: fixed;
-  right: 40px;
-  width: 260px;
+  right: 0;
+  width: 25%;
+  background-color: white;
 }
 
 .chat-integrations {

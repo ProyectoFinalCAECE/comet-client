@@ -1,7 +1,7 @@
 <div class="row wrapper border-bottom white-bg" data-view="channel-explore">
   <div class="col-lg-9 ExplorarCanal">
     <div class="row channel-explore-header" sticky offset="60">
-      <div class="col-lg-6" style="float:left;">
+      <div class="col-lg-10" style="float:left;">
         <h2>
           <i class="fa fa-comments"></i>
           <strong>{{vm.channel.name}}</strong>
@@ -16,7 +16,7 @@
           </li>
         </ol>
       </div>
-      <div class="col-lg-2 col-lg-offset-4 ButtonAdminList" ng-show="!vm.isDirect">
+      <div class="col-lg-2 ButtonAdminList" ng-show="!vm.isDirect">
         <ul>
           <li class="admin-item dropdown">
             <a ng-class="vm.project.isOwner ? '' : 'disabled'" ng-click="vm.showIntegrations = !vm.showIntegrations; vm.showMembers = false">
