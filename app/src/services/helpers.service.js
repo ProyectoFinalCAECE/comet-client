@@ -68,9 +68,9 @@
             // Trello
             case 2:
               return '../images/integraciones/trello.png';
-            // Pingdom
+            // statusCake
             case 3:
-              return '../images/integraciones/pingdom.png';
+              return '../images/integraciones/statusCake.png';
             }
         }
     }
