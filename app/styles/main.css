@@ -686,7 +686,7 @@ body[state="dashboard.project.channel-explore"] {
 /* Emojis */
 .emoji-container {
     height: 300px;
-    width: 270px;
+    width: 265px;
     overflow: auto;
     position: absolute;
     top: -305px;

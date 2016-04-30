@@ -197,12 +197,14 @@
               var integrations = response.data.integrations;
               for (var i = 0; i < integrations.length; i++) {
                 var integ = integrations[i];
-                for (var j = 0; j < integ.configurations.length; j++) {
-                  var config = integ.configurations[j];
-                  if (config.ChannelId === channel.id){
-                    config.integrationId = integ.integrationId;
-                    config.integrationName = integ.name;
-                    vm.integrationsConfigured.push(config);
+                if (integ.configurations) {
+                  for (var j = 0; j < integ.configurations.length; j++) {
+                    var config = integ.configurations[j];
+                    if (config.ChannelId === channel.id){
+                      config.integrationId = integ.integrationId;
+                      config.integrationName = integ.name;
+                      vm.integrationsConfigured.push(config);
+                    }
                   }
                 }
                 // var config = lodash.find(integ.configurations, 'ChannelId', channel.id);
