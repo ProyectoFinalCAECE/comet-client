@@ -44,8 +44,11 @@
                    <i ng-show="channel.hasNotification" class="fa fa-circle" style="float: right; padding-top: 5px;font-size: 10px;"></i>
                 </a>
               </li>
-              <li ng-show="vm.publicChannels.length == 0">
-                <a href="" style="cursor:default;">No hay canales públicos</a>
+              <li ng-show="vm.publicChannels.length == 0 && vm.therearepublicchannels">
+                <a href="" style="cursor:default; font-size:12px">No formas parte de ninguno</a>
+              </li>
+              <li ng-show="vm.publicChannels.length == 0 && !vm.therearepublicchannels">
+                <a href="" style="cursor:default; font-size:12px">No hay canales públicos</a>
               </li>
             </ul>
           </li>
@@ -66,8 +69,11 @@
                    <i ng-show="channel.hasNotification" class="fa fa-circle" style="float: right; padding-top: 5px;font-size: 10px;"></i>
                 </a>
               </li>
-              <li ng-show="vm.privateChannels.length == 0">
-                <a href="" style="cursor:default;">No hay canales privados</a>
+              <li ng-show="vm.privateChannels.length == 0 && vm.thereareprivatechannels">
+                <a href="" style="cursor:default; font-size:12px">No formas parte de ninguno</a>
+              </li>
+              <li ng-show="vm.privateChannels.length == 0 && !vm.thereareprivatechannels">
+                <a href="" style="cursor:default; font-size:12px">No hay canales privados</a>
               </li>
             </ul>
           </li>
