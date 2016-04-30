@@ -349,6 +349,9 @@
               case messageType.INTEGRATION_TRELLO:
                 msgPayload.trello = JSON.parse(msgPayload.text);
                 break;
+              case messageType.INTEGRATION_STATUSCAKE:
+                msgPayload.statusCake = JSON.parse(msgPayload.text);
+                break;
             }
 
             // add message to message list
@@ -476,7 +479,7 @@
             switch (message.type) {
               case messageType.INTEGRATION_GITHUB:
               case messageType.INTEGRATION_TRELLO:
-              case messageType.INTEGRATION_PINGDOM: {
+              case messageType.INTEGRATION_STATUSCAKE: {
                 var config = getIntegrationConfig(message.integrationId, integrationId);
                 return {
                   alias: config.name,
@@ -498,7 +501,7 @@
                 return 1;
               case messageType.INTEGRATION_TRELLO:
                 return 2;
-              case messageType.INTEGRATION_PINGDOM:
+              case messageType.INTEGRATION_STATUSCAKE:
                 return 3;
             }
           }
