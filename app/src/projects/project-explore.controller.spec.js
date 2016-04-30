@@ -6,7 +6,7 @@
 
     describe('Testing ProjectExploreController', function () {
 
-      var scope, controller, mockProject;
+      var controller, mockProject;
 
       beforeEach(function () {
         module('cometApp');

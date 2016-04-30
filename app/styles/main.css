@@ -453,7 +453,7 @@ body[state="dashboard.project.channel-explore"] {
 }
 
 .columnaCanal{
-  width:160px;
+  /*width:160px; MQ:la dejo libre para que tenga mas lugar el nombre */
   max-width: 160px;
   white-space: nowrap;
   overflow: hidden;
@@ -686,7 +686,7 @@ body[state="dashboard.project.channel-explore"] {
 /* Emojis */
 .emoji-container {
     height: 300px;
-    width: 270px;
+    width: 265px;
     overflow: auto;
     position: absolute;
     top: -305px;

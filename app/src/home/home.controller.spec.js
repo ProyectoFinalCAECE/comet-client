@@ -6,13 +6,13 @@
 
     describe('Testing HomeController', function () {
 
-      var scope, homeController;
+      var homeController;
 
       beforeEach(function () {
         module('cometApp');
       });
 
-      beforeEach(inject(function($controller, authService) {
+      beforeEach(inject(function($controller) {
         homeController = $controller('HomeController');
       }));
 
