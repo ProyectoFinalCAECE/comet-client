@@ -276,7 +276,7 @@
           function loadChannelMessages() {
 
             if(vm.loadById){
-              channelService.getMessagesById(vm.project.id, vm.channel.id, vm.messageId, vm.limit, vm.direction).then(function(response){
+              channelService.getMessagesById(vm.project.id, vm.channel.id, vm.messageId, vm.limit, vm.direction, vm.isDirect).then(function(response){
                 if(response.data.messages.length === 0){
                   // for the first load
                   if (nextRequestOffset === 0) {
