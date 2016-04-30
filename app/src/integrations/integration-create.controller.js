@@ -139,19 +139,6 @@
           }
 
           /**
-           * @name generateHookUrlForStatusCake
-           * @desc return the webhook URL for statusCake.
-           *       Example: http://localhost:4000/hooks/KIJTUG/?integrationId=2
-          */
-          function generateHookUrlForStatusCake () {
-            var combined = $location.protocol() + '://' +
-                           $location.host() + ':' +
-                           $location.port();
-            token = $rootScope.helpers.randomString(50);
-            vm.statusCakeHookUrl = combined + '/hooks/' + token + '/?integrationId=' + projectIntegration.integrationId;
-          }
-
-          /**
            * @name post
            * @desc create/edit the integration config
           */
@@ -201,19 +188,6 @@
         }
 
         /**
-         * @name integrationConfigCreatedNoRedirect
-         * @desc shows a dialog indicating a successful operation but don't redirect user
-        */
-        function integrationConfigCreatedNoRedirect () {
-          // show dialog to the user
-          var msg = 'Integración configurada exitósamente.';
-          var dlg = dialogService.showModalAlert('Configurar integración', msg);
-          dlg.result.finally(function () {
-
-          });
-        }
-
-        /**
          * @name integrationConfigError
          * @desc shows the error message to the user
         */
@@ -252,12 +226,14 @@
             //store boards ids
             vm.boardsIds = res.idBoards;
             for (var x in vm.boardsIds) {
-              TrelloApi.boards(vm.boardsIds[x], {}).then(function(res) {
-                vm.boards.push({id:res.id, name: res.name});
-                vm.selectedBoard = vm.boards[0];
-              });
+              TrelloApi.boards(vm.boardsIds[x], {}).then(loadBoardsCallback);
             }
           });
+        }
+
+        function loadBoardsCallback(res) {
+          vm.boards.push({id:res.id, name: res.name});
+          vm.selectedBoard = vm.boards[0];
         }
 
         function trelloAuth(){
@@ -272,16 +248,15 @@
         */
         function postStatusCake(){
           if (!vm.statusCakeUsername ||
-            !vm.statusCakeAPIKey ||
-            !vm.statusCakeIntegrationName) {
-            ngToast.danger('Debes ingresar todos los parámetros del formulario para poder configurar esta integración.');
+              !vm.statusCakeAPIKey ||
+              !vm.statusCakeIntegrationName) {
+                ngToast.danger('Debes ingresar todos los parámetros del formulario para poder configurar esta integración.');
           } else {
-            generateHookUrlForStatusCake();
 
             var data = {
               cakeUser: vm.statusCakeUsername,
               cakeToken: vm.statusCakeAPIKey,
-              hookUrl: vm.statusCakeHookUrl,
+              hookUrl: vm.hookUrl,
               channelId: vm.selectedChannel.id,
               name: vm.statusCakeIntegrationName,
               token: token
@@ -292,7 +267,7 @@
                   ngToast.danger('Ocurrió un error intentando configurar StatusCake: ' + error);
                 })
                 .then(function () {
-                  integrationConfigCreatedNoRedirect();
+                  integrationConfigCreated();
                 });
           }
         }

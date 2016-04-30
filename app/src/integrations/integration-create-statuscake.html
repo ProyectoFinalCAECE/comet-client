@@ -50,7 +50,7 @@
       </div>
     </div>
   </div>
-  <div ng-show="vm.statusCakeHookUrl !== null">
+  <div>
     <!-- Hook URL -->
     <div class="form-group">
     <label class="col-sm-4 control-label">
@@ -58,7 +58,7 @@
         <span class="text-muted label-detail">Ésta es tu Hook URL. Debes configurarla en algún "Contact Group" de tu cuenta de StatusCake, eligiendo el método POST, para que StatusCake envie al Hook URL una solicitud cuando un Test falla o se recupera.</span>
       </label>
       <div class="col-sm-8">
-        <p><code>{{vm.statusCakeHookUrl}}</code></p>
+        <p><code>{{vm.hookUrl}}</code></p>
       </div>
     </div>
   </div>
