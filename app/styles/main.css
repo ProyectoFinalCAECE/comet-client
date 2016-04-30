@@ -696,6 +696,19 @@ body[state="dashboard.project.channel-explore"] {
   text-align: left;
 }
 
+/* status cake */
+.message-status-wrapper {
+  margin-top: 10px;
+}
+
+.message-status-wrapper .status-down {
+  color: red;
+}
+
+.message-status-wrapper .status-up {
+  color: green;
+}
+
 /* Emojis */
 .emoji-container {
     height: 300px;
