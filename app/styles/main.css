@@ -583,7 +583,7 @@ body[state="dashboard.project.channel-explore"] {
 }
 
 /* contenido del mensaje */
-.chat-discussion .chat-message pre.message-text {
+.chat-discussion .chat-message span.message-text {
   border:0;
   background-color: #F5F5F5;
   margin:0;
@@ -592,7 +592,7 @@ body[state="dashboard.project.channel-explore"] {
 }
 
 /* mensajes autogenerados */
-.chat-discussion .chat-message.auto pre.message-text {
+.chat-discussion .chat-message.auto span.message-text {
   font-style: italic;
 }
 
@@ -1018,7 +1018,7 @@ body[state="dashboard.project.channel-explore"] {
   margin-left: 30px;
 }
 
-.search-result-message pre {
+.search-result-message span {
   margin-bottom: 0px;
   padding: 2px;
 }
