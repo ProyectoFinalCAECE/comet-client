@@ -152,10 +152,9 @@ body[state="dashboard.project.channel-explore"] {
   background: #213A53;
 }
 
-/*.skin-2 #side-menu > li > a,
-.skin-2 .nav.nav-second-level > li > a {
-    color: #EDF6FF;
-}*/
+.skin-2 .nav-tabs > li > a{
+    color: #676A6C;
+}
 
 .skin-2 #side-menu > div > li > a,
 .skin-2 #side-menu .nav > div > li > a,
@@ -318,7 +317,7 @@ body[state="dashboard.project.channel-explore"] {
 
 .col-lg-9 li {
     display: inline;
-    width: 10%;
+    /*width: 10%;*/
 }
 
 .buttonRight button{
@@ -386,110 +385,6 @@ body[state="dashboard.project.channel-explore"] {
   width:590px;
 }
 
-@media (max-width: 1100px) {
-    .proyecto-sm-8 {
-        height: 90px;
-    }
-
-    .invitarEmails{
-      width:590px;
-    }
-
-    .crearProyecto-sm-8 label{
-        float:none;
-    }
-}
-
-@media (max-width: 900px) {
-    .miembrosProyecto{
-        display:none;
-    }
-
-    .proyecto-lg-4 {
-       width: 100%
-    }
-
-    .proyecto-sm-8 {
-        width: 100%;
-        height: 40px
-    }
-
-	.columnaMiembros{
-        display:none;
-    }
-
-	.columnaIntegraciones{
-        display:none;
-    }
-
-    .cometInput input, .cometInput textarea, .cometInput div{
-      width:400px;
-    }
-
-    .invitarEmails{
-      width:350px;
-    }
-
-    .invitarEmails button{
-      width:100px;
-    }
-
-    .crearProyecto-sm-8 label{
-        float:none;
-    }
-
-    .chat-users-wrapper {
-      display: none;
-    }
-}
-
-@media (max-width: 500px) {
-    .rolProyecto {
-        display:none;
-    }
-
-	.columnaFecha{
-        display:none;
-	}
-
-  .cometInput input, .cometInput textarea, .cometInput div{
-  	width:350px;
-  }
-
-  .invitarEmails{
-    width:300px;
-  }
-
-  .invitarEmails button{
-    width:100px;
-  }
-
-  .chat-users-wrapper {
-    display: none;
-  }
-}
-
-@media (max-width: 315px) {
-	.breadcrumb2 .form-control {
-		width: 40%;
-	}
-
-  .cometInput input, .cometInput textarea, .cometInput div{
-  	width:160px;
-  }
-
-  .invitarEmails{
-    width:160px;
-  }
-
-  .invitarEmails button{
-    width:20px;
-  }
-
-  .chat-users-wrapper {
-    display: none;
-  }
-}
 
 .ProjectCards {
   margin-top: 90px;
@@ -506,52 +401,8 @@ body[state="dashboard.project.channel-explore"] {
 }
 
 .ProjDesc{
-    width: 880px;
+    width: 25%;
     word-wrap: break-word;
-}
-
-.skin-2 .nav-tabs > li > a{
-    color: #676A6C;
-}
-
-@media (max-width: 940px) {
-
-.cometTitle{
-  margin-left: 0px;
-  width: 25%;
-}
-}
-
-@media (max-width: 768px) {
-
-.search-header{
-  margin-left: 10px;
-}
-
-.navbar-form-custom{
-  display: inline-table;
-  width: 100px;
-}
-
-.cometTitle{
-margin-left: 5%;
-width: 25%;
-margin-top: 15px;
-}
-
-.cometTitle h1{
-font-size: 25px;
-}
-
-.cometTitle img{
-height: 25px;
-}
-
-.navbar-right{
-  float: right;
-
-}
-
 }
 
 /*Crear Proyecto*/

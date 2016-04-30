@@ -10,9 +10,14 @@
   "strict": true,
   "undef": true,
   "unused": true,
+  "jasmine": true,
   "globals": {
     "angular": false,
     "jquery": false,
-    "$": false
+    "$": false,
+    "it": true,
+    "inject": true,
+    "expect": true,
+    "spyOn": true
   }
 }
