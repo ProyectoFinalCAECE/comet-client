@@ -80,6 +80,8 @@
           vm.showLogout = true;
           vm.showExit = false;
 
+          vm.therearepublicchannels = false;
+
           var pingTimer = null,
               urlonLoad = null;
 
@@ -90,6 +92,8 @@
            * @desc controller activation logic
            */
           function activate() {
+
+            vm.therearepublicchannels = false;
 
             // user account confirmation alert
             if (!vm.user.confirmed) {
@@ -234,6 +238,17 @@
 
                   return c.type === 'S' && c.state !== 'C' && isMember;
                 });
+
+                var i = 0;
+                var current_channel;
+                while(vm.therearepublicchannels === false &&
+                        i < channels.length){
+                          current_channel = channels[i];
+                          if(current_channel.type === 'S' &&        current_channel.state !== 'C'){
+                            vm.therearepublicchannels = true;
+                          }
+                          i++;
+                }
               });
 
               vm.availableMembers = [];
