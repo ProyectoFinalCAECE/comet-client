@@ -188,6 +188,19 @@ body[state="dashboard.project.channel-explore"] {
 
 /*Dashboard Fijo*/
 
+.skin-2 .nav-header {
+  padding-bottom: 15px;
+}
+
+.btnCrearCanalMenu {
+  margin: auto;
+  margin-top: 25px;
+  margin-bottom: 0;
+}
+
+.btnCrearCanalMenu.ng-hide.ng-hide-animate{
+     display: none !important;
+}
 
 .dash-side-fixed {
   position: fixed;

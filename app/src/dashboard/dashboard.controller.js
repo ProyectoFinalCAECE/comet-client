@@ -107,7 +107,6 @@
                 // leave the previous project room
                 notificationsLeaveRoom(previousProject);
               }
-
               vm.project = dashboardServiceModel.getCurrentProject();
               loadChannels(vm.project);
               notificationsJoinRoom();
