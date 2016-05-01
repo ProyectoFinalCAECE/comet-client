@@ -93,6 +93,7 @@
           vm.formatMessageDate = formatMessageDate;
           vm.sendUserMessage = sendUserMessage;
           vm.loadOlderMessages = loadOlderMessages;
+          vm.searching = true;
           var nextRequestOffset = 0;
           vm.emptyChannel = false;
           vm.noMoreMessages = false;
@@ -276,7 +277,7 @@
            * @desc loads the channel message history
           */
           function loadChannelMessages() {
-
+            vm.searching = true;
             if(vm.loadById){
               channelService.getMessagesById(vm.project.id, vm.channel.id, vm.messageId, vm.limit, vm.direction, vm.isDirect).then(function(response){
                 if(response.data.messages.length === 0){
@@ -358,6 +359,7 @@
             addMessageToListFunction(msgPayload);
 
             lastMsgId = msgPayload.id;
+            vm.searching = false;
           }
 
           /**
