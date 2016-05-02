@@ -8,9 +8,9 @@
     angular.module('cometApp')
            .controller('AccountConfirmController', AccountConfirmController);
 
-        AccountConfirmController.$inject = ['$state', '$stateParams', 'accountService'];
+        AccountConfirmController.$inject = ['$state', '$stateParams', 'accountService', 'dialogService'];
 
-        function AccountConfirmController ($state, $stateParams, accountService) {
+        function AccountConfirmController ($state, $stateParams, accountService, dialogService) {
 
           var vm = this;
           vm.confirm = confirm;
@@ -62,6 +62,7 @@
             }).then(function() {
                 vm.resend = true;
                 vm.resendSuccess = true;
+                dialogService.showModalAlert('Reenviar confirmación', 'El email de confirmación ha sido reenviado');
                 console.log("confirmation resend");
             });
           }
