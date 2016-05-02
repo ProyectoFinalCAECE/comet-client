@@ -20,10 +20,18 @@
             <li><a ng-click="vm.logout()">Salir</a></li>
           </ul>
         </div>
+        <!-- Create channel button -->
         <button ng-show="(vm.project != null || vm.project.state === 'O')"
                 ui-sref="dashboard.project.channel-create" type="button"
                 name="btnCrearCanal" class="btnCrearCanalMenu btn btn-primary btn-xs btn-block btn-outline">
             Crear Canal
+        </button>
+        <!-- Create project button -->
+        <button ng-show="(vm.project == null)"
+                ng-click="vm.gotoCreateProject()"
+                type="button"
+                name="btnCrearProyecto" class="btnCrearProyectoMenu btn btn-primary btn-xs btn-block btn-outline">
+            Crear Proyecto
         </button>
       </li>
       <div class="scroll-content">

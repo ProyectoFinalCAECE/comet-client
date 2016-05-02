@@ -192,13 +192,15 @@ body[state="dashboard.project.channel-explore"] {
   padding-bottom: 15px;
 }
 
-.btnCrearCanalMenu {
+.btnCrearCanalMenu,
+.btnCrearProyectoMenu {
   margin: auto;
-  margin-top: 25px;
+  margin-top: 25px !important;
   margin-bottom: 0;
 }
 
-.btnCrearCanalMenu.ng-hide.ng-hide-animate{
+.btnCrearCanalMenu.ng-hide.ng-hide-animate,
+.btnCrearProyectoMenu.ng-hide.ng-hide-animate {
      display: none !important;
 }
 

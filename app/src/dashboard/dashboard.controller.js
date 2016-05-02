@@ -19,10 +19,14 @@
                                        'ngToast',
                                        'lodash',
                                        'moment',
+                                       'constraints',
                                        'systemNotificationType',
                                        'dashboardServiceModel',
                                        'accountService',
+                                       'projectService',
                                        'channelService',
+                                       'userService',
+                                       'dialogService',
                                        'desktopNotificationService',
                                        'notificationService',
                                        'user'];
@@ -38,10 +42,14 @@
                                       ngToast,
                                       lodash,
                                       moment,
+                                      constraints,
                                       systemNotificationType,
                                       dashboardServiceModel,
                                       accountService,
+                                      projectService,
                                       channelService,
+                                      userService,
+                                      dialogService,
                                       desktopNotificationService,
                                       notificationService,
                                       user) {
@@ -61,6 +69,8 @@
 
           vm.showNotifications = true;
           vm.systemNotifications = [];
+
+          vm.gotoCreateProject = gotoCreateProject;
 
           vm.setActiveChannel = setActiveChannel;
           vm.setActiveChannelForSearch = setActiveChannelForSearch;
@@ -182,6 +192,42 @@
 
             // notifications
             initializeNotifications();
+          }
+
+          /**
+           * @name gotoCreateProject
+           * @desc validates the user account and redirects to the
+           *       create project page
+           */
+          function gotoCreateProject() {
+            var message = '';
+
+            userService.getCurrentUser().then(function (user) {
+
+              // a user with an unconfirmed email addres cannot create projects
+              if (!user.confirmed) {
+                dialogService.showModalAlert('Crear proyecto',
+                                             'Debes confirmar tu cuenta para poder crear un proyecto');
+                return;
+              }
+
+              // check the number of created projects
+              projectService.getAll().then(function (response) {
+                var projects = response.data,
+                    total = projects.length;
+
+                if (total >= constraints.projectPerUser) {
+                  message = 'No puedes crear un proyecto, has llegado al límite de ' +
+                        constraints.projectPerUser + '.<BR/>' +
+                        'Cierra algún proyecto para continuar.';
+                  dialogService.showModalAlert('Crear proyecto', message);
+                  return;
+                }
+
+                // ok
+                $state.go('dashboard.project-create');
+              });
+            });
           }
 
           /**
