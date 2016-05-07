@@ -186,6 +186,13 @@ body[state="dashboard.project.channel-explore"] {
   width: 205px !important;
 }
 
+#side-menu .profile-picture {
+  padding-left: 61px;
+}
+
+#side-menu .username {
+  text-align: center;
+}
 /*Dashboard Fijo*/
 
 .skin-2 .nav-header {
