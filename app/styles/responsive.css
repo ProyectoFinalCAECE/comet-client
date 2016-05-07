@@ -92,7 +92,7 @@
   height: 25px;
   }
 
-  .navbar-right {
+  .dash-top-fixed .navbar-right {
     float: right;
   }
 
@@ -116,6 +116,9 @@
     display: none;
   }
 
+  #page-top .separador {
+    display: none;
+  }
 }
 
 @media (max-width: 700px) {
