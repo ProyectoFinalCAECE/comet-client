@@ -488,7 +488,8 @@
             if (notification.type === 'channel') {
               var channel = findChannel(notification.id);
               if (channel !== undefined &&
-                  !isActiveChannel(notification.id)) {
+                  !isActiveChannel(notification.id) &&
+                  user.id !== notification.source_user_id) {
                 channel.hasNotification = true;
                 showDesktopNotif = true;
                 notifBody = 'Nuevo mensaje en "' + channel.name + '"';
@@ -510,7 +511,8 @@
                   var privatechannel = findChannel(notification.id);
                   if (privatechannel !== undefined &&
                       !isActiveChannel(notification.id) &&
-                      isActiveProject(notification.projectId)) {
+                      isActiveProject(notification.projectId) &&
+                      user.id !== notification.source_user_id) {
                     privatechannel.hasNotification = true;
                     showDesktopNotif = true;
                     notifBody = 'Nuevo mensaje en "' + privatechannel.name + '"';
@@ -809,8 +811,8 @@
               return;
             }
 
-            $(document).one('click', function(){                
-                // hide members 
+            $(document).one('click', function(){
+                // hide members
                 $scope.$apply(function(){
                   vm.membersVisible = false;
                 });
