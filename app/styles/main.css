@@ -187,7 +187,7 @@ body[state="dashboard.project.channel-explore"] {
 }
 
 #side-menu .profile-picture {
-  padding-left: 61px;
+  padding-left: 55px;
 }
 
 #side-menu .username {
@@ -196,13 +196,13 @@ body[state="dashboard.project.channel-explore"] {
 /*Dashboard Fijo*/
 
 .skin-2 .nav-header {
-  padding-bottom: 15px;
+  padding: 15px 25px 10px 25px;
 }
 
 .btnCrearCanalMenu,
 .btnCrearProyectoMenu {
   margin: auto;
-  margin-top: 25px !important;
+  margin-top: 20px !important;
   margin-bottom: 0;
 }
 
