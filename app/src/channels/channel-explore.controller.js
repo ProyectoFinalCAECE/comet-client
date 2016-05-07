@@ -287,10 +287,12 @@
                   }
                   if(vm.direction === 'forwards'){
                     vm.noMoreMessagesForward = true;
-                  }else{
+                    vm.emptyChannel = false;
+                  }else if (vm.direction === 'backwards'){
                     vm.noMoreMessages = true;
+                    vm.emptyChannel = false;
                   }
-
+                  vm.searching = false;
                 }
                 else {
                   response.data.messages.forEach(function(entry) {
@@ -310,6 +312,7 @@
                       vm.emptyChannel = true;
                   }
                   vm.noMoreMessages = true;
+                  vm.searching = false;
                 }
                 else {
                   response.data.messages.forEach(function(entry) {

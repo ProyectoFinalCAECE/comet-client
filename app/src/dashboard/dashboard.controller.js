@@ -810,12 +810,15 @@
             }
 
             $(document).one('click', function(event){
-                var isClickedElementChildOfPopup =
-                    angular.element('.theme-config').find(event.target).length > 0;
-                if (isClickedElementChildOfPopup) {
-                  return;
-                }
-
+                
+                // search for the clicked element inside the popup
+                // var $clickedElement = angular.element('.theme-config').find(event.target); 
+                
+                // // is a child of the members popup and is not the title div 
+                // if ($clickedElement.length > 0 && !$clickedElement.hasClass('title'))
+                //   return;
+                
+                // is not a child of the members popup -> hide 
                 $scope.$apply(function(){
                   vm.membersVisible = false;
                 });
