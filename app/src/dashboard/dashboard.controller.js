@@ -374,7 +374,7 @@
               $log.log('system', notification);
               loadSystemNotification(notification.data);
             });
-
+            
             notificationsJoinRoom();
             notificationsSendPing();
           }
@@ -573,9 +573,15 @@
             switch (sysNotif.type) {
               case systemNotificationType.CHANNEL_CREATE:
               {
-                sysNotif.text = sysNotif.alias + ' ha creado el canal: ' + sysNotif.channelName;
+                sysNotif.text = sysNotif.alias + ' ha creado el canal: ' + sysNotif.channelName;               
                 sysNotif.link = $state.href('dashboard.project.channel-explore', {
-                                  channelId: sysNotif.channelId
+                                  channelId: sysNotif.channelId,
+                                  id: sysNotif.projectId,
+                                  isDirect: false,
+                                  loadById: undefined,
+                                  direction: undefined,
+                                  messageId: undefined,
+                                  limit: undefined
                                 }, {
                                   absolute: true
                                 });
@@ -585,7 +591,13 @@
               {
                 sysNotif.text = sysNotif.alias + ' ha cerrado el canal: ' + sysNotif.channelName;
                 sysNotif.link = $state.href('dashboard.project.channel-explore', {
-                                  channelId: sysNotif.channelId
+                                  channelId: sysNotif.channelId,
+                                  id: sysNotif.projectId,
+                                  isDirect: false,
+                                  loadById: undefined,
+                                  direction: undefined,
+                                  messageId: undefined,
+                                  limit: undefined
                                 }, {
                                   absolute: true
                                 });
@@ -595,7 +607,13 @@
               {
                 sysNotif.text = sysNotif.alias + ' te ha subscripto al canal: ' + sysNotif.channelName;
                 sysNotif.link = $state.href('dashboard.project.channel-explore', {
-                                  channelId: sysNotif.channelId
+                                  channelId: sysNotif.channelId,
+                                  id: sysNotif.projectId,
+                                  isDirect: false,
+                                  loadById: undefined,
+                                  direction: undefined,
+                                  messageId: undefined,
+                                  limit: undefined
                                 }, {
                                   absolute: true
                                 });
@@ -605,7 +623,13 @@
               {
                 sysNotif.text = sysNotif.alias + ' ha editado el canal: ' + sysNotif.channelName;
                 sysNotif.link = $state.href('dashboard.project.channel-explore', {
-                                  channelId: sysNotif.channelId
+                                  channelId: sysNotif.channelId,
+                                  id: sysNotif.projectId,
+                                  isDirect: false,
+                                  loadById: undefined,
+                                  direction: undefined,
+                                  messageId: undefined,
+                                  limit: undefined
                                 }, {
                                   absolute: true
                                 });
@@ -646,8 +670,7 @@
                 $log.log('tipo de notificacion desconocido', sysNotif);
                 return;
             }
-
-            sysNotif.formattedDate = formatNotificationDate(sysNotif.date);
+            
             vm.systemNotifications.push(sysNotif);
           }
 
