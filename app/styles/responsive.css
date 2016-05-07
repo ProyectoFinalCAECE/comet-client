@@ -118,6 +118,14 @@
 
 }
 
+@media (max-width: 700px) {
+
+  .modificarProyecto .nav.nav-tabs li {
+    width: 100%;
+  }
+
+}
+
 @media (max-width: 600px) {
 
   .channel-explore-header .col-lg-10 {
@@ -126,6 +134,26 @@
 
   .channel-explore-header .col-lg-2 {
     width: 30%;
+  }
+
+  .channel-explore-header h2 {
+    font-size: 18px;
+  }
+
+  .project-explore-header h2 {
+    font-size: 18px;
+  }
+
+  .search-title {
+    font-size: 18px;
+  }
+
+  .search-count {
+    font-size: 14px;
+  }
+
+  .project-admin-header h2 {
+    font-size: 18px;
   }
 }
 
@@ -153,6 +181,11 @@
 
   .ButtonAdminList {
     padding-top: 75px;
+  }
+
+  .modificarProyecto .datos .cometInput input,
+  .modificarProyecto .datos .cometInput textarea {
+    width: 270px;
   }
 }
 
