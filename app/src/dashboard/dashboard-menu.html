@@ -45,7 +45,7 @@
             <ul class="nav nav-second-level" nav-menu-active="selected-channel" notification-class="has-notification">
               <li ng-repeat="channel in vm.publicChannels" ui-sref-active="selected-channel">
                 <a ng-class="{ 'has-notification': channel.hasNotification }"
-                   ui-sref="dashboard.project.channel-explore({projectId: vm.project.id, channelId:channel.id, isDirect:false})"
+                   ui-sref="dashboard.project.channel-explore({projectId: vm.project.id, channelId:channel.id, isDirect:false, loadById:undefined, direction:undefined, messageId:undefined, limit:undefined})"
                    data-type="S"
                    data-id="{{channel.id}}">
                    {{channel.name}}
@@ -70,7 +70,7 @@
             <ul class="nav nav-second-level" nav-menu-active="selected-channel" notification-class="has-notification">
               <li ng-repeat="channel in vm.privateChannels" ui-sref-active="selected-channel">
                 <a ng-class="{ 'has-notification': channel.hasNotification }"
-                   ui-sref="dashboard.project.channel-explore({projectId: vm.project.id, channelId:channel.id, isDirect:false})"
+                   ui-sref="dashboard.project.channel-explore({projectId: vm.project.id, channelId:channel.id, isDirect:false, loadById:undefined, direction:undefined, messageId:undefined, limit:undefined})"
                    data-type="P"
                    data-id="{{channel.id}}">
                    {{channel.name}}
