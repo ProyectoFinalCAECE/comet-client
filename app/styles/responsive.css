@@ -155,6 +155,19 @@
   .project-admin-header h2 {
     font-size: 18px;
   }
+
+  .user-profile-header h2 {
+    font-size: 18px;
+  }
+
+  .user-profile-header .botonVolver {
+    font-size: 14px;
+    margin-right: 0;
+  }
+
+  .modificarCuenta .nav.nav-tabs li {
+    width: 100%;
+  }
 }
 
 
@@ -168,7 +181,15 @@
 	}
 
   .cometInput input, .cometInput textarea, .cometInput div {
-  	width:350px;
+  	width:320px;
+  }
+
+  .modificarCuenta .form-group {
+    width: 320px;
+  }
+
+  .modificarCuenta p {
+    width: 320px;
   }
 
   .invitarEmails {

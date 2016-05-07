@@ -448,6 +448,13 @@ body[state="dashboard.project.channel-explore"] {
     width:150px;
 }
 
+/*Modificar Perfil*/
+
+.user-profile-header .botonVolver {
+  float:right;
+  margin-right:30px;
+}
+
 /* Estilos para formularios dentro de pestanas */
 .columnaMiembros li {
     display: inline;
