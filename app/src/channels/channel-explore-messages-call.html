@@ -5,13 +5,19 @@
         <p style="font-style: italic;">
           Ha iniciado una videoconferencia.
         </p>
-        <p>
+        <p ng-if="!finishedCall">  
           <a href="{{message.text}}" target="_blank">
-            <button type="button" ng-disabled="finishedCall" ng-class="{ 'btn-default': finishedCall, 'btn-info': !finishedCall }" class="btn btn-lg">
+            <button type="button" ng-disabled="finishedCall" class="btn btn-info btn-lg">
               <i class="fa fa-video-camera" style="margin-right:10px;"></i>
-              {{finishedCall ? 'Finalizada' : 'Entrar' }}
+              Entrar
             </button>
           </a>
+        </p>
+        <p ng-if="finishedCall">  
+          <button type="button" ng-disabled="finishedCall" class="btn btn-default btn-lg">
+            <i class="fa fa-video-camera" style="margin-right:10px;"></i>
+            Finalizada
+          </button>
         </p>
       </div>
     </span>

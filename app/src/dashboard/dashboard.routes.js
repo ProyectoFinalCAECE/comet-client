@@ -12,7 +12,7 @@
     $stateProvider
       .state('dashboard', {
         url: '/dashboard',
-        templateUrl: '/src/dashboard/dashboard-index.html',
+        templateUrl: 'src/dashboard/dashboard-index.html',
         controller: 'DashboardController',
         controllerAs: 'vm',
         ncyBreadcrumb: {

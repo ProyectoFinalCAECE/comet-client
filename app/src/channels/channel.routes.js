@@ -17,7 +17,7 @@
       },
       views:{
         '@dashboard': {
-          templateUrl: '/src/channels/channel-create.html',
+          templateUrl: 'src/channels/channel-create.html',
           controller: 'ChannelCreateController',
           controllerAs: 'vm'
         }
@@ -31,7 +31,7 @@
       },
       views:{
         '@dashboard': {
-          templateUrl: '/src/channels/channel-explore.html',
+          templateUrl: 'src/channels/channel-explore.html',
           controller: 'ChannelExploreController',
           controllerAs: 'vm'
         }
@@ -83,7 +83,7 @@
       },
       views:{
         '@dashboard': {
-          templateUrl: '/src/channels/channel-closed-list.html',
+          templateUrl: 'src/channels/channel-closed-list.html',
           controller: 'ChannelClosedListController',
           controllerAs: 'vm'
         }

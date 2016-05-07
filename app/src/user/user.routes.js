@@ -12,7 +12,7 @@
     $stateProvider
       .state('user-create', {
         url: '/user/create',
-        templateUrl: '/src/user/user-create.html',
+        templateUrl: 'src/user/user-create.html',
         controller: 'UserCreateController',
         controllerAs: 'vm',
         onEnter: ['$state', 'authService', function ($state, authService) {
@@ -25,12 +25,12 @@
         url: '/profile',
         views:{
           '':{
-            templateUrl: '/src/user/user-profile.html',
+            templateUrl: 'src/user/user-profile.html',
             controller: 'UserProfileController',
             controllerAs: 'vm'
           },
           'resend-confirmation@dashboard.profile': {
-            templateUrl: '/src/account/account-resend-confirm.html',
+            templateUrl: 'src/account/account-resend-confirm.html',
             controller: 'AccountConfirmController',
             controllerAs: 'vmc'
           }

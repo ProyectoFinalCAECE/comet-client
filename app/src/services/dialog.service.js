@@ -21,7 +21,7 @@
         */
         function showModalAlert (title, message) {
           var modalInstance = $modal.open({
-            templateUrl: '/src/dialog/dialog-modal.html',
+            templateUrl: 'src/dialog/dialog-modal.html',
             controller: 'DialogModalController',
             controllerAs: 'vm',
             size: 'sm',
@@ -48,7 +48,7 @@
         */
         function showModalConfirm (title, message) {
           var modalInstance = $modal.open({
-            templateUrl: '/src/dialog/dialog-modal.html',
+            templateUrl: 'src/dialog/dialog-modal.html',
             controller: 'DialogModalController',
             controllerAs: 'vm',
             size: 'sm',

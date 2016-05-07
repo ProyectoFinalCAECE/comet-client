@@ -12,7 +12,7 @@
     $stateProvider
       .state('home', {
         url: '/',
-        templateUrl: '/src/home/home.html',
+        templateUrl: 'src/home/home.html',
         controller: 'HomeController',
         controllerAs: 'vm',
         onEnter: ['$state', 'authService', function ($state, authService) {
@@ -23,7 +23,7 @@
       })
       .state('video-test', {
         url: '/test?room',
-        templateUrl: '/src/video/test.html',
+        templateUrl: 'src/video/test.html',
         controller: 'VideoIndexController',
         controllerAs: 'vm'
       });

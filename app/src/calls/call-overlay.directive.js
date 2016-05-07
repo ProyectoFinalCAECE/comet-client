@@ -16,7 +16,7 @@
           scope: {
               peerId: '@'
           },
-          templateUrl: '/src/calls/call-overlay.html',
+          templateUrl: 'src/calls/call-overlay.html',
           controller: function ( $scope ) {
 
             $scope.mute = function() {

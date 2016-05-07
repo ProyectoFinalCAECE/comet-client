@@ -16,7 +16,7 @@
         },
         views:{
           '@dashboard': {
-            templateUrl: '/src/search/search-results.html',
+            templateUrl: 'src/search/search-results.html',
             controller: 'SearchResultsController',
             controllerAs: 'vm'
           }

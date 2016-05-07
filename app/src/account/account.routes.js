@@ -12,7 +12,7 @@
     $stateProvider
       .state('account-login', {
         url: '/account/login',
-        templateUrl: '/src/account/account-login.html',
+        templateUrl: 'src/account/account-login.html',
         controller: 'AccountLoginController',
         controllerAs: 'vm',
         onEnter: ['$state', 'authService', function ($state, authService) {
@@ -23,13 +23,13 @@
       })
       .state('account-confirm', {
         url: '/account/confirm?token',
-        templateUrl: '/src/account/account-confirm.html',
+        templateUrl: 'src/account/account-confirm.html',
         controller: 'AccountConfirmController',
         controllerAs: 'vm'
       })
       .state('account-forgot', {
         url: '/account/forgot',
-        templateUrl: '/src/account/account-forgot.html',
+        templateUrl: 'src/account/account-forgot.html',
         controller: 'AccountRecoverController',
         controllerAs: 'vm',
         onEnter: ['$state', 'authService', function ($state, authService) {
@@ -40,7 +40,7 @@
       })
       .state('account-recover', {
         url: '/account/recover?token&email',
-        templateUrl: '/src/account/account-recover.html',
+        templateUrl: 'src/account/account-recover.html',
         controller: 'AccountRecoverController',
         controllerAs: 'vm',
         onEnter: ['$state', 'authService', function ($state, authService) {
@@ -51,7 +51,7 @@
       })
       .state('account-reopen', {
         url: '/account/reopen',
-        templateUrl: '/src/account/account-reopen.html',
+        templateUrl: 'src/account/account-reopen.html',
         controller: 'AccountReopenController',
         controllerAs: 'vm',
         onEnter: ['$state', 'authService', function ($state, authService) {
@@ -62,7 +62,7 @@
       })
       .state('account-reopen-return', {
         url: '/account/reopen-return?token&email',
-        templateUrl: '/src/account/account-reopen-return.html',
+        templateUrl: 'src/account/account-reopen-return.html',
         controller: 'AccountReopenController',
         controllerAs: 'vm',
         onEnter: ['$state', 'authService', function ($state, authService) {

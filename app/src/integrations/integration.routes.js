@@ -17,7 +17,7 @@
         },
         views:{
           '@dashboard': {
-            templateUrl: '/src/integrations/integration-create.html',
+            templateUrl: 'src/integrations/integration-create.html',
             controller: 'IntegrationCreateController',
             controllerAs: 'vm'
           }

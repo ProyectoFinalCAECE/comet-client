@@ -16,7 +16,7 @@
         },
         views:{
           '@dashboard': {
-            templateUrl: '/src/calls/call-index.html',
+            templateUrl: 'src/calls/call-index.html',
             controller: 'CallIndexController',
             controllerAs: 'vm'
           }

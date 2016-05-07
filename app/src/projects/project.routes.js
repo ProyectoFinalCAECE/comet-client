@@ -11,7 +11,7 @@
     $stateProvider
       .state('dashboard.project-list', {
         url: '/projects',
-        templateUrl: '/src/projects/project-list.html',
+        templateUrl: 'src/projects/project-list.html',
         controller: 'ProjectListController',
         controllerAs: 'vm',
         ncyBreadcrumb: {
@@ -27,7 +27,7 @@
       })
       .state('dashboard.project-closed-list', {
         url: '/projects/closed',
-        templateUrl: '/src/projects/project-closed-list.html',
+        templateUrl: 'src/projects/project-closed-list.html',
         controller: 'ProjectClosedListController',
         controllerAs: 'vm',
         ncyBreadcrumb: {
@@ -63,12 +63,12 @@
         },
         views:{
           '@dashboard': {
-            templateUrl: '/src/projects/project-explore.html',
+            templateUrl: 'src/projects/project-explore.html',
             controller: 'ProjectExploreController',
             controllerAs: 'vm'
           },
           'channels@dashboard.project.project-explore': {
-            templateUrl: '/src/channels/channel-list.html',
+            templateUrl: 'src/channels/channel-list.html',
             controller: 'ChannelListController',
             controllerAs: 'vmc',
             resolve: {
@@ -86,18 +86,18 @@
       .state('project-accept', {
         url: '/projects/invitations/accept?token',
         views:{
-          '':{templateUrl: '/src/projects/project-accept.html',
+          '':{templateUrl: 'src/projects/project-accept.html',
           controller: 'ProjectAcceptController',
           controllerAs: 'vm'
         },
 
         'columnOne@project-accept': {
-          templateUrl: '/src/projects/project-accept-create-account.html',
+          templateUrl: 'src/projects/project-accept-create-account.html',
           controller: 'UserCreateController',
           controllerAs: 'vmc'
         },
         'columnTwo@project-accept': {
-          templateUrl: '/src/projects/project-accept-login.html',
+          templateUrl: 'src/projects/project-accept-login.html',
           controller: 'AccountLoginController',
           controllerAs: 'vml'
         }
@@ -105,7 +105,7 @@
     })
     .state('dashboard.project-create', {
       url: '/projects/create',
-      templateUrl: '/src/projects/project-create.html',
+      templateUrl: 'src/projects/project-create.html',
       controller: 'ProjectCreateController',
       controllerAs: 'vm',
       ncyBreadcrumb: {
@@ -119,12 +119,12 @@
       },
       views:{
         '@dashboard': {
-          templateUrl: '/src/projects/project-admin.html',
+          templateUrl: 'src/projects/project-admin.html',
           controller: 'ProjectAdminController',
           controllerAs: 'vm',
         },
         'integrations@dashboard.project.project-admin': {
-          templateUrl: '/src/integrations/integration-list.html',
+          templateUrl: 'src/integrations/integration-list.html',
           controller: 'IntegrationListController',
           controllerAs: 'vmi'
         }
