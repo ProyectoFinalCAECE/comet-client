@@ -287,8 +287,10 @@
                   }
                   if(vm.direction === 'forwards'){
                     vm.noMoreMessagesForward = true;
-                  }else{
+                    vm.emptyChannel = false;
+                  }else if (vm.direction === 'backwards'){
                     vm.noMoreMessages = true;
+                    vm.emptyChannel = false;
                   }
                   vm.searching = false;
                 }
