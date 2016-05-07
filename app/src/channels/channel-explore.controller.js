@@ -290,7 +290,7 @@
                   }else{
                     vm.noMoreMessages = true;
                   }
-
+                  vm.searching = false;
                 }
                 else {
                   response.data.messages.forEach(function(entry) {
@@ -310,6 +310,7 @@
                       vm.emptyChannel = true;
                   }
                   vm.noMoreMessages = true;
+                  vm.searching = false;
                 }
                 else {
                   response.data.messages.forEach(function(entry) {
