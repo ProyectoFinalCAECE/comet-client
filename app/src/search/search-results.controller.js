@@ -234,8 +234,11 @@
           function searchError (data) {
               vm.searching = false;
               vm.validationErrors = $rootScope.helpers.loadServerErrors(data);
+
               if (vm.validationErrors === null){
                 ngToast.danger('Ocurrió un error al consultar al servidor.');
+              } else {
+                ngToast.danger(vm.validationErrors.q);
               }
           }
 
