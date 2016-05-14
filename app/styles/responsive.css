@@ -75,7 +75,7 @@
 
   .navbar-form-custom {
     display: inline-table;
-    width: 100px;
+    width: 70px;
   }
 
   .cometTitle {
@@ -118,6 +118,10 @@
 
   #page-top .separador {
     display: none;
+  }
+
+  .btnPerfil {
+    display: inline-block!important;
   }
 }
 
@@ -170,6 +174,20 @@
 
   .modificarCuenta .nav.nav-tabs li {
     width: 100%;
+  }
+
+  .cometTitle {
+  margin-left: 3%;
+  width: 30%;
+  margin-top: 18px;
+  }
+
+  .cometTitle h1 {
+  font-size: 20px;
+  }
+
+  .cometTitle img {
+  height: 20px;
   }
 }
 
