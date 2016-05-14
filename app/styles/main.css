@@ -128,6 +128,10 @@ a.disabled {
   font-size: 16px;
 }
 
+.btnPerfil {
+  display: none!important;
+}
+
 /* Wrapper del dashboard - color de fondo azul */
 #wrapper {
     background-color: #213A53!important;
