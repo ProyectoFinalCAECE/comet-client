@@ -324,6 +324,10 @@ body[state="dashboard.project.channel-explore"] {
     border-style: none solid none;
 }
 
+.mailLogin .col-md-6 {
+  width: 100%;
+}
+
 .MemberList {
   position: fixed;
   z-index: 10;
