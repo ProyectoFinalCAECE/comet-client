@@ -42,7 +42,9 @@
       display:none;
   }
 
-  .cometInput input, .cometInput textarea, .cometInput div{
+  .cometInput input,
+  .cometInput textarea,
+  .cometInput div{
     width:400px;
   }
 
@@ -97,7 +99,7 @@
   }
 
   .chat-users-wrapper {
-    width: 30%;
+    width: 50%;
     text-align: center;
     z-index: 110;
   }
@@ -107,7 +109,7 @@
   }
 
   .chat-integrations-wrapper{
-    width: 30%;
+    width: 50%;
     text-align: center;
     z-index: 110;
   }
@@ -179,7 +181,7 @@
   .cometTitle {
   margin-left: 3%;
   width: 30%;
-  margin-top: 18px;
+  margin-top: 20px;
   }
 
   .cometTitle h1 {
@@ -201,7 +203,9 @@
     display:none;
 	}
 
-  .cometInput input, .cometInput textarea, .cometInput div {
+  .cometInput input,
+  .cometInput textarea,
+  .cometInput div {
   	width:320px;
   }
 
@@ -229,6 +233,15 @@
   .modificarProyecto .datos .cometInput textarea {
     width: 270px;
   }
+}
+
+@media (max-width: 400px) {
+  .cometTitle {
+  margin-left: 2%;
+  width: 28%;
+  margin-top: 20px;
+  }
+
 }
 
 @media (max-width: 315px) {

@@ -806,6 +806,8 @@ body[state="dashboard.project.channel-explore"] {
   position: fixed;
   right: 0;
   width: 25%;
+  height: 65%;
+  overflow-y: auto;
   background-color: white;
 }
 
