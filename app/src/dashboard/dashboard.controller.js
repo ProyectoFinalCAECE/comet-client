@@ -678,14 +678,14 @@
            * @name formatNotificationDate
            * @desc returns the formatted notification date
           */
-          function formatNotificationDate(notifDate) {
-            return moment(notifDate).calendar(null, {
-              lastDay : '[ayer] LT',
-              lastWeek : 'dddd L LT',
-              sameDay : 'LT',
-              sameElse : 'dddd L LT'
-            });
-          }
+          // function formatNotificationDate(notifDate) {
+          //   return moment(notifDate).calendar(null, {
+          //     lastDay : '[ayer] LT',
+          //     lastWeek : 'dddd L LT',
+          //     sameDay : 'LT',
+          //     sameElse : 'dddd L LT'
+          //   });
+          // }
 
           /**
            * @name isActiveChannel
