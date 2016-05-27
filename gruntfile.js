@@ -22,7 +22,8 @@ module.exports = function (grunt) {
   // Configurable paths for the application
   var appConfig = {
     app: require('./bower.json').appPath || 'app',
-    dist: '../comet-server/dist'
+    //dist: '../comet-server/dist'
+    dist: '/var/www/dist'
   };
 
   // Define the configuration for all the tasks
@@ -370,6 +371,13 @@ module.exports = function (grunt) {
           cwd: '',
           dest: '<%= yeoman.dist %>/fonts',
           src: ['bower_components/fontawesome/fonts/*.*']
+        },
+        {
+          expand: true,
+          flatten: true,
+          cwd: '',
+          dest: '<%= yeoman.dist %>/socket.io',
+          src: ['../comet-server/node_modules/socket.io/node_modules/socket.io-client/*.js']
         }]
       },
       styles: {
