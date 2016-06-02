@@ -99,6 +99,10 @@
                 vm.isMember = true;
               }
             }
+            else {
+              // for private channels
+              vm.isMember = true;
+            }
           }
 
           /**

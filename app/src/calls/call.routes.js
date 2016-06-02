@@ -26,7 +26,7 @@
             function($stateParams, channelService, project) {
 
                 // for calls in direct channels
-                if ($stateParams.callId === 0) {
+                if (parseInt($stateParams.callId, 10) === 0) {
                   return null;
                 }
 
