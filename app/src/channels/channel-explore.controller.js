@@ -20,8 +20,7 @@
                                            '$anchorScroll',
                                            'lodash',
                                            'moment',
-                                           'ngToast',
-                                           'dropboxChooser',
+                                           'ngToast',                                           
                                            'messageType',
                                            'dialogService',
                                            'dashboardServiceModel',
@@ -51,7 +50,6 @@
                                           lodash,
                                           moment,
                                           ngToast,
-                                          dropboxChooser,
                                           messageType,
                                           dialogService,
                                           dashboardServiceModel,
@@ -699,7 +697,7 @@
            * @desc open the dropbox chooser
           */
           function addDropboxFile() {
-            dropboxChooser.choose({
+            window.Dropbox.choose({
               // Required. Called when a user selects an item in the Chooser.
               success: function(files) {
                   var dropbox = files[0],
