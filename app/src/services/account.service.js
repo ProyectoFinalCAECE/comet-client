@@ -142,7 +142,7 @@
 
             var req = {
               method: "DELETE",
-              url: '/user/',
+              url: '/users/',
               data: data,
               headers: {"Content-Type":"application/json;charset=utf-8",
                         "Authorization":"Bearer "+ authService.getToken()}
