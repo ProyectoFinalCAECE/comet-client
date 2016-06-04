@@ -368,9 +368,19 @@
            * @desc send message to the channel using the text in the input
           */
           function sendUserMessage() {
+            
+            try {
+              vm.message = $rootScope.helpers.escapeHtml(vm.message); 
+            }
+            catch (e) {
+              $log.error('sendUserMessage - escapeHtml', e);
+              vm.mesage = '';
+            }
+            
             if (vm.message.length === 0) {
               return;
             }
+            
             sendMessage(vm.message, user.id, messageType.TEXT);
             vm.message = '';
           }

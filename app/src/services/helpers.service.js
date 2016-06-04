@@ -12,7 +12,8 @@
             loadServerErrors:loadServerErrors,
             fieldIsNotValid: fieldIsNotValid,
             randomString:randomString,
-            getIntegrationImage: getIntegrationImage
+            getIntegrationImage: getIntegrationImage,
+            escapeHtml: escapeHtml
         };
 
         /**
@@ -56,6 +57,7 @@
           }
           return s;
         }
+        
         /**
          * @name getIntegrationImage
          * @desc returns the logo image of a integration
@@ -72,6 +74,26 @@
             case 3:
               return '../images/integraciones/statusCake.png';
             }
+        }
+        
+        /**
+         * @name escapeHtml
+         * @desc returns the html entities tags escaped
+        */
+        function escapeHtml (str) {
+          
+          var entityMap = {
+              "&": "&amp;",
+              "<": "&lt;",
+              ">": "&gt;",
+              '"': '&quot;',
+              "'": '&#39;',
+              "/": '&#x2F;'
+          };
+
+          return String(str).replace(/[&<>"'\/]/g, function (s) {
+              return entityMap[s];
+          });          
         }
     }
 })();
