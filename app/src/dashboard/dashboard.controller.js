@@ -88,6 +88,7 @@
           vm.showMembersList = true;
           vm.showSearch = true;
           vm.showLogout = true;
+          vm.showProfile = true;
           vm.showExit = false;
 
           vm.therearepublicchannels = false;
@@ -178,6 +179,7 @@
                 vm.showMembersList = false;
                 vm.showSearch = false;
                 vm.showLogout = false;
+                vm.showProfile = false;
                 vm.showExit = true;
               }
               else {
@@ -186,6 +188,7 @@
                 vm.showMembersList = true;
                 vm.showSearch = true;
                 vm.showLogout = true;
+                vm.showProfile = true;
                 vm.showExit = false;
               }
             });
@@ -374,7 +377,7 @@
               $log.log('system', notification);
               loadSystemNotification(notification.data);
             });
-            
+
             notificationsJoinRoom();
             notificationsSendPing();
           }
@@ -573,7 +576,7 @@
             switch (sysNotif.type) {
               case systemNotificationType.CHANNEL_CREATE:
               {
-                sysNotif.text = sysNotif.alias + ' ha creado el canal: ' + sysNotif.channelName;               
+                sysNotif.text = sysNotif.alias + ' ha creado el canal: ' + sysNotif.channelName;
                 sysNotif.link = $state.href('dashboard.project.channel-explore', {
                                   channelId: sysNotif.channelId,
                                   id: sysNotif.projectId,
@@ -670,7 +673,7 @@
                 $log.log('tipo de notificacion desconocido', sysNotif);
                 return;
             }
-            
+
             vm.systemNotifications.push(sysNotif);
           }
 
