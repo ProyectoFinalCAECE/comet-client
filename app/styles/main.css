@@ -612,6 +612,7 @@ body[state="dashboard.project.channel-explore"] {
   background-color: #F5F5F5;
   margin:0;
   padding:0;
+  word-wrap: break-word;
   font-family: 'open sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
@@ -1047,6 +1048,7 @@ body[state="dashboard.project.channel-explore"] {
 .search-result-message span {
   margin-bottom: 0px;
   padding: 2px;
+  word-wrap: break-word;
 }
 
 .search-result-message h3 {
