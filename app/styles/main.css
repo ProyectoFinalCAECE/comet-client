@@ -215,6 +215,14 @@ body[state="dashboard.project.channel-explore"] {
      display: none !important;
 }
 
+.tituloMisCanalesMenu {
+    text-align: center;
+    color: #EDF6FF;
+    font-weight: 400;
+    padding-top: 10px;
+    font-size: 14px;
+}
+
 .dash-side-fixed {
   position: fixed;
   top: 0;
