@@ -36,6 +36,7 @@
           vm.getChannelName = getChannelName;
           vm.getActiveConfigurations = getActiveConfigurations;
           vm.deleteConfiguredIntegration = deleteConfiguredIntegration;
+          vm.hasChannels = (channels.length > 0);
 
           activate();
 
