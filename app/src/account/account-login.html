@@ -24,14 +24,14 @@
           <form name="vm.frmLogin" class="m-t" role="form" ng-submit="vm.login()" novalidate="">
             <!-- Email -->
             <div class="form-group" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'email') }">
-              <input type="text" name="email" autofocus ng-model="vm.user.email" class="form-control" placeholder="Dirección de correo" required="">
+              <input type="text" name="email" autofocus ng-model="vm.user.email" class="form-control" placeholder="Dirección de correo" required="" autocomplete="off">
               <div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'email')" class="control-label" role="alert">
                 <div class="text-center">{{ vm.validationErrors['email'] }}</div>
               </div>
             </div>
             <!-- Password -->
             <div class="form-group" ng-class="{ 'has-error': helpers.fieldIsNotValid(vm.validationErrors, 'password') }">
-              <input type="password" name="password" ng-model="vm.user.password" class="form-control" placeholder="Contraseña" required="">
+              <input type="password" name="password" ng-model="vm.user.password" class="form-control" placeholder="Contraseña" required="" autocomplete="off">
               <div ng-messages="helpers.fieldIsNotValid(vm.validationErrors, 'password')" class="control-label" role="alert">
                 <div class="text-center">{{ vm.validationErrors['password'] }}</div>
                 <div class="text-center">{{ vm.validationErrors['all'] }}</div>
