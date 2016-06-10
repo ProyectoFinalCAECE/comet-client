@@ -192,6 +192,10 @@
          * @desc shows the error message to the user
         */
         function integrationConfigError (data) {
+            if (data.errors.all) {
+              ngToast.danger(data.errors.all);
+              return;
+            }
             vm.validationErrors = $rootScope.helpers.loadServerErrors(data);
             if (vm.validationErrors === null)
             {
