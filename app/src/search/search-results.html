@@ -50,7 +50,13 @@
                               <h4 ng-hide="vm.messagesInProjectCommonChannels == 0">Canales Comunes</h4>
                               <div class="search-result-message" ng-repeat="channel in vm.messagesInProjectCommonChannels"
                                   ng-init="channelObject = vm.getChannelById(channel.id)">
-                                  <h3>{{channelObject.name}}</h3>
+                                  <span>
+                                    <h3>{{channelObject.name}}
+                                    <div class="badge badge-warning" style="vertical-align: middle; margin-left: 5px;" ng-show="channelObject.state === 'C'">
+                                      Cerrado
+                                    </div>
+                                    </h3>
+                                  </span>
                                   <div ng-repeat="message in channel.messages"
                                       ng-init="msgAuthor = vm.getMember(message.user)">
                                       <br />
