@@ -289,6 +289,11 @@
            * @desc sends a chat messsage using the rtc datachannel
           */
           function sendMessage(text) {
+
+            if (!text.length) {
+              return;
+            }
+
             var message = {
               content: text,
               author: localNickname,
