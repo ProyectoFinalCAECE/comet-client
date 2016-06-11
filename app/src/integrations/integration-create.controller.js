@@ -148,6 +148,7 @@
           }
 
           function post() {
+            vm.name = $rootScope.helpers.toTitleCase(vm.name);
             if (isUpdate) {
               // update configuration
               var updateData = {
