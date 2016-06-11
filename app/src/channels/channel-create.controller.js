@@ -74,6 +74,9 @@
            * @desc channel creation logic
           */
           function create () {
+            
+            // channel name 
+            vm.channel.name = $rootScope.helpers.toTitleCase(vm.channel.name);
 
             // channel type
             vm.channel.type = (vm.isPrivate ? 'P' : 'S');

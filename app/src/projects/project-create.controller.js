@@ -85,6 +85,7 @@
            * @desc project creation logic
           */
           function create () {
+            vm.project.name = $rootScope.helpers.toTitleCase(vm.project.name);
             vm.project.members = vm.invites;
             projectService.create(vm.project).error(function(data) {
               vm.validationErrors = $rootScope.helpers.loadServerErrors(data);

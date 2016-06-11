@@ -475,7 +475,12 @@ body[state="dashboard.project.channel-explore"] {
   margin-right:30px;
 }
 
-/* Estilos para formularios dentro de pestanas */
+/* Tablas */
+.colHeaderOrder {
+  font-weight: bold;
+  color:rgb(103, 106, 108);
+}
+
 .columnaMiembros li {
     display: inline;
 }

@@ -7,7 +7,7 @@
       </h2>
       <ol class="breadcrumb2">
         <li>
-          <input ng-model="vm.filterQuery" type="text" placeholder="Filtrar..." class="form-control" name="top-search">
+          <input ng-model="vm.filterQuery" type="text" placeholder="Filtrar proyectos por nombre / descripción / miembros..." class="form-control" name="top-search">
         </li>
         <li>
           <button ng-click="vm.gotoCreateProject()" type="button" name="btnCrearProyecto" class="btn btn-primary" style="float:right">Crear Proyecto</button>
@@ -26,7 +26,9 @@
           </p>
       </div>
       <!-- listado de proyectos -->
-      <div ng-hide="vm.isEmpty" ng-repeat="project in vm.projects | filter:vm.filterQuery | orderBy:createdAt" class="col-lg-4 proyecto-lg-4">
+      <div  ng-hide="vm.isEmpty"
+            dir-paginate="project in vm.projects | filter:vm.filterQuery | orderBy:createdAt | itemsPerPage: 4"
+            class="col-lg-4 proyecto-lg-4">
         <div class="contact-box cometProjects">
           <a ui-sref="dashboard.project.project-explore({id:project.id})">
             <div class="col-sm-8 proyecto-sm-8">
@@ -52,5 +54,6 @@
         </div>
       </div>
     </div>
+    <dir-pagination-controls/>
   </div>
 </div>

@@ -13,7 +13,8 @@
             fieldIsNotValid: fieldIsNotValid,
             randomString:randomString,
             getIntegrationImage: getIntegrationImage,
-            escapeHtml: escapeHtml
+            escapeHtml: escapeHtml,
+            toTitleCase: toTitleCase
         };
 
         /**
@@ -94,6 +95,17 @@
           return String(str).replace(/[&<>"'\/]/g, function (s) {
               return entityMap[s];
           });          
+        }
+
+        /**
+         * @name toTitleCase
+         * @desc returns the string in "Titlecase""
+        */
+        function toTitleCase(str)
+        {
+            return str.replace(/\w\S*/g, function(txt) { 
+              return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+            });
         }
     }
 })();
