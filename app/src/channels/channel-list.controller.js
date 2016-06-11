@@ -32,8 +32,9 @@
           var vmc = this;
           vmc.channels = [];
           vmc.isEmpty = true; 
-          vmc.sortType = 'name';
+          vmc.sortType = 'lastActivity';
           vmc.sortReverse = false;
+          vmc.formatLastActivityDate = formatLastActivityDate;
           vmc.gotoCreateChannel = gotoCreateChannel;
 
           activate();
@@ -96,6 +97,19 @@
                   }
                 }
               }
+            });
+          }
+
+          /**
+           * @name formatLastActivityDate
+           * @desc returns the last activity timestamp in a readable format
+          */
+          function formatLastActivityDate (activityDate) {
+            return moment(activityDate).calendar(null, {
+              lastDay : '[ayer] LT',
+              lastWeek : 'ddd LT',
+              sameDay : '[Hoy] LT',
+              sameElse : 'ddd DD/MM'
             });
           }
 

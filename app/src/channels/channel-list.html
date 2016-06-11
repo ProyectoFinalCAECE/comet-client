@@ -48,12 +48,11 @@
                     <th class="columnaMiembros">Miembros</th>
                     <th class="columnaIntegraciones">Integraciones</th>
                     <th class="colHeaderOrder" class="columnaFecha">
-                      <a class="colHeaderOrder" ng-click="vmc.sortType = 'createdAt'; vmc.sortReverse = !vmc.sortReverse">
-                        Fecha Creación
-                        <span ng-show="vmc.sortType == 'createdAt'" class="fa" ng-class="{'fa-caret-down': vmc.sortReverse, 'fa-caret-up': !vmc.sortReverse}"></span>
+                      <a class="colHeaderOrder" ng-click="vmc.sortType = 'lastActivity'; vmc.sortReverse = !vmc.sortReverse">
+                        Últ. actividad
+                        <span ng-show="vmc.sortType == 'lastActivity'" class="fa" ng-class="{'fa-caret-down': vmc.sortReverse, 'fa-caret-up': !vmc.sortReverse}"></span>
                       </a>
                     </th>
-            <!--    <th class="columnaFecha">Ultimo Mensaje</th>  -->
                   </tr>
                 </thead>
                 <tbody>
@@ -86,7 +85,7 @@
                           </li>
                         </ul>
                       </td>
-                      <td class="columnaFecha">{{channel.createdAt | date}}</td>
+                      <td class="columnaFecha" title="{{channel.lastActivity | date:'medium'}}">{{vmc.formatLastActivityDate(channel.lastActivity)}}</td>
                   </tr>
                 </tbody>
               </table>

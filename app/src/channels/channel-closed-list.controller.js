@@ -31,6 +31,9 @@
           vm.project = project;
           vm.channels = null;
           vm.isEmpty = true;
+          vm.sortType = 'closedAt';
+          vm.sortReverse = false;
+          vm.formatLastActivityDate = formatLastActivityDate;
 
           activate();
 
@@ -51,6 +54,19 @@
               });
 
               vm.isEmpty = (vm.channels.length === 0);
+          }
+
+          /**
+           * @name formatLastActivityDate
+           * @desc returns the last activity timestamp in a readable format
+          */
+          function formatLastActivityDate (activityDate) {
+            return moment(activityDate).calendar(null, {
+              lastDay : '[ayer] LT',
+              lastWeek : 'ddd LT',
+              sameDay : '[Hoy] LT',
+              sameElse : 'ddd DD/MM'
+            });
           }
         }
 })();

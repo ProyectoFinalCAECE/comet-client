@@ -34,9 +34,9 @@
                 <div class="col-lg-9">
                   <ol class="breadcrumb2">
                     <li>
-                      <input ng-model="vm.filterQuery" type="text" placeholder="Filtrar..." class="form-control" name="top-search"/>
+                      <input ng-model="vm.filterQuery" type="text" placeholder="Filtrar canales cerrados por nombre / descripción / miembros"  class="form-control" name="top-search"/>
                     </li>
-                    <li class="buttonRight">
+                    <li class="buttonRight" style="float:right">
                       <a ui-sref="dashboard.project.project-explore({id:vm.project.id})" class="btn btn-xl btn-primary">Volver</a>
                     </li>
                   </ol>
@@ -46,17 +46,48 @@
                 <table class="table table-striped">
                   <thead>
                     <tr>
-                      <th class="columnaCanal">Canal</th>
-                      <th class="columnaDescripcion">Descripción</th>
-                      <th class="columnaMiembros">Miembros</th>
-                      <th class="columnaIntegraciones">Integraciones</th>
-                      <th class="columnaFecha">Fecha Creación</th>
-                      <th class="columnaFecha">Fecha Cierre</th>
+                      <th class="columnaCanal">
+                        <a class="colHeaderOrder" ng-click="vm.sortType = 'name'; vm.sortReverse = !vm.sortReverse">
+                          Canal
+                          <span ng-show="vm.sortType == 'name'" class="fa" ng-class="{'fa-caret-down': vm.sortReverse, 'fa-caret-up': !vm.sortReverse}"></span>
+                        </a>
+                      </th>
+                      <th class="columnaDescripcion">
+                        <a class="colHeaderOrder" ng-click="vm.sortType = 'descripcion'; vm.sortReverse = !vm.sortReverse">
+                          Descripción
+                          <span ng-show="vm.sortType == 'descripcion'" class="fa" ng-class="{'fa-caret-down': vm.sortReverse, 'fa-caret-up': !vm.sortReverse}"></span>
+                        </a>
+                      </th>
+                      <th class="columnaMiembros">
+                          Miembros
+                      </th>
+                      <th class="columnaIntegraciones">
+                          Integraciones
+                        </a>
+                      </th>
+                      <th class="columnaFecha">
+                        <a class="colHeaderOrder" ng-click="vm.sortType = 'lastActivity'; vm.sortReverse = !vm.sortReverse">
+                          Ult. actividad
+                          <span ng-show="vm.sortType == 'lastActivity'" class="fa" ng-class="{'fa-caret-down': vm.sortReverse, 'fa-caret-up': !vm.sortReverse}"></span>
+                        </a>
+                      </th>
+                      <th class="columnaFecha">
+                        <a class="colHeaderOrder" ng-click="vm.sortType = 'createdAt'; vm.sortReverse = !vm.sortReverse">
+                          Fecha creación
+                          <span ng-show="vm.sortType == 'createdAt'" class="fa" ng-class="{'fa-caret-down': vm.sortReverse, 'fa-caret-up': !vm.sortReverse}"></span>
+                        </a>
+                      </th>
+                      <th class="columnaFecha">
+                        <a class="colHeaderOrder" ng-click="vm.sortType = 'closedAt'; vm.sortReverse = !vm.sortReverse">
+                          Fecha cierre
+                          <span ng-show="vm.sortType == 'closedAt'" class="fa" ng-class="{'fa-caret-down': vm.sortReverse, 'fa-caret-up': !vm.sortReverse}"></span>
+                        </a>
+                      </th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr style="cursor: pointer;"
-                        dir-paginate="channel in vm.channels | itemsPerPage: 5 | filter: vm.filterQuery | orderBy:['-state', '-createdAt']"
+                        dir-paginate="channel in vm.channels | orderBy:vm.sortType:vm.sortReverse | filter: vm.filterQuery | itemsPerPage: 5"
                         ui-sref="dashboard.project.channel-explore({projectId: vm.project.id, channelId:channel.id, isDirect:false, loadById:undefined, direction:undefined, messageId:undefined, limit:undefined})">
                         <td class="columnaCanal">
                           <b>{{channel.name}}</b>
@@ -78,6 +109,7 @@
                           <ul>
                           </ul>
                         </td>
+                        <td class="columnaFecha">{{channel.lastActivity | date}}</td>
                         <td class="columnaFecha">{{channel.createdAt | date}}</td>
                         <td class="columnaFecha">{{channel.closedAt | date}}</td>
                     </tr>
