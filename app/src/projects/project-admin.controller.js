@@ -51,6 +51,8 @@
           vm.addInvite = addInvite;
           vm.removeInvite = removeInvite;
           vm.inviteMembers = inviteMembers;
+          vm.sortType = 'fullName';
+          vm.sortReverse = false;
 
           //close project
           vm.imSure = false;

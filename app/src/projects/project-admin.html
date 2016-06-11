@@ -66,19 +66,39 @@
                         <thead>
                           <tr>
                               <th></th>
-                              <th>Nombre</th>
-                              <th>Alias</th>
-                              <th>Correo</th>
-                              <th>Fecha de Alta</th>
+                              <th>
+                                <a class="colHeaderOrder" ng-click="vm.sortType = 'fullName'; vm.sortReverse = !vm.sortReverse">
+                                  Nombre
+                                  <span ng-show="vm.sortType == 'fullName'" class="fa" ng-class="{'fa-caret-down': vm.sortReverse, 'fa-caret-up': !vm.sortReverse}"></span>
+                                </a>
+                              </th>
+                              <th>
+                                <a class="colHeaderOrder" ng-click="vm.sortType = 'alias'; vm.sortReverse = !vm.sortReverse">
+                                  Alias
+                                  <span ng-show="vm.sortType == 'alias'" class="fa" ng-class="{'fa-caret-down': vm.sortReverse, 'fa-caret-up': !vm.sortReverse}"></span>
+                                </a>
+                              </th>
+                              <th>
+                                <a class="colHeaderOrder" ng-click="vm.sortType = 'email'; vm.sortReverse = !vm.sortReverse">
+                                  Correo
+                                  <span ng-show="vm.sortType == 'email'" class="fa" ng-class="{'fa-caret-down': vm.sortReverse, 'fa-caret-up': !vm.sortReverse}"></span>
+                                </a>
+                              </th>
+                              <th>
+                                <a class="colHeaderOrder" ng-click="vm.sortType = 'createdAt'; vm.sortReverse = !vm.sortReverse">
+                                  Fecha Alta
+                                  <span ng-show="vm.sortType == 'createdAt'" class="fa" ng-class="{'fa-caret-down': vm.sortReverse, 'fa-caret-up': !vm.sortReverse}"></span>
+                                </a>
+                              </th>
                               <th class="text-center">Acciones</th>
                           </tr>
                         </thead>
                         <tbody>
-                          <tr dir-paginate="member in vm.project.members  | itemsPerPage: 5 | filter:vm.filterQuery">
+                          <tr dir-paginate="member in vm.project.members | orderBy:vm.sortType:vm.sortReverse | filter:vm.filterQuery | itemsPerPage: 5">
                               <td>
                                 <img alt="image" class="img-circle" title="{{member.alias}}" ng-src="{{member.profilePicture}}" height="30" width="30" />
                               </td>
-                              <td>{{member.firstName + ' ' + member.lastName}}</td>
+                              <td>{{member.fullName}}</td>
                               <td>{{member.alias}}</td>
                               <td>{{member.email}}</td>
                               <td>{{member.createdAt | date}}</td>
