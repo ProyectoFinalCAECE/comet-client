@@ -43,7 +43,7 @@
                 </thead>
                 <tbody>
                   <tr style="cursor: pointer;"
-                      dir-paginate="channel in vmc.channels | itemsPerPage: 5 | filter: vmc.filterQuery | orderBy:['-state', '-createdAt']"
+                      dir-paginate="channel in vmc.channels | filter: vmc.filterQuery | itemsPerPage: 5 | orderBy:['-state', '-createdAt']"
                       ui-sref="dashboard.project.channel-explore({projectId: vm.project.id, channelId:channel.id, isDirect:false})">
                       <td class="columnaCanal" title="{{channel.name}}">
                         <b>{{channel.name}}</b>
