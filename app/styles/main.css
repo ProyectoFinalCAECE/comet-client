@@ -366,6 +366,10 @@ body[state="dashboard.project.channel-explore"] {
     float: right;
 }
 
+.buttonRight a{
+    float: right;
+}
+
 .breadcrumb2 .form-control {
     width: 50%;
     float: left;
