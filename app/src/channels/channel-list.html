@@ -33,17 +33,32 @@
               <table class="table table-striped">
                 <thead>
                   <tr>
-                    <th class="columnaCanal">Canal</th>
-                    <th class="columnaDescripcion">Descripción</th>
+                    <th class="columnaCanal">
+                      <a class="colHeaderOrder" ng-click="vmc.sortType = 'name'; vmc.sortReverse = !vmc.sortReverse">
+                        Canal
+                        <span ng-show="vmc.sortType == 'name'" class="fa" ng-class="{'fa-caret-down': vmc.sortReverse, 'fa-caret-up': !vmc.sortReverse}"></span>
+                      </a>
+                    </th>
+                    <th class="columnaDescripcion">
+                      <a class="colHeaderOrder" ng-click="vmc.sortType = 'description'; vmc.sortReverse = !vmc.sortReverse">
+                        Descripción                      
+                        <span ng-show="vmc.sortType == 'description'" class="fa" ng-class="{'fa-caret-down': vmc.sortReverse, 'fa-caret-up': !vmc.sortReverse}"></span>
+                      </a>
+                    </th>
                     <th class="columnaMiembros">Miembros</th>
                     <th class="columnaIntegraciones">Integraciones</th>
-                    <th class="columnaFecha">Fecha Creación</th>
+                    <th class="colHeaderOrder" class="columnaFecha">
+                      <a class="colHeaderOrder" ng-click="vmc.sortType = 'createdAt'; vmc.sortReverse = !vmc.sortReverse">
+                        Fecha Creación
+                        <span ng-show="vmc.sortType == 'createdAt'" class="fa" ng-class="{'fa-caret-down': vmc.sortReverse, 'fa-caret-up': !vmc.sortReverse}"></span>
+                      </a>
+                    </th>
             <!--    <th class="columnaFecha">Ultimo Mensaje</th>  -->
                   </tr>
                 </thead>
                 <tbody>
                   <tr style="cursor: pointer;"
-                      dir-paginate="channel in vmc.channels | filter: vmc.filterQuery | itemsPerPage: 5 | orderBy:['-state', '-createdAt']"
+                      dir-paginate="channel in vmc.channels | orderBy:vmc.sortType:vmc.sortReverse | filter: vmc.filterQuery | itemsPerPage: 5"
                       ui-sref="dashboard.project.channel-explore({projectId: vm.project.id, channelId:channel.id, isDirect:false})">
                       <td class="columnaCanal" title="{{channel.name}}">
                         <b>{{channel.name}}</b>

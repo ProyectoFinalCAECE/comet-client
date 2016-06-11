@@ -31,7 +31,9 @@
 
           var vmc = this;
           vmc.channels = [];
-          vmc.isEmpty = true;
+          vmc.isEmpty = true; 
+          vmc.sortType = 'name';
+          vmc.sortReverse = false;
           vmc.gotoCreateChannel = gotoCreateChannel;
 
           activate();
