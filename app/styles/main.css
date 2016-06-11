@@ -121,6 +121,10 @@ a.disabled {
   color: #C1C1C1;
 }
 
+.search-header input{
+  width: 290px;
+}
+
 .search-header > i {
   float:left;
   margin-top: 22px;

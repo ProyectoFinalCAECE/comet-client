@@ -59,6 +59,10 @@
   .crearProyecto-sm-8 label {
       float:none;
   }
+
+  .search-header input{
+    width: 205px;
+  }
 }
 
 @media (max-width: 800px) {
@@ -133,6 +137,9 @@
     width: 100%;
   }
 
+  .search-header input {
+    width: 135px;
+  }
 }
 
 @media (max-width: 600px) {
@@ -179,7 +186,7 @@
   }
 
   .cometTitle {
-  margin-left: 3%;
+  margin-left: 1%;
   width: 30%;
   margin-top: 20px;
   }
@@ -233,11 +240,27 @@
   .modificarProyecto .datos .cometInput textarea {
     width: 270px;
   }
+
+  .skin-2 .navbar-top-links li:last-child {
+    margin-right: 10px;
+  }
+}
+
+@media (max-width: 450px) {
+
+  .skin-2 .navbar-top-links li:last-child {
+    margin-right: 5px;
+  }
+
+  .search-header input{
+    width: 70px;
+  }
+
 }
 
 @media (max-width: 400px) {
   .cometTitle {
-  margin-left: 2%;
+  margin-left: 1%;
   width: 28%;
   margin-top: 20px;
   }
@@ -265,3 +288,9 @@
     display: none;
   }
 }
+
+/* Para todas las resoluciones
+
+input[placeholder] {
+   text-overflow: ellipsis;
+}*/
