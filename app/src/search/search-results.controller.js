@@ -83,23 +83,23 @@
            * @desc controller activation logic
           */
           function activate () {
-            searchService.searchUserInProject(vm.projectId, vm.criterioBusqueda).error(searchError)
-            .then(function (users_search_result) {
-              vm.resultUsers = users_search_result.data.users;
-              if(vm.channelId){
-                //buscar solamente en el canal provisto
-                searchService.searchMessageInChannel(vm.projectId, vm.channelId, vm.criterioBusqueda, vm.limit, undefined).error(searchError).then(
-                  function (project_search_result) {
-                    if(project_search_result.data.project.channels.direct){
-                      vm.messagesInProjectDirectChannels = project_search_result.data.project.channels.direct;
-                    }
-
-                    if(project_search_result.data.project.channels.common){
-                      vm.messagesInProjectCommonChannels = project_search_result.data.project.channels.common;
-                    }
+            if(vm.channelId){
+              //buscar solamente en el canal provisto
+              searchService.searchMessageInChannel(vm.projectId, vm.channelId, vm.criterioBusqueda, vm.limit, undefined).error(searchError).then(
+                function (project_search_result) {
+                  if(project_search_result.data.project.channels.direct){
+                    vm.messagesInProjectDirectChannels = project_search_result.data.project.channels.direct;
                   }
-                ).then(searchResult);
-              } else {
+
+                  if(project_search_result.data.project.channels.common){
+                    vm.messagesInProjectCommonChannels = project_search_result.data.project.channels.common;
+                  }
+                }
+              ).then(searchResult);
+            } else {
+              searchService.searchUserInProject(vm.projectId, vm.criterioBusqueda).error(searchError)
+              .then(function (users_search_result) {
+                vm.resultUsers = users_search_result.data.users;
                 //Buscar en todos los canales comunes del proyecto.
                 searchService.searchMessageInProject(vm.projectId, vm.criterioBusqueda, false, vm.limit, undefined).error(searchError).then(
                   function (project_common_search_result) {
@@ -115,8 +115,8 @@
                     }
                   ).then(searchResult);
                 });
-              }
-            });
+              });  
+            }
           }
 
           /**
