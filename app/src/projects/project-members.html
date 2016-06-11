@@ -22,11 +22,9 @@
 													 ng-class="{ 'offline': !member.isOnline }"
                            title="{{member.alias}}"
                            ng-src="{{::member.profilePicture}}"/>
-
-											<!--<i class="user-state fa fa-circle"
-												 ng-class="{ 'online': member.isOnline }"></i>-->
-
 											<span ng-class="{ 'has-notification': member.hasNotification }">{{member.alias}}</span>
+											<i class="user-state fa fa-circle"
+												 ng-class="{ 'online': member.isOnline }"></i>
 										</div>
 									</a>
 								</div>

@@ -958,7 +958,9 @@ body[state="dashboard.project.channel-explore"] {
 }
 
 .cometProjectUsers .user-state {
-  margin-right: 5px;
+    float: right;
+    padding-top: 10px;
+    margin-right: 10px;
 }
 
 .cometProjectUsers .user-state.online {
