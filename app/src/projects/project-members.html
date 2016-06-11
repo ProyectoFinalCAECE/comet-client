@@ -8,6 +8,7 @@
 					<div class="cometProjectUsers">
 						<div class="title">Miembros</div>
 						<ul nav-menu-active="selected-channel" notification-class="has-notification">
+							<li class="empty" ng-show="vm.availableMembers.length === 0" >No hay usuarios conectados</li>
 							<li ng-repeat="member in vm.availableMembers | orderBy:['-isOnline','-alias']"  ng-class="{ 'selected-channel':member.isActive}">
 								<div class="chat-user">
 									<a data-type="D"
@@ -16,8 +17,15 @@
 										 style="display:block;"
 										>
 										<div class="chat-user-name">
-											<i class="user-state fa fa-circle"
-												 ng-class="{ 'online': member.isOnline }"></i>
+											<img alt="image"
+                           class="chat-avatar"
+													 ng-class="{ 'offline': !member.isOnline }"
+                           title="{{member.alias}}"
+                           ng-src="{{::member.profilePicture}}"/>
+											
+											<!--<i class="user-state fa fa-circle"
+												 ng-class="{ 'online': member.isOnline }"></i>-->
+
 											<span ng-class="{ 'has-notification': member.hasNotification }">{{member.alias}}</span>
 										</div>
 									</a>

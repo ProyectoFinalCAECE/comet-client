@@ -817,6 +817,11 @@ body[state="dashboard.project.channel-explore"] {
   padding: 10px 0;
 }
 
+.chat-user-name img.offline {
+  filter: grayscale(100%);
+  -webkit-filter: grayscale(100%);
+}
+
 
 /*Integration Sidebar*/
 .chat-integrations-wrapper {
@@ -930,6 +935,13 @@ body[state="dashboard.project.channel-explore"] {
 .cometProjectUsers li {
   list-style: none;
 }
+
+.cometProjectUsers .empty {
+  text-align: center;
+  padding: 5px;
+  font-style: italic;
+}
+
 .cometProjectUsers .chat-avatar {
   margin-left: 5px;
 }
