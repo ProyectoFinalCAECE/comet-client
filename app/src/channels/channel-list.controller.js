@@ -33,7 +33,7 @@
           vmc.channels = [];
           vmc.isEmpty = true; 
           vmc.sortType = 'lastActivity';
-          vmc.sortReverse = false;
+          vmc.sortReverse = true;
           vmc.formatLastActivityDate = formatLastActivityDate;
           vmc.gotoCreateChannel = gotoCreateChannel;
 

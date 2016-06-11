@@ -32,7 +32,7 @@
           vm.channels = null;
           vm.isEmpty = true;
           vm.sortType = 'closedAt';
-          vm.sortReverse = false;
+          vm.sortReverse = true;
           vm.formatLastActivityDate = formatLastActivityDate;
 
           activate();
