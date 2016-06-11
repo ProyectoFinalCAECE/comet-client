@@ -817,11 +817,18 @@ body[state="dashboard.project.channel-explore"] {
   padding: 10px 0;
 }
 
-.chat-user-name img.offline {
+.project-member{
+  padding: 0;
+}
+
+.project-member img.offline {
   filter: grayscale(100%);
   -webkit-filter: grayscale(100%);
 }
 
+.project-member img {
+  float: none;
+}
 
 /*Integration Sidebar*/
 .chat-integrations-wrapper {
