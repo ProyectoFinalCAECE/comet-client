@@ -26,7 +26,9 @@
           </p>
       </div>
       <!-- listado de proyectos -->
-      <div ng-hide="vm.isEmpty" ng-repeat="project in vm.projects | filter:vm.filterQuery | orderBy:createdAt" class="col-lg-4 proyecto-lg-4">
+      <div  ng-hide="vm.isEmpty"
+            dir-paginate="project in vm.projects | filter:vm.filterQuery | orderBy:createdAt | itemsPerPage: 4"
+            class="col-lg-4 proyecto-lg-4">
         <div class="contact-box cometProjects">
           <a ui-sref="dashboard.project.project-explore({id:project.id})">
             <div class="col-sm-8 proyecto-sm-8">
@@ -51,6 +53,7 @@
           </a>
         </div>
       </div>
+      <dir-pagination-controls/>
     </div>
   </div>
 </div>
