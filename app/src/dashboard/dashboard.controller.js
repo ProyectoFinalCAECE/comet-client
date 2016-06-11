@@ -142,12 +142,11 @@
 
             // channel-explore active channel logic
             $scope.$on('$stateChangeSuccess', function() {
-              vm.placeholder = 'Buscar en proyecto';
-
+              vm.placeholder = 'Buscar mensajes y usuarios en proyecto';
 
               if ($state.current.name === 'dashboard.project.channel-explore')
               {
-                vm.placeholder = 'Buscar en canal';
+                vm.placeholder = 'Buscar mensajes en canal';
                 // new state url
                 var currentUrl = '#' + $location.url().split('#')[0];
                 urlonLoad = currentUrl;

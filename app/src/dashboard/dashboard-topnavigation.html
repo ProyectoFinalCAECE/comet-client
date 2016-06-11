@@ -4,7 +4,12 @@
       <i ng-style="{'visibility': (vm.project !== null && vm.showSearch) ? 'visible':'hidden'}" class="fa fa-search"></i>
       <form ng-submit="vm.buscar(vm.textoBusqueda)" ng-style="{'visibility': (vm.project !== null && vm.showSearch)  ? 'visible':'hidden'}" role="search" class="navbar-form-custom">
           <div class="form-group">
-              <input type="text" ng-model="vm.textoBusqueda" placeholder="{{vm.placeholder}}" class="form-control" maxlength="50">
+              <input type="text"
+                     ng-model="vm.textoBusqueda" 
+                     placeholder="{{vm.placeholder}}" 
+                     class="form-control" 
+                     maxlength="50"
+                     style="width:290px;">
           </div>
       </form>
     </div>
