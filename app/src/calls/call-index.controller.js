@@ -61,11 +61,13 @@
           vm.sendMessage = sendMessage;
           vm.formatMessageDate = formatMessageDate;
           vm.getMessageClass = getMessageClass;
+          vm.changeChatState = changeChatState;
           vm.messages = [];
           vm.peers = {};
           vm.roomIsFull = false;
           vm.isMember = false;
           vm.videoError = false;
+          vm.hasNewMessage = false;
 
           activate();
 
@@ -106,6 +108,13 @@
             else {
               // for private channels
               vm.isMember = true;
+            }
+          }
+
+          function changeChatState() {
+            vm.showChat = !vm.showChat;
+            if (vm.showChat) {
+              vm.hasNewMessage = false;
             }
           }
 
@@ -219,6 +228,7 @@
             webrtc.connection.on('message', function (data) {
               if (data.type === 'chat') {
                 vm.messages.push(data.payload);
+                vm.hasNewMessage = true;
               }
             });
 
@@ -283,10 +293,16 @@
            * @desc updates the container div's
           */
           function updateLayout () {
-            angular.element('#remotes')
-                   .removeClass('peers-1 peers-2 peers-3 peers-4')
-                   .addClass('peers-' + (totalPeers));
 
+            var $remotes = angular.element('#remotes'); 
+
+            $remotes
+              .removeClass('peers-1 peers-2 peers-3 peers-4')
+              .addClass('peers-' + (totalPeers));
+            
+            if (totalPeers < 4) {
+              $remotes.find('br').remove();
+            }
           }
 
           /**

@@ -83,9 +83,9 @@ a.disabled {
     margin-top: 10px;
 }
 
-body[state="dashboard.project.call-index"] .cometTitle {
+/*body[state="dashboard.project.call-index"] .cometTitle {
   width: 15%;
-}
+}*/
 
 .cometTitle ul {
     list-style: none;
@@ -1278,8 +1278,8 @@ body[state="dashboard.project.call-index"] #page-wrapper {
 }
 
 #video-index .chat-discussion .chat-message {
-    padding-left: 5px;
-    padding-right: 5px
+    padding: 5px;
+    font-size: 11px;
 }
 
 #video-index .chat-discussion .message-content.server {

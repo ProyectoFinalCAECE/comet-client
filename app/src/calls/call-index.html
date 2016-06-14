@@ -3,12 +3,19 @@
     <div class="col-lg-12">
     <!-- Maximizado -->
       <div class="row">
-          <div class="col-lg-11" style="float:left;">
-              <h2><i class="fa fa-video-camera"></i> Videoconferencia</h2>
+          <div class="col-lg-10" style="float:left;">
+              <h2 style="margin-top:10px;font-size:18px;"><i class="fa fa-video-camera"></i> Videoconferencia</h2>
           </div>
-          <div class="col-lg-1" style="margin-top:20px" ng-hide="vm.roomIsFull">
-              <a style="font-size: 20px" ng-click="vm.showChat = !vm.showChat">
-                  <i class="fa fa-comments"></i>
+          <div class="col-lg-2" style="margin-top:10px; text-align:right;" ng-hide="vm.roomIsFull">
+              <a style="font-size:16px" ng-click="vm.changeChatState()">
+                  <span ng-if="!vm.showChat">
+                    Abrir Chat&nbsp;&nbsp;
+                    <i class="fa fa-comments"></i>
+                  </span>
+                  <span ng-if="vm.showChat">
+                    Cerrar&nbsp;&nbsp;
+                    <i class="fa fa-comments"></i>
+                  </span>
               </a>
           </div>
       </div>
