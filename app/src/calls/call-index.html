@@ -47,11 +47,11 @@
                  ng-class="vm.getMessageClass(message)"
                  ng-repeat="message in vm.messages">
               <div class="message">
-                <b>{{::message.author}}</b>
+                <b ng-if="!message.isCometMessage">{{::message.author}}</b>
                 <span class="message-date">
                   {{::vm.formatMessageDate(message.date) }}
                 </span>
-                <span class="message-content">
+                <span class="message-content" ng-class="{'server': message.isCometMessage}">
                   {{::message.content}}
                 </span>
               </div>

@@ -1282,6 +1282,10 @@ body[state="dashboard.project.call-index"] #page-wrapper {
     padding-right: 5px
 }
 
+#video-index .chat-discussion .message-content.server {
+    font-style: italic;
+}
+
 #video-index textarea {
   width: 100%;
 }

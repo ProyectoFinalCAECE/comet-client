@@ -203,13 +203,15 @@
                   mouseIn: false,
                   rtcPeer: rtcPeer
                 };
-
+                
+                insertServerMessage(newPeer.name + ' se ha unido');
                 addPeer(newPeer, video);
             });
 
             // a peer was removed
             webrtc.on('videoRemoved', function (video, rtcPeer) {
                 $log.info('webrtc::video removed ', rtcPeer);
+                insertServerMessage(rtcPeer.nick + ' se ha desconectado');
                 removePeer(rtcPeer);
             });
 
@@ -339,6 +341,19 @@
             // messages from the current logged in user
             cssClass += messageIsFromUser(message) ? 'mine' : '';
             return cssClass;
+          }
+
+          /**
+           * @name insertServerMessage
+           * @desc create a new server message in the chat panel
+          */
+          function insertServerMessage(content) {
+            vm.messages.push({
+                author: 'Comet',
+                isCometMessage: true,
+                content: content,
+                date: new Date()
+              });
           }
       }
 })();
