@@ -1120,9 +1120,17 @@ body[state="dashboard.project.channel-explore"] {
 }
 
 /* Videoconferencia */
-/*body[state="dashboard.project.call-index"] {
-  
+
+/*body[state="dashboard.project.call-index"] {  
 }*/
+
+#video-index .hasNewChat {
+  line-height: 12px;
+  padding: 1px 4px;
+  position: absolute;
+  right: 6px;
+  top: -4px;
+}
 
 #video-index #remotes {
   text-align: center;

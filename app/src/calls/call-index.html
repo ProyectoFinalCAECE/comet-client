@@ -11,6 +11,7 @@
                   <span ng-if="!vm.showChat">
                     Abrir Chat&nbsp;&nbsp;
                     <i class="fa fa-comments"></i>
+                    <span ng-if="vm.hasNewMessage" class="label label-warning hasNewChat">!</span>
                   </span>
                   <span ng-if="vm.showChat">
                     Cerrar&nbsp;&nbsp;
