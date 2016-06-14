@@ -213,15 +213,16 @@
             ngToast.danger('Debes autenticarte en Trello para poder configurar esta integración.');
           }
           $log.log('postTrello', vm.hookUrl, vm.selectedBoard);
-          post()
-            .error(integrationConfigError)
-            .then(function () {
-              integrationService.configureTrelloWebhook(TrelloApi.Token(), vm.hookUrl, trelloAppKey, vm.selectedBoard.id)
-                  .error(function () {
-                    ngToast.danger('Ocurrió un error en la comunicación con Trello.');
-                  })
-                  .then(integrationConfigCreated);
-            });
+
+          integrationService.configureTrelloWebhook(TrelloApi.Token(), vm.hookUrl, trelloAppKey, vm.selectedBoard.id)
+            .error(function () {
+              ngToast.danger('Ocurrió un error en la comunicación con Trello.');
+          })
+            .then(function(){
+              post()
+                .error(integrationConfigError)
+                .then(integrationConfigCreated);
+              });
         }
 
         function loadBoards(){
