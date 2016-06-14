@@ -13,6 +13,8 @@
           </div>
       </div>
       <div class="row">
+
+        <!--Mensajes al usuario-->
         <div class="jumbotron" ng-show="vm.roomIsFull">
           <p class="text-center">Lo lamentamos. Esta sala se encuentra llena. <i class="fa fa-frown-o"></i></p>
           <p class="text-center">Pueden participar un máximo de 4 personas. </p>
@@ -20,6 +22,12 @@
 
         <div class="jumbotron" ng-show="!vm.isMember">
           <p class="text-center">Lo lamentamos. Esta sala es privada.</p>
+        </div>
+
+        <div class="jumbotron" ng-show="vm.videoError">
+          <p class="text-center">Lo lamentamos. Ocurrió un error al inicializar la comunicación.</p>
+          <p class="text-center">Esto puede deberse a que tu navegador o sistema operativo no está soportado.</p>
+          <p class="text-center">Los navegadores soportados son Google Chrome y Mozilla Firefox</p>
         </div>
 
         <!-- layouts -->

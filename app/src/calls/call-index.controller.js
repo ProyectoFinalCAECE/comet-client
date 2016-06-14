@@ -65,6 +65,7 @@
           vm.peers = {};
           vm.roomIsFull = false;
           vm.isMember = false;
+          vm.videoError = false;
 
           activate();
 
@@ -92,8 +93,11 @@
             };
           }
 
+          /**
+           * @name validateMember
+           * @desc validate that the user is member of the channel
+          */
           function validateMember() {
-            console.log('channel validate', channel);
             if (channel !== null) {
               if (lodash.find(channel.members, 'id', user.id) !== undefined) {
                 vm.isMember = true;
@@ -124,7 +128,6 @@
             // create our webrtc connection
             webrtc = new SimpleWebRTC({
                 // the id/element dom element that will hold "our" video
-                //localVideoEl: 'peer-main',
                 localVideoEl: 'localVideo',
                 // the id/element dom element that will hold remote videos
                 remoteVideosEl: '',
@@ -184,7 +187,7 @@
             // we did not get access to the camera
             webrtc.on('localMediaError', function (err) {
               $log.log('webrtc::localMediaError', err);
-              ngToast.danger('Ocurrió un error al iniciar el video.');
+              vm.videoError = true;
             });
 
             // a peer video has been added
@@ -289,7 +292,6 @@
            * @desc sends a chat messsage using the rtc datachannel
           */
           function sendMessage(text) {
-
             if (!text.length) {
               return;
             }
@@ -336,7 +338,6 @@
             var cssClass = '';
             // messages from the current logged in user
             cssClass += messageIsFromUser(message) ? 'mine' : '';
-
             return cssClass;
           }
       }

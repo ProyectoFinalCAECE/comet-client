@@ -82,6 +82,11 @@ a.disabled {
     text-align: center;
     margin-top: 10px;
 }
+
+body[state="dashboard.project.call-index"] .cometTitle {
+  width: 15%;
+}
+
 .cometTitle ul {
     list-style: none;
     display: inline-block;
@@ -1115,6 +1120,10 @@ body[state="dashboard.project.channel-explore"] {
 }
 
 /* Videoconferencia */
+/*body[state="dashboard.project.call-index"] {
+  
+}*/
+
 #video-index #remotes {
   text-align: center;
   margin-top: 10px;
