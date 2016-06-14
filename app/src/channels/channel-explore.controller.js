@@ -1002,6 +1002,7 @@
                                       });
                   sendMessage(callUrl, user.id, messageType.CALL, callUrl);
                   showSummary(newCall);
+                  $window.open(callUrl);
                 });
               }
               else {
@@ -1011,9 +1012,8 @@
                                       room: roomId
                                     });
                 sendMessage(callUrl, user.id, messageType.CALL, callUrl);
+                $window.open(callUrl);
               }
-              $window.open(callUrl);
-
           }
 
           /**
