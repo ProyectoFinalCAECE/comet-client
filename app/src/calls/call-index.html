@@ -11,6 +11,7 @@
                   <span ng-if="!vm.showChat">
                     Abrir Chat&nbsp;&nbsp;
                     <i class="fa fa-comments"></i>
+                    <span ng-if="vm.hasNewMessage" class="label label-warning hasNewChat">!</span>
                   </span>
                   <span ng-if="vm.showChat">
                     Cerrar&nbsp;&nbsp;
@@ -38,13 +39,13 @@
         </div>
 
         <!-- layouts -->
-        <div ng-class="vm.showChat ? 'col-lg-8' : 'col-lg-12'">
+        <div ng-class="vm.showChat ? 'col-lg-8 col-md-8' : 'col-lg-12 col-md-12'">
           <div id="remotes" ng-show="!vm.roomIsFull && vm.isMember">
           </div>
         </div>
 
         <!-- Chat -->
-        <div class="col-lg-4" ng-show="vm.showChat">
+        <div class="col-lg-4 col-md-4" ng-show="vm.showChat">
           <div class="chat-discussion">
             <div class="text-warning chat-warning">
               Los mensajes de esta conversación son volátiles, <br/> no serán guardados en el canal.
