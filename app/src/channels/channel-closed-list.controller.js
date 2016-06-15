@@ -64,7 +64,7 @@
           */
           function formatLastActivityDate (activityDate) {
             return moment(activityDate).calendar(null, {
-              lastDay : '[ayer] LT',
+              lastDay : '[Ayer] LT',
               lastWeek : 'ddd LT',
               sameDay : '[Hoy] LT',
               sameElse : 'ddd DD/MM'
