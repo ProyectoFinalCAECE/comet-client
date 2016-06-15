@@ -213,7 +213,7 @@
                   rtcPeer: rtcPeer
                 };
                 
-                insertServerMessage(newPeer.name + ' se ha unido');
+                insertServerMessage(newPeer.name + ' se ha conectado');
                 addPeer(newPeer, video);
             });
 
