@@ -756,6 +756,26 @@ body[state="dashboard.project.channel-explore"] {
   text-align: left;
 }
 
+.message-callSummary-wrapper h4
+{
+    text-align: center;
+    background-color: rgba(67, 88, 103, 0.14);
+    padding: 5px;
+}
+
+.message-callSummary-wrapper ul {
+  list-style-type: disc;
+  margin-left: 15px;
+}
+.message-callSummary-wrapper ol {
+  list-style-type: decimal;
+  margin-left: 15px;
+}
+.message-callSummary-wrapper li {
+  display: list-item;
+}
+
+
 /* status cake */
 .message-status-wrapper {
   margin-top: 10px;

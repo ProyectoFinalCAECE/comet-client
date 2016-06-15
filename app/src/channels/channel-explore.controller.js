@@ -102,6 +102,7 @@
           // calls
           vm.startCall = startCall;
           vm.callIsFinished = callIsFinished;
+          vm.formatCallSummaryDate = formatCallSummaryDate;
           // update info
           vm.edit = edit;
           // invite / delete members
@@ -591,6 +592,19 @@
               lastWeek : 'dddd L LTS',
               sameDay : 'LTS',
               sameElse : 'dddd L LTS'
+            });
+          }
+
+          /**
+           * @name formatCallSummaryDate
+           * @desc returns the call summary timestamp in a readable format
+          */
+          function formatCallSummaryDate (msgDate) {
+            return moment(msgDate).calendar(null, {
+              lastDay : 'dddd L LT',
+              lastWeek : 'dddd L LT',
+              sameDay : 'dddd L LT',
+              sameElse : 'dddd L LT'
             });
           }
 
