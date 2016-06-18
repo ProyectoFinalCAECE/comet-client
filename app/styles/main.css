@@ -291,6 +291,14 @@ body[state="dashboard.project.channel-explore"] {
 }
 
 /* para marcar canal con notificacion en menu */
+.notification-count {
+  font-size: 9px;
+  font-weight: normal;
+  padding: 4px;
+  margin-top: 10px;
+  margin-right: 5px;
+}
+
 .has-notification {
   font-weight: bold !important;
 }

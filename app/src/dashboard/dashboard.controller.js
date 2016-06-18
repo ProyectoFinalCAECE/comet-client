@@ -258,6 +258,8 @@
                     limit: undefined
                   });
 
+                  c.notificationCount = 0;
+
                   if (c.channelUrl === urlonLoad) {
                     setActiveChannel(c);
                     urlonLoad = null;
@@ -278,6 +280,8 @@
                     limit: undefined
                   });
 
+                  c.notificationCount = 0;
+
                   if (c.channelUrl === urlonLoad) {
                     setActiveChannel(c);
                     urlonLoad = null;
@@ -288,13 +292,13 @@
 
                 var i = 0;
                 var current_channel;
-                while(vm.therearepublicchannels === false &&
-                        i < channels.length){
-                          current_channel = channels[i];
-                          if(current_channel.type === 'S' &&        current_channel.state !== 'C'){
-                            vm.therearepublicchannels = true;
-                          }
-                          i++;
+
+                while (vm.therearepublicchannels === false && i < channels.length){
+                  current_channel = channels[i];
+                  if (current_channel.type === 'S' && current_channel.state !== 'C') {
+                    vm.therearepublicchannels = true;
+                  }
+                  i++;
                 }
               });
 
@@ -456,6 +460,7 @@
                 channel = lodash.find(vm.privateChannels, 'id', update.id);
               }
               if (channel !== undefined) {
+                channel.notificationCount = update.count;
                 channel.hasNotification = true;
               }
             }
@@ -486,12 +491,12 @@
               notifUrl = '',
               showDesktopNotif = false;
 
-            // public and private channels
             if (notification.type === 'channel') {
               var channel = findChannel(notification.id);
               if (channel !== undefined &&
                   !isActiveChannel(notification.id) &&
                   user.id !== notification.source_user_id) {
+                channel.notificationCount++;
                 channel.hasNotification = true;
                 showDesktopNotif = true;
                 notifBody = 'Nuevo mensaje en "' + channel.name + '"';
@@ -515,6 +520,7 @@
                       !isActiveChannel(notification.id) &&
                       isActiveProject(notification.projectId) &&
                       user.id !== notification.source_user_id) {
+                    privatechannel.notificationCount++;
                     privatechannel.hasNotification = true;
                     showDesktopNotif = true;
                     notifBody = 'Nuevo mensaje en "' + privatechannel.name + '"';
@@ -763,6 +769,7 @@
               vm.activeChannel = channel;
             }
 
+            channel.notificationCount = 0;
             channel.hasNotification = false;
 
             // notify channel activation
