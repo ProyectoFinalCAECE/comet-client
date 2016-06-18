@@ -390,6 +390,10 @@
           */
           function sendUserMessage() {
             
+            if (message == null) {
+              return;
+            }
+
             try {
               vm.message = $rootScope.helpers.escapeHtml(vm.message); 
             }
