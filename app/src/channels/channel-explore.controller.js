@@ -290,6 +290,7 @@
             if (vm.isDirect) {
               vm.isMember = true;
               vm.isClosed = false;
+              vm.newMessagesAlertEnabled = false;
               return;
             }
 
@@ -299,6 +300,10 @@
 
             vm.isClosed = (vm.channel.state === 'C' ||
                            vm.project.state === 'C');
+
+            if (vm.isClosed) {
+              vm.newMessagesAlertEnabled = false;
+            }
           }
 
           /**
@@ -641,6 +646,10 @@
           function showNewMessagesAlert(message) {
 
             if (!vm.newMessagesAlertEnabled) {
+              return false;
+            }
+
+            if (vm.messageIsFromUser(message)) {
               return false;
             }
 
