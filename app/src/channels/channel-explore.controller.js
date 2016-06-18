@@ -1221,7 +1221,7 @@
           function emitTyping(){
             chatService.emit('typing',
               {
-                room: vm.channel.id,
+                room: getChannelRoomId(),
                 typing: typing,
                 who: vm.user.alias
               }
@@ -1232,7 +1232,7 @@
            typing = false;
            chatService.emit('typing',
               {
-                room: vm.channel.id,
+                room: getChannelRoomId(),
                 typing: typing,
                 who: vm.user.alias
               }

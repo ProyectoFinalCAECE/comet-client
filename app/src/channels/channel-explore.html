@@ -122,9 +122,6 @@
                         o accede a más opciones presionando el botón <i class="fa fa-plus"></i>
                   </div>
                   <!-- load channel history (forwards) -->
-                  <div ng-show="vm.typing">
-                    <span>{{ vm.who_types }}</span>
-                  </div>
                   <div ng-cloak="" ng-hide="vm.noMoreMessagesForward || vm.emptyChannel" class="text-center">
                     <a ng-click="vm.loadOlderMessages('forwards')" name="btnLoadMore" class="btn btn-xl">Recuperar más mensajes</a>
                   </div>
@@ -174,6 +171,9 @@
                 </a>
               </div>
               <div class="messageInputText">
+                <div ng-show="vm.typing">
+                  <span><i>{{ vm.who_types }}</i></span>
+                </div>
                 <div class="col-lg-12" style="padding-left:0;">
                   <div class="chat-message-form">
                     <div class="input-group">
