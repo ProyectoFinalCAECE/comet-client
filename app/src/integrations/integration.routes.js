@@ -23,7 +23,7 @@
           }
         },
         resolve: {
-          projectIntegration: ['integrationService','$stateParams', 'project', function (integrationService, $stateParams, project) {
+          projectIntegration: ['integrationService', '$stateParams', 'project', function (integrationService, $stateParams, project) {
             var projectIntegrationId = parseInt($stateParams.projectIntegrationId, 10);
             return integrationService.getProjectIntegrationById(project.id, projectIntegrationId).then(function (response) {
               return response.data.integration;

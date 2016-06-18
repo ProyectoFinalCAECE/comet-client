@@ -114,15 +114,18 @@
           */
           function loadChannels() {
             vm.selectedChannel = channels[0];
+            vm.channels = [];
             for (var i = 0; i < channels.length; i++) {
               var channel = channels[i];
-              channel.typeDescription = (channel.type === 'S' ? 'Canales públicos' : 'Canales privados');
-              $log.log(channel, channelId);
-              if (channelId === channel.id) {
-                vm.selectedChannel = channel;
+              // only opened channels
+              if (channel.state === 'O') {
+                channel.typeDescription = (channel.type === 'S' ? 'Canales públicos' : 'Canales privados');
+                if (channelId === channel.id) {
+                  vm.selectedChannel = channel;
+                }
+                vm.channels.push(channel);
               }
             }
-            vm.channels = channels;
           }
 
           /**
