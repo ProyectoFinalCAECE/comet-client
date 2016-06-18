@@ -301,7 +301,7 @@
                 }
               });
             } else {
-              var limit = 20;
+              var limit = 30;
               vm.noMoreMessagesForward = true;
 
               channelService.getMessages(vm.project.id, vm.channel.id, nextRequestOffset, limit, vm.isDirect).then(function (response) {

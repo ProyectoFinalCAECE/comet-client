@@ -54,22 +54,22 @@
           </li>
         </ul>
       </div>
-      <div ng-show="vm.searching" style="float:right; margin-right:10%;">
-        <img src="/images/gifs/mini_balls.gif" alt="Loading Icon" height="28" width="28">
-      </div>
     </div>
     <div class="row">
       <div class="col-lg-12">
         <div class="ibox chat-view">
           <div class="ibox-title">
-
           </div>
           <div class="ibox-content">
             <div class="row">
               <div ng-class="vm.showMembers || vm.showIntegrations ? 'col-md-9' : 'col-md-12'">
                 <div class="chat-discussion">
+                  <!--loading indicator-->
+                  <div ng-if="vm.searching" style="text-align:center;">
+                    <img src="/images/gifs/mini_balls.gif" alt="Loading Icon" height="28" width="28">
+                  </div>
                   <!-- load channel history -->
-                  <div ng-cloak="" ng-hide="vm.noMoreMessages || vm.emptyChannel" class="text-center">
+                  <div ng-cloak="" ng-hide="vm.noMoreMessages || vm.emptyChannel || vm.searching" class="text-center">
                     <a ng-click="vm.loadOlderMessages('backwards')" name="btnLoadMore" class="btn btn-xl">Recuperar más mensajes</a>
                   </div>
                   <!-- no more channel history left -->
