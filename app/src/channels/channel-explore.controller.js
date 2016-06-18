@@ -191,10 +191,27 @@
             });
 
             $scope.$on("$destroy", function(){
+              chatService.emit('leave-room', {
+                room: getChannelRoomId(),
+                channelId: vm.channel.id,
+                userId: vm.user.id
+              });
+
+              $timeout.cancel(pingTimer);
+
               vm.messageId = undefined;
               vm.channelId = undefined;
               vm.loadById = undefined;
             });
+
+            // close the connection on exit
+            $window.onunload = function(  ) {
+              chatService.emit('leave-room', {
+                room: getChannelRoomId(),
+                channelId: vm.channel.id,
+                userId: vm.user.id
+              });
+            };
           }
 
           /**
@@ -246,16 +263,6 @@
 
             chatService.emit('join-room', {
               room: getChannelRoomId()
-            });
-
-            $scope.$on("$destroy", function(){
-              chatService.emit('leave-room', {
-                room: getChannelRoomId(),
-                channelId: vm.channel.id,
-                userId: vm.user.id
-              });
-
-              $timeout.cancel(pingTimer);
             });
 
             channelPresenceSendPing();
