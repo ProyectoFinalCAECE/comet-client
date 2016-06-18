@@ -209,12 +209,6 @@
                     }
                   }
                 }
-                // var config = lodash.find(integ.configurations, 'ChannelId', channel.id);
-                // if (angular.isDefined(config)) {
-                //   config.integrationId = integ.integrationId;
-                //   config.integrationName = integ.name;
-                //   vm.integrationsConfigured.push(config);
-                // }
               }
             });
           }
@@ -279,7 +273,7 @@
           */
           function loadChannelMessages() {
             vm.searching = true;
-            if(vm.loadById){
+            if (vm.loadById){
               channelService.getMessagesById(vm.project.id, vm.channel.id, vm.messageId, vm.limit, vm.direction, vm.isDirect).then(function(response){
                 if(response.data.messages.length === 0){
                   // for the first load
@@ -298,12 +292,16 @@
                 else {
                   response.data.messages.forEach(function(entry) {
                       processMessageReceived(entry, addMessageToListUnshift);
-                      scrollToLast();
                   });
+                  // the message order is descending so we need to fix the lastMsgId
+                  if (response.data.messages) {
+                    lastMsgId = response.data.messages[0].message.id;
+                  }
+                  scrollToLast();
                 }
               });
             } else {
-              var limit = 5;
+              var limit = 20;
               vm.noMoreMessagesForward = true;
 
               channelService.getMessages(vm.project.id, vm.channel.id, nextRequestOffset, limit, vm.isDirect).then(function (response) {
@@ -318,8 +316,12 @@
                 else {
                   response.data.messages.forEach(function(entry) {
                       processMessageReceived(entry, addMessageToListUnshift);
-                      scrollToLast();
                   });
+                  // the message order is descending so we need to fix the lastMsgId
+                  if (response.data.messages) {
+                    lastMsgId = response.data.messages[0].message.id;
+                  }
+                  scrollToLast();
                 }
                 nextRequestOffset = response.data.next_offset;
               });
@@ -741,8 +743,8 @@
            *       the channel
           */
           function showAddCurrentMemberDialog () {
-            var msg = '¿Desea agregarse como participante en este canal?';
-            var dlg = dialogService.showModalConfirm('Agregar canal', msg);
+            var msg = '¿Desea subscribirse a este canal?';
+            var dlg = dialogService.showModalConfirm('Subscripción a canal', msg);
             dlg.result.then(function () {
               var invites = {
                 members: [
@@ -759,7 +761,7 @@
                   $rootScope.$broadcast('channelsUpdated');
                   ngToast.success('Canal agregado.');
                   // sends an auto generated message
-                  sendMessage('Se ha unido al canal.',
+                  sendMessage('Se ha subscripto al canal.',
                               user.id,
                               messageType.AUTO);
                   
@@ -813,7 +815,7 @@
 
              // sends an auto generated message for each added member
              for (var i = 0; i < added.length; i++) {
-               sendMessage(added[i].fullName + ' se ha unido al canal.',
+               sendMessage(added[i].fullName + ' se ha subscripto al canal.',
                            added[i].id,
                            messageType.AUTO);
              }
