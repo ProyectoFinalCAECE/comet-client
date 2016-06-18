@@ -78,11 +78,17 @@
                   </div>
                   <!-- messages -->
                   <!-- me invento una clase message-loop, necesaria para obtener el ultimo mensaje -->
-                  <div class="message-loop">
-                    <div class="chat-message "
-                         ng-class="vm.getMessageClass(message)"
-                         ng-repeat="message in vm.messages"
-                         ng-init="msgMember = vm.getMember(message)">
+                  <div class="message-loop" 
+                        ng-repeat="message in vm.messages"
+                        ng-init="msgMember = vm.getMember(message)">
+                    
+                    <div class="newMessagesAlert" ng-if="vm.showNewMessagesAlert(message)">
+                      <i class="fa fa-arrow-down"></i>
+                      Nuevos mensajes desde {{::vm.formatDisconnectedAt()}}
+                    </div>
+                    
+                    <div class="chat-message"
+                         ng-class="vm.getMessageClass(message)">
                       <img class="message-avatar" ng-src="{{::msgMember.profilePicture}}" alt="profilePicture" >
                       <div class="message">
                         <span id="msg_{{::message.id}}" class="message-author"><b>{{::msgMember.alias}}</b></span>
