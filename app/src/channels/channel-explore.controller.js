@@ -418,7 +418,7 @@
           */
           function sendUserMessage() {
 
-            if (message == null) {
+            if (vm.message == null) {
               return;
             }
 
