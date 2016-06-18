@@ -161,6 +161,17 @@
 
           var pingTimer = null;
 
+          vm.isTyping = isTyping;
+          vm.focused = focused;
+          vm.blurred = blurred;
+
+          vm.who_types = '';
+
+          //timeout variables and functions for 'user is typing..'
+          var typing = false;
+          var input_focused = false;
+          var timeout = undefined;
+
           activate();
 
           /**
@@ -242,6 +253,19 @@
 
             chatService.on("error", function(error) {
               $log.log('chatservice error', error);
+            });
+
+            chatService.on("typing", function(data) {
+              if (data.typing) {
+                  vm.typing = true;
+                  vm.who_types = data.msg;
+                  timeout = setTimeout(timeoutFunction, 1000);
+                  console.log('typing');
+              } else {
+                vm.typing = false;
+                vm.who_types = '';
+                console.log('no more typing');
+              }
             });
 
             chatService.emit('join-room', {
@@ -1177,5 +1201,50 @@
           function reloadState() {
             $state.go($state.current, $state.params, { reload: true});
           }
+
+          function isTyping(e){
+            if (e.which !== 13) {
+              if (typing === false && input_focused) {
+                typing = true;
+                emitTyping();
+              } else {
+                clearTimeout(timeout);
+                timeout = setTimeout(timeoutFunction, 1000);
+              }
+            }
+          }
+
+          /**
+           * @name isTyping
+           * @desc emit typing event so it's broadcasted by socket
+          */
+          function emitTyping(){
+            chatService.emit('typing',
+              {
+                room: vm.channel.id,
+                typing: typing,
+                who: vm.user.alias
+              }
+            );
+          }
+
+         function timeoutFunction() {
+           typing = false;
+           chatService.emit('typing',
+              {
+                room: vm.channel.id,
+                typing: typing,
+                who: vm.user.alias
+              }
+            );
+         }
+
+         function focused(){
+           input_focused = true;
+         }
+
+         function blurred(){
+           input_focused = false;
+         }
       }
 })();
