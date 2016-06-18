@@ -78,15 +78,13 @@
                   </div>
                   <!-- messages -->
                   <!-- me invento una clase message-loop, necesaria para obtener el ultimo mensaje -->
-                  <div class="message-loop" 
+                  <div class="message-loop"
                         ng-repeat="message in vm.messages"
                         ng-init="msgMember = vm.getMember(message)">
-                    
                     <div class="newMessagesAlert" ng-if="vm.showNewMessagesAlert(message)">
                       <i class="fa fa-arrow-down"></i>
                       Nuevos mensajes desde {{::vm.formatDisconnectedAt()}}
                     </div>
-                    
                     <div class="chat-message"
                          ng-class="vm.getMessageClass(message)">
                       <img class="message-avatar" ng-src="{{::msgMember.profilePicture}}" alt="profilePicture" >
@@ -171,6 +169,9 @@
                 </a>
               </div>
               <div class="messageInputText">
+                <div ng-show="vm.typing">
+                  <span><i>{{ vm.who_types }}</i></span>
+                </div>
                 <div class="col-lg-12" style="padding-left:0;">
                   <div class="chat-message-form">
                     <div class="input-group">
@@ -230,7 +231,10 @@
                                 class="form-control col-lg-10"
                                 style="resize: none;"
                                 placeholder="Ingrese el mensaje"
-                                autofocus>
+                                autofocus
+                                ng-keypress="vm.isTyping($event)"
+                                ng-focus="vm.focused()"
+                                ng-blur="vm.blurred()">
                               </textarea>
                               </div>
                            </div>
