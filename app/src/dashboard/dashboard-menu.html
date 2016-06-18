@@ -51,11 +51,11 @@
               <li ng-repeat="channel in vm.publicChannels"
                   ui-sref-active="selected-channel">
                 <a ng-class="{ 'has-notification': channel.hasNotification }"
+                   class="channel-name-link"
                    ui-sref="dashboard.project.channel-explore({projectId: vm.project.id, channelId:channel.id, isDirect:false, loadById:undefined, direction:undefined, messageId:undefined, limit:undefined, destUserId:undefined})"
                    data-type="S"
                    data-id="{{channel.id}}"
-                   title="{{channel.name}}"
-                   style="display:inline-block;width:185px;text-overflow:ellipsis;overflow:hidden;white-space: nowrap;">
+                   title="{{channel.name}}">
                    {{channel.name}}
                 </a>
                 <span ng-show="channel.hasNotification" class="label label-info pull-right notification-count">
@@ -80,12 +80,15 @@
             <ul class="nav nav-second-level" nav-menu-active="selected-channel" notification-class="has-notification">
               <li ng-repeat="channel in vm.privateChannels" ui-sref-active="selected-channel">
                 <a ng-class="{ 'has-notification': channel.hasNotification }"
+                   class="channel-name-link"
                    ui-sref="dashboard.project.channel-explore({projectId: vm.project.id, channelId:channel.id, isDirect:false, loadById:undefined, direction:undefined, messageId:undefined, limit:undefined, destUserId:undefined})"
                    data-type="P"
                    data-id="{{channel.id}}">
                    {{channel.name}}
-                   <i ng-show="channel.hasNotification" class="fa fa-circle" style="float: right; padding-top: 5px;font-size: 10px;"></i>
                 </a>
+                <span ng-show="channel.hasNotification" class="label label-info pull-right notification-count">
+                    {{channel.notificationCount > 99 ? '99+' : channel.notificationCount}}
+                </span>
               </li>
               <li ng-show="vm.privateChannels.length == 0 && vm.thereareprivatechannels">
                 <a href="" style="cursor:default; font-size:12px">No formas parte de ninguno</a>

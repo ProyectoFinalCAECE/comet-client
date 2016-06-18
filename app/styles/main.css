@@ -290,6 +290,14 @@ body[state="dashboard.project.channel-explore"] {
   color: inherit;
 }
 
+.channel-name-link{
+  display:inline-block !important;
+  width:185px !important;
+  text-overflow:ellipsis !important;
+  overflow:hidden !important;
+  white-space: nowrap !important;
+}
+
 /* para marcar canal con notificacion en menu */
 .notification-count {
   font-size: 9px;
@@ -603,6 +611,11 @@ body[state="dashboard.project.channel-explore"] {
   margin-top: 60px;
 }
 
+.newMessagesAlert {
+  border-bottom: 2px solid #1c84c6;
+  padding: 3px 0px;
+  font-family: 'Arial', 'Helvetica', sans-serif;
+}
 
 /* Piso los estilos de inspinia que ponen un msj a la izquierda y otro a derecha */
 .chat-discussion .chat-message:nth-child(2n+1) .message-avatar,
