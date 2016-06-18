@@ -20,7 +20,7 @@
                                            '$anchorScroll',
                                            'lodash',
                                            'moment',
-                                           'ngToast',                                           
+                                           'ngToast',
                                            'messageType',
                                            'dialogService',
                                            'dashboardServiceModel',
@@ -159,6 +159,8 @@
           // current message Id counter
           var lastMsgId = 0;
 
+          var pingTimer = null;
+
           activate();
 
           /**
@@ -248,9 +250,35 @@
 
             $scope.$on("$destroy", function(){
               chatService.emit('leave-room', {
-                room: getChannelRoomId()
+                room: getChannelRoomId(),
+                channelId: vm.channel.id,
+                userId: vm.user.id
               });
+
+              $timeout.cancel(pingTimer);
             });
+
+            channelPresenceSendPing();
+          }
+
+          /**
+           * @name channelPresenceSendPing
+           * @desc sends a ping message to the server to save the
+           *       user activity date on current channel.
+           *        this function calls itself recursively
+           */
+          function channelPresenceSendPing() {
+
+            if (vm.channel === null) {
+              return;
+            }
+
+            chatService.emit('ping', {
+              channelId: vm.channel.id,
+              userId: vm.user.id
+            });
+
+            pingTimer = $timeout(channelPresenceSendPing, 5 * 1000);
           }
 
           /**
@@ -389,23 +417,23 @@
            * @desc send message to the channel using the text in the input
           */
           function sendUserMessage() {
-            
+
             if (message == null) {
               return;
             }
 
             try {
-              vm.message = $rootScope.helpers.escapeHtml(vm.message); 
+              vm.message = $rootScope.helpers.escapeHtml(vm.message);
             }
             catch (e) {
               $log.error('sendUserMessage - escapeHtml', e);
               vm.mesage = '';
             }
-            
+
             if (vm.message.length === 0) {
               return;
             }
-            
+
             sendMessage(vm.message, user.id, messageType.TEXT);
             vm.message = '';
           }
@@ -611,14 +639,14 @@
            * @desc used to show the "xx new messages"" alert message
           */
           function showNewMessagesAlert(message) {
-            
+
             if (!vm.newMessagesAlertEnabled) {
               return false;
             }
 
             if (vm.newMessagesAlertId === -1 || vm.newMessagesAlertId === message.id) {
               var momentMsgDate = moment(message.date);
-              if (momentMsgDate.isSame(vm.disconnectedAt) || 
+              if (momentMsgDate.isSame(vm.disconnectedAt) ||
                   momentMsgDate.isAfter(vm.disconnectedAt)) {
                 vm.newMessagesAlertId = message.id;
                 return true;
@@ -818,7 +846,7 @@
                   sendMessage('Se ha subscripto al canal.',
                               user.id,
                               messageType.AUTO);
-                  
+
                   reloadState();
                 });
             });
