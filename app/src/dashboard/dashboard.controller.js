@@ -140,10 +140,10 @@
             // project channels
             loadChannels(vm.project);
 
-            // channel-explore active channel logic
             $scope.$on('$stateChangeSuccess', function() {
               vm.placeholder = 'Buscar mensajes y usuarios en proyecto';
-
+              
+              // channel-explore - active channel logic
               if ($state.current.name === 'dashboard.project.channel-explore')
               {
                 vm.placeholder = 'Buscar mensajes en canal';
@@ -171,7 +171,7 @@
                 setActiveChannelForSearch(null);
               }
 
-              // videoconference view settings
+              // videoconference - view settings
               if ($state.current.name === 'dashboard.project.call-index') {
                 vm.showMenu = false;
                 vm.showNotifications = false;
@@ -593,6 +593,7 @@
                                 }, {
                                   absolute: true
                                 });
+                loadChannels(vm.project);
                 break;
               }
               case systemNotificationType.CHANNEL_CLOSE:
@@ -609,6 +610,7 @@
                                 }, {
                                   absolute: true
                                 });
+                loadChannels(vm.project);
                 break;
               }
               case systemNotificationType.CHANNEL_JOIN:
@@ -625,6 +627,7 @@
                                 }, {
                                   absolute: true
                                 });
+                loadChannels(vm.project);
                 break;
               }
               case systemNotificationType.CHANNEL_EDIT:
