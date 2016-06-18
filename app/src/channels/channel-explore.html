@@ -205,13 +205,10 @@
                           <i class="fa fa-plus"></i>
                         </button>
                         <ul class="dropdown-menu">
-                          <!-- <li>
-                            <a ngf-select ng-model="vm.sourceImage" accept="image/*"><i class="fa fa-file"></i> Subir un archivo</a>
-                          </li> -->
                           <li>
                             <a ng-click="vm.addDropboxFile()"><i class="fa fa-dropbox"></i> Dropbox</a>
                           </li>
-                          <li>
+                          <li ng-if="vm.isMember">
                             <a ng-click="vm.startCall()"><i class="fa fa-video-camera"></i> Videollamada </a>
                           </li>
                         </ul>

@@ -162,6 +162,8 @@
           */
           function activate () {
 
+            $log.log('activate');
+
             // focus con message text
             angular.element('#message-input').focus();
 
@@ -760,6 +762,8 @@
                   sendMessage('Se ha unido al canal.',
                               user.id,
                               messageType.AUTO);
+                  
+                  $state.go($state.current, $state.params, { reload: true});
                 });
             });
           }

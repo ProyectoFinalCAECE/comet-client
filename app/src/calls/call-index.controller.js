@@ -101,6 +101,7 @@
           */
           function validateMember() {
             if (channel !== null) {
+              $log.log('validate members', channel.members, user.id);
               if (lodash.find(channel.members, 'id', user.id) !== undefined) {
                 vm.isMember = true;
               }
