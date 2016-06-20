@@ -346,7 +346,7 @@
             vm.searching = true;
             if (vm.loadById){
               channelService.getMessagesById(vm.project.id, vm.channel.id, vm.messageId, vm.limit, vm.direction, vm.isDirect).then(function(response){
-                if(response.data.messages.length === 0){
+                if (response.data.messages.length === 0){
                   // for the first load
                   if (nextRequestOffset === 0) {
                       vm.emptyChannel = true;
@@ -437,7 +437,10 @@
             // add message to message list
             addMessageToListFunction(msgPayload);
 
-            lastMsgId = msgPayload.id;
+            if (msgPayload.id) {
+              lastMsgId = msgPayload.id;
+            }
+            
             vm.searching = false;
           }
 
@@ -536,8 +539,23 @@
            * @desc scroll the window to the last message
           */
           function scrollToLast() {
-            $location.hash('msg_' + lastMsgId);
-            $anchorScroll();
+            if (vm.messages.length) {
+              // messages received through socket do not have an .id
+              var auxId = vm.messages[vm.messages.length-1].id; 
+              if (auxId) {
+                $location.hash('msg_' + auxId);
+                $anchorScroll();
+              } 
+              else {
+                // awful fix
+                angular.element('html, body').animate({ 
+                    scrollTop: angular.element(document).height() - 30
+                  }, 
+                  400, 
+                  "swing"
+                );
+              }
+            }
           }
 
           /**
