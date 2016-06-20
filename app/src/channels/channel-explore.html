@@ -81,7 +81,7 @@
                   <div class="message-loop"
                         ng-repeat="message in vm.messages"
                         ng-init="msgMember = vm.getMember(message)">
-                    <div class="newMessagesAlert" ng-if="vm.showNewMessagesAlert(message)">
+                    <div class="newMessagesAlert" ng-if="vm.newMessagesAlertEnabled && message.showNewMessageAlert">
                       <i class="fa fa-arrow-down"></i>
                       Nuevos mensajes desde {{::vm.formatDisconnectedAt()}}
                     </div>
